@@ -1,0 +1,41 @@
+---
+layout: default
+---
+{%- assign c = site.data.categories | where: "id", page.category | first -%}
+<article class="wrap post">
+  <header class="post__head">
+    <p class="eyebrow mono">{% if c %}<a href="{{ '/categories/' | append: c.id | append: '/' | relative_url }}"><span class="dot dot--{{ c.hue }}"></span>{{ c.name }}</a>{% endif %}</p>
+    <h1 class="post__title">{{ page.title | escape }}</h1>
+    {%- if page.summary -%}<p class="post__summary">{{ page.summary }}</p>{%- endif -%}
+    <p class="post__meta mono">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time>
+      <span aria-hidden="true">·</span> 읽는 데 {% include read-time.html content=content %}
+    </p>
+    {%- if page.tags.size > 0 -%}
+    <ul class="post__tags">{%- for t in page.tags -%}<li><a class="tag" href="{{ '/tags/' | relative_url }}#{{ t | slugify: 'raw' }}">#{{ t }}</a></li>{%- endfor -%}</ul>
+    {%- endif -%}
+  </header>
+
+  <div class="post__grid">
+    <aside class="toc" id="toc" aria-label="목차" hidden>
+      <p class="toc__label mono">이 글의 차례</p>
+      <ol id="toc-list"></ol>
+    </aside>
+    <div class="prose" id="prose">{{ content }}</div>
+  </div>
+
+  <nav class="pager" aria-label="이전·다음 글">
+    {%- if page.previous -%}<a class="pager__item" href="{{ page.previous.url | relative_url }}"><span class="mono muted">← 이전 글</span><span>{{ page.previous.title | escape }}</span></a>{%- else -%}<span></span>{%- endif -%}
+    {%- if page.next -%}<a class="pager__item pager__item--next" href="{{ page.next.url | relative_url }}"><span class="mono muted">다음 글 →</span><span>{{ page.next.title | escape }}</span></a>{%- endif -%}
+  </nav>
+
+  {%- if c -%}
+  {%- assign same = site.categories[c.id] | where_exp: "p", "p.url != page.url" -%}
+  {%- if same.size > 0 -%}
+  <section class="related">
+    <h2 class="mono">{{ c.name }}의 다른 글</h2>
+    <ol class="rows">{%- for post in same limit: 4 -%}{% include post-row.html post=post %}{%- endfor -%}</ol>
+  </section>
+  {%- endif -%}
+  {%- endif -%}
+</article>

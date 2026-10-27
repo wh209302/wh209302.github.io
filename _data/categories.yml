@@ -1,0 +1,16 @@
+# 분류를 늘리려면 여기에 한 줄 더하고 categories/ 에 같은 id로 파일 하나를 만듭니다.
+- id: notebook-rpg
+  name: 공책 RPG 개발기
+  short: 공책 RPG
+  desc: 판타지 웹 게임을 만들며 정한 것, 틀린 것, 고친 것.
+  hue: blue
+- id: dev-tips
+  name: 개발 팁·노하우
+  short: 팁
+  desc: 이런저런 개발을 하며 얻은 요령과 해결법.
+  hue: yellow
+- id: ai-work
+  name: AI와 일하기
+  short: AI
+  desc: Claude 같은 AI에게 일을 맡기며 배운 것.
+  hue: green

@@ -1,17 +1,20 @@
-title: 공책 RPG 개발 일지
-description: 판타지 웹 게임을 만들며 배운 것과 진행 기록
+title: 개발 공책
+description: 만들면서 알게 된 것을 적어 두는 곳. 판타지 웹 게임 개발기와 개발 팁·노하우.
+author: 조현수
 lang: ko
 timezone: Asia/Seoul
 url: "https://wh209302.github.io"
 baseurl: ""
-theme: minima
 permalink: /:year/:month/:day/:title/
+theme: null
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
-minima:
-  date_format: "%Y년 %m월 %d일"
 exclude:
   - README.md
   - CLAUDE.md

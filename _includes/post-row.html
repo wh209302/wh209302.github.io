@@ -1,0 +1,11 @@
+{%- assign p = include.post -%}
+<li class="row">
+  <a class="row__link" href="{{ p.url | relative_url }}">
+    <span class="row__date"><time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%Y.%m.%d" }}</time></span>
+    <span class="row__body">
+      <span class="row__title">{{ p.title | escape }}</span>
+      <span class="row__summary">{{ p.summary | default: p.excerpt | strip_html | strip_newlines | truncate: 120 }}</span>
+    </span>
+  </a>
+  <span class="row__meta">{% include cat-chip.html id=p.category %}<span class="mono muted">{% include read-time.html content=p.content %}</span></span>
+</li>

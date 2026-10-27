@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+<head>
+{% include head.html %}
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header class="masthead">
+  <div class="wrap masthead__inner">
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} 첫 화면">
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__name">{{ site.title }}</span>
+    </a>
+    <nav class="nav" aria-label="주 메뉴">
+      <details class="nav__cats">
+        <summary>분류</summary>
+        <ul>
+          {%- for c in site.data.categories -%}
+          {%- assign n = site.categories[c.id] | size -%}
+          <li><a href="{{ '/categories/' | append: c.id | append: '/' | relative_url }}"><span class="dot dot--{{ c.hue }}"></span>{{ c.name }}<span class="mono muted">{{ n }}</span></a></li>
+          {%- endfor -%}
+        </ul>
+      </details>
+      <a href="{{ '/tags/' | relative_url }}">태그</a>
+      <a href="{{ '/about/' | relative_url }}">소개</a>
+      <button class="iconbtn" type="button" id="search-open" aria-label="글 찾기 (단축키 /)">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span class="iconbtn__label">찾기</span>
+      </button>
+      <button class="iconbtn" type="button" id="theme-toggle" aria-label="밝게·어둡게 바꾸기">
+        <svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></g></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="currentColor"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+{{ content }}
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__inner">
+    <p>{{ site.title }} · {{ site.author }}</p>
+    <p class="mono"><a href="{{ '/feed.xml' | relative_url }}">RSS</a> · <a href="https://github.com/wh209302">GitHub</a></p>
+  </div>
+</footer>
+
+<div class="search" id="search" hidden>
+  <div class="search__panel" role="dialog" aria-modal="true" aria-label="글 찾기">
+    <div class="search__bar">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input id="search-input" type="search" placeholder="제목, 태그, 본문으로 찾기" autocomplete="off" aria-label="찾을 말">
+      <button class="search__close" type="button" id="search-close">닫기</button>
+    </div>
+    <ul class="search__list" id="search-list"></ul>
+    <p class="search__hint mono muted" id="search-hint">↑↓ 고르기 · Enter 열기 · Esc 닫기</p>
+  </div>
+</div>
+<script>window.SEARCH_URL = "{{ '/search.json' | relative_url }}";</script>
+<script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
+</body>
+</html>

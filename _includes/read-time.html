@@ -1,0 +1,3 @@
+{%- assign chars = include.content | strip_html | strip_newlines | size -%}
+{%- assign mins = chars | divided_by: 500 | plus: 1 -%}
+{{ mins }}분

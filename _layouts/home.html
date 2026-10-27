@@ -1,0 +1,34 @@
+---
+layout: default
+---
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow mono">since 2026.10</p>
+    <h1 class="hero__title">만들면서 알게 된 것을<br><mark>적어 두는 공책</mark></h1>
+    <p class="hero__lead">개발을 전문으로 배운 적 없는 사람이 AI와 함께 게임을 만들고, 그 길에서 얻은 요령을 모읍니다.</p>
+  </div>
+</section>
+
+<section class="wrap shelf" aria-label="분류">
+  {%- for c in site.data.categories -%}
+  {%- assign list = site.categories[c.id] -%}
+  <a class="shelf__item shelf__item--{{ c.hue }}" href="{{ '/categories/' | append: c.id | append: '/' | relative_url }}">
+    <span class="shelf__count mono">{{ list | size }}편</span>
+    <span class="shelf__name">{{ c.name }}</span>
+    <span class="shelf__desc">{{ c.desc }}</span>
+    {%- if list.size > 0 -%}<span class="shelf__latest">최근 · {{ list.first.title | escape }}</span>{%- else -%}<span class="shelf__latest muted">첫 글을 준비 중입니다</span>{%- endif -%}
+  </a>
+  {%- endfor -%}
+</section>
+
+<section class="wrap list-section" aria-labelledby="latest">
+  <div class="section-head">
+    <h2 id="latest">최근 글</h2>
+    <a class="mono" href="{{ '/tags/' | relative_url }}">태그로 보기 →</a>
+  </div>
+  <ol class="rows">
+    {%- for post in site.posts limit: 20 -%}
+    {% include post-row.html post=post %}
+    {%- endfor -%}
+  </ol>
+</section>

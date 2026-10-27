@@ -1,0 +1,21 @@
+---
+layout: default
+---
+{%- assign c = site.data.categories | where: "id", page.cat | first -%}
+{%- assign list = site.categories[page.cat] -%}
+<section class="hero hero--small">
+  <div class="wrap">
+    <p class="eyebrow mono"><a href="{{ '/' | relative_url }}">개발 공책</a> / 분류</p>
+    <h1 class="hero__title"><span class="dot dot--lg dot--{{ c.hue }}"></span>{{ c.name }}</h1>
+    <p class="hero__lead">{{ c.desc }} <span class="mono muted">{{ list | size }}편</span></p>
+  </div>
+</section>
+<section class="wrap list-section">
+  {%- if list.size > 0 -%}
+  <ol class="rows">
+    {%- for post in list -%}{% include post-row.html post=post %}{%- endfor -%}
+  </ol>
+  {%- else -%}
+  <p class="empty">아직 이 분류에 글이 없습니다. 첫 글이 올라오면 여기에 쌓입니다.</p>
+  {%- endif -%}
+</section>
