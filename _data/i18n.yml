@@ -1,0 +1,105 @@
+# 화면 문구. 레이아웃은 page.lang(ko/en)으로 골라 씁니다.
+ko:
+  base: ""
+  site_title: 개발 공책
+  skip: 본문으로 건너뛰기
+  home_label: 첫 화면
+  menu: 주 메뉴
+  cats: 분류
+  series_all: 연재 모아 보기
+  all_posts: 전체 글
+  tags: 태그
+  about: 소개
+  search: 찾기
+  search_aria: 글 찾기 (단축키 /)
+  theme_aria: 밝게·어둡게 바꾸기
+  search_ph: 제목, 태그, 본문으로 찾기
+  search_word: 찾을 말
+  close: 닫기
+  search_hint: ↑↓ 고르기 · Enter 열기 · Esc 닫기
+  no_hit: 맞는 글이 없습니다. 다른 낱말로 찾아 보세요.
+  no_posts: 아직 글이 없습니다.
+  load_fail: 글 목록을 불러오지 못했습니다. 새로고침 뒤 다시 해 보세요.
+  switch_label: English
+  switch_short: EN
+  switch_aria: 영어로 보기
+  hero_title: 만들면서 알게 된 것을<br><mark>적어 두는 공책</mark>
+  hero_lead: 개발을 배우지 않은 사람이 AI와 대화하며 게임을 만드는 과정을 적는 곳입니다.
+  start: 처음 오셨다면 이 글부터
+  count: 편
+  latest: 최근
+  empty_shelf: 첫 글을 준비 중입니다
+  series: 연재
+  series_more: 연재 모두 보기 →
+  recent: 최근 글
+  all_n: 전체 글
+  ongoing: 연재 중
+  archive_lead: 지금까지 쓴 글
+  archive_lead2: 편을 한 쪽에 모았습니다.
+  series_lead: 이어지는 글을 처음부터 순서대로 읽을 수 있게 묶었습니다.
+  tags_lead: 같은 주제의 글을 모아 봅니다.
+  cat_empty: 아직 이 분류에 글이 없습니다. 첫 글이 올라오면 여기에 쌓입니다.
+  read: 읽는 데
+  min: 분
+  views: 조회
+  toc: 목차
+  toc_label: 이 글의 차례
+  prev: ← 이전 글
+  next: 다음 글 →
+  pager: 이전·다음 글
+  others: 의 다른 글
+  comments: 댓글
+  comments_title: 댓글과 좋아요
+  comments_hint: 글이 도움이 됐다면 아래 👍를 눌러 주세요. GitHub 계정으로 댓글을 남길 수 있습니다.
+en:
+  base: "/en"
+  site_title: Dev Notebook
+  skip: Skip to content
+  home_label: home
+  menu: Main menu
+  cats: Topics
+  series_all: All series
+  all_posts: All posts
+  tags: Tags
+  about: About
+  search: Search
+  search_aria: Search posts (shortcut /)
+  theme_aria: Toggle light and dark
+  search_ph: Search titles, tags and text
+  search_word: Search words
+  close: Close
+  search_hint: ↑↓ select · Enter open · Esc close
+  no_hit: No matching posts. Try other words.
+  no_posts: No posts yet.
+  load_fail: Couldn't load the post list. Please refresh and try again.
+  switch_label: 한국어
+  switch_short: KO
+  switch_aria: 한국어로 보기
+  hero_title: A notebook of things<br><mark>I learned while building</mark>
+  hero_lead: A non-developer's notes on making a game by talking with AI.
+  start: New here? Start with these
+  count: ""
+  latest: Latest
+  empty_shelf: First post coming soon
+  series: Series
+  series_more: All series →
+  recent: Recent posts
+  all_n: All posts
+  ongoing: posts so far
+  archive_lead: All
+  archive_lead2: posts on one page.
+  series_lead: Posts that continue each other, in reading order.
+  tags_lead: Posts grouped by topic.
+  cat_empty: No posts in this topic yet.
+  read: ""
+  min: min read
+  views: views
+  toc: Contents
+  toc_label: In this post
+  prev: ← Previous
+  next: Next →
+  pager: Previous and next posts
+  others: ": more posts"
+  comments: Comments
+  comments_title: Comments and likes
+  comments_hint: If this helped, press 👍 below. You can comment with a GitHub account.

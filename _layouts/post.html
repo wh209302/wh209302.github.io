@@ -1,34 +1,34 @@
 ---
 layout: default
 ---
-{%- assign c = site.data.categories | where: "id", page.category | first -%}
+{% include lang.html %}{%- assign c = site.data.categories | where: "id", page.category | first -%}{%- if c -%}{%- assign cn = c[L] | default: c -%}{%- endif -%}
 <article class="wrap post">
   <header class="post__head">
-    <p class="eyebrow mono">{% if c %}<a href="{{ '/categories/' | append: c.id | append: '/' | relative_url }}"><span class="dot dot--{{ c.hue }}"></span>{{ c.name }}</a>{% endif %}</p>
+    <p class="eyebrow mono">{% if c %}<a href="{{ B | append: '/categories/' | append: c.id | append: '/' | relative_url }}"><span class="dot dot--{{ c.hue }}"></span>{{ cn.name }}</a>{% endif %}</p>
     <h1 class="post__title">{{ page.title | escape }}</h1>
     {%- if page.summary -%}<p class="post__summary">{{ page.summary }}</p>{%- endif -%}
     <p class="post__meta mono">
       <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time>
-      <span aria-hidden="true">·</span> 읽는 데 {% include read-time.html content=content %}
+      <span aria-hidden="true">·</span> {{ T.read }} {% include read-time.html content=content %}
       {% include views.html %}
     </p>
     {%- if page.tags.size > 0 -%}
-    <ul class="post__tags">{%- for t in page.tags -%}<li><a class="tag" href="{{ '/tags/' | relative_url }}#{{ t | slugify: 'raw' }}">#{{ t }}</a></li>{%- endfor -%}</ul>
+    <ul class="post__tags">{%- for t in page.tags -%}<li><a class="tag" href="{{ B | append: '/tags/' | relative_url }}#{{ t | slugify: 'raw' }}">#{{ t }}</a></li>{%- endfor -%}</ul>
     {%- endif -%}
   </header>
 
   <div class="post__grid">
-    <aside class="toc" id="toc" aria-label="목차" hidden>
-      <p class="toc__label mono">이 글의 차례</p>
+    <aside class="toc" id="toc" aria-label="{{ T.toc }}" hidden>
+      <p class="toc__label mono">{{ T.toc_label }}</p>
       <ol id="toc-list"></ol>
     </aside>
     <div class="post__main">
       {%- if page.series -%}
-      {%- assign sr = site.data.series | where: "id", page.series | first -%}
-      {%- assign parts = site.posts | where: "series", page.series | sort: "date" -%}
+      {%- assign sr = site.data.series | where: "id", page.series | first -%}{%- assign srn = sr[L] | default: sr -%}
+      {%- assign parts = P | where: "series", page.series | sort: "date" -%}
       {%- if sr -%}
       <details class="series-box"{% if parts.size <= 6 %} open{% endif %}>
-        <summary><span class="mono muted">연재</span> <strong>{{ sr.name }}</strong> <span class="mono muted">{% for p in parts %}{% if p.url == page.url %}{{ forloop.index }}{% endif %}{% endfor %} / {{ parts | size }}편</span></summary>
+        <summary><span class="mono muted">{{ T.series }}</span> <strong>{{ srn.name }}</strong> <span class="mono muted">{% for p in parts %}{% if p.url == page.url %}{{ forloop.index }}{% endif %}{% endfor %} / {{ parts | size }}{{ T.count }}</span></summary>
         <ol>
           {%- for p in parts -%}
           <li>{% if p.url == page.url %}<span class="is-here">{{ p.title | escape }}</span>{% else %}<a href="{{ p.url | relative_url }}">{{ p.title | escape }}</a>{% endif %}</li>
@@ -43,16 +43,19 @@ layout: default
 
   {% include comments.html %}
 
-  <nav class="pager" aria-label="이전·다음 글">
-    {%- if page.previous -%}<a class="pager__item" href="{{ page.previous.url | relative_url }}"><span class="mono muted">← 이전 글</span><span>{{ page.previous.title | escape }}</span></a>{%- else -%}<span></span>{%- endif -%}
-    {%- if page.next -%}<a class="pager__item pager__item--next" href="{{ page.next.url | relative_url }}"><span class="mono muted">다음 글 →</span><span>{{ page.next.title | escape }}</span></a>{%- endif -%}
+  <nav class="pager" aria-label="{{ T.pager }}">
+    {%- assign prv = nil -%}{%- assign nxt = nil -%}
+    {%- for p in P -%}{%- if p.url == page.url -%}{%- assign i = forloop.index0 -%}{%- endif -%}{%- endfor -%}
+    {%- if i -%}{%- assign j = i | plus: 1 -%}{%- assign prv = P[j] -%}{%- if i > 0 -%}{%- assign k = i | minus: 1 -%}{%- assign nxt = P[k] -%}{%- endif -%}{%- endif -%}
+    {%- if prv -%}<a class="pager__item" href="{{ prv.url | relative_url }}"><span class="mono muted">{{ T.prev }}</span><span>{{ prv.title | escape }}</span></a>{%- else -%}<span></span>{%- endif -%}
+    {%- if nxt -%}<a class="pager__item pager__item--next" href="{{ nxt.url | relative_url }}"><span class="mono muted">{{ T.next }}</span><span>{{ nxt.title | escape }}</span></a>{%- endif -%}
   </nav>
 
   {%- if c -%}
-  {%- assign same = site.categories[c.id] | where_exp: "p", "p.url != page.url" -%}
+  {%- assign same = P | where: "category", c.id | where_exp: "p", "p.url != page.url" -%}
   {%- if same.size > 0 -%}
   <section class="related">
-    <h2 class="mono">{{ c.name }}의 다른 글</h2>
+    <h2 class="mono">{{ cn.name }}{{ T.others }}</h2>
     <ol class="rows">{%- for post in same limit: 4 -%}{% include post-row.html post=post %}{%- endfor -%}</ol>
   </section>
   {%- endif -%}

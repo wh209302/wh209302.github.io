@@ -1,22 +1,22 @@
 ---
 layout: default
 ---
-{%- assign tags = site.tags | sort -%}
+{% include lang.html %}{%- assign tags = site.tags | sort -%}
 <section class="hero hero--small">
   <div class="wrap">
-    <p class="eyebrow mono"><a href="{{ '/' | relative_url }}">개발 공책</a> / 태그</p>
-    <h1 class="hero__title">태그</h1>
-    <p class="hero__lead">같은 주제의 글을 모아 봅니다.</p>
+    <p class="eyebrow mono"><a href="{{ B | append: '/' | relative_url }}">{{ T.site_title }}</a> / {{ T.tags }}</p>
+    <h1 class="hero__title">{{ T.tags }}</h1>
+    <p class="hero__lead">{{ T.tags_lead }}</p>
   </div>
 </section>
 <section class="wrap list-section">
   <ul class="tagcloud">
-    {%- for t in tags -%}<li><a class="tag" href="#{{ t[0] | slugify: 'raw' }}">#{{ t[0] }} <span class="mono muted">{{ t[1] | size }}</span></a></li>{%- endfor -%}
+    {%- for t in tags -%}{%- assign tp = t[1] | where: "lang", L -%}{%- if tp.size > 0 -%}<li><a class="tag" href="#{{ t[0] | slugify: 'raw' }}">#{{ t[0] }} <span class="mono muted">{{ tp | size }}</span></a></li>{%- endif -%}{%- endfor -%}
   </ul>
-  {%- for t in tags -%}
+  {%- for t in tags -%}{%- assign tp = t[1] | where: "lang", L -%}{%- if tp.size > 0 -%}
   <div class="tag-group" id="{{ t[0] | slugify: 'raw' }}">
     <h2>#{{ t[0] }}</h2>
-    <ol class="rows">{%- for post in t[1] -%}{% include post-row.html post=post %}{%- endfor -%}</ol>
+    <ol class="rows">{%- for post in tp -%}{% include post-row.html post=post %}{%- endfor -%}</ol>
   </div>
-  {%- endfor -%}
+  {%- endif -%}{%- endfor -%}
 </section>

@@ -1,0 +1,5 @@
+{%- comment -%}레이아웃 맨 위에서 부릅니다. L(언어), T(문구), B(주소 앞머리), P(이 언어의 글)를 정합니다.{%- endcomment -%}
+{%- assign L = page.lang | default: "ko" -%}
+{%- assign T = site.data.i18n[L] -%}
+{%- assign B = T.base -%}
+{%- assign P = site.posts | where: "lang", L -%}

@@ -8,6 +8,15 @@ defaults:
   - scope: { path: "" }
     values:
       image: /assets/img/og-default.png
+      lang: ko
+  # 영어판: en/ 아래 쪽과 en/_posts 글
+  - scope: { path: "en" }
+    values:
+      lang: en
+  - scope: { path: "en", type: posts }
+    values:
+      lang: en
+      permalink: /en/:year/:month/:day/:title/
 permalink: /:year/:month/:day/:title/
 theme: null
 markdown: kramdown

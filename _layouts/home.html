@@ -1,18 +1,18 @@
 ---
 layout: default
 ---
-<section class="hero">
+{% include lang.html %}<section class="hero">
   <div class="wrap">
     <p class="eyebrow mono">since 2026.10</p>
-    <h1 class="hero__title">만들면서 알게 된 것을<br><mark>적어 두는 공책</mark></h1>
-    <p class="hero__lead">개발을 배우지 않은 사람이 AI와 게임을 만들며 실제로 써 본 방법과 설정을 정리하는 곳입니다.</p>
+    <h1 class="hero__title">{{ T.hero_title }}</h1>
+    <p class="hero__lead">{{ T.hero_lead }}</p>
   </div>
 </section>
 
-{%- assign pinned = site.posts | where: "pin", true -%}
+{%- assign pinned = P | where: "pin", true -%}
 {%- if pinned.size > 0 -%}
 <section class="wrap start" aria-labelledby="start">
-  <h2 id="start" class="start__label">처음 오셨다면 이 글부터</h2>
+  <h2 id="start" class="start__label">{{ T.start }}</h2>
   <div class="start__grid">
     {%- for p in pinned limit: 3 -%}
     <a class="start__item" href="{{ p.url | relative_url }}">
@@ -25,14 +25,14 @@ layout: default
 </section>
 {%- endif -%}
 
-<section class="wrap shelf" aria-label="분류">
+<section class="wrap shelf" aria-label="{{ T.cats }}">
   {%- for c in site.data.categories -%}
-  {%- assign list = site.categories[c.id] -%}
-  <a class="shelf__item shelf__item--{{ c.hue }}" href="{{ '/categories/' | append: c.id | append: '/' | relative_url }}">
-    <span class="shelf__count mono">{{ list | size }}편</span>
-    <span class="shelf__name">{{ c.name }}</span>
-    <span class="shelf__desc">{{ c.desc }}</span>
-    {%- if list.size > 0 -%}<span class="shelf__latest">최근 · {{ list.first.title | escape }}</span>{%- else -%}<span class="shelf__latest muted">첫 글을 준비 중입니다</span>{%- endif -%}
+  {%- assign list = P | where: "category", c.id -%}{%- assign cn = c[L] | default: c -%}
+  <a class="shelf__item shelf__item--{{ c.hue }}" href="{{ B | append: '/categories/' | append: c.id | append: '/' | relative_url }}">
+    <span class="shelf__count mono">{{ list | size }}{{ T.count }}</span>
+    <span class="shelf__name">{{ cn.name }}</span>
+    <span class="shelf__desc">{{ cn.desc }}</span>
+    {%- if list.size > 0 -%}<span class="shelf__latest">{{ T.latest }} · {{ list.first.title | escape }}</span>{%- else -%}<span class="shelf__latest muted">{{ T.empty_shelf }}</span>{%- endif -%}
   </a>
   {%- endfor -%}
 </section>
@@ -40,8 +40,8 @@ layout: default
 {%- if site.data.series.size > 0 -%}
 <section class="wrap series-section" aria-labelledby="series">
   <div class="section-head">
-    <h2 id="series">연재</h2>
-    <a href="{{ '/series/' | relative_url }}">연재 모두 보기 →</a>
+    <h2 id="series">{{ T.series }}</h2>
+    <a href="{{ B | append: '/series/' | relative_url }}">{{ T.series_more }}</a>
   </div>
   <div class="series-grid">
     {%- for s in site.data.series -%}{% include series-card.html series=s %}{%- endfor -%}
@@ -51,11 +51,11 @@ layout: default
 
 <section class="wrap list-section" aria-labelledby="latest">
   <div class="section-head">
-    <h2 id="latest">최근 글</h2>
-    <a href="{{ '/archive/' | relative_url }}">전체 글 {{ site.posts | size }}편 →</a>
+    <h2 id="latest">{{ T.recent }}</h2>
+    <a href="{{ B | append: '/archive/' | relative_url }}">{{ T.all_n }} {{ P | size }}{{ T.count }} →</a>
   </div>
   <ol class="rows">
-    {%- for post in site.posts limit: 10 -%}
+    {%- for post in P limit: 10 -%}
     {% include post-row.html post=post %}
     {%- endfor -%}
   </ol>

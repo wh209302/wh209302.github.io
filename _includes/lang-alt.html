@@ -1,0 +1,7 @@
+{%- comment -%}다른 언어판 주소(ALT)를 찾습니다. 없으면 그 언어의 첫 화면.{%- endcomment -%}
+{%- if L == "en" -%}{%- assign alt_url = page.url | remove_first: "/en" -%}{%- assign alt_lang = "ko" -%}{%- assign alt_home = "/" -%}
+{%- else -%}{%- assign alt_url = "/en" | append: page.url -%}{%- assign alt_lang = "en" -%}{%- assign alt_home = "/en/" -%}{%- endif -%}
+{%- if alt_url == "" -%}{%- assign alt_url = "/" -%}{%- endif -%}
+{%- assign alt_hit = site.posts | where: "url", alt_url | first -%}
+{%- unless alt_hit -%}{%- assign alt_hit = site.pages | where: "url", alt_url | first -%}{%- endunless -%}
+{%- if alt_hit -%}{%- assign ALT = alt_url -%}{%- else -%}{%- assign ALT = nil -%}{%- endif -%}

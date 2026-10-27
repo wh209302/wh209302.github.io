@@ -1,24 +1,25 @@
 ---
 layout: default
 ---
-<section class="hero hero--small">
+{% include lang.html %}<section class="hero hero--small">
   <div class="wrap">
-    <p class="eyebrow mono"><a href="{{ '/' | relative_url }}">개발 공책</a> / 연재</p>
-    <h1 class="hero__title">연재</h1>
-    <p class="hero__lead">이어지는 글을 처음부터 순서대로 읽을 수 있게 묶었습니다.</p>
+    <p class="eyebrow mono"><a href="{{ B | append: '/' | relative_url }}">{{ T.site_title }}</a> / {{ T.series }}</p>
+    <h1 class="hero__title">{{ T.series }}</h1>
+    <p class="hero__lead">{{ T.series_lead }}</p>
   </div>
 </section>
 <section class="wrap list-section">
   {%- for s in site.data.series -%}
-  {%- assign parts = site.posts | where: "series", s.id | sort: "date" -%}
+  {%- assign parts = P | where: "series", s.id | sort: "date" -%}{%- assign sn = s[L] | default: s -%}{%- if parts.size > 0 -%}
   <div class="tag-group" id="{{ s.id }}">
-    <h2>{{ s.name }} <span class="mono muted">{{ parts | size }}편</span></h2>
-    <p class="muted">{{ s.desc }}</p>
+    <h2>{{ sn.name }} <span class="mono muted">{{ parts | size }}{{ T.count }}</span></h2>
+    <p class="muted">{{ sn.desc }}</p>
     <ol class="steps">
       {%- for p in parts -%}
-      <li><a href="{{ p.url | relative_url }}"><span class="steps__n mono">{{ forloop.index }}편</span><span class="steps__t">{{ p.title | escape }}</span><span class="mono muted">{{ p.date | date: "%Y.%m.%d" }}</span></a></li>
+      <li><a href="{{ p.url | relative_url }}"><span class="steps__n mono">{% if L == "en" %}#{{ forloop.index }}{% else %}{{ forloop.index }}편{% endif %}</span><span class="steps__t">{{ p.title | escape }}</span><span class="mono muted">{{ p.date | date: "%Y.%m.%d" }}</span></a></li>
       {%- endfor -%}
     </ol>
   </div>
+  {%- endif -%}
   {%- endfor -%}
 </section>

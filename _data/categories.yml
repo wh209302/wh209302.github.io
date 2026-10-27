@@ -4,13 +4,16 @@
   short: 공책 RPG
   desc: 판타지 웹 게임을 만들며 정한 것, 틀린 것, 고친 것.
   hue: blue
+  en: { name: Notebook RPG devlog, short: RPG, desc: "Building a fantasy web game: what I decided, got wrong, and fixed." }
 - id: dev-tips
   name: 개발 팁·노하우
   short: 팁
   desc: 이런저런 개발을 하며 얻은 요령과 해결법.
   hue: yellow
+  en: { name: Dev tips, short: Tips, desc: Tricks and fixes from all kinds of building. }
 - id: ai-work
   name: AI와 일하기
   short: AI
   desc: Claude 같은 AI에게 일을 맡기며 배운 것.
   hue: green
+  en: { name: Working with AI, short: AI, desc: What I learned handing work to AI like Claude. }

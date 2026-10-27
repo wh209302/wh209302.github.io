@@ -1,15 +1,15 @@
 ---
 layout: default
 ---
-<section class="hero hero--small">
+{% include lang.html %}<section class="hero hero--small">
   <div class="wrap">
-    <p class="eyebrow mono"><a href="{{ '/' | relative_url }}">개발 공책</a> / 전체 글</p>
-    <h1 class="hero__title">전체 글</h1>
-    <p class="hero__lead">지금까지 쓴 글 {{ site.posts | size }}편을 한 쪽에 모았습니다.</p>
+    <p class="eyebrow mono"><a href="{{ B | append: '/' | relative_url }}">{{ T.site_title }}</a> / {{ T.all_posts }}</p>
+    <h1 class="hero__title">{{ T.all_posts }}</h1>
+    <p class="hero__lead">{{ T.archive_lead }} {{ P | size }}{{ T.count }} {{ T.archive_lead2 }}</p>
   </div>
 </section>
 <section class="wrap list-section">
-  {%- assign years = site.posts | group_by_exp: "p", "p.date | date: '%Y'" -%}
+  {%- assign years = P | group_by_exp: "p", "p.date | date: '%Y'" -%}
   {%- for y in years -%}
   <div class="year">
     <h2 class="year__label mono">{{ y.name }}</h2>

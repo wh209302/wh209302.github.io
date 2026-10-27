@@ -1,5 +1,5 @@
 {%- if site.goatcounter != "" -%}
-<span class="views" hidden><span aria-hidden="true">·</span> 조회 <span class="views__n"></span></span>
+<span class="views" hidden><span aria-hidden="true">·</span> {% if L == "en" %}<span class="views__n"></span> {{ T.views }}{% else %}{{ T.views }} <span class="views__n"></span>{% endif %}</span>
 <script>
 (function () {
   var el = document.currentScript.previousElementSibling;

@@ -12,6 +12,10 @@
 <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
 {% feed_meta %}
 {% seo %}
+{%- if ALT %}
+<link rel="alternate" hreflang="{{ L }}" href="{{ page.url | absolute_url }}">
+<link rel="alternate" hreflang="{{ alt_lang }}" href="{{ ALT | absolute_url }}">
+{%- endif %}
 {%- if site.naver_verification != "" %}
 <meta name="naver-site-verification" content="{{ site.naver_verification }}">
 {%- endif %}

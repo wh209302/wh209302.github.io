@@ -1,7 +1,7 @@
 {%- if site.giscus.repo_id != "" and site.giscus.category_id != "" -%}
-<section class="talk" aria-label="댓글">
-  <h2 class="mono">댓글과 좋아요</h2>
-  <p class="talk__hint muted">글이 도움이 됐다면 아래 👍를 눌러 주세요. GitHub 계정으로 댓글을 남길 수 있습니다.</p>
+<section class="talk" aria-label="{{ T.comments }}">
+  <h2 class="mono">{{ T.comments_title }}</h2>
+  <p class="talk__hint muted">{{ T.comments_hint }}</p>
   <div id="giscus"></div>
 </section>
 <script>
@@ -17,7 +17,7 @@
     'data-repo': '{{ site.giscus.repo }}', 'data-repo-id': '{{ site.giscus.repo_id }}',
     'data-category': '{{ site.giscus.category }}', 'data-category-id': '{{ site.giscus.category_id }}',
     'data-mapping': 'pathname', 'data-strict': '1', 'data-reactions-enabled': '1',
-    'data-emit-metadata': '0', 'data-input-position': 'top', 'data-lang': 'ko',
+    'data-emit-metadata': '0', 'data-input-position': 'top', 'data-lang': '{{ L }}',
     'data-loading': 'lazy', 'data-theme': dark ? 'dark' : 'light'
   };
   for (var k in a) s.setAttribute(k, a[k]);

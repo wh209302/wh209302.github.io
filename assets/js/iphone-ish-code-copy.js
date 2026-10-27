@@ -18,6 +18,7 @@
     return copied;
   }
 
+  var en = document.documentElement.lang === 'en';
   prose.querySelectorAll('pre').forEach(function (pre, index) {
     var block = pre.closest('.highlighter-rouge') || pre;
     if (block.previousElementSibling && block.previousElementSibling.classList.contains('ish-copybar')) return;
@@ -26,8 +27,8 @@
     var button = document.createElement('button');
     button.type = 'button';
     button.className = 'ish-copybtn';
-    button.textContent = '코드 복사';
-    button.setAttribute('aria-label', (index + 1) + '번 코드 복사');
+    button.textContent = en ? 'Copy code' : '코드 복사';
+    button.setAttribute('aria-label', en ? 'Copy code block ' + (index + 1) : (index + 1) + '번 코드 복사');
     button.setAttribute('aria-live', 'polite');
     toolbar.appendChild(button);
     block.before(toolbar);
@@ -44,7 +45,7 @@
       }
       if (!copied) copied = fallbackCopy(text);
       button.focus({ preventScroll: true });
-      button.textContent = copied ? '복사 완료' : '코드를 길게 눌러 복사';
+      button.textContent = copied ? (en ? 'Copied' : '복사 완료') : (en ? 'Long-press the code to copy' : '코드를 길게 눌러 복사');
     });
   });
 })();

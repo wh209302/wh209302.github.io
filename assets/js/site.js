@@ -66,7 +66,7 @@
       return words.every(function (w) { return hay.indexOf(w) !== -1; });
     }).slice(0, 12);
     picked = 0;
-    if (!hits.length) { out.innerHTML = '<li class="none">' + (q ? '맞는 글이 없습니다. 다른 낱말로 찾아 보세요.' : '아직 글이 없습니다.') + '</li>'; return; }
+    if (!hits.length) { out.innerHTML = '<li class="none">' + (q ? T.no_hit : T.no_posts) + '</li>'; return; }
     out.innerHTML = hits.map(function (p, i) {
       return '<li><a href="' + esc(p.u) + '"' + (i === 0 ? ' class="is-on"' : '') + '><span class="t">' + esc(p.t) + '</span><span class="s">' + esc(p.d) + ' · ' + esc(p.s).slice(0, 90) + '</span></a></li>';
     }).join('');
@@ -74,7 +74,7 @@
   function openSearch() {
     lastFocus = document.activeElement;
     box.hidden = false; input.value = ''; input.focus();
-    load().then(render).catch(function () { out.innerHTML = '<li class="none">글 목록을 불러오지 못했습니다. 새로고침 뒤 다시 해 보세요.</li>'; });
+    load().then(render).catch(function () { out.innerHTML = '<li class="none">' + T.load_fail + '</li>'; });
   }
   function closeSearch() { box.hidden = true; if (lastFocus) lastFocus.focus(); }
   function move(d) {

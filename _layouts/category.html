@@ -1,13 +1,13 @@
 ---
 layout: default
 ---
-{%- assign c = site.data.categories | where: "id", page.cat | first -%}
-{%- assign list = site.categories[page.cat] -%}
+{% include lang.html %}{%- assign c = site.data.categories | where: "id", page.cat | first -%}
+{%- assign list = P | where: "category", page.cat -%}{%- assign cn = c[L] | default: c -%}
 <section class="hero hero--small">
   <div class="wrap">
-    <p class="eyebrow mono"><a href="{{ '/' | relative_url }}">개발 공책</a> / 분류</p>
-    <h1 class="hero__title"><span class="dot dot--lg dot--{{ c.hue }}"></span>{{ c.name }}</h1>
-    <p class="hero__lead">{{ c.desc }} <span class="mono muted">{{ list | size }}편</span></p>
+    <p class="eyebrow mono"><a href="{{ B | append: '/' | relative_url }}">{{ T.site_title }}</a> / {{ T.cats }}</p>
+    <h1 class="hero__title"><span class="dot dot--lg dot--{{ c.hue }}"></span>{{ cn.name }}</h1>
+    <p class="hero__lead">{{ cn.desc }} <span class="mono muted">{{ list | size }}{{ T.count }}</span></p>
   </div>
 </section>
 <section class="wrap list-section">
@@ -16,6 +16,6 @@ layout: default
     {%- for post in list -%}{% include post-row.html post=post %}{%- endfor -%}
   </ol>
   {%- else -%}
-  <p class="empty">아직 이 분류에 글이 없습니다. 첫 글이 올라오면 여기에 쌓입니다.</p>
+  <p class="empty">{{ T.cat_empty }}</p>
   {%- endif -%}
 </section>
