@@ -1,0 +1,21 @@
+title: 공책 RPG 개발 일지
+description: 판타지 웹 게임을 만들며 배운 것과 진행 기록
+lang: ko
+timezone: Asia/Seoul
+url: "https://wh209302.github.io"
+baseurl: ""
+theme: minima
+permalink: /:year/:month/:day/:title/
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+minima:
+  date_format: "%Y년 %m월 %d일"
+exclude:
+  - README.md
+  - CLAUDE.md
+  - Gemfile
+  - Gemfile.lock
+  - .gems
+  - vendor
