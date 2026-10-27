@@ -26,7 +26,7 @@ summary: 게임을 만들며 Claude에게 참고하라고 건넨 사이트 가�
 
 <figure><img src="/assets/img/posts/reference-sites/refiner.webp" alt="AI가 그린 캐릭터 세 명을 원본, Pixel Refiner, 작업대 다듬기로 나란히 비교" loading="lazy"><figcaption>왼쪽부터 AI 원본, Pixel Refiner, 저희 작업대입니다.</figcaption></figure>
 
-**[claude-pxl](https://github.com/augusto-scarvalho/claude-pxl)** · 짧은 코드로 픽셀 그림과 움직이는 그림을 만드는 도구이고, AI가 쓰기 좋게 만들어져 있습니다. Claude에게 마법 효과를 이걸로 그리게 했더니 흰 공책 바탕에 파스텔 색이 묻혀 잘 보이지 않았습니다. 진한 테두리를 두르는 기능을 더하자 또렷해졌습니다.
+**[claude-pxl](https://github.com/augusto-scarvalho/claude-pxl)** · 짧은 코드로 픽셀 그림과 움직이는 그림을 만드는 도구이고 AI가 쓰기 좋게 만들어져 있습니다. Claude에게 마법 효과를 이걸로 그리게 했더니 흰 공책 바탕에 파스텔 색이 묻혀 잘 보이지 않았습니다. 진한 테두리를 두르는 기능을 더하자 또렷해졌습니다.
 
 <figure><img src="/assets/img/posts/reference-sites/pxl-fire.webp" alt="불 마법 다섯 장면. 위는 기본 색, 아래는 공책 색과 테두리" loading="lazy"><figcaption>위는 기본값, 아래는 테두리를 넣은 불 마법입니다.</figcaption></figure>
 
@@ -38,6 +38,6 @@ summary: 게임을 만들며 Claude에게 참고하라고 건넨 사이트 가�
 
 ## 세 줄 요약
 
-1. 참고할 사이트는 Claude에게 건네 직접 읽히고, 공식 문서와 맞춰 본 뒤 쓸 것만 적용합니다.
-2. 픽셀 그림은 Pixel Refiner로 칸을 맞추고, 효과는 claude-pxl로, 검사는 용어집 점검표로 합니다.
+1. 참고할 사이트는 Claude에게 건네 직접 읽히고 공식 문서와 맞춰 본 뒤 쓸 것만 적용합니다.
+2. 픽셀 그림은 Pixel Refiner로 칸을 맞추고 효과는 claude-pxl로, 검사는 용어집 점검표로 합니다.
 3. 새로 쓸 만한 곳을 찾으면 이 글에 계속 더합니다.
