@@ -12,7 +12,7 @@ Whenever I find a great community tip or a nifty web tool while making the game,
 
 Quite a few sites paid off nicely that way, but the problem was that after just a few days I'd be scrambling to find them again, going "what was that site's address again?" So I'm pinning down here only **the gems that really earned their keep** after I tried them myself.
 
-<figure><img src="/assets/img/posts/reference-sites/refs.webp" alt="Reference site cards, sorted into writing, Claude settings, pixel art, and ideas" loading="lazy"><figcaption>A bookmark list picked out by category.</figcaption></figure>
+<figure><img src="/assets/img/posts/reference-sites/refs.webp" alt="Reference site cards, sorted into writing, Claude settings, pixel art, game screens, and ideas" loading="lazy"><figcaption>A bookmark list picked out by category.</figcaption></figure>
 
 ## Writing and polishing tone
 
@@ -34,6 +34,10 @@ Quite a few sites paid off nicely that way, but the problem was that after just 
 
 **[Pixel Shading Glossary](https://tuiella.github.io/pixel-glossary/)** · A Korean visual dictionary that explains the technical terms for light, shadow, and color in pixel art with cute before-and-after pictures. If you just tell the AI "make the shadows look more natural," it brings back something off every time, but if you pinpoint it with the exact terms from this dictionary (for example, no pillow shading, apply hue shifting), the results come out surprisingly consistent. I even had Claude memorize this dictionary whole and turn it into a checklist for reviewing art.
 
+## Game screen (UI) design
+
+**[UI Glossary](https://tuiella.github.io/ui-glossary/)** · A Korean dictionary from the same author as the pixel shading glossary above, this time covering 140-odd game screen components with example pictures. Things like a delayed damage bar, a hit vignette, or collection silhouettes, the stuff you only know as "that thing, you know," all have proper names here, so I sweat a lot less trying to describe them to Claude. I handed the whole list to Claude and had it check our game screen against it line by line. **Once what we already have and what we're missing split apart at a glance, the idea meeting moves as fast as ticking off a checklist.**
+
 ## Treasure chest of effect ideas
 
 **[Opus 5.5 video collection](https://github.com/yihui-dev/awesome-opus5-5-videos)** · A repository gathering 703 videos of results from having AI write animations in code, along with the actual prompts. When it's frustrating to explain an effect that only exists in your head, you can find a video with a similar feel here and borrow the prompt wording, which gets you there directly. The analog effect in our game where pencil lines jitter slightly came from a hint found right here, and I applied it in the [video-making post](/en/2026/10/27/ai-clip/).
@@ -41,5 +45,5 @@ Quite a few sites paid off nicely that way, but the problem was that after just 
 ## Three-line summary
 
 1. When you find a good tip site, first toss it to the AI to cross-check against the official docs, then take only the real gems.
-2. For AI pixel art, line up the grid with Pixel Refiner, stamp out effects with claude-pxl, and hold quality with the glossary checklist, and you're in good shape.
+2. For AI pixel art, line up the grid with Pixel Refiner, stamp out effects with claude-pxl, and hold quality with the glossary checklist, and you're in good shape. Check your game screen against the UI Glossary line by line and the gaps show up.
 3. I'll keep adding to this post whenever I find tools that earn their keep in real use.
