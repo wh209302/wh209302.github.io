@@ -5,39 +5,41 @@ date: 2026-10-27 15:45:00 +0900
 category: dev-tips
 tags: [참고자료, AI협업, 픽셀아트, 토큰, 글쓰기]
 image: /assets/img/posts/reference-sites/refs.webp
-summary: 게임을 만들며 Claude에게 참고하라고 건넨 사이트 가운데 실제로 도움이 된 것만 모았습니다. 무엇인지, 우리 작업에서 어떻게 썼는지를 짧게 적고 새로 찾으면 계속 더합니다.
+summary: 게임을 만들며 Claude에게 "이거 참고해 봐" 하고 건넸던 사이트 중 진짜로 밥값을 한 알짜배기들만 모았습니다. 새로 발굴할 때마다 계속 업데이트하는 보물창고입니다.
 ---
 
-게임을 만들면서 커뮤니티 글이나 도구를 찾으면 Claude에게 "이거 참고해 봐" 하고 건넵니다. 그때는 도움이 됐는데 나중에 다시 찾으려면 주소가 기억나지 않았습니다. 그래서 실제로 써 보고 도움이 된 것만 여기 모아 둡니다.
+게임을 만들다 괜찮은 커뮤니티 꿀팁이나 신박한 웹 도구를 발견하면 일단 Claude에게 **"야, 이거 한 번 읽어 봐"** 하고 링크부터 던져 줍니다. 
 
-<figure><img src="/assets/img/posts/reference-sites/refs.webp" alt="참고 사이트 카드. 글쓰기, Claude 설정, 픽셀 아트, 아이디어로 분류" loading="lazy"><figcaption>분류별로 정리한 모습입니다.</figcaption></figure>
+그렇게 쏠쏠하게 재미를 본 사이트가 꽤 되는데, 문제는 며칠만 지나도 "그때 그 사이트 주소가 뭐였더라?" 하며 다시 찾느라 헤맨다는 거였습니다. 그래서 제가 직접 써 보고 **진짜로 밥값을 했던 알짜배기 사이트들**만 이곳에 박제해 둡니다.
 
-## 글쓰기
+<figure><img src="/assets/img/posts/reference-sites/refs.webp" alt="참고 사이트 카드. 글쓰기, Claude 설정, 픽셀 아트, 아이디어로 분류" loading="lazy"><figcaption>분야별로 추려 둔 즐겨찾기 목록입니다.</figcaption></figure>
 
-**[Humanize KR](https://github.com/epoko77-ai/im-not-ai)** · AI가 쓴 한국어 글에서 번역투와 기계적인 나열을 찾아 고쳐 주는 Claude 스킬입니다. 사실과 숫자는 건드리지 않고 문장만 다듬습니다. 저는 Claude에게 이 스킬을 가볍게 줄인 판을 만들게 해서 이 블로그 글을 올리기 전에 늘 돌립니다.
+## 글쓰기 & 말투 교정
 
-## Claude 설정과 토큰
+**[Humanize KR](https://github.com/epoko77-ai/im-not-ai)** · AI가 쓴 한국어 특유의 어색한 번역투와 로봇 같은 문장 나열을 사람 말투로 자연스럽게 다듬어 주는 Claude 전용 스킬입니다. 팩트나 숫자는 건드리지 않고 문장의 결만 매끄럽게 정돈해 주는 게 특징입니다. 우리 블로그에서도 글을 올리기 전에 초안을 다듬는 용도로 요긴하게 참고하고 있습니다.
 
-**디시인사이드 [AI 개발 갤러리 글](https://gall.dcinside.com/mgallery/board/view/?id=aidevelop&no=4369)과 [AI 활용 갤러리 글](https://gall.dcinside.com/mgallery/board/view/?id=ai_utilize&no=137000)** · Claude Code를 오래 쓴 분들이 토큰을 아끼는 설정을 나눈 글입니다. 자동 압축을 일찍 하기, 에이전트를 함부로 띄우지 않기 같은 내용입니다. Claude에게 이 글을 읽히고 공식 문서와 맞춰 보게 한 뒤 맞는 것만 적용했습니다. 과정은 [토큰 아끼기 글]({% post_url 2026-10-27-ai-tokens %})에 있습니다.
+## Claude 설정과 토큰 다이어트
 
-## 픽셀 아트
+**디시인사이드 [AI 개발 갤러리 글](https://gall.dcinside.com/mgallery/board/view/?id=aidevelop&no=4369)과 [AI 활용 갤러리 글](https://gall.dcinside.com/mgallery/board/view/?id=ai_utilize&no=137000)** · Claude Code 고인물 유저분들이 토큰 아끼는 실전 세팅법을 아낌없이 풀어 놓은 글입니다. 대화 자동 요약을 일찍 돌리기, 보조 에이전트 함부로 소환하지 않기 같은 뼈가 되고 살이 되는 팁들이 담겨 있습니다. Claude에게 이 글들을 읽히고 공식 매뉴얼과 팩트 체크를 시켜서 우리 환경에 맞게 적용한 과정은 [토큰 아끼기 글]({% post_url 2026-10-27-ai-tokens %})에 자세히 적어 두었습니다.
 
-**[Pixel Refiner](https://pixel-refiner.app/)** · AI가 그린 "픽셀풍" 그림을 진짜 픽셀 칸에 맞춰 주는 무료 웹 도구입니다. 그림을 끌어다 놓기만 하면 됩니다. 저희 작업대의 다듬기 기능과 나란히 비교해 봤는데 결과는 거의 같았습니다. 작업대 같은 도구가 없다면 가장 먼저 써 볼 만합니다.
+## 픽셀 아트 & 그래픽 도구
 
-<figure><img src="/assets/img/posts/reference-sites/refiner.webp" alt="AI가 그린 캐릭터 세 명을 원본, Pixel Refiner, 작업대 다듬기로 나란히 비교" loading="lazy"><figcaption>왼쪽부터 AI 원본, Pixel Refiner, 저희 작업대입니다.</figcaption></figure>
+**[Pixel Refiner](https://pixel-refiner.app/)** · AI가 그럴싸하게 흉내만 낸 '무늬만 픽셀' 그림을 **진짜 도트 격자(그리드)**에 딱딱 들어맞게 정렬해 주는 고마운 무료 웹 도구입니다. 사이트에 접속해서 그림 파일을 마우스로 툭 끌어다 놓기만 하면 끝납니다. 저희가 자체 제작한 에셋 작업대의 보정 기능과 나란히 비교해 봤는데도 결과물이 막상막하더군요. 별도의 자체 작업대가 없는 분들께 무조건 1순위로 추천합니다.
 
-**[claude-pxl](https://github.com/augusto-scarvalho/claude-pxl)** · 짧은 코드로 픽셀 그림과 움직이는 그림을 만드는 도구이고 AI가 쓰기 좋게 만들어져 있습니다. Claude에게 마법 효과를 이걸로 그리게 했더니 흰 공책 바탕에 파스텔 색이 묻혀 잘 보이지 않았습니다. 진한 테두리를 두르는 기능을 더하자 또렷해졌습니다.
+<figure><img src="/assets/img/posts/reference-sites/refiner.webp" alt="AI가 그린 캐릭터 세 명을 원본, Pixel Refiner, 작업대 다듬기로 나란히 비교" loading="lazy"><figcaption>왼쪽부터 AI 원본, Pixel Refiner 보정본, 저희 자체 작업대 보정본입니다. 지저분하던 도트 선이 깔끔하게 정돈됩니다.</figcaption></figure>
 
-<figure><img src="/assets/img/posts/reference-sites/pxl-fire.webp" alt="불 마법 다섯 장면. 위는 기본 색, 아래는 공책 색과 테두리" loading="lazy"><figcaption>위는 기본값, 아래는 테두리를 넣은 불 마법입니다.</figcaption></figure>
+**[claude-pxl](https://github.com/augusto-scarvalho/claude-pxl)** · 짧은 코드로 도트 그림과 프레임 애니메이션을 찍어 내는 도구인데, 태생부터 AI가 다루기 쉽게 설계되어 있습니다. Claude에게 이걸 쥐여 주고 불 마법 이펙트를 그려 보라고 시켰더니, 처음엔 밝은 공책 배경색에 파스텔 톤 불꽃이 묻혀서 영 안 보이더군요. 거기에 진한 외곽선을 두르는 옵션만 살짝 얹었더니 단숨에 게임에 쓸 만한 퀄리티가 나왔습니다.
 
-**[픽셀 셰이딩 용어집](https://tuiella.github.io/pixel-glossary/)** · 빛, 그림자, 색 용어를 작은 그림의 전후 비교로 보여 주는 한국어 용어집입니다. "그림자를 자연스럽게"라고 하면 AI가 매번 다르게 그리는데, 용어 이름으로 말하면 결과가 안정됩니다. Claude에게 이 용어집을 읽혀 그림을 검사할 때 쓰는 점검표로 만들어 두었습니다.
+<figure><img src="/assets/img/posts/reference-sites/pxl-fire.webp" alt="불 마법 다섯 장면. 위는 기본 색, 아래는 공책 색과 테두리" loading="lazy"><figcaption>위가 기본 설정으로 뽑은 불 마법, 아래가 공책 배경에 맞춰 외곽선을 덧입힌 버전입니다.</figcaption></figure>
 
-## 아이디어
+**[픽셀 셰이딩 용어집](https://tuiella.github.io/pixel-glossary/)** · 도트 아트의 빛, 그림자, 색감 관련 전문 용어들을 귀여운 전후 비교 짤로 알기 쉽게 설명해 둔 한국어 도감입니다. AI에게 그냥 "그림자 좀 자연스럽게 쳐 줘"라고 하면 매번 엉뚱한 결과물을 가져오는데, 이 사전에 나오는 정확한 용어(예: 필로우 셰이딩 금지, 휴 시프팅 적용 등)로 콕 집어 명령하면 결과물이 놀랍도록 일관되게 나옵니다. 아예 Claude에게 이 사전을 통째로 외우게 해서 그림 검수용 체크리스트로 만들어 두었습니다.
 
-**[Opus 5.5 영상 모음](https://github.com/yihui-dev/awesome-opus5-5-videos)** · AI에게 코드로 만들게 한 영상 703개와 그 프롬프트를 모은 곳입니다. 원하는 연출을 말로 설명하기 어려울 때 비슷한 영상을 찾아 표현을 빌립니다. 여기서 연필 선이 살짝 떨리는 효과를 찾아 [영상 만드는 글]({% post_url 2026-10-27-ai-clip %})에 썼습니다.
+## 연출 아이디어 보물창고
+
+**[Opus 5.5 영상 모음](https://github.com/yihui-dev/awesome-opus5-5-videos)** · AI에게 코드로 애니메이션을 짜게 시킨 결과물 영상 703개와 실제 프롬프트를 한데 모아 둔 저장소입니다. 머릿속에만 맴도는 연출을 말로 설명하기 답답할 때, 여기서 비슷한 느낌의 영상을 찾아 프롬프트 표현을 빌려 쓰면 직빵입니다. 우리 게임에서 연필 선이 사각거리며 미세하게 떨리는 아날로그 연출도 바로 이곳에서 힌트를 얻어 [영상 만드는 글]({% post_url 2026-10-27-ai-clip %})에 적용했습니다.
 
 ## 세 줄 요약
 
-1. 참고할 사이트는 Claude에게 건네 직접 읽히고 공식 문서와 맞춰 본 뒤 쓸 것만 적용합니다.
-2. 픽셀 그림은 Pixel Refiner로 칸을 맞추고 효과는 claude-pxl로, 검사는 용어집 점검표로 합니다.
-3. 새로 쓸 만한 곳을 찾으면 이 글에 계속 더합니다.
+1. 괜찮은 팁 사이트를 발견하면 일단 AI에게 던져 줘서 공식 문서와 대조해 보게 한 뒤, 진짜 알짜만 뽑아 먹습니다.
+2. AI 픽셀 아트는 Pixel Refiner로 격자를 맞추고, 이펙트는 claude-pxl로 찍어 내고, 품질 검수는 용어집 체크리스트로 잡으면 든든합니다.
+3. 앞으로도 실전에서 써 보고 밥값 하는 도구들을 찾으면 이 글에 계속 추가해 나가겠습니다.
