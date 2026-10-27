@@ -18,10 +18,10 @@ CONFIG = Path(__file__).resolve().with_name("credentials.json")
 def credentials():
     cfg = json.loads(CONFIG.read_text(encoding="utf-8"))
     user, password = cfg["username"], cfg["password"]
-    if not isinstance(user, str) or not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", user):
-        raise ValueError("Use 1-64 ASCII letters, digits, _ or - for username")
-    if not isinstance(password, str) or not re.fullmatch(r"[A-Za-z0-9_-]{16,128}", password):
-        raise ValueError("Use 16-128 ASCII letters, digits, _ or - for password")
+    if not isinstance(user, str) or not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", user) or "__" in user:
+        raise ValueError("Use 1-64 ASCII letters, digits, _ or - for username; do not use consecutive underscores")
+    if not isinstance(password, str) or not re.fullmatch(r"[A-Za-z0-9_-]{16,128}", password) or "__" in password:
+        raise ValueError("Use 16-128 ASCII letters, digits, _ or - for password; do not use consecutive underscores")
     return user, password
 
 
@@ -51,10 +51,10 @@ def main():
         if password != getpass.getpass("Repeat password: "):
             raise SystemExit("Passwords do not match")
         # Validate before saving. The restrictive alphabet avoids URI delimiters.
-        if not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", user):
-            raise SystemExit("Invalid username")
-        if not re.fullmatch(r"[A-Za-z0-9_-]{16,128}", password):
-            raise SystemExit("Invalid password")
+        if not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", user) or "__" in user:
+            raise SystemExit("Invalid username (consecutive underscores are not allowed)")
+        if not re.fullmatch(r"[A-Za-z0-9_-]{16,128}", password) or "__" in password:
+            raise SystemExit("Invalid password (consecutive underscores are not allowed)")
         fd = os.open(CONFIG, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
         with os.fdopen(fd, "w", encoding="utf-8") as handle:
             json.dump(dict(username=user, password=password), handle)

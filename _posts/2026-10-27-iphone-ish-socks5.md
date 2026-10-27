@@ -114,10 +114,10 @@ CONFIG = Path(__file__).resolve().with_name("credentials.json")
 def credentials():
     cfg = json.loads(CONFIG.read_text(encoding="utf-8"))
     user, password = cfg["username"], cfg["password"]
-    if not isinstance(user, str) or not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", user):
-        raise ValueError("Use 1-64 ASCII letters, digits, _ or - for username")
-    if not isinstance(password, str) or not re.fullmatch(r"[A-Za-z0-9_-]{16,128}", password):
-        raise ValueError("Use 16-128 ASCII letters, digits, _ or - for password")
+    if not isinstance(user, str) or not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", user) or "__" in user:
+        raise ValueError("Use 1-64 ASCII letters, digits, _ or - for username; do not use consecutive underscores")
+    if not isinstance(password, str) or not re.fullmatch(r"[A-Za-z0-9_-]{16,128}", password) or "__" in password:
+        raise ValueError("Use 16-128 ASCII letters, digits, _ or - for password; do not use consecutive underscores")
     return user, password
 
 
@@ -147,10 +147,10 @@ def main():
         if password != getpass.getpass("Repeat password: "):
             raise SystemExit("Passwords do not match")
         # Validate before saving. The restrictive alphabet avoids URI delimiters.
-        if not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", user):
-            raise SystemExit("Invalid username")
-        if not re.fullmatch(r"[A-Za-z0-9_-]{16,128}", password):
-            raise SystemExit("Invalid password")
+        if not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", user) or "__" in user:
+            raise SystemExit("Invalid username (consecutive underscores are not allowed)")
+        if not re.fullmatch(r"[A-Za-z0-9_-]{16,128}", password) or "__" in password:
+            raise SystemExit("Invalid password (consecutive underscores are not allowed)")
         fd = os.open(CONFIG, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
         with os.fdopen(fd, "w", encoding="utf-8") as handle:
             json.dump(dict(username=user, password=password), handle)
@@ -183,7 +183,7 @@ cd /root/socks && .venv/bin/python -m py_compile socks5.py && echo 'socks5.py OK
 cd /root/socks && .venv/bin/python socks5.py --configure
 ```
 
-입력 순서는 다음과 같습니다.
+사용자 이름과 비밀번호에 연속된 밑줄(`__`)은 넣지 않습니다. pproxy가 연결 경로 구분자로 해석하는 문자열이어서 이 예제에서 거부하도록 했습니다. 입력 순서는 다음과 같습니다.
 
 1. `Username`: 영문·숫자·`_`·`-`로 1~64자를 입력합니다.
 2. `Password`: 같은 문자 범위로 16~128자를 입력합니다. 다른 서비스와 겹치지 않는 비밀번호를 사용합니다.
