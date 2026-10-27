@@ -1,12 +1,12 @@
 {%- if site.goatcounter != "" -%}
-<span class="views" hidden><span aria-hidden="true">·</span> 조회 <span class="views__n"></span></span>
+<span class="views" hidden><span aria-hidden="true">·</span> 조회 <span class="views__n">0</span></span>
 <script>
 (function () {
   var el = document.currentScript.previousElementSibling;
-  var path = location.pathname;
-  fetch('https://{{ site.goatcounter }}.goatcounter.com/counter/' + encodeURIComponent(path) + '.json')
-    .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (d) { if (d && d.count) { el.querySelector('.views__n').textContent = d.count; el.hidden = false; } })
+  // 아직 아무도 안 본 글은 GoatCounter가 404를 돌려주므로 0으로 보여 줍니다.
+  fetch('https://{{ site.goatcounter }}.goatcounter.com/counter/' + encodeURIComponent(location.pathname) + '.json')
+    .then(function (r) { return r.ok ? r.json() : (r.status === 404 ? { count: '0' } : null); })
+    .then(function (d) { if (d && d.count != null) { el.querySelector('.views__n').textContent = d.count; el.hidden = false; } })
     .catch(function () {});
 })();
 </script>
