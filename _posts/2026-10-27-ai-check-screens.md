@@ -127,6 +127,8 @@ ffmpeg -i demo.mp4 -frames:v 1 demo.jpg
 
 <figure class="narrow"><video src="/assets/img/posts/ai-screens/book-open-phone.mp4" poster="/assets/img/posts/ai-screens/book-open-phone.jpg" controls muted playsinline preload="none"></video><figcaption>폰에서 공책을 펼치는 연출을 이렇게 찍었습니다.</figcaption></figure>
 
+녹화 영상은 프레임이 띄엄띄엄 빠질 수 있습니다. 빠른 움직임까지 빠짐없이 담으려면 시계를 멈추고 한 장씩 찍는 방법을 씁니다. [한 장씩 찍어 영상으로 만드는 법]({% post_url 2026-10-27-ai-clip %})에 정리했습니다.
+
 ## 겪은 함정
 
 - **영어 화면이 찍힙니다.** 화면 없는 브라우저는 기본 언어가 영어일 때가 있습니다. 언어에 따라 글이 바뀌는 사이트라면 `locale: 'ko-KR'`을 꼭 넣습니다.
