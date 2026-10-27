@@ -332,3 +332,8 @@ mark, .prose mark {
 .prose figure.narrow img { width: auto; max-width: min(100%, 26rem); margin: 0 auto; }
 .prose figcaption { margin-top: .6rem; color: var(--muted); font-size: .88rem; line-height: 1.55; text-align: center; }
 @media (min-width: 1100px) { .prose figure.wide { margin-left: -6rem; margin-right: -6rem; } }
+
+/* 댓글과 좋아요 */
+.talk { max-width: var(--measure); margin: 3rem auto 1rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+.talk h2 { margin: 0 0 .4rem; font-size: .8125rem; color: var(--muted); }
+.talk__hint { margin: 0 0 1rem; font-size: .95rem; }

@@ -26,3 +26,16 @@ exclude:
   - Gemfile.lock
   - .gems
   - vendor
+
+# 검색 노출: 서치 콘솔에서 받은 확인 코드만 넣습니다(공개돼도 되는 값).
+webmaster_verifications:
+  google: ""
+naver_verification: ""
+
+# 댓글·좋아요(giscus)와 조회수(GoatCounter). 값이 비어 있으면 화면에 나오지 않습니다.
+giscus:
+  repo: wh209302/wh209302.github.io
+  repo_id: ""
+  category: Announcements
+  category_id: ""
+goatcounter: ""

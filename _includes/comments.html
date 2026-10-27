@@ -1,0 +1,34 @@
+{%- if site.giscus.repo_id != "" and site.giscus.category_id != "" -%}
+<section class="talk" aria-label="댓글">
+  <h2 class="mono">댓글과 좋아요</h2>
+  <p class="talk__hint muted">글이 도움이 됐다면 아래 👍를 눌러 주세요. GitHub 계정으로 댓글을 남길 수 있습니다.</p>
+  <div id="giscus"></div>
+</section>
+<script>
+(function () {
+  var dark = (function () {
+    var t = document.documentElement.dataset.theme;
+    if (t) return t === 'dark';
+    return window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches;
+  })();
+  var s = document.createElement('script');
+  s.src = 'https://giscus.app/client.js';
+  var a = {
+    'data-repo': '{{ site.giscus.repo }}', 'data-repo-id': '{{ site.giscus.repo_id }}',
+    'data-category': '{{ site.giscus.category }}', 'data-category-id': '{{ site.giscus.category_id }}',
+    'data-mapping': 'pathname', 'data-strict': '1', 'data-reactions-enabled': '1',
+    'data-emit-metadata': '0', 'data-input-position': 'top', 'data-lang': 'ko',
+    'data-loading': 'lazy', 'data-theme': dark ? 'dark' : 'light'
+  };
+  for (var k in a) s.setAttribute(k, a[k]);
+  s.crossOrigin = 'anonymous'; s.async = true;
+  document.getElementById('giscus').appendChild(s);
+  // 밝게·어둡게를 바꾸면 댓글 창도 따라 바뀝니다.
+  new MutationObserver(function () {
+    var f = document.querySelector('iframe.giscus-frame');
+    if (!f) return;
+    f.contentWindow.postMessage({ giscus: { setConfig: { theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light' } } }, 'https://giscus.app');
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+})();
+</script>
+{%- endif -%}

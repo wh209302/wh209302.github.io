@@ -10,6 +10,7 @@ layout: default
     <p class="post__meta mono">
       <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time>
       <span aria-hidden="true">·</span> 읽는 데 {% include read-time.html content=content %}
+      {% include views.html %}
     </p>
     {%- if page.tags.size > 0 -%}
     <ul class="post__tags">{%- for t in page.tags -%}<li><a class="tag" href="{{ '/tags/' | relative_url }}#{{ t | slugify: 'raw' }}">#{{ t }}</a></li>{%- endfor -%}</ul>
@@ -39,6 +40,8 @@ layout: default
       <div class="prose" id="prose">{{ content }}</div>
     </div>
   </div>
+
+  {% include comments.html %}
 
   <nav class="pager" aria-label="이전·다음 글">
     {%- if page.previous -%}<a class="pager__item" href="{{ page.previous.url | relative_url }}"><span class="mono muted">← 이전 글</span><span>{{ page.previous.title | escape }}</span></a>{%- else -%}<span></span>{%- endif -%}

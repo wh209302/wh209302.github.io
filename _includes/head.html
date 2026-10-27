@@ -12,3 +12,15 @@
 <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
 {% feed_meta %}
 {% seo %}
+{%- if site.naver_verification != "" %}
+<meta name="naver-site-verification" content="{{ site.naver_verification }}">
+{%- endif %}
+{%- if page.layout == "post" %}
+{%- for t in page.tags %}
+<meta property="article:tag" content="{{ t }}">
+{%- endfor %}
+{%- if page.tags.size > 0 %}<meta name="keywords" content="{{ page.tags | join: ', ' }}">{% endif %}
+{%- endif %}
+{%- if site.goatcounter != "" %}
+<script data-goatcounter="https://{{ site.goatcounter }}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+{%- endif %}

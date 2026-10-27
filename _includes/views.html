@@ -1,0 +1,13 @@
+{%- if site.goatcounter != "" -%}
+<span class="views" hidden><span aria-hidden="true">·</span> 조회 <span class="views__n"></span></span>
+<script>
+(function () {
+  var el = document.currentScript.previousElementSibling;
+  var path = location.pathname;
+  fetch('https://{{ site.goatcounter }}.goatcounter.com/counter/' + encodeURIComponent(path) + '.json')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) { if (d && d.count) { el.querySelector('.views__n').textContent = d.count; el.hidden = false; } })
+    .catch(function () {});
+})();
+</script>
+{%- endif -%}
