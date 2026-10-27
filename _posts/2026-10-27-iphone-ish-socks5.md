@@ -14,6 +14,15 @@ summary: 아이폰의 SOCKS5 서버를 Windows v2rayN에 연결하는 흐름과 
 
 이 글은 공식 문서와 공개 소스를 확인하고 예제의 인증·TCP 중계를 PC에서 시험한 설정 가이드입니다. 아이폰 실기기에서 화면 잠금 후 유지 시간이나 통신사의 데이터 차감 방식을 측정한 사용기는 아닙니다.
 
+아이폰에서 바로 설치하려면 [1. iSH에 Python과 작업 폴더 준비](#ish-install)부터 진행합니다. 코드 블록의 ‘코드 복사’를 누르면 파일 저장 명령까지 함께 복사됩니다.
+
+<script src="/assets/js/iphone-ish-code-copy.js" defer></script>
+<style>
+.ish-copybar { display: flex; justify-content: flex-end; margin-top: 1rem; }
+.ish-copybtn { min-height: 44px; padding: .5rem .9rem; border: 1px solid var(--line); border-radius: .4rem; color: var(--ink); background: var(--paper-2); font: inherit; font-size: .875rem; cursor: pointer; }
+.ish-copybtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+
 ## 테더링 제한과 프록시 연결은 따로 확인합니다
 
 알뜰폰에서 말하는 데이터 무제한과 테더링 제공량은 요금제 상세 조건에서 각각 확인해야 합니다. 이 글에서는 특정 사업자나 요금제가 정해져 있지 않아 제공량과 소진 후 동작을 단정하지 않습니다. [Apple도 개인용 핫스팟의 지원 여부를 이동통신사와 요금제에서 확인하도록 안내합니다.](https://support.apple.com/ko-kr/111785)
@@ -51,45 +60,152 @@ cd /root/socks && python3 socks5.py
 
 원래 `socks5.py`의 소스는 확인 가능한 대화 기록에 남아 있지 않습니다. 인증 지원, 수신 주소, UDP 지원 여부는 현재로서는 알 수 없습니다. 아래에는 공개 패키지를 사용하는 별도 예제를 준비했습니다.
 
-## 파일이 없다면 이 예제로 시작합니다
+<h2 id="ish-install">1. iSH에 Python과 작업 폴더 준비</h2>
 
-예제는 [pproxy](https://github.com/qwj/python-proxy)의 Server API를 사용합니다. Python 파일은 서버 실행과 로컬 인증 파일 준비만 담당하며, 이 구성에서는 TCP SOCKS5만 엽니다. UDP와 게임·음성 통화·QUIC까지 지원하는 예제로 생각하면 안 됩니다.
+아이폰에서 이 글을 열고 각 코드 블록의 **코드 복사**를 누른 뒤 iSH에 붙여넣고 실행합니다. 블록 위아래의 설명은 복사하지 않아도 됩니다. 처음 설치할 때는 1~4단계를 순서대로 진행합니다. 설치가 끝난 뒤부터는 ‘위치 읽기와 서버를 한 번에 실행하기’의 명령 한 줄만 사용하면 됩니다.
 
-iSH에서 다음 명령으로 작업 폴더와 가상환경을 만듭니다. 설치 단계에는 정상적인 인터넷 연결이 필요합니다.
+이 예제의 `socks5.py`는 [pproxy](https://github.com/qwj/python-proxy)의 Server API를 사용하는 실행 파일입니다. 아래에 전체 코드를 넣었습니다. Python 표준 라이브러리만으로 동작하는 파일은 아니므로 pproxy 설치도 필요합니다. 이 구성은 인증을 사용하는 TCP SOCKS5이며 UDP는 지원하지 않습니다.
 
-```sh
-apk update
-apk add python3 py3-pip curl
-mkdir -p /root/socks
-cd /root/socks
-python3 -m venv .venv
-.venv/bin/python -m pip install 'pproxy==2.7.9'
-```
-
-`venv`나 `ensurepip`를 찾지 못하면 사용 중인 Alpine 저장소의 [py3-virtualenv 패키지](https://pkgs.alpinelinux.org/package/v3.20/community/x86/py3-virtualenv) 지원 여부를 확인합니다. 해당 버전에서 패키지를 제공한다면 `apk add py3-virtualenv`로 설치한 뒤 `python3 -m virtualenv .venv`로 가상환경을 만드는 방법도 있습니다. 시스템 Python에 패키지를 강제로 덮어쓰지 않습니다. 예제는 pproxy 2.7.9로 확인했으며, iSH에 설치된 Python 버전에서도 정상 기동하는지 확인해야 합니다.
-
-이 블로그에 함께 올린 [socks5.py 소스](/assets/downloads/iphone-socks5/socks5.py)와 [start-socks.sh 소스](/assets/downloads/iphone-socks5/start-socks.sh)를 내려받습니다. 다운로드한 파일을 읽어 본 뒤 실행합니다.
+iSH를 처음 설치했다면 앱을 열고 터미널이 나타날 때까지 기다립니다. 아래 블록 전체를 붙여넣습니다. 설치가 끝날 때까지 정상적인 인터넷 연결이 필요합니다. 괄호까지 함께 복사하면 중간 명령이 실패했을 때 해당 블록 안의 나머지 설치를 멈춥니다.
 
 ```sh
-cd /root/socks
-curl -fL https://wh209302.github.io/assets/downloads/iphone-socks5/socks5.py -o socks5.py
-curl -fL https://wh209302.github.io/assets/downloads/iphone-socks5/start-socks.sh -o start-socks.sh
-chmod 700 start-socks.sh
-.venv/bin/python socks5.py --configure
+(
+  set -eu
+  apk update
+  apk add python3 py3-pip curl
+  mkdir -p /root/socks
+  cd /root/socks
+  if ! python3 -m venv .venv; then
+    apk add py3-virtualenv
+    python3 -m virtualenv .venv
+  fi
+  .venv/bin/python -m pip install 'pproxy==2.7.9'
+  .venv/bin/python -c 'import pproxy; print("Python / pproxy OK")'
+)
 ```
 
-마지막 명령에서 사용자 이름과 비밀번호를 정합니다. 이 예제의 사용자 이름은 영문·숫자·`_`·`-`로 1~64자, 비밀번호는 같은 문자 범위로 16~128자입니다. 비밀번호 입력은 화면에 표시하지 않습니다. 인증 정보는 같은 폴더의 `credentials.json`에 저장하며, 이 파일은 블로그나 Git 저장소에 올리면 안 됩니다.
+마지막에 `Python / pproxy OK`가 나오면 다음 단계로 넘어갑니다. 오류가 나면 그 단계에서 멈춰 오류 내용을 확인합니다. `py3-virtualenv`도 찾지 못한다면 사용 중인 Alpine 버전의 저장소 설정과 [패키지 제공 여부](https://pkgs.alpinelinux.org/package/v3.20/community/x86/py3-virtualenv)를 확인해야 합니다. 시스템 Python에 패키지를 강제로 덮어쓰지는 않습니다.
+
+## 2. socks5.py 전체 코드를 파일로 저장
+
+아래 블록 전체를 복사해서 iSH에 붙여넣습니다. 첫 줄의 `cat`부터 마지막 `PY`까지 포함해야 합니다. `PY`가 단독으로 적힌 마지막 줄은 파일 입력을 끝내는 표시입니다. 붙여넣은 뒤 입력이 끝나지 않으면 Enter를 한 번 누릅니다.
+
+명령은 `/root/socks/socks5.py`를 만듭니다. 같은 이름의 파일이 이미 있다면 내용을 덮어쓰므로, 기존 서버 코드를 계속 사용할 경우에는 이 단계를 건너뜁니다. 아래 3단계 이후의 인증 설정과 실행 옵션은 이 글의 코드 기준입니다.
+
+```sh
+cat > /root/socks/socks5.py <<'PY'
+#!/usr/bin/env python3
+"""Authenticated TCP SOCKS5 example using pproxy 2.7.9. No UDP listener.
+
+Local credentials stay beside this script in credentials.json. Do not publish it.
+The SOCKS5 username/password exchange is NOT encrypted. Use a trusted network.
+"""
+import argparse
+import asyncio
+import getpass
+import json
+import os
+from pathlib import Path
+import re
+
+CONFIG = Path(__file__).resolve().with_name("credentials.json")
+
+
+def credentials():
+    cfg = json.loads(CONFIG.read_text(encoding="utf-8"))
+    user, password = cfg["username"], cfg["password"]
+    if not isinstance(user, str) or not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", user):
+        raise ValueError("Use 1-64 ASCII letters, digits, _ or - for username")
+    if not isinstance(password, str) or not re.fullmatch(r"[A-Za-z0-9_-]{16,128}", password):
+        raise ValueError("Use 16-128 ASCII letters, digits, _ or - for password")
+    return user, password
+
+
+async def serve(host, port):
+    import pproxy
+    user, password = credentials()
+    proxy = pproxy.Server(f"socks5://{host}:{port}#{user}:{password}")
+    # Disable IP-based authentication reuse; authenticate every connection.
+    server = await proxy.start_server(dict(rserver=[], authtime=-1))
+    print(f"SOCKS5 TCP listening on {host}:{port}; authentication required", flush=True)
+    async with server:
+        await server.serve_forever()
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--configure", action="store_true")
+    parser.add_argument("--host", default="127.0.0.1",
+                        help="IPv4 bind address; use the phone LAN IP for PC access")
+    parser.add_argument("--port", default=1080, type=int)
+    args = parser.parse_args()
+    if args.configure:
+        if CONFIG.exists():
+            raise SystemExit("credentials.json already exists; edit or remove it locally first")
+        user = input("Username (ASCII letters/digits/_/-): ").strip()
+        password = getpass.getpass("Password (16+ ASCII letters/digits/_/-): ")
+        if password != getpass.getpass("Repeat password: "):
+            raise SystemExit("Passwords do not match")
+        # Validate before saving. The restrictive alphabet avoids URI delimiters.
+        if not re.fullmatch(r"[A-Za-z0-9_-]{1,64}", user):
+            raise SystemExit("Invalid username")
+        if not re.fullmatch(r"[A-Za-z0-9_-]{16,128}", password):
+            raise SystemExit("Invalid password")
+        fd = os.open(CONFIG, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            json.dump(dict(username=user, password=password), handle)
+        print("Saved local credentials.json. Keep it private.")
+        return
+    try:
+        asyncio.run(serve(args.host, args.port))
+    except KeyboardInterrupt:
+        pass
+
+
+if __name__ == "__main__":
+    main()
+PY
+```
+
+저장 후 문법과 파일 위치를 확인합니다. `socks5.py OK`가 나오면 파일 준비가 끝난 것입니다. 이 확인은 실제 네트워크 연결 시험과는 별개입니다.
+
+```sh
+cd /root/socks && .venv/bin/python -m py_compile socks5.py && echo 'socks5.py OK'
+```
+
+파일로 받는 편이 편하다면 [같은 socks5.py 내려받기](/assets/downloads/iphone-socks5/socks5.py)도 사용할 수 있습니다. 위 코드 블록과 다운로드 파일의 내용은 같습니다.
+
+## 3. 사용자 이름과 비밀번호 설정
+
+아래 명령을 별도로 붙여넣고 실행합니다. 사용자 이름과 비밀번호를 묻는 단계는 화면을 보면서 직접 입력합니다.
+
+```sh
+cd /root/socks && .venv/bin/python socks5.py --configure
+```
+
+입력 순서는 다음과 같습니다.
+
+1. `Username`: 영문·숫자·`_`·`-`로 1~64자를 입력합니다.
+2. `Password`: 같은 문자 범위로 16~128자를 입력합니다. 다른 서비스와 겹치지 않는 비밀번호를 사용합니다.
+3. `Repeat password`: 같은 비밀번호를 다시 입력합니다.
+
+비밀번호는 입력해도 화면에 표시되지 않습니다. `Saved local credentials.json. Keep it private.`가 나오면 저장이 끝났습니다. 사용자 이름과 비밀번호는 나중에 v2rayN에도 똑같이 입력합니다. 인증 정보가 담긴 `/root/socks/credentials.json`은 블로그나 Git 저장소에 올리면 안 됩니다.
+
+`credentials.json already exists`가 나오면 이전 인증 설정이 남아 있다는 뜻입니다. 이미 설정한 계정으로 사용할 경우 다시 만들 필요가 없습니다.
+
+## 4. 서버부터 실행해 연결 확인
 
 처음에는 백그라운드 유지 없이 서버 연결만 시험합니다.
 
 ```sh
-cd /root/socks
-.venv/bin/python -u socks5.py --host 0.0.0.0 --port 1080
+cd /root/socks && .venv/bin/python -u socks5.py --host 0.0.0.0 --port 1080
 ```
 
-기본 수신 주소인 `127.0.0.1`은 아이폰 내부에서만 접근할 수 있습니다. 위 명령의 `0.0.0.0`은 모든 IPv4 인터페이스에서 연결을 받으므로, 본인 기기만 접속하는 신뢰할 수 있는 핫스팟에서 사용합니다. 가능하면 `--host`에 아이폰의 해당 연결 주소만 지정해 범위를 줄입니다. PC에는 `0.0.0.0` 대신 실제로 도달 가능한 아이폰 주소를 입력합니다.
+`SOCKS5 TCP listening on 0.0.0.0:1080; authentication required`가 나오면 서버가 시작된 것입니다. 실행 중에는 터미널 입력 창이 돌아오지 않습니다. 중지할 때는 iSH에서 `Ctrl+C`를 누릅니다. iSH의 보조 키보드에서 Ctrl을 선택하고 C를 입력하는 방식으로 보낼 수 있습니다.
 
-iOS가 로컬 네트워크 접근 권한을 요청하면 허용합니다. 서버가 기동했다는 메시지만으로 PC 접근까지 확인된 것은 아닙니다. 다음 단계의 포트 검사와 요청 시험을 통과해야 합니다.
+기본 수신 주소인 `127.0.0.1`은 아이폰 내부에서만 접근할 수 있습니다. 위 명령의 `0.0.0.0`은 모든 IPv4 인터페이스에서 연결을 받으므로 본인 기기만 접속하는 신뢰할 수 있는 핫스팟에서 사용합니다. 가능하면 `--host`에 아이폰의 해당 연결 주소만 지정해 범위를 줄입니다. PC에는 `0.0.0.0` 대신 실제로 도달 가능한 아이폰 주소를 입력합니다.
+
+iOS가 로컬 네트워크 접근 권한을 요청하면 허용합니다. 서버가 시작됐다는 메시지만으로 PC 접근까지 확인된 것은 아닙니다. 다음 단계의 포트 검사와 요청 시험을 통과해야 합니다.
 
 ## Windows와 v2rayN 연결
 
@@ -129,11 +245,52 @@ curl이 프록시 비밀번호를 요청하면 아이폰에서 정한 비밀번�
 
 ## 위치 읽기와 서버를 한 번에 실행하기
 
-연결 시험이 끝났다면 앞에서 내려받은 스크립트로 실행합니다.
+PC 연결 시험까지 끝났다면 iSH로 돌아와 앞서 실행한 서버를 `Ctrl+C`로 중지합니다. 아래 블록 전체를 복사해 붙여넣으면 위치 읽기와 서버 실행을 묶은 파일이 만들어집니다. 마지막 `SH`까지 포함하고, 붙여넣은 뒤 필요하면 Enter를 한 번 누릅니다. 기존 `start-socks.sh`가 있으면 이 내용으로 바뀝니다.
+
+```sh
+cat > /root/socks/start-socks.sh <<'SH'
+#!/bin/sh
+set -eu
+cd /root/socks
+
+# A directory lock avoids starting multiple copies from different login shells.
+if ! mkdir .run-lock 2>/dev/null; then
+    echo 'Already running, or stale .run-lock. Check ps before removing the lock.'
+    exit 1
+fi
+location_pid=''
+cleanup() {
+    if [ -n "$location_pid" ]; then
+        kill "$location_pid" 2>/dev/null || :
+        wait "$location_pid" 2>/dev/null || :
+    fi
+    rmdir .run-lock 2>/dev/null || :
+}
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM HUP
+
+if [ ! -c /dev/location ]; then
+    echo '/dev/location is unavailable; background keep-alive is not enabled.'
+    exit 1
+fi
+cat /dev/location > /dev/null &
+location_pid=$!
+
+# Foreground server: Ctrl+C returns to the shell and stops this location reader.
+# All IPv4 interfaces are reachable: only use a trusted private hotspot/network.
+.venv/bin/python -u socks5.py --host 0.0.0.0 --port 1080
+SH
+chmod 700 /root/socks/start-socks.sh
+```
+
+이제부터는 다음 한 줄로 실행합니다. 처음 실행할 때 위치 권한 요청이 나오면 확인합니다. 위치 권한이 거부되어 있으면 iOS 설정에서 iSH의 위치 서비스 권한을 확인해야 합니다.
 
 ```sh
 sh /root/socks/start-socks.sh
 ```
+
+[같은 start-socks.sh 내려받기](/assets/downloads/iphone-socks5/start-socks.sh)도 제공합니다.
 
 이 스크립트는 `/dev/location`을 읽고 Python 서버를 전경에서 실행합니다. `Ctrl+C`로 종료하면 자신이 시작한 위치 읽기 프로세스도 정리합니다. 다른 작업에 쓰는 `cat`까지 종료하는 `killall cat`은 사용하지 않습니다.
 
@@ -154,9 +311,13 @@ sh /root/socks/start-socks.sh
 
 ## .profile로 로그인할 때 자동 실행하기
 
-명령을 매번 입력하기 싫다면 iSH의 `/root/.profile` 끝에 아래 블록을 한 번만 추가합니다. 기존 내용을 덮어쓰지 않습니다.
+실행 명령을 매번 입력하기 싫다면 아래 블록을 한 번 복사해 실행합니다. 먼저 서버를 `Ctrl+C`로 중지한 상태에서 입력합니다. 기존 `/root/.profile` 내용은 유지하고 파일 끝에 자동 실행 블록을 추가합니다. 같은 블록을 다시 복사해도 중복 등록하지 않습니다.
 
 ```sh
+if ! grep -Fq '# BEGIN iSH SOCKS5 autostart' /root/.profile 2>/dev/null; then
+  cat >> /root/.profile <<'PROFILE'
+
+# BEGIN iSH SOCKS5 autostart
 case $- in
   *i*)
     if [ ! -e /root/socks/disable-autostart ] &&
@@ -165,6 +326,9 @@ case $- in
     fi
     ;;
 esac
+# END iSH SOCKS5 autostart
+PROFILE
+fi
 ```
 
 iSH의 기본 시작 명령은 [공개 소스의 UserPreferences.m](https://github.com/ish-app/ish/blob/master/app/UserPreferences.m)에서 `/bin/login -f root`로 확인했습니다. 기본 로그인 셸을 사용하는 새 세션에서 `.profile`을 읽는 흐름입니다. 시작 명령을 바꾸었거나 로그인 셸이 아니라면 동작을 확인해야 합니다.
