@@ -1,138 +1,43 @@
 ---
 layout: post
-title: "AI 개발하며 모아 둔 참고 사이트: 무엇이고 어떻게 쓰는지"
+title: "AI 개발하며 모아 둔 참고 사이트"
 date: 2026-10-27 15:45:00 +0900
 category: dev-tips
 tags: [참고자료, AI협업, 픽셀아트, 토큰, 글쓰기]
 image: /assets/img/posts/reference-sites/refs.webp
-summary: 게임을 만들며 참고하려고 가져온 사이트 가운데 다시 꺼내 쓸 만한 것만 골라 무엇인지, 왜 쓸모 있는지, 설치와 사용법, 직접 써 본 결과를 정리했습니다. 새로 쓸 만한 곳을 찾으면 이 글에 계속 더합니다.
+summary: 게임을 만들며 Claude에게 참고하라고 건넨 사이트 가운데 실제로 도움이 된 것만 모았습니다. 무엇인지, 우리 작업에서 어떻게 썼는지를 짧게 적고 새로 찾으면 계속 더합니다.
 ---
 
-게임을 만들면서 커뮤니티 글이나 도구 저장소를 자주 찾아봤습니다. 대부분은 그때 한 번 보고 지나갔는데, 시간이 지나 다시 찾으려니 주소도 내용도 기억나지 않았습니다. 그래서 다시 쓸 만한 것만 골라 이 글에 모아 둡니다.
+게임을 만들면서 커뮤니티 글이나 도구를 찾으면 Claude에게 "이거 참고해 봐" 하고 건넵니다. 그때는 도움이 됐는데 나중에 다시 찾으려면 주소가 기억나지 않았습니다. 그래서 실제로 써 보고 도움이 된 것만 여기 모아 둡니다.
 
-고르는 기준은 세 가지입니다. 나중에 다시 꺼내 쓸 일이 있는지, 지금도 열리는지, 실제로 써 보니 효과가 있었는지입니다. 지금까지 가져온 링크 8개 가운데 7개를 남겼습니다.
-
-<figure><img src="/assets/img/posts/reference-sites/refs.webp" alt="참고 사이트 카드 일곱 장. 글쓰기, Claude 설정, 픽셀 아트, 아이디어로 분류했고 한 장은 제외로 표시" loading="lazy"><figcaption>분류별로 정리한 모습입니다. 열리지 않은 글 한 편은 뺐습니다.</figcaption></figure>
-
-각 항목은 같은 순서로 적었습니다. 무엇인지, 왜 쓸모 있는지, 어떻게 쓰는지, 그리고 제가 써 본 결과입니다. 라이선스와 사용법은 2026년 10월 27일에 각 저장소에서 확인했습니다.
+<figure><img src="/assets/img/posts/reference-sites/refs.webp" alt="참고 사이트 카드. 글쓰기, Claude 설정, 픽셀 아트, 아이디어로 분류" loading="lazy"><figcaption>분류별로 정리한 모습입니다.</figcaption></figure>
 
 ## 글쓰기
 
-### Humanize KR (한글 AI 티 제거기)
-
-- 주소: [github.com/epoko77-ai/im-not-ai](https://github.com/epoko77-ai/im-not-ai) · MIT
-- **무엇인지.** AI가 쓴 한국어 글에서 사실, 수치, 고유명사, 인용은 그대로 두고 문체만 고쳐 주는 Claude 스킬입니다. 번역투, "첫째·둘째" 식 기계적 나열, "결론적으로" 같은 표현을 10개 대분류, 85개 세부 패턴으로 찾아냅니다.
-- **왜 쓸모 있는지.** AI에게 글을 맡기면 내용은 맞는데 어딘가 읽기 불편한 문장이 나옵니다. 이 스킬은 무엇이 어색한지 이름을 붙여 고치기 때문에 같은 실수가 줄어듭니다. 변경률이 30%를 넘으면 경고하고 50%를 넘으면 멈추는 장치도 있어서 글이 통째로 바뀌는 일이 없습니다.
-- **어떻게 쓰는지.** Claude Code에서 다음 두 줄로 설치합니다.
-
-```text
-/plugin marketplace add epoko77-ai/im-not-ai
-/plugin install humanize-korean@im-not-ai
-```
-
-설치한 뒤에는 `/humanize-korean`을 입력하거나 "이 글 AI 티 없애 줘"라고 말하면 됩니다. 전체를 고칠 필요가 있는지 먼저 보고 싶다면 `/humanize-scan`을 씁니다. Codex CLI, GitHub Copilot CLI, Gemini CLI용 설치법도 저장소에 있습니다.
-
-- **써 본 결과.** 저는 이 스킬을 줄인 판(humanize-korean-lite)을 만들어 이 블로그의 모든 글을 올리기 전에 돌립니다. 가장 자주 잡히는 것은 연결어미 뒤의 쉼표와 "핵심은"으로 시작하는 문장의 반복이었습니다.
+**[Humanize KR](https://github.com/epoko77-ai/im-not-ai)** · AI가 쓴 한국어 글에서 번역투와 기계적인 나열을 찾아 고쳐 주는 Claude 스킬입니다. 사실과 숫자는 건드리지 않고 문장만 다듬습니다. 저는 Claude에게 이 스킬을 가볍게 줄인 판을 만들게 해서 이 블로그 글을 올리기 전에 늘 돌립니다.
 
 ## Claude 설정과 토큰
 
-### 토큰 절약 글 두 편 (디시인사이드)
-
-- [AI 개발 갤러리 4369번](https://gall.dcinside.com/mgallery/board/view/?id=aidevelop&no=4369) "코드품질 유지하면서 토큰사용량 줄이는 방법"(2026-10-14)
-- [AI 활용 갤러리 137000번](https://gall.dcinside.com/mgallery/board/view/?id=ai_utilize&no=137000) "클로드 쓸때는 400~750k에서 오토 컴팩해주셈"(2026-10-17)
-- **무엇인지.** Claude Code를 오래 쓴 사람들이 토큰을 아끼는 설정을 공유한 글입니다. 자동 압축 시점을 400K~750K로 당기기, effort를 medium에서 high 사이로 두기, 에이전트끼리는 영어로 대화시키기, 지침 맨 위에 "에이전트는 기본적으로 쓰지 않는다"를 적기 같은 내용이 있습니다. 짧게 답하게 하는 것은 효과가 미미했다는 경험도 적혀 있습니다.
-- **왜 쓸모 있는지.** 공식 문서는 기능을 설명하지만 어느 값이 실전에서 잘 맞는지는 알려 주지 않습니다. 이런 글은 출발점으로 삼을 값을 줍니다.
-- **어떻게 쓰는지.** 커뮤니티 글의 숫자는 그대로 믿지 말고 공식 문서로 한 번 더 확인합니다. 저는 확인하는 과정에서 1M 모델의 자동 압축 기본값이 약 967K라는 것과 `/autocompact 500k` 같은 설정법을 [공식 문서](https://code.claude.com/docs/en/settings)에서 찾았습니다.
-- **써 본 결과.** 자동 압축 시점, 에이전트 사용 기준, 에이전트 사이 영어 대화는 적용했습니다. 설정값과 확인 방법은 [토큰 절약 글]({% post_url 2026-10-27-ai-tokens %})에 따로 정리했습니다.
+**디시인사이드 [AI 개발 갤러리 글](https://gall.dcinside.com/mgallery/board/view/?id=aidevelop&no=4369)과 [AI 활용 갤러리 글](https://gall.dcinside.com/mgallery/board/view/?id=ai_utilize&no=137000)** · Claude Code를 오래 쓴 분들이 토큰을 아끼는 설정을 나눈 글입니다. 자동 압축을 일찍 하기, 에이전트를 함부로 띄우지 않기 같은 내용입니다. Claude에게 이 글을 읽히고 공식 문서와 맞춰 보게 한 뒤 맞는 것만 적용했습니다. 과정은 [토큰 아끼기 글]({% post_url 2026-10-27-ai-tokens %})에 있습니다.
 
 ## 픽셀 아트
 
-### Pixel Refiner
+**[Pixel Refiner](https://pixel-refiner.app/)** · AI가 그린 "픽셀풍" 그림을 진짜 픽셀 칸에 맞춰 주는 무료 웹 도구입니다. 그림을 끌어다 놓기만 하면 됩니다. 저희 작업대의 다듬기 기능과 나란히 비교해 봤는데 결과는 거의 같았습니다. 작업대 같은 도구가 없다면 가장 먼저 써 볼 만합니다.
 
-- 주소: [pixel-refiner.app](https://pixel-refiner.app/) · 소스 [github.com/HappyOnigiri/PixelRefiner](https://github.com/HappyOnigiri/PixelRefiner) · MIT
-- 소개 글: [zenn.dev 글(일본어)](https://zenn.dev/happy_onigiri/articles/1a0601d2afec2c)
-- **무엇인지.** AI가 그린 "픽셀풍" 그림을 실제 칸에 맞는 픽셀 아트로 바꿔 주는 무료 웹 도구입니다. AI 그림은 겉보기엔 픽셀 같아도 점 크기가 들쭉날쭉하고 색이 수천 개라 게임에 그대로 쓰기 어렵습니다.
-- **왜 쓸모 있는지.** 설치 없이 브라우저에서 끝납니다. 점 크기를 추정해 칸을 다시 맞추고, 가장자리에서 배경색을 추정해 지우고, 색을 줄이고, 1배에서 32배까지 키워 내보냅니다. 여러 장을 한 번에 처리해 ZIP으로 받을 수도 있습니다.
-- **어떻게 쓰는지.**
-  1. [pixel-refiner.app](https://pixel-refiner.app/)을 엽니다.
-  2. 그림을 끌어다 놓습니다. 기본 설정(おまかせ, 자동)이 그림 종류를 보고 처리 방법을 고릅니다.
-  3. 가운데 슬라이더로 전후를 비교합니다. 마음에 들지 않으면 다른 후보(他の候補)를 고릅니다.
-  4. 내려받습니다.
-- **함정.** 그리기 기능은 없습니다. 인물과 배경 색이 비슷하거나 그림자가 윤곽을 흐리면 배경 지우기가 실패합니다. 만든 사람은 그림을 생성하는 단계에서 배경을 단색으로 두라고 권하고 사이트에 프롬프트 안내도 올려 두었습니다.
-- **써 본 결과.** 저희 에셋 작업대의 다듬기 기능과 같은 그림으로 비교했습니다. 결과는 거의 비슷했고 Pixel Refiner 쪽이 조금 느렸습니다. 작업대가 없다면 가장 먼저 써 볼 도구입니다.
+<figure><img src="/assets/img/posts/reference-sites/refiner.webp" alt="AI가 그린 캐릭터 세 명을 원본, Pixel Refiner, 작업대 다듬기로 나란히 비교" loading="lazy"><figcaption>왼쪽부터 AI 원본, Pixel Refiner, 저희 작업대입니다.</figcaption></figure>
 
-<figure><img src="/assets/img/posts/reference-sites/refiner.webp" alt="AI가 그린 캐릭터 세 명을 원본, Pixel Refiner 24색, 작업대 다듬기 세 칸으로 나란히 비교한 그림" loading="lazy"><figcaption>왼쪽부터 AI 원본, Pixel Refiner(24색), 저희 작업대 다듬기입니다. 그림은 저희 게임용으로 만든 것입니다.</figcaption></figure>
+**[claude-pxl](https://github.com/augusto-scarvalho/claude-pxl)** · 짧은 코드로 픽셀 그림과 움직이는 그림을 만드는 도구이고, AI가 쓰기 좋게 만들어져 있습니다. Claude에게 마법 효과를 이걸로 그리게 했더니 흰 공책 바탕에 파스텔 색이 묻혀 잘 보이지 않았습니다. 진한 테두리를 두르는 기능을 더하자 또렷해졌습니다.
 
-### claude-pxl
+<figure><img src="/assets/img/posts/reference-sites/pxl-fire.webp" alt="불 마법 다섯 장면. 위는 기본 색, 아래는 공책 색과 테두리" loading="lazy"><figcaption>위는 기본값, 아래는 테두리를 넣은 불 마법입니다.</figcaption></figure>
 
-- 주소: [github.com/augusto-scarvalho/claude-pxl](https://github.com/augusto-scarvalho/claude-pxl) · MIT (함께 들어 있는 견본 그림 일부는 CC-BY 4.0)
-- **무엇인지.** 짧은 `.px.js` 파일에 팔레트와 글자 격자를 적으면 PNG, 스프라이트 시트와 JSON, 움직이는 GIF를 만들어 주는 도구입니다. AI 에이전트가 쓰도록 만들었고 스킬 파일도 들어 있습니다. 의존성이 없고 빌드 과정도 없습니다.
-- **왜 쓸모 있는지.** AI 그림 생성기는 마법 효과나 작은 소품처럼 칸 단위로 정확해야 하는 그림에 약합니다. 코드로 그리면 크기와 색이 정확히 지켜지고, 고칠 때도 몇 줄만 바꾸면 됩니다.
-- **어떻게 쓰는지.** Node 22.18 이상이 필요합니다. README의 clone 주소는 `crsolver/claude-pxl`로 되어 있습니다.
-
-```bash
-git clone https://github.com/crsolver/claude-pxl.git
-cd claude-pxl
-node bin/pxl.js serve examples/shop.px.js   # http://127.0.0.1:4321/ 에서 실시간 보기
-node bin/pxl.js build art.px.js             # out/sprites/*.png 등으로 내보내기
-```
-
-내 파일만 바로 돌려 보려면 `npx github:crsolver/claude-pxl build art.px.js`도 됩니다. 명령은 `build`, `serve`, `check`, `shot` 등이 있고 `pxl`만 입력하면 전체 목록이 나옵니다.
-
-- **함정.** 내장 글꼴은 영문뿐이라 한글은 CSS로 따로 얹어야 합니다. 기본 색은 진하고 선명해서 흰 공책 바탕에 파스텔 색으로 바꾸면 효과가 바탕에 묻혔습니다.
-- **써 본 결과.** 저희는 이 도구를 저장소에 넣어 공책 색표를 쓰도록 고쳤습니다. 파스텔 색만으로는 바람과 빛 효과가 흰 종이에 묻혀서 진한 테두리(스티커 테두리)를 두르는 옵션을 더했고, 그게 가장 효과가 컸습니다. 얼굴이 중심인 인물 그림은 이 도구로도 원하는 화풍이 나오지 않아 AI 그림을 계속 씁니다.
-
-<figure><img src="/assets/img/posts/reference-sites/pxl-fire.webp" alt="불 마법이 날아가 터지는 다섯 장면. 위는 claude-pxl 기본 색, 아래는 공책 색과 스티커 테두리를 쓴 것" loading="lazy"><figcaption>위는 기본값, 아래는 공책 색과 스티커 테두리를 쓴 불 마법입니다. 흰 바탕에서 아래쪽이 또렷합니다.</figcaption></figure>
-
-### 픽셀 셰이딩 용어집
-
-- 주소: [1편 픽셀 셰이딩](https://tuiella.github.io/pixel-glossary/) · [2편 색 표현](https://tuiella.github.io/pixel-glossary/color/)
-- **무엇인지.** 렌더링과 픽셀 아트에서 자주 나오는 용어를 32×32 장면의 전후 비교로 설명하는 한국어 용어집입니다. 광원은 모두 왼쪽 위로 통일했고, 실수를 다루는 항목은 왼쪽에 틀린 예, 오른쪽에 고친 예를 둡니다.
-- **왜 쓸모 있는지.** AI에게 "그림자를 더 자연스럽게"라고 하면 결과가 매번 다릅니다. "틈새 어둠(AO)을 바닥에 한 줄 넣어"처럼 용어로 말하면 결과가 안정됩니다. 그림을 몰라도 장면 하나만 보면 뜻을 알 수 있습니다.
-- **어떻게 쓰는지.** 그림을 고쳐 달라고 할 때 이 용어집에서 해당 항목 이름을 찾아 지시문에 넣습니다. 저는 AI에게 용어집을 읽혀 빛과 그림자, 재질, 팔레트별 점검표로 줄였습니다. 지금은 그림을 검수할 때 이 점검표를 기준으로 씁니다. 예를 들면 "광원은 장면 전체에서 하나", "반사광은 밝은 면보다 밝으면 안 됨", "그늘로 갈수록 밝기만이 아니라 색상도 옮김(휴 시프트)" 같은 항목입니다.
-- **알아 둘 점.** 페이지의 그림은 코드로 그려 화면에 띄우는 방식이라 글만 긁어 가면 용어가 보이지 않습니다. 브라우저에서 직접 보시기 바랍니다. 만든 사람과 라이선스는 페이지에 적혀 있지 않아 그림은 이 글에 옮기지 않았습니다.
+**[픽셀 셰이딩 용어집](https://tuiella.github.io/pixel-glossary/)** · 빛, 그림자, 색 용어를 작은 그림의 전후 비교로 보여 주는 한국어 용어집입니다. "그림자를 자연스럽게"라고 하면 AI가 매번 다르게 그리는데, 용어 이름으로 말하면 결과가 안정됩니다. Claude에게 이 용어집을 읽혀 그림을 검사할 때 쓰는 점검표로 만들어 두었습니다.
 
 ## 아이디어
 
-### Opus 5.5 영상 모음
+**[Opus 5.5 영상 모음](https://github.com/yihui-dev/awesome-opus5-5-videos)** · AI에게 코드로 만들게 한 영상 703개와 그 프롬프트를 모은 곳입니다. 원하는 연출을 말로 설명하기 어려울 때 비슷한 영상을 찾아 표현을 빌립니다. 여기서 연필 선이 살짝 떨리는 효과를 찾아 [영상 만드는 글]({% post_url 2026-10-27-ai-clip %})에 썼습니다.
 
-- 주소: [github.com/yihui-dev/awesome-opus5-5-videos](https://github.com/yihui-dev/awesome-opus5-5-videos) · MIT
-- **무엇인지.** Claude Opus 5.5에게 "애니메이션을 코드로 써 달라"고 해서 만든 영상 703개와 각각의 프롬프트를 모은 저장소입니다. 모션 그래픽, 설명 영상, 3D 장면, 게임으로 나뉘어 있고 418개는 다시 만든 결과를 바로 볼 수 있습니다.
-- **왜 쓸모 있는지.** 원하는 연출을 말로 설명하기 어려울 때, 비슷한 영상을 찾아 그 프롬프트의 표현을 빌리면 됩니다. 어떤 수치(속도, 겹치는 횟수, 곡선 공식)를 적어야 결과가 좋아지는지도 배울 수 있습니다.
-- **어떻게 쓰는지.** 목록을 눈으로 훑기에는 너무 많아서 저는 `data/videos.json`을 내려받아 낱말로 걸러 봅니다. 아래 스크립트를 `vfind.py`로 저장해 쓰시면 됩니다.
+## 세 줄 요약
 
-```bash
-curl -L -o videos.json https://raw.githubusercontent.com/yihui-dev/awesome-opus5-5-videos/main/data/videos.json
-```
-
-```python
-import json, sys
-words = [w.lower() for w in sys.argv[2:]]
-for v in json.load(open(sys.argv[1], encoding='utf-8')):
-    p = v['prompt'].lower()
-    if all(w in p for w in words):
-        print(v['slug'], v['category'], v['post_url'])
-        print('   ', v['prompt'][:140].replace('\n', ' '))
-```
-
-`python3 vfind.py videos.json pixel`처럼 실행하면 프롬프트에 그 낱말이 들어간 영상의 이름, 분류, 원래 게시물 주소, 프롬프트 앞부분이 나옵니다. 제가 돌렸을 때 `pixel`은 21개, `pencil`은 4개가 나왔습니다. 낱말을 여러 개 주면 모두 들어간 것만 나옵니다.
-
-- **알아 둘 점.** 영상 자체는 각 게시자의 것이라 퍼 오지 않고, 프롬프트에 쓰인 기법만 참고합니다. 대부분이 3D나 제품 홍보 영상이라 게임 화면에 맞는 것은 일부입니다.
-- **써 본 결과.** 연필 선이 살짝 떨리게 다시 그리는 기법, 튀지 않고 멈추는 스프링 곡선, 한 HTML을 시간 단위로 넘기며 찍어 매끄러운 영상을 만드는 방법을 여기서 찾았습니다. 마지막 방법은 [한 장씩 찍어 영상 만드는 글]({% post_url 2026-10-27-ai-clip %})에 연필 선 떨림과 함께 실제로 써서 정리했습니다.
-
-## 뺀 것
-
-디시인사이드 AI 개발 갤러리의 글 한 편은 두 번 열어 봤지만 본문이 비어 있었습니다. 지워졌거나 로그인해야 보이는 글로 보입니다(추정). 내용을 확인하지 못한 것은 싣지 않았습니다.
-
-## 이 글을 계속 채우는 방식
-
-앞으로도 참고하려고 가져오는 사이트는 AI가 먼저 열어 보고 판단합니다. 기준은 처음에 적은 세 가지이고, 남길 만하면 이 글의 알맞은 분류에 같은 서식으로 더합니다. 직접 따라 해 보고 싶은 분은 아래 지시문을 그대로 쓰셔도 됩니다.
-
-```text
-내가 참고하라고 링크를 주면 직접 열어 보고 판단해라.
-- 남기는 기준: 나중에 다시 쓸 일이 있는가, 지금도 열리는가, 써 보니 효과가 있었는가.
-- 남길 것은 참고 자료 문서에 추가: 무엇인지 / 왜 쓸모 있는지 / 어떻게 쓰는지(설치·명령) / 써 본 결과.
-- 라이선스와 사용법은 원래 저장소에서 확인하고 확인 날짜를 적어라.
-- 열리지 않거나 확인할 수 없는 것은 싣지 말고 뺀 이유만 적어라.
-- 남의 그림·영상은 퍼 오지 말고 링크만 걸어라.
-```
+1. 참고할 사이트는 Claude에게 건네 직접 읽히고, 공식 문서와 맞춰 본 뒤 쓸 것만 적용합니다.
+2. 픽셀 그림은 Pixel Refiner로 칸을 맞추고, 효과는 claude-pxl로, 검사는 용어집 점검표로 합니다.
+3. 새로 쓸 만한 곳을 찾으면 이 글에 계속 더합니다.
