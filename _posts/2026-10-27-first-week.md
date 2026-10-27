@@ -6,6 +6,7 @@ category: notebook-rpg
 tags: [회고, AI협업, 결정, 측정]
 series: rpg-weekly
 pin: true
+image: /assets/img/posts/first-week/cover.webp
 summary: 코드를 짜지 않는 사람이 AI와 일주일 동안 게임을 만들며 정한 것과 틀린 것, 숫자로 재 보고 알게 된 것.
 ---
 
@@ -15,7 +16,15 @@ summary: 코드를 짜지 않는 사람이 AI와 일주일 동안 게임을 만�
 
 판타지 세계에 평범한 주민으로 무작위로 태어납니다. 영웅 대신 농부의 딸, 대장장이의 셋째 아들 같은 사람으로요. 인생의 고비마다 20면체 주사위를 굴리고, 한 판 몇 분 안에 한 생이 끝납니다. 죽으면 공책 마지막 쪽에 묘비와 사망 통지서가 붙고, 그 위에 "참 잘했어요" 도장이 찍힙니다.
 
+<figure><img src="/assets/img/posts/first-week/cover.webp" alt="공책 표지 화면. 이름 칸과 캐릭터 스티커, 지난 공책 목록이 보인다" loading="lazy"><figcaption>첫 화면. 공책 한 권이 한 생입니다. 아래에 지난 공책이 쌓입니다.</figcaption></figure>
+
+죽은 뒤에는 그 사람이 지나온 길을 지도 위에서 다시 보여 줍니다.
+
+<figure><video src="/assets/img/posts/first-week/journey.mp4" poster="/assets/img/posts/first-week/journey-poster.jpg" controls muted playsinline preload="none"></video><figcaption>지나온 길. 태어난 곳부터 굵직한 일을 따라 지도 위를 걷습니다.</figcaption></figure>
+
 화면은 초등학생이 공책에 혼자 끄적인 모험 RPG처럼 생겼습니다. 줄 공책, 스프링, 연필 글씨, 스티커가 있습니다. 대신 일어나는 일은 순하지 않습니다. 겉은 귀엽게, 결과는 적나라하게 가기로 처음부터 정했습니다.
+
+<figure class="narrow"><img src="/assets/img/posts/first-week/play-phone.webp" alt="폰으로 본 게임 화면. 위에 캐릭터 스티커 장면, 가운데 노선도, 아래 일어난 일 기록" loading="lazy"><figcaption>폰으로 한 생을 사는 모습. 위는 장면, 가운데는 노선도처럼 생긴 이동 지도, 아래는 일어난 일입니다.</figcaption></figure>
 
 ## 일하는 방식
 
@@ -29,11 +38,15 @@ summary: 코드를 짜지 않는 사람이 AI와 일주일 동안 게임을 만�
 
 처음 AI로 뽑은 캐릭터 그림은 디테일이 많은 서양 판타지풍이었는데 제가 원한 것과 달랐습니다. 저는 머리가 크고 눈이 큰 일본 인디 게임식 2등신 캐릭터를 원했습니다. 그 뒤로 픽셀에서 매끈한 일러스트로 바꿨다가 처음 예시로 보여 줬던 파스텔 픽셀 스티커가 제일 좋다는 걸 알고 되돌아왔습니다.
 
+<figure class="narrow"><img src="/assets/img/posts/first-week/style-compare.webp" alt="같은 캐릭터 셋을 화풍 여러 가지로 뽑아 나란히 놓은 비교표" loading="lazy"><figcaption>같은 캐릭터를 화풍만 바꿔 나란히 뽑은 비교표 일부. 이렇게 놓고 봐야 고를 수 있었습니다.</figcaption></figure>
+
 말로 화풍을 설명하는 것보다 마음에 드는 그림 한 장을 보여 주는 편이 훨씬 빠릅니다. 여러 안을 나란히 놓고 보기 전에는 제 취향을 저도 정확히 모른다는 것도 이번에 알았습니다.
 
 ## 느낌 말고 숫자로
 
 10월 24일쯤 "사건이 너무 자주 나와서 진도가 안 나간다", "원하는 직업을 얻기 어렵다"는 불만이 쌓였습니다. 바로 고치는 대신 먼저 재 보기로 했습니다. 컴퓨터가 혼자 백 번 넘게 한 생을 살게 하고 기록을 셌습니다.
+
+<figure><img src="/assets/img/posts/first-week/time-chart.webp" alt="막대그래프. 1년 고용 계약 66%, 도제 들이기 12%, 산속 수련 11%, 자기 직업 일 1.4%" loading="lazy"><figcaption>어른 시간을 어디에 썼는지 센 결과.</figcaption></figure>
 
 결과는 예상 밖이었습니다. 자동 진행이 어른 시간의 66%를 "1년 고용 계약"에 쓰고 있었고, 자기 직업 일은 1.4%뿐이었습니다. 낮은 단계 직업보다 계약 일이 벌이가 좋았기 때문입니다. 직업 사건이 안 나오는 건 사건이 부족해서가 아니라 직업 일을 안 해서였던 겁니다. 감으로 고쳤다면 사건만 잔뜩 늘렸을 것입니다.
 

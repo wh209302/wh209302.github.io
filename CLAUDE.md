@@ -13,3 +13,16 @@
 - 디자인은 `assets/css/site.css`의 색 토큰(밝은·어두운 화면)으로만 바꿉니다. 테마 젬은 쓰지 않습니다(`theme: null`).
 - `series`: 이어지는 글이면 `_data/series.yml`의 id(지금은 rpg-weekly 공책 RPG 주간 일지).
 - `pin: true`: 첫 화면 "처음 오셨다면 이 글부터"에 올릴 글(세 편까지).
+
+## 그림·영상 (사용자 지시 2026-10-27)
+- 글마다 독자가 실제로 보고 따라 할 수 있게 그림이나 영상을 넣습니다. 게임 화면, 전후 비교, 숫자는 막대그래프 그림으로.
+- 파일은 `assets/img/posts/<글 주소>/`에 둡니다. 그림은 webp(가로 1600px 이하), 영상은 mp4(H.264, 소리 없음, 5MB 이하, `-movflags +faststart`)와 첫 장면 jpg.
+- 넣는 법: `<figure><img src="..." alt="무엇이 보이는지" loading="lazy"><figcaption>한 줄 설명</figcaption></figure>`. 세로로 긴 폰 화면은 `<figure class="narrow">`. 영상은 `<video src controls muted playsinline preload="none" poster>`.
+- 머리말 `image:`에 대표 그림을 적으면 공유할 때 미리보기로 뜹니다.
+
+## 공개하면 안 되는 것 (올리기 전 반드시 확인)
+- 비밀 키·토큰·비밀번호·환경 변수 값, 로그인 설정 화면.
+- 이메일·전화·주소 등 개인정보, 사용자 PC 경로나 기기 이름.
+- 운영실(관리자 화면)·서버/DB 이름·내부 주소·API 경로 목록.
+- 다른 사람의 저작물(라이선스가 불분명한 그림), 플레이어가 쓴 글.
+- 그림 속에도 위 내용이 찍혀 있지 않은지 확대해서 봅니다. 애매하면 빼거나 가립니다.
