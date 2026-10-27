@@ -4,6 +4,8 @@ title: "개발을 모르는 사람이 AI와 판타지 웹 게임을 만든 첫 �
 date: 2026-10-27 13:00:00 +0900
 category: notebook-rpg
 tags: [회고, AI협업, 결정, 측정]
+series: rpg-weekly
+pin: true
 summary: 코드를 짜지 않는 사람이 AI와 일주일 동안 게임을 만들며 정한 것과 틀린 것, 숫자로 재 보고 알게 된 것.
 ---
 

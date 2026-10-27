@@ -1,0 +1,23 @@
+---
+layout: default
+---
+<section class="hero hero--small">
+  <div class="wrap">
+    <p class="eyebrow mono"><a href="{{ '/' | relative_url }}">개발 공책</a> / 전체 글</p>
+    <h1 class="hero__title">전체 글</h1>
+    <p class="hero__lead">지금까지 쓴 글 {{ site.posts | size }}편을 한 쪽에 모았습니다.</p>
+  </div>
+</section>
+<section class="wrap list-section">
+  {%- assign years = site.posts | group_by_exp: "p", "p.date | date: '%Y'" -%}
+  {%- for y in years -%}
+  <div class="year">
+    <h2 class="year__label mono">{{ y.name }}</h2>
+    <ol class="compact">
+      {%- for p in y.items -%}
+      <li><a class="compact__link" href="{{ p.url | relative_url }}"><span class="mono muted">{{ p.date | date: "%m.%d" }}</span><span class="compact__t">{{ p.title | escape }}</span><span class="compact__s">{{ p.summary | strip_html | truncate: 60 }}</span></a>{% include cat-chip.html id=p.category %}</li>
+      {%- endfor -%}
+    </ol>
+  </div>
+  {%- endfor -%}
+</section>

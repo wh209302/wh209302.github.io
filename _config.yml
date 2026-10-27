@@ -5,6 +5,10 @@ lang: ko
 timezone: Asia/Seoul
 url: "https://wh209302.github.io"
 baseurl: ""
+defaults:
+  - scope: { path: "" }
+    values:
+      image: /assets/img/og-default.png
 permalink: /:year/:month/:day/:title/
 theme: null
 markdown: kramdown

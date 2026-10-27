@@ -9,6 +9,22 @@ layout: default
   </div>
 </section>
 
+{%- assign pinned = site.posts | where: "pin", true -%}
+{%- if pinned.size > 0 -%}
+<section class="wrap start" aria-labelledby="start">
+  <h2 id="start" class="start__label">처음 오셨다면 이 글부터</h2>
+  <div class="start__grid">
+    {%- for p in pinned limit: 3 -%}
+    <a class="start__item" href="{{ p.url | relative_url }}">
+      <span class="start__title">{{ p.title | escape }}</span>
+      <span class="start__summary">{{ p.summary }}</span>
+      <span class="start__meta">{% include cat-chip.html id=p.category plain=true %}<span class="mono muted">{% include read-time.html content=p.content %}</span></span>
+    </a>
+    {%- endfor -%}
+  </div>
+</section>
+{%- endif -%}
+
 <section class="wrap shelf" aria-label="분류">
   {%- for c in site.data.categories -%}
   {%- assign list = site.categories[c.id] -%}
@@ -21,13 +37,25 @@ layout: default
   {%- endfor -%}
 </section>
 
+{%- if site.data.series.size > 0 -%}
+<section class="wrap series-section" aria-labelledby="series">
+  <div class="section-head">
+    <h2 id="series">연재</h2>
+    <a href="{{ '/series/' | relative_url }}">연재 모두 보기 →</a>
+  </div>
+  <div class="series-grid">
+    {%- for s in site.data.series -%}{% include series-card.html series=s %}{%- endfor -%}
+  </div>
+</section>
+{%- endif -%}
+
 <section class="wrap list-section" aria-labelledby="latest">
   <div class="section-head">
     <h2 id="latest">최근 글</h2>
-    <a class="mono" href="{{ '/tags/' | relative_url }}">태그로 보기 →</a>
+    <a href="{{ '/archive/' | relative_url }}">전체 글 {{ site.posts | size }}편 →</a>
   </div>
   <ol class="rows">
-    {%- for post in site.posts limit: 20 -%}
+    {%- for post in site.posts limit: 10 -%}
     {% include post-row.html post=post %}
     {%- endfor -%}
   </ol>

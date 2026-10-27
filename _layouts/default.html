@@ -17,8 +17,10 @@
         <ul>
           {%- for c in site.data.categories -%}
           {%- assign n = site.categories[c.id] | size -%}
-          <li><a href="{{ '/categories/' | append: c.id | append: '/' | relative_url }}"><span class="dot dot--{{ c.hue }}"></span>{{ c.name }}<span class="mono muted">{{ n }}</span></a></li>
+          <li><a href="{{ '/categories/' | append: c.id | append: '/' | relative_url }}"><span class="dot dot--{{ c.hue }}"></span><span class="nav__cat"><span>{{ c.name }}</span><small>{{ c.desc }}</small></span><span class="mono muted">{{ n }}</span></a></li>
           {%- endfor -%}
+          <li class="nav__sep"><a href="{{ '/series/' | relative_url }}">연재 모아 보기</a></li>
+          <li><a href="{{ '/archive/' | relative_url }}">전체 글</a></li>
         </ul>
       </details>
       <a href="{{ '/tags/' | relative_url }}">태그</a>

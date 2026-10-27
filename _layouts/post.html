@@ -21,7 +21,23 @@ layout: default
       <p class="toc__label mono">이 글의 차례</p>
       <ol id="toc-list"></ol>
     </aside>
-    <div class="prose" id="prose">{{ content }}</div>
+    <div class="post__main">
+      {%- if page.series -%}
+      {%- assign sr = site.data.series | where: "id", page.series | first -%}
+      {%- assign parts = site.posts | where: "series", page.series | sort: "date" -%}
+      {%- if sr -%}
+      <details class="series-box"{% if parts.size <= 6 %} open{% endif %}>
+        <summary><span class="mono muted">연재</span> <strong>{{ sr.name }}</strong> <span class="mono muted">{% for p in parts %}{% if p.url == page.url %}{{ forloop.index }}{% endif %}{% endfor %} / {{ parts | size }}편</span></summary>
+        <ol>
+          {%- for p in parts -%}
+          <li>{% if p.url == page.url %}<span class="is-here">{{ p.title | escape }}</span>{% else %}<a href="{{ p.url | relative_url }}">{{ p.title | escape }}</a>{% endif %}</li>
+          {%- endfor -%}
+        </ol>
+      </details>
+      {%- endif -%}
+      {%- endif -%}
+      <div class="prose" id="prose">{{ content }}</div>
+    </div>
   </div>
 
   <nav class="pager" aria-label="이전·다음 글">

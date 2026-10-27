@@ -1,0 +1,7 @@
+{%- assign s = include.series -%}
+{%- assign parts = site.posts | where: "series", s.id | sort: "date" -%}
+<a class="series-card" href="{{ '/series/' | relative_url }}#{{ s.id }}">
+  <span class="series-card__count mono">{{ parts | size }}편 연재 중</span>
+  <span class="series-card__name">{{ s.name }}</span>
+  <span class="series-card__desc">{{ s.desc }}</span>
+</a>

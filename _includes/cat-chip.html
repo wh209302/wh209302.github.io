@@ -1,2 +1,2 @@
 {%- assign cc = site.data.categories | where: "id", include.id | first -%}
-{%- if cc -%}<a class="chip chip--{{ cc.hue }}" href="{{ '/categories/' | append: cc.id | append: '/' | relative_url }}">{{ cc.short }}</a>{%- endif -%}
+{%- if cc -%}{%- if include.plain -%}<span class="chip chip--{{ cc.hue }}">{{ cc.short }}</span>{%- else -%}<a class="chip chip--{{ cc.hue }}" href="{{ '/categories/' | append: cc.id | append: '/' | relative_url }}">{{ cc.short }}</a>{%- endif -%}{%- endif -%}
