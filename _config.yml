@@ -35,7 +35,7 @@ naver_verification: ""
 # 댓글·좋아요(giscus)와 조회수(GoatCounter). 값이 비어 있으면 화면에 나오지 않습니다.
 giscus:
   repo: wh209302/wh209302.github.io
-  repo_id: ""
+  repo_id: "R_kgDOVYxUMQ"
   category: Announcements
-  category_id: ""
+  category_id: "DIC_kwDOVYxUMc4DJuab"
 goatcounter: ""
