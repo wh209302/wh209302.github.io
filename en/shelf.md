@@ -31,6 +31,55 @@ So I made a shelf. Every time I toss a link over, Claude checks what it does, wh
 - **Status:** Tried (2026-10-28, breathing and blinking checked with the sample)
 - **Verdict:** It's made for front-facing upper-body anime illustrations, so it doesn't fit small pixel stickers. Paired with see-through, "one picture → moving portrait" is nearly automatic, so it comes off the shelf together with see-through for a next game with big portraits.
 
+## Image generation (ComfyUI)
+
+Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories are in the [AI lab](/en/categories/ai-lab/) category.
+
+### [Anima](https://huggingface.co/circlestone-labs/Anima) + pixel/sprite LoRAs
+
+- **What:** A 2B image model that is strong at anime styles. Its structure differs from SDXL, so SDXL pixel checkpoints and LoRAs can't be mixed in; you use Anima-specific LoRAs from Civitai. For the test I grabbed an RPG side-view battle sheet LoRA (svactors), a pixel sprite style (Elin) and an RPG walk sheet (rpgchara).
+- **Where it fits:** Getting many motions of one character as a single sheet. Because it's all drawn in one image, face, clothes, colors and pixel size barely drift between frames.
+- **License:** The model is under the CircleStone Labs Non-Commercial License. The LoRAs also block or restrict selling images, so test use only.
+- **Specs:** About 55 seconds for one 2048×1360 sheet on 12GB (roughly 1 second per frame).
+- **Status:** Tested (2026-10-28)
+- **Verdict:** Best consistency, small motions. The walk is closer to breathing in place and the attack is just an arm thrust, so big motions need the edit model below.
+
+### [Anima Ref Adapter](https://github.com/ElectronGirl/ComfyUI-Anima-Ref-Adapter)
+
+- **What:** ComfyUI nodes plus a small LoRA that keep a character's hair, eyes and outfit from one reference image while the prompt changes pose and background. No character name or appearance tags needed, so it works for original characters.
+- **Where it fits:** When a single sheet gives motions that are too small, generating big motions of the same character one image at a time.
+- **License:** Node code Apache-2.0; adapter weights under the CircleStone Non-Commercial License.
+- **Specs:** Anima base v1.0 and bf16 only (fp16 overflows), Euler 28–30 steps.
+- **Status:** Testing (2026-10-28)
+- **Verdict:** It's a pilot; the author notes identity transfers better than style, and small patterns or large garment colors can drift. I'll update this once results are in.
+
+### [Qwen-Image-Edit-2511](https://huggingface.co/Qwen/Qwen-Image-Edit-2511)
+
+- **What:** An edit model that changes an image by instruction ("change only the pose", "add a kerchief") instead of drawing from scratch. With the 4-step Lightning LoRA and a 4-bit GGUF build it runs on 12GB.
+- **Where it fits:** Making swing, pray, hurt and fall poses from one standing character. Face, clothes, colors and style stay almost intact.
+- **License:** Apache-2.0 (model, Lightning LoRA and GGUF builds).
+- **Specs:** About 23GB of downloads, 20–25 seconds per image, peak video memory about 11.4GB.
+- **Status:** Tested (2026-10-21, retested on Anima art 10-28)
+- **Verdict:** The most reliable way I've seen to get many poses of one character. Direction and size can change between frames, so plan on a post-processing pass to align them.
+
+### [Z-Image Turbo](https://huggingface.co/Tongyi-MAI/Z-Image-Turbo)
+
+- **What:** A fast 8-step image model that follows sentence prompts better than tags.
+- **Where it fits:** Drafting pixel characters when commercial release is on the table. It follows asks like two heads tall, big eyes and blushing cheeks.
+- **License:** Apache-2.0.
+- **Specs:** On 12GB use the int8 build (bf16 doesn't fit).
+- **Status:** Tested (2026-10-20)
+- **Verdict:** First pick for a commercially safe pixel route. Negative prompts don't work, and writing "no white" actually paints white.
+
+### Baking a style LoRA with [kohya sd-scripts](https://github.com/kohya-ss/sd-scripts)
+
+- **What:** A LoRA training tool that teaches a model your style from a handful of examples.
+- **Where it fits:** Once the style is fixed and you need a steady stream of new characters in the same look.
+- **License:** The tool is Apache-2.0; the resulting LoRA follows the base model's license.
+- **Specs:** SDXL base, 13 examples, 2,100 steps in 26 minutes, 8.4GB of video memory.
+- **Status:** Tested (2026-10-21)
+- **Verdict:** Colors and details come quickly, but teaching a stubborn proportion like two heads tall needs dozens of examples. About 1,400 steps was best.
+
 ## Game screens (UI)
 
 ### [UI Glossary](https://tuiella.github.io/ui-glossary/) (Korean)
@@ -52,3 +101,12 @@ So I made a shelf. Every time I toss a link over, Claude checks what it does, wh
 - **Hardware:** Any web browser.
 - **Status:** In use (2026-10-28)
 - **Verdict:** Worth keeping nearby for any game that uses pixel art.
+
+### Recovering the pixel grid ([unfake](https://pypi.org/project/unfake/), [proper-pixel-art](https://github.com/KennethJAllen/proper-pixel-art))
+
+- **What:** Finds the original grid in an AI's "big picture that looks like pixel art" and reads one representative color per cell to get true 1× pixel art back. We used our own post-processing built in the same order.
+- **Where it fits:** The last pass before AI pixel art goes into a game. Arbitrary downscaling mixes cells and smears the face; recovering the grid keeps even one-pixel eyes.
+- **License:** Check each tool's repository before use (our version lives in the game repo).
+- **Specs:** Plain Python, no GPU needed.
+- **Status:** Tested (2026-10-20)
+- **Verdict:** Always reduce colors after reading the cells. Flip the order and the eyes and pink cheeks vanish.
