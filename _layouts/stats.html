@@ -1,0 +1,126 @@
+---
+layout: default
+---
+{% include lang.html %}
+{%- assign ko_posts = site.posts | where: "lang", "ko" -%}
+<section class="hero hero--small">
+  <div class="wrap">
+    <p class="eyebrow mono"><a href="{{ B | append: '/' | relative_url }}">{{ T.site_title }}</a> / {{ T.stats }}</p>
+    <h1 class="hero__title">{{ T.stats }}</h1>
+    <p class="hero__lead">{{ T.stats_lead }}</p>
+  </div>
+</section>
+
+<section class="wrap list-section stats" id="stats" data-state="loading">
+  <p class="stats__msg muted" id="stats-msg">{{ T.stats_loading }}</p>
+
+  <div class="stats__tiles">
+    <div class="stats__tile"><span class="stats__label">{{ T.stats_today }}</span><strong class="stats__num" id="s-today">–</strong></div>
+    <div class="stats__tile"><span class="stats__label">{{ T.stats_week }}</span><strong class="stats__num" id="s-week">–</strong></div>
+    <div class="stats__tile"><span class="stats__label">{{ T.stats_total }}</span><strong class="stats__num" id="s-total">–</strong></div>
+  </div>
+
+  <h2 class="stats__h">{{ T.stats_daily }}</h2>
+  <div class="stats__chart" id="s-daily" role="img" aria-label="{{ T.stats_daily }}"></div>
+
+  <h2 class="stats__h">{{ T.stats_posts }}</h2>
+  <ol class="stats__bars" id="s-posts"></ol>
+
+  <h2 class="stats__h">{{ T.stats_lang }}</h2>
+  <div class="stats__split" id="s-lang"><span class="stats__split-ko"></span><span class="stats__split-en"></span></div>
+  <p class="stats__legend mono"><span class="dot dot--yellow"></span>{{ T.stats_ko }} <span id="s-ko">–</span> &nbsp; <span class="dot dot--blue"></span>{{ T.stats_en }} <span id="s-en">–</span></p>
+</section>
+
+<script>
+(function () {
+  var CODE = {{ site.goatcounter | jsonify }};
+  var T = {{ T | jsonify }};
+  var LANG = {{ L | jsonify }};
+  // 글마다 한국어 주소, 영어 주소, 지금 언어의 제목
+  var POSTS = [{%- for p in ko_posts -%}{%- assign en_url = "/en" | append: p.url -%}{%- assign enp = site.posts | where: "url", en_url | first -%}
+    {"ko": {{ p.url | jsonify }}, "en": {% if enp %}{{ enp.url | jsonify }}{% else %}null{% endif %}, "t": {% if L == "en" and enp %}{{ enp.title | jsonify }}{% else %}{{ p.title | jsonify }}{% endif %}, "u": {% if L == "en" and enp %}{{ enp.url | jsonify }}{% else %}{{ p.url | jsonify }}{% endif %}}{% unless forloop.last %},{% endunless %}
+  {%- endfor -%}];
+  var box = document.getElementById('stats');
+  var msg = document.getElementById('stats-msg');
+  if (!CODE) { msg.textContent = T.stats_fail; return; }
+
+  function num(s) { return parseInt(String(s).replace(/\D/g, ''), 10) || 0; }
+  function fmt(n) { return n.toLocaleString(LANG === 'en' ? 'en-US' : 'ko-KR'); }
+  function ymd(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+
+  // GoatCounter 공개 숫자(설정의 "Allow adding visitor counts"가 켜져 있어야 함). 기록이 없으면 404 → 0.
+  var failed = 0;
+  function count(path, start) {
+    var u = 'https://' + CODE + '.goatcounter.com/counter/' + (path === 'TOTAL' ? 'TOTAL' : encodeURIComponent(path)) + '.json' + (start ? '?start=' + start : '');
+    return fetch(u).then(function (r) {
+      if (r.status === 404) return 0;
+      if (!r.ok) { failed++; return 0; }
+      return r.json().then(function (d) { return num(d.count); });
+    }).catch(function () { failed++; return 0; });
+  }
+  // 한꺼번에 너무 많이 묻지 않도록 6개씩
+  function pool(tasks, n) {
+    var out = new Array(tasks.length), i = 0;
+    function next() { if (i >= tasks.length) return Promise.resolve(); var k = i++; return tasks[k]().then(function (v) { out[k] = v; return next(); }); }
+    var runners = []; for (var j = 0; j < n; j++) runners.push(next());
+    return Promise.all(runners).then(function () { return out; });
+  }
+
+  var today = new Date(); today.setHours(12, 0, 0, 0);
+  var days = [];
+  for (var k = 29; k >= 0; k--) { var d = new Date(today); d.setDate(d.getDate() - k); days.push(d); }
+
+  // "그날부터 지금까지"를 날마다 물어 이웃한 날끼리 빼면 그날 하루 숫자가 됩니다.
+  var tasks = days.map(function (d) { return function () { return count('TOTAL', ymd(d)); }; });
+  tasks.push(function () { return count('TOTAL'); });
+  POSTS.forEach(function (p) {
+    tasks.push(function () { return count(p.ko); });
+    tasks.push(function () { return p.en ? count(p.en) : Promise.resolve(0); });
+  });
+  tasks.push(function () { return count('/'); });
+  tasks.push(function () { return count('/en/'); });
+
+  pool(tasks, 6).then(function (r) {
+    if (failed > tasks.length / 2) { msg.textContent = T.stats_fail; box.dataset.state = 'error'; return; }
+    var since = r.slice(0, 30), total = r[30], off = 31;
+    var daily = since.map(function (v, i) { return Math.max(0, v - (i < 29 ? since[i + 1] : 0)); });
+    document.getElementById('s-today').textContent = fmt(daily[29]);
+    document.getElementById('s-week').textContent = fmt(since[23]);
+    document.getElementById('s-total').textContent = fmt(total);
+
+    // 날짜별 막대(그림은 SVG, 글씨는 HTML이라 폰에서도 찌그러지지 않습니다)
+    var max = Math.max.apply(null, daily.concat([1]));
+    var W = 300, H = 100, bw = W / 30;
+    var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" aria-hidden="true">';
+    [0.5, 1].forEach(function (f) { var y = H - H * f * 0.92; svg += '<line class="stats__grid" vector-effect="non-scaling-stroke" x1="0" x2="' + W + '" y1="' + y + '" y2="' + y + '"/>'; });
+    daily.forEach(function (v, i) {
+      var h = v ? Math.max(1.5, H * 0.92 * v / max) : 0;
+      svg += '<rect class="stats__bar' + (i === 29 ? ' is-today' : '') + '" x="' + (i * bw + bw * 0.15) + '" y="' + (H - h) + '" width="' + (bw * 0.7) + '" height="' + h + '"><title>' + ymd(days[i]) + ' · ' + fmt(v) + '</title></rect>';
+    });
+    svg += '</svg>';
+    var yl = [1, 0.5].map(function (f) { return '<span class="stats__y mono" style="bottom:' + (92 * f) + '%">' + fmt(Math.round(max * f)) + '</span>'; }).join('');
+    var xl = days.map(function (d, i) { return '<span class="mono">' + (i % 7 === 1 || i === 29 ? (d.getMonth() + 1) + '/' + d.getDate() : '') + '</span>'; }).join('');
+    document.getElementById('s-daily').innerHTML = '<div class="stats__plot">' + svg + yl + '</div><div class="stats__x">' + xl + '</div>';
+
+    // 많이 읽힌 글(한·영 합계)
+    var ko = 0, en = 0;
+    var rows = POSTS.map(function (p, i) { var a = r[off + i * 2], b = r[off + i * 2 + 1]; ko += a; en += b; return { t: p.t, u: p.u, n: a + b }; });
+    ko += r[r.length - 2]; en += r[r.length - 1];
+    rows = rows.filter(function (x) { return x.n > 0; }).sort(function (a, b) { return b.n - a.n; }).slice(0, 8);
+    var top = rows.length ? rows[0].n : 1;
+    document.getElementById('s-posts').innerHTML = rows.length ? rows.map(function (x) {
+      var e = document.createElement('a'); e.href = x.u; e.textContent = x.t;
+      return '<li><span class="stats__bars-t">' + e.outerHTML + '</span><span class="stats__bars-track"><span style="width:' + Math.max(3, 100 * x.n / top) + '%"></span></span><span class="stats__bars-n mono">' + fmt(x.n) + '</span></li>';
+    }).join('') : '<li class="muted">' + T.stats_none + '</li>';
+
+    // 한국어판과 영어판
+    var sum = ko + en || 1;
+    document.querySelector('.stats__split-ko').style.width = (100 * ko / sum) + '%';
+    document.querySelector('.stats__split-en').style.width = (100 * en / sum) + '%';
+    document.getElementById('s-ko').textContent = fmt(ko);
+    document.getElementById('s-en').textContent = fmt(en);
+
+    msg.hidden = true; box.dataset.state = 'ready';
+  });
+})();
+</script>

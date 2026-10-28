@@ -52,6 +52,19 @@ ko:
   comments: 댓글
   comments_title: 댓글과 좋아요
   comments_hint: 글이 도움이 됐다면 아래 👍를 눌러 주세요. GitHub 계정으로 댓글을 남길 수 있습니다.
+  stats: 방문 통계
+  stats_lead: 이 블로그를 얼마나 많은 분이 찾아 주셨는지 그래프로 봅니다. 숫자는 몇 시간마다 새로 고쳐집니다.
+  stats_total: 전체 조회
+  stats_today: 오늘
+  stats_week: 최근 7일
+  stats_daily: 최근 30일 날짜별 조회
+  stats_posts: 많이 읽힌 글
+  stats_lang: 한국어판과 영어판
+  stats_ko: 한국어
+  stats_en: 영어
+  stats_loading: 불러오는 중입니다…
+  stats_fail: 통계를 불러오지 못했습니다. 잠시 뒤 다시 열어 주세요.
+  stats_none: 아직 쌓인 기록이 없습니다.
 en:
   base: "/en"
   site_title: Dev Notebook
@@ -105,3 +118,16 @@ en:
   comments: Comments
   comments_title: Comments and likes
   comments_hint: If this helped, press 👍 below. You can comment with a GitHub account.
+  stats: Visitor stats
+  stats_lead: How many people have stopped by, as charts. Numbers refresh every few hours.
+  stats_total: Total views
+  stats_today: Today
+  stats_week: Last 7 days
+  stats_daily: Daily views, last 30 days
+  stats_posts: Most-read posts
+  stats_lang: Korean vs English
+  stats_ko: Korean
+  stats_en: English
+  stats_loading: Loading…
+  stats_fail: Couldn't load the stats. Please try again in a bit.
+  stats_none: Nothing recorded yet.

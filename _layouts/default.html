@@ -46,7 +46,7 @@
 <footer class="foot">
   <div class="wrap foot__inner">
     <p>{{ T.site_title }}</p>
-    <p class="mono"><a href="{{ '/feed.xml' | relative_url }}">RSS</a></p>
+    <p class="mono"><a href="{{ B | append: '/stats/' | relative_url }}">{{ T.stats }}</a> · <a href="{{ '/feed.xml' | relative_url }}">RSS</a></p>
   </div>
 </footer>
 
