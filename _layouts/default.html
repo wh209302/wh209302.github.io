@@ -21,6 +21,7 @@
           {%- endfor -%}
           <li class="nav__sep"><a href="{{ B | append: '/series/' | relative_url }}">{{ T.series_all }}</a></li>
           <li><a href="{{ B | append: '/archive/' | relative_url }}">{{ T.all_posts }}</a></li>
+          <li><a href="{{ B | append: '/shelf/' | relative_url }}">{{ T.shelf }}</a></li>
         </ul>
       </details>
       <a href="{{ B | append: '/tags/' | relative_url }}">{{ T.tags }}</a>

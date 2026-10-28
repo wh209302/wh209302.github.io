@@ -8,6 +8,7 @@ ko:
   cats: 분류
   series_all: 연재 모아 보기
   all_posts: 전체 글
+  shelf: 기술 서랍
   tags: 태그
   about: 소개
   search: 찾기
@@ -60,6 +61,7 @@ en:
   cats: Topics
   series_all: All series
   all_posts: All posts
+  shelf: Tech shelf
   tags: Tags
   about: About
   search: Search
