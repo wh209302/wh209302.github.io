@@ -53,6 +53,23 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 - **Status:** Tested (2026-10-28)
 - **Verdict:** The only route so far that gave both consistency and big motion. It mostly faces left (flip to fix), draws a ground line under the feet, and small patterns and held props shift a little per frame. The test story is in [Same Face, Walking and Swinging](/en/2026/10/28/anima-motion/).
 
+### [Krea 2 Turbo](https://huggingface.co/krea/Krea-2-Turbo) + [pixel LoRA](https://huggingface.co/e-n-v-y/Krea-2-Pixel-Art)
+
+- **What:** The 8-step version of a 2026 image model, plus a pixel-art LoRA on top. The LoRA draws on a 128-cell grid, so the dots come out very even.
+- **Where it helps:** Cleaning up the dots of an image drawn by another model. Applied strongly (0.45) it also wipes out the earlier style, so it worked best as a light 0.20 tidy-up after pixelizing directly.
+- **Licence:** Model under the Krea 2 Community License (commercial use allowed for companies under $1M yearly revenue); pixel LoRA under MIT.
+- **Specs:** fp8 build 13.1GB, about 13 seconds per 1024² image, peak VRAM about 11.2GB. "full body" alone crops the feet, so always add "head to toe, with margin".
+- **Status:** Tested (2026-10-28)
+- **One-line verdict:** The cleanest dots among pixel routes with open commercial terms. On its own, different seeds give similar pictures, so leave the drawing to another model and use this for finishing. The story is in [Hunting an anime pixel style](/en/2026/10/29/pixel-style-hunt/).
+
+### [Anima Style Explorer](https://github.com/ThetaCursed/Anima-Style-Explorer)
+
+- **What:** A list of the 59,000-plus artist names Anima learned, and a page to browse one sample per artist drawn with the same prompt.
+- **Where it helps:** Steering style with artist tags. A name that isn't on the list does nothing, so check it first.
+- **Licence:** As stated in the repository. We only used the name list.
+- **Status:** Used (2026-10-28)
+- **One-line verdict:** We matched 400 pixel/chibi artists from an image board against this list and got 243. Artist tags work well at the Anima stage, but a later redraw step can erase them, so look at the image after every step.
+
 ### [Qwen-Image-Edit-2511](https://huggingface.co/Qwen/Qwen-Image-Edit-2511)
 
 - **What:** An edit model that changes an image by instruction ("change only the pose", "add a kerchief") instead of drawing from scratch. With the 4-step Lightning LoRA and a 4-bit GGUF build it runs on 12GB.
