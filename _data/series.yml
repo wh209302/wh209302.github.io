@@ -7,3 +7,7 @@
   name: 비개발자의 AI 개발 요령
   desc: 코드를 모르는 사람이 AI와 대화하며 개발을 풀어 가는 과정과 요령.
   en: { name: AI dev tips from a non-developer, desc: How someone who can't code works through development by talking with AI. }
+- id: comfyui-lab
+  name: ComfyUI 시험 일지
+  desc: 제 PC의 ComfyUI로 그림 모델·LoRA·편집 도구를 직접 돌려 본 기록.
+  en: { name: ComfyUI test log, desc: "Hands-on runs of image models, LoRAs and edit tools in ComfyUI on my own PC." }

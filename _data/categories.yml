@@ -17,3 +17,9 @@
   desc: Claude 같은 AI에게 일을 맡기며 배운 것.
   hue: green
   en: { name: Working with AI, short: AI, desc: What I learned handing work to AI like Claude. }
+- id: ai-lab
+  name: AI 실험실
+  short: 실험
+  desc: 이미지 생성 모델·도구를 직접 돌려 본 시험 기록. 된 것, 안 된 것, 다음에 쓸 만한 것.
+  hue: purple
+  en: { name: AI lab, short: Lab, desc: "Hands-on test logs of image models and tools: what worked, what didn't, what's worth reusing." }
