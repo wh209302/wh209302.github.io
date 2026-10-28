@@ -80,6 +80,18 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 - **Status:** Tested (2026-10-21)
 - **Verdict:** Colors and details come quickly, but teaching a stubborn proportion like two heads tall needs dozens of examples. About 1,400 steps was best.
 
+## Backgrounds and depth
+
+### 3D blockout + AI paintover for 2D backgrounds with depth ([HD-2D](https://en.wikipedia.org/wiki/HD-2D), [Midjourney→Blender 2.5D test](https://hitmarker.net/news/utilizing-midjourney-generated-ai-artworks-to-create-a-2-5d-location-for-an-adventure-game-522580))
+
+- **What:** I ran into a post with this recipe: "make character sprites with an AI sprite generator → build a gray 3D model in Blender and put the character in it → paint over that render with GPT image → rebuild the 3D background in Blender from that painting." Pull it apart and it isn't a new trick so much as two old ones stitched together with AI. One is concept art's **paint over a gray blockout**, the other is film compositing's **project a painting onto 3D surfaces** (camera projection). 3D nails the perspective and scale, AI adds texture and mood, and going back to 3D buys the parallax, lighting and occlusion a single picture can't give you.
+- **Where it could fit:** Quarter-view or top-down RPGs and adventure games where the camera barely moves. HD-2D (Octopath Traveler: 3D sets with pixel characters) and Disco Elysium (hand paintover on 3D renders) work on the same idea. The closest AI case is a 2023 2.5D adventure test that recovered the camera of Midjourney images with fSpy and rebuilt them in 3D in Blender. I haven't found a shipped game that used all four steps as written.
+- **Tools:** AI sprite generators like [SpriteGen](https://spritegen.ai/) or [Ludo.ai](https://ludo.ai/features/sprite-generator) for sprites, Blender (free) for blockout and projection, fSpy (free) to recover the camera from one picture, and [StableGen](https://github.com/sakalond/StableGen) (a Blender add-on wired to ComfyUI) to paint over and project in one go inside Blender.
+- **License:** Blender is GPL, StableGen is GPL-3.0. Check the image model used for the paintover on its own. SpriteGen allows commercial use of sprites made with paid credits.
+- **Hardware:** Blender and fSpy run on an ordinary PC. Local paintover with StableGen wants 8GB+ of graphics memory (for SDXL).
+- **Status:** Looked at (2026-10-28)
+- **Verdict:** Notebook RPG is a side view of small pixel stickers, so there's no room for a 3D set. But "fix the perspective with a gray model first, then let the AI paint" is worth pulling out on its own to keep perspective consistent across many backgrounds, and for a quarter-view next game the whole recipe is a candidate.
+
 ## Game screens (UI)
 
 ### [UI Glossary](https://tuiella.github.io/ui-glossary/) (Korean)

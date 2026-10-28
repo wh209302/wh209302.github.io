@@ -80,6 +80,18 @@ AI와 일하다 보면 "오, 이거 대박인데?" 싶은 기술이 하루에도
 - **상태:** 시험함 (2026-10-21)
 - **한 줄 판단:** 색과 디테일은 금방 따라 하지만 2등신 같은 비율 고집까지 가르치려면 예시가 수십 장은 있어야 합니다. 1400걸음쯤이 가장 나았습니다.
 
+## 배경·공간감
+
+### 3D 모형 + AI 덧칠로 2D 배경에 깊이 주기([HD-2D](https://en.wikipedia.org/wiki/HD-2D), [Midjourney→Blender 2.5D 시범](https://hitmarker.net/news/utilizing-midjourney-generated-ai-artworks-to-create-a-2-5d-location-for-an-adventure-game-522580))
+
+- **무엇:** 어디서 본 글에 "AI로 캐릭터 스프라이트 만들기 → Blender로 회색 3D 모형을 짜서 캐릭터 올리기 → 그 렌더를 GPT 이미지로 덧칠 → 그 그림을 보고 다시 Blender로 3D 배경 만들기"라는 순서가 있었습니다. 뜯어보면 새 기술이라기보다 오래된 두 기법을 AI로 이은 겁니다. 하나는 컨셉 아트 업계의 **회색 모형 위에 그림 덧칠하기**(블록아웃 + 페인트오버), 다른 하나는 영화 합성의 **그림을 3D 면에 투사하기**(카메라 프로젝션)입니다. 3D는 원근과 크기를 정확히 잡고, AI는 질감과 분위기를 입히고, 다시 3D로 돌아가면 그림 한 장으로는 안 나오는 시차·빛·가림이 생깁니다.
+- **쓸 만한 자리:** 카메라가 거의 고정된 쿼터뷰·탑다운 RPG나 어드벤처요. 실제로 옥토패스 트래블러류의 HD-2D(3D 배경 + 픽셀 캐릭터), 디스코 엘리시움(3D 렌더 위 손 덧칠)이 같은 원리이고, AI 그림을 끼운 사례로는 Midjourney 그림을 fSpy로 카메라 각도를 되짚어 Blender에서 3D로 다시 짠 2.5D 어드벤처 시범(2023)이 가장 가깝습니다. 네 단계를 그대로 써서 출시한 게임은 아직 찾지 못했습니다.
+- **도구:** 스프라이트는 [SpriteGen](https://spritegen.ai/)·[Ludo.ai](https://ludo.ai/features/sprite-generator) 같은 AI 스프라이트 생성기, 모형·투사는 Blender(무료), 그림 한 장에서 카메라 각도 되찾기는 fSpy(무료), 덧칠과 투사를 Blender 안에서 한 번에 하려면 [StableGen](https://github.com/sakalond/StableGen)(ComfyUI 연결 애드온).
+- **라이선스:** Blender GPL, StableGen GPL-3.0. 덧칠에 쓰는 그림 모델은 모델마다 따로 확인해야 합니다. SpriteGen은 유료 크레딧으로 만든 그림의 상업 사용을 허용합니다.
+- **사양:** Blender와 fSpy는 보통 PC면 됩니다. StableGen으로 로컬 덧칠을 하려면 그래픽 메모리 8GB 이상(SDXL 기준)이 필요합니다.
+- **상태:** 살펴봄 (2026-10-28)
+- **한 줄 판단:** 지금 공책 RPG는 옆에서 보는 작은 픽셀 스티커 장면이라 3D 배경을 들일 자리가 없습니다. 다만 "회색 모형으로 원근을 먼저 정하고 AI에게 그리게 하기"는 배경을 여러 장 뽑을 때 원근을 맞추는 요령으로 따로 떼어 써 볼 만하고, 쿼터뷰 다음 게임이라면 통째로 후보입니다.
+
 ## 게임 화면(UI)
 
 ### [UI 용어집](https://tuiella.github.io/ui-glossary/)
