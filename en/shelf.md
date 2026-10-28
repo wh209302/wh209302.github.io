@@ -42,16 +42,16 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 - **License:** The model is under the CircleStone Labs Non-Commercial License. The LoRAs also block or restrict selling images, so test use only.
 - **Specs:** About 55 seconds for one 2048×1360 sheet on 12GB (roughly 1 second per frame).
 - **Status:** Tested (2026-10-28)
-- **Verdict:** Best consistency, small motions. The walk is closer to breathing in place and the attack is just an arm thrust, so big motions need the edit model below.
+- **Verdict:** Best consistency, small motions. The walk is closer to breathing in place and the attack is just an arm thrust, so big motions came out best with the reference adapter below.
 
 ### [Anima Ref Adapter](https://github.com/ElectronGirl/ComfyUI-Anima-Ref-Adapter)
 
-- **What:** ComfyUI nodes plus a small LoRA that keep a character's hair, eyes and outfit from one reference image while the prompt changes pose and background. No character name or appearance tags needed, so it works for original characters.
-- **Where it fits:** When a single sheet gives motions that are too small, generating big motions of the same character one image at a time.
+- **What:** ComfyUI nodes plus a small LoRA (92MB) that keep a character's hair, eyes and outfit from one reference image while the prompt changes pose and background. No character name or appearance tags needed, so it works for original characters.
+- **Where it fits:** After settling a character with a one-image sheet, feed one cell in as the reference to get big motions like walking or swinging with the same face.
 - **License:** Node code Apache-2.0; adapter weights under the CircleStone Non-Commercial License.
-- **Specs:** Anima base v1.0 and bf16 only (fp16 overflows), Euler 28–30 steps.
-- **Status:** Testing (2026-10-28)
-- **Verdict:** It's a pilot; the author notes identity transfers better than style, and small patterns or large garment colors can drift. I'll update this once results are in.
+- **Specs:** Anima base v1.0 and bf16 only (fp16 overflows), Euler 30 steps, cfg 4.5, ref_guidance 5. About 55 seconds per frame on 12GB, peak video memory about 8.5GB.
+- **Status:** Tested (2026-10-28)
+- **Verdict:** The only route so far that gave both consistency and big motion. It mostly faces left (flip to fix), draws a ground line under the feet, and small patterns and held props shift a little per frame. The test story is in [Same Face, Walking and Swinging](/en/2026/10/28/anima-motion/).
 
 ### [Qwen-Image-Edit-2511](https://huggingface.co/Qwen/Qwen-Image-Edit-2511)
 
