@@ -59,7 +59,7 @@ Here are the three routes side by side.
 2. Base image + edit: big motion but wobbling direction and size, about 31 seconds per frame.
 3. Base image + reference adapter: both consistency and big motion, about 55 seconds per frame.
 
-The best combo was **settling the character with a one-image sheet, then feeding one of its cells to the reference adapter for big motions**. Anima, the adapter and the sprite LoRAs are all non-commercial, though, so they can't go straight into a game I sell. I'm filing this away as a proven possibility and will pull it out again when a commercial route opens up.
+The best combo was **settling the character with a one-image sheet, then feeding one of its cells to the reference adapter for big motions**. Anima and the adapter are non-commercial models, but their images may be used commercially. Some of the sprite LoRAs I used forbid selling images, though, so this can't go straight into a game I sell. I'm filing this away as a proven possibility and will pull it out again when a commercial route opens up.
 
 ## Three-line summary
 

@@ -39,7 +39,7 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 
 - **What:** A 2B image model that is strong at anime styles. Its structure differs from SDXL, so SDXL pixel checkpoints and LoRAs can't be mixed in; you use Anima-specific LoRAs from Civitai. For the test I grabbed an RPG side-view battle sheet LoRA (svactors), a pixel sprite style (Elin) and an RPG walk sheet (rpgchara).
 - **Where it fits:** Getting many motions of one character as a single sheet. Because it's all drawn in one image, face, clothes, colors and pixel size barely drift between frames.
-- **License:** The model is under the CircleStone Labs Non-Commercial License. The LoRAs also block or restrict selling images, so test use only.
+- **License:** The model is under the CircleStone Labs Non-Commercial License, but generated images may be used commercially (section 2(e)). Running the model inside a revenue-generating service or using it to train models commercially is not allowed. The LoRAs block or restrict selling images, so test use only.
 - **Specs:** About 55 seconds for one 2048×1360 sheet on 12GB (roughly 1 second per frame).
 - **Status:** Tested (2026-10-28)
 - **Verdict:** Best consistency, small motions. The walk is closer to breathing in place and the attack is just an arm thrust, so big motions came out best with the reference adapter below.
@@ -48,7 +48,7 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 
 - **What:** ComfyUI nodes plus a small LoRA (92MB) that keep a character's hair, eyes and outfit from one reference image while the prompt changes pose and background. No character name or appearance tags needed, so it works for original characters.
 - **Where it fits:** After settling a character with a one-image sheet, feed one cell in as the reference to get big motions like walking or swinging with the same face.
-- **License:** Node code Apache-2.0; adapter weights under the CircleStone Non-Commercial License.
+- **License:** Node code Apache-2.0; adapter weights under the CircleStone Non-Commercial License. As with Anima, generated images may be used commercially.
 - **Specs:** Anima base v1.0 and bf16 only (fp16 overflows), Euler 30 steps, cfg 4.5, ref_guidance 5. About 55 seconds per frame on 12GB, peak video memory about 8.5GB.
 - **Status:** Tested (2026-10-28)
 - **Verdict:** The only route so far that gave both consistency and big motion. It mostly faces left (flip to fix), draws a ground line under the feet, and small patterns and held props shift a little per frame. The test story is in [Same Face, Walking and Swinging](/en/2026/10/28/anima-motion/).
@@ -56,7 +56,7 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 ### [Krea 2 Turbo](https://huggingface.co/krea/Krea-2-Turbo) + [pixel LoRA](https://huggingface.co/e-n-v-y/Krea-2-Pixel-Art)
 
 - **What:** The 8-step version of a 2026 image model, plus a pixel-art LoRA on top. The LoRA draws on a 128-cell grid, so the dots come out very even.
-- **Where it helps:** Cleaning up the dots of an image drawn by another model. Applied strongly (0.45) it also wipes out the earlier style, so it worked best as a light 0.20 tidy-up after pixelizing directly.
+- **Where it helps:** Cleaning up the dots of an image drawn by another model. A 0.45 redraw gives the cleanest dots. It erases artist flavour added earlier, but going lighter (0.20–0.30) or skipping it left the dots jittery and unusable in practice.
 - **Licence:** Model under the Krea 2 Community License (commercial use allowed for companies under $1M yearly revenue); pixel LoRA under MIT.
 - **Specs:** fp8 build 13.1GB, about 13 seconds per 1024² image, peak VRAM about 11.2GB. "full body" alone crops the feet, so always add "head to toe, with margin".
 - **Status:** Tested (2026-10-28)

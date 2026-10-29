@@ -6,12 +6,12 @@ category: ai-lab
 series: comfyui-lab
 tags: [AI art, ComfyUI, pixel art, test log, prompts]
 image: /assets/img/posts/pixel-style-hunt/cast.webp
-summary: To find an anime pixel-character style I actually liked, I generated over 600 images across 12 styles, 30 artists and several finishing orders. The answer turned out to be the order of the pipeline, not the prompt.
+summary: To find an anime pixel-character style I actually liked, I generated over 600 images across 12 styles, 30 artists and several finishing orders. After sleeping on it, the very first style comparison turned out to be the useful part.
 ---
 
 Ask an AI for pixel characters and the first few look fine. Flip through a few more and the odd ones creep in: glassy eyes, mushy dots, and a strangely Western game face. So this time I set out to find a style I genuinely liked. It had nothing to do with the current game, and it ate a whole day.
 
-<figure><img src="/assets/img/posts/pixel-style-hunt/talk-en.webp" alt="Table of five scenes, Start, Go wide, Artist tags, Reorder and Decide, with what I said, Claude's answer and what changed" loading="lazy"><figcaption>A day of back-and-forth, boiled down to five scenes.</figcaption></figure>
+<figure><img src="/assets/img/posts/pixel-style-hunt/talk-en.webp" alt="Table of five scenes, Start, Go wide, Artist tags, Reorder, Decide and Next day, with what I said, Claude's answer and what changed" loading="lazy"><figcaption>Two days of back-and-forth, boiled down to six scenes.</figcaption></figure>
 
 ## "Not these weird pictures"
 
@@ -59,12 +59,22 @@ So Claude suggested changing the finishing order. Dropping the redraw and pixeli
 
 The final pick happened on a decision card: the sharp-eyed artist, the round-faced artist, or a mix of both. Claude recommended the mix and I chose it too. Not copying one person's look also matched my original idea of adding our own colour. Here are the 12 characters, drawn again four times each.
 
-<figure><img src="/assets/img/posts/pixel-style-hunt/cast.webp" alt="Twelve characters in the same pixel style: elf archer, dwarf smith, priestess, cat thief, dark mage, dragon knight, merchant, fox shrine maiden, old wizard, princess, ninja and bard" loading="lazy"><figcaption>Twelve characters in the final style. They finally look like they live in the same town.</figcaption></figure>
+<figure><img src="/assets/img/posts/pixel-style-hunt/cast.webp" alt="Twelve characters in the same pixel style: elf archer, dwarf smith, priestess, cat thief, dark mage, dragon knight, merchant, fox shrine maiden, old wizard, princess, ninja and bard" loading="lazy"><figcaption>Twelve characters from the new pipeline. At the time I thought this was final.</figcaption></figure>
 
-One thing to be clear about: the base model, Anima, has a non-commercial licence, so these images can't be sold as they are. Krea 2 can be used commercially while yearly revenue is under $1M. The next step is to train our own style LoRA on 20 to 30 favourites from this batch. The artist names were only a compass; the final style will be ours.
+## "The dots got way too jittery"
+
+Next morning I zoomed into the results one by one and said: **everything from r27 on has dots so jittery they're unusable; r25 kept the dots best.** I also summed up the artist-tag tests as useful only up to r25, not much use from r26 on.
+
+Claude owned the cause right away. Anima's drawings aren't pixel art to begin with, so slicing them straight into cells mixes colours inside each cell and leaves jittery specks. The strong Krea redraw erased the artist flavour, but it also rebuilt a clean pixel structure. **Chasing the artist flavour had cost us the dot quality.** It looked fine small, but at in-game size it showed immediately.
+
+<figure><img src="/assets/img/posts/pixel-style-hunt/jitter.webp" alt="Two zoomed princesses. The left has even colours per cell and smooth outlines; the right has mixed-colour specks jittering in the hair and skirt" loading="lazy"><figcaption>Left: the r25 pipeline. Right: the new one. Zoom in and the right one's hair and skirt jitter.</figcaption></figure>
+
+So the finish is locked back to the r25 pipeline (Krea 2 redraw at 0.45), and the style will be picked from the r25 branches. The artist tests and the new pipeline went into the drawer as a record of what not to do.
+
+A word on licences. The Anima model itself is under a non-commercial licence, but its terms say generated images may be used for any purpose, commercial included. What's off-limits is running the model inside a revenue-generating service. Krea 2 can be used commercially while yearly revenue is under $1M. Next up: pick one r25 style and feed that image as a reference to draw the same character in several poses.
 
 ## Three-line summary
 
 1. If style words aren't landing, check whether another LoRA is overpowering them and lower it before writing more prompt.
-2. In a multi-step pipeline, look at the image after every step. A later step may be erasing what an earlier one added.
+2. In a multi-step pipeline, look at the image after every step, and make the final call zoomed to the size you'll actually use.
 3. When the AI says it won't do something and the reason doesn't convince you, push back with your evidence. One line is enough to change direction.
