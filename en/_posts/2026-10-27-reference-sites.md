@@ -42,6 +42,10 @@ Quite a few sites paid off nicely that way, but the problem was that after just 
 
 **[Opus 5.5 video collection](https://github.com/yihui-dev/awesome-opus5-5-videos)** · A repository gathering 703 videos of results from having AI write animations in code, along with the actual prompts. When it's frustrating to explain an effect that only exists in your head, you can find a video with a similar feel here and borrow the prompt wording, which gets you there directly. The analog effect in our game where pencil lines jitter slightly came from a hint found right here, and I applied it in the [video-making post](/en/2026/10/27/ai-clip/).
 
+## Balance and play data
+
+**DCInside [indie game dev gallery post](https://gall.dcinside.com/mgallery/board/view/?id=game_dev&no=233476)** (Korean) · The developer of the pachinko roguelite *Hyper Roller Penny* shares how they tuned balance from 58,000 recorded runs. Instead of math models, they started with questions like "which stage kills the most players?" and shaped the records so the answers would fall out. I had Claude read it and map it onto our game, and out came an eight-row question sheet: life stages and causes of death instead of win rate, and "the choice you picked and the life that followed" instead of item win rate. That's when I noticed we'd been collecting records all along with no questions to ask them.
+
 ## Three-line summary
 
 1. When you find a good tip site, first toss it to the AI to cross-check against the official docs, then take only the real gems.
