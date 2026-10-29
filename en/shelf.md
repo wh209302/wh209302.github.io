@@ -58,9 +58,18 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 - **What:** ComfyUI nodes plus a small LoRA (92MB) that keep a character's hair, eyes and outfit from one reference image while the prompt changes pose and background. No character name or appearance tags needed, so it works for original characters.
 - **Where it fits:** After settling a character with a one-image sheet, feed one cell in as the reference to get big motions like walking or swinging with the same face.
 - **License:** Node code Apache-2.0; adapter weights under the CircleStone Non-Commercial License. As with Anima, generated images may be used commercially.
-- **Specs:** Anima base v1.0 and bf16 only (fp16 overflows), Euler 30 steps, cfg 4.5, ref_guidance 5. About 55 seconds per frame on 12GB, peak video memory about 8.5GB.
-- **Status:** Tested (2026-10-28)
-- **Verdict:** The only route so far that gave both consistency and big motion. It mostly faces left (flip to fix), draws a ground line under the feet, and small patterns and held props shift a little per frame. The test story is in [Same Face, Walking and Swinging](/en/2026/10/28/anima-motion/).
+- **Specs:** Anima base v1.0 and bf16 only (fp16 overflows), 30 steps, cfg 4.5, ref_guidance 4.5–5. V2 (183MB) arrived on 2026-10-29: a single node to drop in, and one image went from 55 to 33 seconds on 12GB. Two reference images side by side give two characters. The author says development has stopped for lack of funding.
+- **Status:** Tested (2026-10-28, V2 2026-10-29)
+- **Verdict:** The only route so far that gave both consistency and big motion. It mostly faces left (flip to fix), draws a ground line under the feet, and small patterns and held props shift a little per frame. The test story is in [Same Face, Walking and Swinging](/en/2026/10/28/anima-motion/). With V2, a pose written in plain text was enough for attack, cast and knocked-down poses, so it became our default for one character in many poses ([Pose by Words, Face by Picture](/en/2026/10/29/same-character-poses/)).
+
+### [Anima ControlNet VACE Depth](https://huggingface.co/TaihoC/Anima-ControlNet-VACE-Depth)
+
+- **What:** Weights that steer an Anima drawing's pose and silhouette from a depth map (a grey image where near is bright and far is dark). Needs a patched Advanced-ControlNet node.
+- **Where it fits:** Making a drawing follow a pose built in Blender or with a mannequin. It ran together with the reference adapter without the two getting in each other's way.
+- **License:** Weights under the CircleStone Non-Commercial License; node under GPL-3.
+- **Specs:** 596MB; about 37 seconds per image on 12GB together with the reference adapter.
+- **Status:** Tested (2026-10-29)
+- **Verdict:** The silhouette follows, but blunt depth maps from a mannequin couldn't place arms or weapons, so it wasn't much better than writing the pose in text. Depth alone without the adapter sometimes drew two people. Worth another look once we have crisp Blender depth maps showing arms and weapons.
 
 ### [Krea 2 Turbo](https://huggingface.co/krea/Krea-2-Turbo) + [pixel LoRA](https://huggingface.co/e-n-v-y/Krea-2-Pixel-Art)
 
