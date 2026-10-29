@@ -31,6 +31,15 @@ So I made a shelf. Every time I toss a link over, Claude checks what it does, wh
 - **Status:** Tried (2026-10-28, breathing and blinking checked with the sample)
 - **Verdict:** It's made for front-facing upper-body anime illustrations, so it doesn't fit small pixel stickers. Paired with see-through, "one picture → moving portrait" is nearly automatic, so it comes off the shelf together with see-through for a next game with big portraits.
 
+### Fixing AI-drawn fingers (community tips)
+
+- **What:** What people do when an image AI like GPT keeps getting the fingers wrong in one pose no matter how often you ask. Roughly in order of popularity: (1) change the hand so the problem goes away (a fist gripping the staff, hand in a sleeve, behind the back); (2) stop repeating in the same chat, open a new one with the original picture and one line about the hand only; (3) paint just the hand with the select (brush) tool and fix that; (4) paste a good hand from another frame or touch up a few pixels by hand; (5) crop the hand large, redraw it in another tool, shrink it back.
+- **Where it could fit:** Small-hand art like 2-head-tall stickers. When a hand is a few pixels, (1) and (4) are fastest. ComfyUI hand-fix nodes (HandRefiner, MeshGraphormer) were trained on realistic hands and don't suit chibi art well.
+- **License:** Not applicable, these are techniques.
+- **Hardware:** (5) needs an edit model such as Qwen-Image-Edit in ComfyUI plus a crop-and-stitch node ([Inpaint CropAndStitch](https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch)).
+- **Status:** Looked into (2026-10-29)
+- **Verdict:** Making a "check every finger" instruction longer shook the other instructions. Naming a concrete hand shape, or fixing the hand on its own, works better than adding more rules.
+
 ## Image generation (ComfyUI)
 
 Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories are in the [AI lab](/en/categories/ai-lab/) category.
