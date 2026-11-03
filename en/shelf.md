@@ -157,3 +157,12 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 - **Specs:** Plain Python, no GPU needed.
 - **Status:** Tested (2026-10-20)
 - **Verdict:** Always reduce colors after reading the cells. Flip the order and the eyes and pink cheeks vanish.
+
+### [pixelfx](https://github.com/patch-gg/pixelfx)
+
+- **What:** 244 pixel art effects drawn in code, no image files: fire, ice, lightning, holy, shadow, nature, status effects, pickups and more. Each effect carries a timing table for the body (wind-up → freeze on contact → recovery), and exports to a transparent PNG strip plus frame JSON.
+- **Where it fits:** When every named skill needs its own shape. "Call the grasping hands" gets hands rising from the ground; "Call the roots" gets roots wrapping the ankles. Colors change through an option.
+- **License:** MIT (commercial use and edits fine, keep the copyright notice). The bundled font is the one exception.
+- **Specs:** Node 18+, no other packages.
+- **Status:** Tested (2026-11-03)
+- **Verdict:** Built to glow on dark backgrounds, so on a bright notebook page the light simply disappears. Kept at native size (a 24×38-pixel dummy) with our colors swapped in, it fit well; scaled up, the pixels got too chunky.
