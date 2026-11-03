@@ -193,5 +193,5 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 - **Where it fits:** When every named skill needs its own shape. "Call the grasping hands" gets hands rising from the ground; "Call the roots" gets roots wrapping the ankles. Colors change through an option.
 - **License:** MIT (commercial use and edits fine, keep the copyright notice). The bundled font is the one exception.
 - **Specs:** Node 18+, no other packages.
-- **Status:** Tested (2026-11-03)
-- **Verdict:** Built to glow on dark backgrounds, so on a bright notebook page the light simply disappears. Kept at native size (a 24×38-pixel dummy) with our colors swapped in, it fit well; scaled up, the pixels got too chunky.
+- **Status:** In use (2026-11-03, 11 spell effects)
+- **Verdict:** Built to glow on dark backgrounds, so on a bright notebook page the light simply disappears. Kept at native size (a 24×38-pixel dummy) with our colors swapped in, it fit well; scaled up, the pixels got too chunky. Turning the light off and redrawing its job as solid bands made it crisp on the bright page too.
