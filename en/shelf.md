@@ -138,6 +138,35 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 - **Status:** In use (2026-10-28)
 - **Verdict:** Checking Notebook RPG's screens against it turned up six improvement ideas. It'll stay useful whatever the game.
 
+## Game feel
+
+### [Game Feel demo (Deepnight)](https://deepnight.net/games/game-feel/)
+
+- **What:** A small 2D action prototype Deepnight Games made to teach game feel (v2, May 2024). Each press of Enter switches one feel feature on or off, so you can watch the same rules turn flat the moment the feedback is gone. Windows and WebGL builds are downloadable and the [source](https://github.com/deepnight/gamefeel) is public.
+- **Where it helps:** The first prototype of a new game. Play with it before asking an AI to "add juice" and your requests get a lot more precise.
+- **License:** Not stated on the page. We won't reuse the code until we've checked the source repository's license.
+- **Specs:** Windows, or download the WebGL build and open it in a browser.
+- **Status:** Looked into (2026-11-03)
+- **Verdict:** Shows in thirty seconds that the same rules with different feedback make a different game.
+
+### [Juice It or Lose It](https://www.youtube.com/watch?v=Fy0aCDmgnxg)
+
+- **What:** A talk by Martin Jonasson and Petri Purho (video, 2012). They take a plain brick-breaker and add particles, sound, squash and stretch and screen reactions one at a time to show what "juice" means.
+- **Where it helps:** Deciding the order to add effects in, and where to stop.
+- **License:** It's a video, so we only link to it.
+- **Specs:** A web browser.
+- **Status:** Looked into (2026-11-03)
+- **Verdict:** The classic every game-feel discussion cites. For a quiet game like a notebook RPG, half of it is already plenty.
+
+### Measuring the moment of a press (screen recording + response time)
+
+- **What:** A check we built ourselves. Headless Chrome's screencast (CDP) hands us a timestamped frame every 1/60 s after a press, and the browser's Event Timing measures "press → next frame" in milliseconds. Throttling the CPU 4× stands in for a slow phone.
+- **Where it helps:** Turning "something feels sluggish" into numbers, and catching beats that land out of order, where the result shows before its cause.
+- **License:** Built-in Chrome and Playwright features.
+- **Specs:** Any laptop.
+- **Status:** Tested (2026-11-03)
+- **Verdict:** This is how we caught our scene showing the result 1.1 s before the die stopped. We never noticed it by eye.
+
 ## Pixel art
 
 ### [Pixel Shading Glossary](https://tuiella.github.io/pixel-glossary/) (Korean)
