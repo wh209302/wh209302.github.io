@@ -52,10 +52,20 @@ I thought we were done, but native size had been tuned for a slime. In front of 
 
 <figure><video src="/assets/img/posts/pixelfx-spells/spells.mp4" poster="/assets/img/posts/pixelfx-spells/spells.jpg" controls muted playsinline preload="none"></video><figcaption>Left is the old four stars, middle and right are the new pictures. Each spell runs 2.6 seconds.</figcaption></figure>
 
-Claude didn't hide the rough edges either. The big smite's disc covers the troll's lower body for about 0.1 seconds at impact, the roots are small on big foes and only wrap the ankles, and the poison cloud is fainter than the rest because it's semi-transparent. I'll decide what to fix after playing it myself. Next I want to see whether the same trick works for event effects like healing and opening chests.
+Claude didn't hide the rough edges either. The big smite's disc covers the troll's lower body for about 0.1 seconds at impact, the roots are small on big foes and only wrap the ankles, and the poison cloud is fainter than the rest because it's semi-transparent. So I asked, "Is there a next step?" Claude laid out a few paths, and I picked "fix the leftovers, then chests and healing."
+
+## Three bits of homework, two bonuses
+
+Homework first. The smite disc no longer grows on the big version, the roots got their own big version for trolls so they wrap up to the waist, and the poison cloud is painted about twice as thick.
+
+Then the bonuses. Until now, nothing moved on screen when a wound healed or a chest spilled money. A line of text popped up and that was it. Now **when an injury, illness or curse heals, petals open at the hero's feet, a ring of light rises to the head and little hearts pop.** When you get more than 10 coins, or money comes out of a chest, a puff of dust goes up and gold coins bounce on the floor. Events usually pay 1 to 5 coins, so the threshold keeps the coins from raining all the time.
+
+The heal effect was built for a tiny doll, so in front of our hero it looked like a wildflower at her ankle. Same rule as before: keep the pixel size, scale the shape 2.5 times. The coins are small next to the hero, but making their pixels chunkier would mix two styles again, so they stay as they are.
+
+<figure><video src="/assets/img/posts/pixelfx-spells/heal-coins.mp4" poster="/assets/img/posts/pixelfx-spells/heal-coins.jpg" controls muted playsinline preload="none"></video><figcaption>1 to 3 are the fixed spells. For 4 (healing) and 5 (coins), left is how it was (nothing happens) and right is the new version.</figcaption></figure>
 
 ## Three-line summary
 
 1. When you borrow someone else's effects, match their size to your own pixel scale first. Scale them up and the art stops looking like one game.
 2. If a glow disappears on a bright screen, don't crank it up. Ask for it to be switched off and redrawn as solid shapes.
-3. "Show me just one first" costs far less than making thirteen and throwing them all out.
+3. "Show me just one first" costs far less than making thirteen and throwing them all out. And when you ask about the next step, bundle the leftover fixes in with it.
