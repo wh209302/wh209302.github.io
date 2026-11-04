@@ -138,6 +138,15 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 - **Status:** In use (2026-10-28)
 - **Verdict:** Checking Notebook RPG's screens against it turned up six improvement ideas. It'll stay useful whatever the game.
 
+### [skullet](https://github.com/lochie/skullet)
+
+- **What:** A library that draws a gray skeleton the exact size of the content that's on its way. It works with React, Vue, Svelte and plain JS, measures a bar for every line of text and a box for every image, so nothing jumps when the content lands. Shimmer or pulse motion and colors are themeable.
+- **Where it could fit:** Screens full of server-fed slots like lists, cards and profiles, where the app is already running and only a few slots inside it are waiting.
+- **License:** MIT (commercial use OK, keep the copyright notice).
+- **Hardware:** A web browser. Version 0.0.3 as of 2026-11, so it's very early.
+- **Status:** Looked into (2026-11-04)
+- **Verdict:** Our game's long wait happens while the game code itself downloads, and at that point skullet hasn't arrived either. Borrowing just the idea, "sketch the outline of the coming screen in the same spot", and putting a pencil-sketch loading screen straight into the first HTML fit better than the library.
+
 ## Game feel
 
 ### [Game Feel demo (Deepnight)](https://deepnight.net/games/game-feel/)
