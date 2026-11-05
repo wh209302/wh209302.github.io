@@ -2,9 +2,9 @@
 - id: notebook-rpg
   name: 공책 RPG 개발기
   short: 공책 RPG
-  desc: 판타지 웹 게임을 만들며 정한 것, 틀린 것, 고친 것.
+  desc: 판타지 웹 게임 「모험 공책 : 절대 보지 마시오!!」를 만들며 정한 것, 틀린 것, 고친 것.
   hue: blue
-  en: { name: Notebook RPG devlog, short: RPG, desc: "Building a fantasy web game: what I decided, got wrong, and fixed." }
+  en: { name: Notebook RPG devlog, short: RPG, desc: "Building the fantasy web game Adventure Notebook: DO NOT READ!! What I decided, got wrong, and fixed." }
 - id: dev-tips
   name: 개발 팁·노하우
   short: 팁

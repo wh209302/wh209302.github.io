@@ -7,7 +7,7 @@ permalink: /en/about/
 
 A dev notebook where someone who has never learned to code scribbles away, with AI as the whole dev team.
 
-Right now I'm making a fantasy web game called **Notebook RPG**. You're born as an ordinary neighborhood resident, not a hero, and live one life rolling a 20-sided die. When you die, a gravestone and a "Great job!" stamp are left on the last page of the notebook. I'm collecting here the survival stories from making this game and the practical tips I picked up working with AI.
+Right now I'm making a fantasy web game called **Adventure Notebook: DO NOT READ!!** (Notebook RPG for short). You're born as an ordinary neighborhood resident, not a hero, and live one life rolling a 20-sided die. When you die, a gravestone and a "Great job!" stamp are left on the last page of the notebook. I'm collecting here the survival stories from making this game and the practical tips I picked up working with AI.
 
 ## How to read this notebook
 
