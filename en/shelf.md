@@ -167,6 +167,15 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 - **Status:** Looked into (2026-11-03)
 - **Verdict:** The classic every game-feel discussion cites. For a quiet game like a notebook RPG, half of it is already plenty.
 
+### [Names of Game Feel](https://tuiella.github.io/b3/sonmat/) (Korean)
+
+- **What:** A new column series (B3) from the author of the two glossaries above. It covers thirteen game-feel parts, from damage number pop, count-up, easing, hitstop and screen shake to coyote time, each laid out as "when it feels flat → A/B demo → how to ask for it." The demos can be played in slow motion.
+- **Where it helps:** When you need a sentence to hand an AI instead of "make the hits feel better." Every entry comes with a request that already has numbers in it, like "pause both for 0.06 seconds," plus the English term, so you can copy it as is.
+- **License:** None stated. Linking is fine, but we don't republish the content.
+- **Requirements:** A web browser.
+- **Status:** Looked into (2026-11-06)
+- **Verdict:** If game-feel talks tell you why, this tells you what to say. "Feedback tiers," saving the big effects so a big number feels like a big deal, fits a quiet game like ours especially well.
+
 ### Measuring the moment of a press (screen recording + response time)
 
 - **What:** A check we built ourselves. Headless Chrome's screencast (CDP) hands us a timestamped frame every 1/60 s after a press, and the browser's Event Timing measures "press → next frame" in milliseconds. Throttling the CPU 4× stands in for a slow phone.
@@ -186,6 +195,15 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 - **Hardware:** Any web browser.
 - **Status:** In use (2026-10-28)
 - **Verdict:** Worth keeping nearby for any game that uses pixel art.
+
+### [Names of Pixel Problems](https://tuiella.github.io/b3/dot/) (Korean)
+
+- **What:** Another B3 column by the same author. Fifteen pixel-art problems, the "it looks jittery" and "it's bubbling" kind, sorted into symptom → cause → fix: boiling, pivot jitter, alpha fringe, mixels, integer scaling, rotation artifacts, fixed palettes and more. Buttons like "show changed pixels" and "overlay grid" let you poke at each problem yourself.
+- **Where it helps:** Reviewing AI-drawn pixel art or animation. Where the pixel shading glossary is about how to paint, this one is a checklist for what went wrong.
+- **License:** None stated. Linking is fine, but we don't republish the content.
+- **Requirements:** A web browser.
+- **Status:** Looked into (2026-11-06)
+- **Verdict:** If you generate frames one at a time with AI, start with the first entry, "boiling." Frames drawn separately change pixels that should stay still, and the result shimmers.
 
 ### Recovering the pixel grid ([unfake](https://pypi.org/project/unfake/), [proper-pixel-art](https://github.com/KennethJAllen/proper-pixel-art))
 
