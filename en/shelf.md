@@ -138,6 +138,15 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 - **Status:** In use (2026-10-28)
 - **Verdict:** Checking Notebook RPG's screens against it turned up six improvement ideas. It'll stay useful whatever the game.
 
+### [Game UI Database](https://www.gameuidatabase.com/)
+
+- **What:** A free collection of game screens run by UI designer Edd Coates. You can browse screenshots from 300-odd games by screen type (shops, inventories, HUDs, popups) and by mood (wood, paper, grunge). It includes 2D pixel games, roguelites and card or turn-based games such as Celeste, Shovel Knight and Rogue Legacy.
+- **Where it helps:** Before designing a new screen, when you want to see how ten other games solved the same one. Giving an AI the screen type plus a few reference game names gets much closer than describing it in words.
+- **License:** The site states no reuse terms. The screenshots belong to their game companies, so we look and learn but don't republish them.
+- **Requirements:** A web browser. Free with no sign-up, just a donation button.
+- **Status:** Looked into (2026-11-06)
+- **Verdict:** If the UI glossary gives you the names, this shows you the real thing. Used together they make screen meetings faster.
+
 ### [skullet](https://github.com/lochie/skullet)
 
 - **What:** A library that draws a gray skeleton the exact size of the content that's on its way. It works with React, Vue, Svelte and plain JS, measures a bar for every line of text and a box for every image, so nothing jumps when the content lands. Shimmer or pulse motion and colors are themeable.

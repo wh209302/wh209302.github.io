@@ -42,6 +42,8 @@ Quite a few sites paid off nicely that way, but the problem was that after just 
 
 **[unslop](https://github.com/heydamir/unslop)** · A Claude skill that audits screens for that "AI-made" look (CC BY 4.0). It was built for company dashboards and landing pages, so rules like "remove emoji" and "use gray backgrounds" are the exact opposite of a notebook RPG. I had Claude read it first, drop the rules that didn't fit and audit with the rest. It caught chip colors, tiny text and twenty-seven font sizes, and it led all the way to [turning the route board into a colored-pencil map](/en/2026/11/02/pencil-map/).
 
+**[Game UI Database](https://www.gameuidatabase.com/)** · A free site collecting screenshots from 300-odd games, sorted by screen type like shops, inventories and HUDs. If the UI glossary taught you the names, this is where you see the real thing. It has a fair number of pixel games like Celeste and Rogue Legacy, plus card and turn-based games. Next time I rework a shop or bag screen, I plan to pick a few similar screens here and hand them to Claude along with the game names. The screenshots belong to their game companies, so the blog only links to them.
+
 ## Treasure chest of effect ideas
 
 **[Opus 5.5 video collection](https://github.com/yihui-dev/awesome-opus5-5-videos)** · A repository gathering 703 videos of results from having AI write animations in code, along with the actual prompts. When it's frustrating to explain an effect that only exists in your head, you can find a video with a similar feel here and borrow the prompt wording, which gets you there directly. The analog effect in our game where pencil lines jitter slightly came from a hint found right here, and I applied it in the [video-making post](/en/2026/10/27/ai-clip/).
