@@ -115,6 +115,15 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 - **Status:** Tested (2026-10-21)
 - **Verdict:** Colors and details come quickly, but teaching a stubborn proportion like two heads tall needs dozens of examples. About 1,400 steps was best.
 
+### [Scenario Agent Skills](https://github.com/scenario-labs/skills)
+
+- **What:** A skill pack for AI coding agents from the game-art service Scenario. It has 175 skills as of 2026-11 and works with Claude Code. Most of them teach an agent to make images, sprite animation, textures, 3D, video and audio through Scenario's server (MCP). A separate set of "expert tools" drives Blender, Unity, Godot, Unreal, Maya, ZBrush and Roblox Studio directly on your machine. The Blender set, for example, has 15 skills distilled from about 200 videos, and its notes say it was tested on Blender 5.2.
+- **Where it helps:** The skill texts are worth reading even if you don't use Scenario. They cover things like sprite-sheet frame math and keeping one character consistent across many actions. The expert tools only need the app itself, not Scenario.
+- **License:** MIT (commercial use OK, keep the notice). Actually running the Scenario skills needs a Scenario account and paid credits.
+- **Requirements:** Install with `npx skills add`. The expert tools need the app installed.
+- **Status:** Looked into (2026-11-07)
+- **Verdict:** We make our art with ComfyUI on a home PC, so the Scenario skills have no job here yet. The home PC has Blender 5.2, though, so the Blender set is the first thing to try next time we pose mannequins.
+
 ## Backgrounds and depth
 
 ### 3D blockout + AI paintover for 2D backgrounds with depth ([HD-2D](https://en.wikipedia.org/wiki/HD-2D), [Midjourney→Blender 2.5D test](https://hitmarker.net/news/utilizing-midjourney-generated-ai-artworks-to-create-a-2-5d-location-for-an-adventure-game-522580))

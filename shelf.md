@@ -115,6 +115,15 @@ AI와 일하다 보면 "오, 이거 대박인데?" 싶은 기술이 하루에도
 - **상태:** 시험함 (2026-10-21)
 - **한 줄 판단:** 색과 디테일은 금방 따라 하지만 2등신 같은 비율 고집까지 가르치려면 예시가 수십 장은 있어야 합니다. 1400걸음쯤이 가장 나았습니다.
 
+### [Scenario Agent Skills](https://github.com/scenario-labs/skills)
+
+- **무엇:** 게임 그림 서비스 Scenario가 내놓은 AI 코딩 도구용 스킬 모음입니다. 2026-11 기준 175개이고 Claude Code에서도 씁니다. 대부분은 Scenario 서버(MCP)에 붙어 그림·스프라이트 애니메이션·텍스처·3D·영상·소리를 만드는 법을 가르칩니다. 따로 묶인 "전문가 도구"는 Blender·Unity·Godot·Unreal·Maya·ZBrush·Roblox Studio를 내 컴퓨터에서 직접 다루는 스킬입니다. 예를 들어 Blender 묶음 15개는 영상 200편쯤을 정리해 만들었고, Blender 5.2에서 시험을 돌렸다고 적혀 있습니다.
+- **쓸 만한 자리:** Scenario를 쓰지 않아도 스킬 글은 읽어 볼 만합니다. 스프라이트 시트 칸 계산이나 한 캐릭터를 여러 동작에서 똑같이 유지하는 요령이 정리돼 있습니다. 전문가 도구는 그 프로그램만 있으면 Scenario 없이 돕니다.
+- **라이선스:** MIT(상업 가능, 저작권 표시만). Scenario 스킬을 실제로 돌리려면 Scenario 계정과 크레딧(유료)이 필요합니다.
+- **사양:** 스킬은 `npx skills add`로 넣습니다. 전문가 도구는 해당 프로그램이 깔려 있어야 합니다.
+- **상태:** 살펴봄 (2026-11-07)
+- **한 줄 판단:** 우리는 그림을 집 PC의 ComfyUI로 만들어서 Scenario 쪽 스킬은 당장 쓸 일이 없습니다. 집 PC에 Blender 5.2가 있으니 Blender 묶음은 마네킹 자세 잡기를 다시 할 때 먼저 꺼내 볼 후보입니다.
+
 ## 배경·공간감
 
 ### 3D 모형 + AI 덧칠로 2D 배경에 깊이 주기([HD-2D](https://en.wikipedia.org/wiki/HD-2D), [Midjourney→Blender 2.5D 시범](https://hitmarker.net/news/utilizing-midjourney-generated-ai-artworks-to-create-a-2-5d-location-for-an-adventure-game-522580))
