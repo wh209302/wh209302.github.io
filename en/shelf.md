@@ -165,6 +165,15 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 - **Status:** Looked at (2026-11-04)
 - **Verdict:** Our game's long wait happens while the game code itself downloads, and at that point skullet hasn't arrived either. Borrowing just the idea, "sketch the outline of the coming screen in the same spot", and putting a pencil-sketch loading screen straight into the first HTML fit better than the library.
 
+### [Impeccable](https://github.com/pbakaus/impeccable)
+
+- **What:** A skill that gives coding agents like Claude Code a design vocabulary. It has 24 commands such as `bolder`, `quieter`, `polish`, `critique` (a scored usability review) and `audit` (accessibility, performance and responsiveness checks). It also ships 62 rules that catch the usual "an AI made this" tells: purple gradients, cards inside cards, Inter everywhere. Those rules run without any AI, so they work in a terminal or CI too.
+- **Where it helps:** When "make it look nicer" is hard to put into words. Pick one command for the direction and point it at one target (`critique the pricing cards`), and the results wobble far less.
+- **License:** Apache-2.0 (commercial use OK, keep the notices).
+- **Requirements:** `npx impeccable install`. It needs Node and downloads an engine binary on first use. One caution: in live mode, which edits right in the browser, Apply runs codex or claude with permission checks off when no chat agent is polling. Setting `IMPECCABLE_LIVE_COPY_AGENT=chat` is the safer choice.
+- **Status:** Looked into (2026-11-07)
+- **Verdict:** Same family as unslop, which we used earlier, but with more commands and a mechanical checker attached. It's tuned for company web pages, so rules that fight our deliberately wobbly, cute notebook screens need filtering out first. For new screens, `critique` and `audit` alone look like a good fit.
+
 ## Game feel
 
 ### [Game Feel demo (Deepnight)](https://deepnight.net/games/game-feel/)
