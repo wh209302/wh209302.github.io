@@ -171,7 +171,8 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 - **Where it helps:** When "make it look nicer" is hard to put into words. Pick one command for the direction and point it at one target (`critique the pricing cards`), and the results wobble far less.
 - **License:** Apache-2.0 (commercial use OK, keep the notices).
 - **Requirements:** `npx impeccable install`. It needs Node and downloads an engine binary on first use. One caution: in live mode, which edits right in the browser, Apply runs codex or claude with permission checks off when no chat agent is polling. Setting `IMPECCABLE_LIVE_COPY_AGENT=chat` is the safer choice.
-- **Status:** Looked into (2026-11-07)
+- **Status:** Tested (2026-11-07)
+- **What we found:** We ran just the checker on our game. It flagged 18 spots in the code and 8 on the cover screen, and none needed fixing. Most were thick left borders read as an "AI tell," which on our screens are notebook margin lines and red-pen marks. The grid background is graph paper, the stripes are ruled lines, and the cyan shine is a sticker's hologram. On the other hand, the contrast and tiny-text checks found nothing on the main game screen, PC or phone. One catch: scanning by URL only sees the first screen. For screens deeper in the game we had to save the HTML and feed it in separately.
 - **Verdict:** Same family as unslop, which we used earlier, but with more commands and a mechanical checker attached. It's tuned for company web pages, so rules that fight our deliberately wobbly, cute notebook screens need filtering out first. For new screens, `critique` and `audit` alone look like a good fit.
 
 ## Game feel
