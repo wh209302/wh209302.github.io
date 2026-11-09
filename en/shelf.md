@@ -233,6 +233,15 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 - **Status:** Looked into (2026-11-06)
 - **Verdict:** If you generate frames one at a time with AI, start with the first entry, "boiling." Frames drawn separately change pixels that should stay still, and the result shimmers.
 
+### [You Need to Know Light](https://tuiella.github.io/b3/light/) (Korean)
+
+- **What:** Part 1 of the same author's B3 column on graphics engines and light math. Eight hands-on entries walk one pixel from texture to monitor: encoded values vs. linear light, the gamma curve, doing math in linear, HDR and exposure, tone mapping, color grading with LUTs, gamuts, and output encoding. It ends with five questions to ask when "the colors look off" and a term table.
+- **Where it helps:** Reports like "the colors look muddy," "the highlights blow out," or "it looks different on my phone." Even a 2D game hits the same rules when it layers transparency, shrinks art, or tints for time of day.
+- **License:** None stated. Linking is fine, but we don't republish the content.
+- **Requirements:** A web browser.
+- **Status:** Looked into (2026-11-09)
+- **Verdict:** Much of it is about 3D engines, but the single question "where did the blending happen?" sorts out most color problems in a 2D game too.
+
 ### Recovering the pixel grid ([unfake](https://pypi.org/project/unfake/), [proper-pixel-art](https://github.com/KennethJAllen/proper-pixel-art))
 
 - **What:** Finds the original grid in an AI's "big picture that looks like pixel art" and reads one representative color per cell to get true 1× pixel art back. We used our own post-processing built in the same order.
