@@ -12,7 +12,7 @@ Whenever I find a great community tip or a nifty web tool while making the game,
 
 Quite a few sites paid off nicely that way, but the problem was that after just a few days I'd be scrambling to find them again, going "what was that site's address again?" So I'm pinning down here only **the gems that really earned their keep** after I tried them myself.
 
-<figure><img src="/assets/img/posts/reference-sites/refs.webp" alt="Reference site cards, sorted into writing, Claude settings, pixel art, game screens, and ideas" loading="lazy"><figcaption>A bookmark list picked out by category.</figcaption></figure>
+<figure><img src="/assets/img/posts/reference-sites/refs.webp" alt="Reference site cards, sorted into writing, Claude settings, pixel art, game screens, ideas, and writing requests" loading="lazy"><figcaption>A bookmark list picked out by category.</figcaption></figure>
 
 ## Writing and polishing tone
 
@@ -58,6 +58,10 @@ Quite a few sites paid off nicely that way, but the problem was that after just 
 
 **[Names of Game Feel](https://tuiella.github.io/b3/sonmat/)** (Korean) · Another column by the same author, this time turning "please make the hits feel better" into words that actually get things fixed. Each of its thirteen game-feel parts, hitstop, easing, count-up and so on, comes with a request that has the numbers baked in, like "pause for 0.06 seconds," so you just copy it and hand it to the AI. After reading it I had Claude hold the "collect to HUD" entry up against our gold coins. We already had coins flying from the hero to the gold slot, but the number itself was changing all at once before the coins had even left. Funny how learning one name puts the fix right in front of you.
 
+## Getting more out of AI requests
+
+**[How to be more ambitious: a tutorial for humans with models](https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/)** · Felix Rieseberg's essay splits "asking AI for bigger work" into three directions: altitude, depth, and range. Aim at the outcome that should change instead of the artifact (altitude), make the model work from the raw material and methods a top expert would use and let an outside judge, not the model, grade the result (depth), and borrow the eyes of other professions (range). The "I want a deeper version of this task, not a bigger one" prompt template is ready to lift as is. I went one step further and had Claude read it and write **a project instruction that rewrites each of my requests into an English prompt in this style before starting work**. Blowing up a one-line question or a typo fix into a grand plan would be silly, so there's also a line saying to just do the simple stuff right away.
+
 ## Balance and play data
 
 **DCInside [indie game dev gallery post](https://gall.dcinside.com/mgallery/board/view/?id=game_dev&no=233476)** (Korean) · The developer of the pachinko roguelite *Hyper Roller Penny* shares how they tuned balance from 58,000 recorded runs. Instead of math models, they started with questions like "which stage kills the most players?" and shaped the records so the answers would fall out. I had Claude read it and map it onto our game, and out came an eight-row question sheet: life stages and causes of death instead of win rate, and "the choice you picked and the life that followed" instead of item win rate. That's when I noticed we'd been collecting records all along with no questions to ask them.
@@ -66,4 +70,4 @@ Quite a few sites paid off nicely that way, but the problem was that after just 
 
 1. When you find a good tip site, first toss it to the AI to cross-check against the official docs, then take only the real gems.
 2. For AI pixel art, line up the grid with Pixel Refiner, stamp out effects with claude-pxl, and hold quality with the glossary checklist, and you're in good shape. Check your game screen against the UI Glossary line by line and the gaps show up.
-3. I'll keep adding to this post whenever I find tools that earn their keep in real use.
+3. Turn one good essay on asking well into a standing instruction and you stop having to think about it every time. I'll keep adding tools that earn their keep here.
