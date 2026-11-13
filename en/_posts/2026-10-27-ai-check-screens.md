@@ -31,17 +31,17 @@ Once I looked at a redesigned screen and bluntly said, **"Ugh, this looks lame. 
 
 Since then, Claude doesn't just bring the finished result. It **stitches the Before and After photos into one picture, side by side**. Looking at the new screen alone, I often can't remember what's actually better than before. With before and after next to each other, I can rule in three seconds: "Oh, way better! Approved."
 
-<figure><img src="/assets/img/posts/ai-screens/before-after.webp" alt="A side-by-side comparison of the phone screen before and after the fix" loading="lazy"><figcaption>The phone screen before (left) and after (right). Put side by side, there's no time left to agonize.</figcaption></figure>
+<figure><img src="/assets/img/posts/ai-screens/before-after.webp" alt="A side-by-side comparison of the phone screen before and after the fix" loading="lazy"><figcaption>The phone screen before (left) and after (right). Side by side, you don't even have to squint.</figcaption></figure>
 
 ## Anything that moves comes as a video
 
-The first time I added the animation where the notebook flips open when the game starts, the cover and the pages moved awkwardly, like two separate acts. So I asked: **"The cover and the paper are moving separately. Make it as realistic as possible, like turning a real notebook."**
+The first time I added the animation where the notebook flips open when the game starts, the cover and the pages moved awkwardly, like two strangers who hadn't rehearsed. So I asked: **"The cover and the paper are moving separately. Make it as realistic as possible, like turning a real notebook."**
 
 From then on, Claude started recording the phone screen as a video (mp4) for its reports. You can never judge how an animation feels or how its timing works from a single still screenshot, so video reports became a must.
 
 <figure class="narrow"><video src="/assets/img/posts/ai-screens/book-open-phone.mp4" poster="/assets/img/posts/ai-screens/book-open-phone.jpg" controls muted playsinline preload="none"></video><figcaption>A report video of the notebook-opening effect, recorded on the phone screen.</figcaption></figure>
 
-When I got a video of the rain and snow weather effect, I answered in just three syllables: **"Hurts my eyes."** Claude got it right away, cut the raindrops in half, and came back with a new video. Even without technical terms, trading videos like this keeps the conversation flowing, even if all I do is toss out how it feels.
+When I got a video of the rain and snow weather effect, I replied in three words: **"Hurts my eyes."** Claude got it right away, cut the raindrops in half, and came back with a new video. Even without technical terms, trading videos like this keeps the conversation flowing when all I do is toss out how it feels.
 
 By the way, the story of how I fixed the choppy video problem when the AI records the screen, with a neat trick, is in a separate post: [the one about making video from one frame at a time](/en/2026/10/27/ai-clip/).
 

@@ -8,7 +8,7 @@ image: /assets/img/posts/iphone-ish-socks5/connection.webp
 summary: The whole process of running a SOCKS5 proxy server in iSH on an iPhone and connecting it to Windows v2rayN. A hands-on guide that also covers keeping it alive in the background and auto-starting it, so you never retype the commands.
 ---
 
-I started out just looking into the tethering limits on an iPhone MVNO plan (a budget carrier plan). Somehow that turned into running a SOCKS5 proxy server straight from the iPhone terminal apps **a-Shell** and **iSH**. Since I was building it anyway, I also pushed the experiment as far as it would go: how much of the "type these annoying commands every time" part can be automated?
+I started out just looking into the tethering limits on an iPhone MVNO plan (a budget carrier plan). Somehow that turned into running a SOCKS5 proxy server straight from the iPhone terminal apps **a-Shell** and **iSH**. While I was at it, I pushed the experiment as far as it would go to see how much of the "retype these annoying commands every time" routine could be automated.
 
 If you just copy-paste the scattered commands floating around the internet, you'll often end up lost: the one file that actually matters is missing, or the server is wide open with no authentication. So this post walks through it in order, with nothing skipped: **① set up the server → ② connect the PC → ③ keep it alive in the background and automate it**.
 
@@ -27,7 +27,7 @@ What carriers call "unlimited data" and the "included tethering (hotspot) allowa
 
 With a SOCKS5 proxy, the internet requests from your PC are received by an app running inside the iPhone, which forwards them for you. But just because you dug this side tunnel doesn't mean the carrier will count all of it as the phone's own data usage. So **"does the proxy connect properly?"** and **"does my plan's tethering cap actually stay untouched?"** are two separate questions, and the safe move is to check them yourself with a small amount of data after connecting.
 
-And of course, the basic road between the PC and the iPhone (a hotspot connection, for example) has to be open first. If the hotspot itself is blocked, or the PC can't reach the iPhone's port, no amount of proxy setup will fix it, so start by lightly checking your own plan's terms.
+And of course, the basic road between the PC and the iPhone (a hotspot connection, for example) has to be open first. If the hotspot itself is blocked, or the PC can't reach the iPhone's port, no amount of proxy setup will fix it, so start by checking your own plan's terms.
 
 <figure><img src="/assets/img/posts/iphone-ish-socks5/connection.webp" alt="Connection order from the PC app to v2rayN's local port, the iPhone SOCKS5 server and the internet, plus the separate things to check: iOS keep-alive and the carrier's data charges" loading="lazy"><figcaption>The whole connection flow. Building the road with a proxy is one thing; iOS background keep-alive and whether the carrier charges the data are two more things you have to check separately.</figcaption></figure>
 
@@ -222,7 +222,7 @@ curl.exe --connect-timeout 10 --max-time 30 `
   --proxy-user "$proxyUser" https://example.com/
 ```
 
-When the password prompt appears, enter the 16+ character password you set on the iPhone. If `Example Domain` HTML comes pouring out on screen, **congratulations! Your PC's request rode through the iPhone's iSH proxy, visited the internet and came back.**
+When the password prompt appears, enter the 16+ character password you set on the iPhone. If `Example Domain` HTML spills out on screen, **congratulations! Your PC's request just rode through the iPhone's iSH proxy out to the internet and back.**
 
 Typing commands every time isn't realistic, so let's register this server in **[v2rayN](https://github.com/2dust/v2rayN)**, a proxy client for Windows.
 
@@ -298,7 +298,7 @@ rmdir /root/socks/.run-lock
 sh /root/socks/start-socks.sh
 ```
 
-Of course, even with the `/dev/location` trick, the connection can drop when the iPhone is badly short on memory or when iOS decides to clean up apps. So test, in a relaxed way, how long it holds up with the screen locked, based on how you actually use it.
+Of course, even with the `/dev/location` trick, the connection can drop when the iPhone is badly short on memory or when iOS decides to clean up apps. So give it a quick test with the screen locked to see how long it holds up for your own routine.
 
 ## One step further: start the server automatically the moment iSH opens (.profile)
 
@@ -347,7 +347,7 @@ So when you build the shortcut, I recommend a **two-step combo** like this.
 1. **Copy text to clipboard**: `sh /root/socks/start-socks.sh`
 2. **Open app**: choose `iSH`
 
-Register it on your Home Screen icon or the iPhone Action Button. When you press it, great if the server starts on its own. And even if it's off, just tap the terminal window and hit **"Paste"** to bring the server back to life in a second.
+Register it on your Home Screen icon or the iPhone Action Button. When you press it, if the server starts on its own, great. And even if it's off, just tap the terminal window and hit **"Paste"** to bring the server back to life in a second.
 
 ## Wrap-up and security tips
 

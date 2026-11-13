@@ -9,7 +9,7 @@ image: /assets/img/posts/comfyui-lab/talk-en.webp
 summary: I ran sixteen tests in two days on a ComfyUI picture factory set up on my own PC. Here's what worked, what didn't, and what's worth pulling out again for the next project.
 ---
 
-I installed ComfyUI on my PC and let Claude drive it remotely so I could generate my own game characters. Two days and sixteen test runs later, the game's art is now made with a different tool. That doesn't make the tests a waste, though. I'm writing them up like lab notes **so the next game doesn't repeat the same digging**. Every run used a single RTX 4070 Ti (12GB).
+I installed ComfyUI on my PC and let Claude drive it remotely so I could generate my own game characters. Two days and sixteen test runs later, the game's art is now made with a different tool. That doesn't make the tests a waste, though. I'm writing them up like lab notes **so the next game doesn't repeat the same dead ends**. Every run used a single RTX 4070 Ti (12GB).
 
 <figure><img src="/assets/img/posts/comfyui-lab/talk-en.webp" alt="Five scenes (pixel, shrink, walk, pose, LoRA) laid out as what I said, Claude's answer, and what changed" loading="lazy"><figcaption>Sixteen runs squeezed into five scenes. Grey boxes are failures, green ones are keepers.</figcaption></figure>
 

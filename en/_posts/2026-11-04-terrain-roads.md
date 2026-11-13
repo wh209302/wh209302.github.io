@@ -1,20 +1,20 @@
 ---
 layout: post
-title: "Roads you can only take by boat, or by wagon"
+title: "Roads you can only take by boat, or by wagon: splitting travel across seven terrains"
 date: 2026-11-04 11:30:00 +0900
 category: notebook-rpg
 tags: [AI collaboration, design, measurement, decisions]
 image: /assets/img/posts/terrain-roads/stages.webp
-summary: How travel that felt the same over sea and forest got split by terrain, and how a final fine-tooth check found riders twisting their ankles on horseback.
+summary: Travel over sea and forest used to feel identical. I split the roads by terrain, and a final fine-tooth check caught riders twisting their ankles on horseback and a sailor with a neon magenta beard.
 ---
 
-The world map in my notebook RPG has seven kinds of land: coast, mountains, forest, a red graveyard belt and more. But in play, sailing a sea lane and crossing a forest both boiled down to one line: "you travel." The map was fancy, the journeys were identical. So I wrote: "Sailing a sea lane or crossing a forest should feel different from just walking a road."
+The world map in my notebook RPG has seven kinds of land: coast, mountains, forest, a red graveyard belt and more. In play, though, sailing a sea lane and crossing a forest both boiled down to one line: "you travel." Fancy map, identical journeys. So I wrote: "Sailing a sea lane or crossing a forest should feel different from just walking a road."
 
 <figure><img src="/assets/img/posts/terrain-roads/talk-en.webp" alt="Table of five scenes from the terrain travel work: what I said, Claude's answer, and what changed" loading="lazy"><figcaption>Five rounds, from one line asking for a difference all the way to a screen check.</figcaption></figure>
 
 ## The biomes exist, but nobody can tell
 
-While I was at it, I asked one more thing: the biomes are there, but do they actually affect the game, and is anything set up so players feel the difference? Claude didn't answer from gut feeling. It ran twenty-two lives on pencil mode (autoplay) and counted the events that actually fired. The result was embarrassing. **Only 0-3% of events even looked at the biome.** Seven stage sets, one script. Living in the mountains or on the plains, life played out almost exactly the same.
+While I was at it, I asked one more thing: the biomes are there, but do they actually affect the game, and is anything set up so players feel the difference? Claude didn't answer from gut feeling. It ran twenty-two lives on pencil mode (autoplay) and counted the events that actually fired. The result was embarrassing: **only 0-3% of events even looked at the biome.** Seven stage sets, one script. Living in the mountains or on the plains, life played out almost exactly the same.
 
 ## Bringing in another AI's proposal
 

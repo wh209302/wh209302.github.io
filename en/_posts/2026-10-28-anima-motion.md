@@ -15,7 +15,7 @@ The most maddening moment in AI-made game sprites is when the character shows up
 
 ## "Wait, is Anima a checkpoint?"
 
-My question, translated: **"Can we combine the Anima model with pixel checkpoints or LoRAs in ComfyUI to get motion sprites of a consistent character?"**
+My question went like this: **"Can we combine the Anima model with pixel checkpoints or LoRAs in ComfyUI to get motion sprites of a consistent character?"**
 
 Claude's first answer was that you can't just combine them. Anima is an image model that's great at anime styles, but its skeleton is different from the SDXL pixel models I used before, so the parts don't swap in. So I asked back, "So we don't use a checkpoint? Is Anima the checkpoint...?" Exactly: Anima itself is the base model, the thing that sits in the checkpoint slot. Civitai already had a few Anima-specific pixel and sprite LoRAs, and Claude laid out three routes with them.
 

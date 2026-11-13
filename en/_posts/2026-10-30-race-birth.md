@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Elves would normally be born in a forest, right?"
+title: "The homunculus in the glass vat was playing peekaboo"
 date: 2026-10-30 14:50:00 +0900
 category: notebook-rpg
 tags: [AI collaboration, decisions, measurement, design]

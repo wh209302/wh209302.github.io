@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "드워프가 마법을 잘하면 좀 이상하잖아요"
+title: "드워프에게 마법을 막진 않았습니다: '종족의 결'을 만든 날"
 date: 2026-10-30 12:20:00 +0900
 category: notebook-rpg
 tags: [AI협업, 결정, 측정, 설계]

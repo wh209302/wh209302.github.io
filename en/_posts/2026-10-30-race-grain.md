@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "A Dwarf Who's Great at Magic Feels a Little Off"
+title: "We didn't ban dwarves from magic—we just gave each race its own grain"
 date: 2026-10-30 12:20:00 +0900
 category: notebook-rpg
 tags: [AI collaboration, decisions, measurement, design]

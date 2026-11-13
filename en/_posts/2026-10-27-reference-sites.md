@@ -8,7 +8,7 @@ image: /assets/img/posts/reference-sites/refs.webp
 summary: Out of the sites I handed to Claude with "check this out" while building the game, only the ones that truly earned their keep. A treasure chest I keep updating as I dig up new ones.
 ---
 
-Whenever I find a great community tip or a nifty web tool while making the game, I first toss the link to Claude with **"hey, read this."**
+Whenever I find a great community tip or a nifty web tool while making the game, I first toss the link to Claude with **"hey, check this out."**
 
 Quite a few sites paid off nicely that way, but the problem was that after just a few days I'd be scrambling to find them again, going "what was that site's address again?" So I'm pinning down here only **the gems that really earned their keep** after I tried them myself.
 
@@ -16,7 +16,7 @@ Quite a few sites paid off nicely that way, but the problem was that after just 
 
 ## Writing and polishing tone
 
-**[Humanize KR](https://github.com/epoko77-ai/im-not-ai)** · A skill made for Claude that smooths the awkward translation-ese and robotic sentence lineups typical of AI-written Korean into natural human speech. It leaves facts and numbers alone and only evens out the texture of the sentences. We lean on it to polish drafts before posting to this blog too.
+**[Humanize KR](https://github.com/epoko77-ai/im-not-ai)** · A skill made for Claude that smooths the awkward translation-ese and robotic sentence lineups typical of AI-written Korean into natural human speech. It leaves facts and numbers alone and only evens out the texture of the sentences. We use it to polish drafts before publishing on this blog too.
 
 ## Claude settings and a token diet
 
@@ -28,7 +28,7 @@ Quite a few sites paid off nicely that way, but the problem was that after just 
 
 <figure><img src="/assets/img/posts/reference-sites/refiner.webp" alt="Three AI-drawn characters compared side by side: original, Pixel Refiner, workbench polish" loading="lazy"><figcaption>From the left: the AI original, the Pixel Refiner result, and our own workbench result. The messy pixel lines get cleaned up neatly.</figcaption></figure>
 
-**[claude-pxl](https://github.com/augusto-scarvalho/claude-pxl)** · A tool that stamps out pixel art and frame animations from a short bit of code, designed from birth to be easy for an AI to handle. I handed it to Claude and asked for a fire magic effect, and at first the pastel flames got buried in the bright notebook background color and were hard to see. Just adding an option for a dark outline instantly gave us game-worthy quality.
+**[claude-pxl](https://github.com/augusto-scarvalho/claude-pxl)** · A tool that stamps out pixel art and frame animations from a short bit of code, designed from the ground up to be easy for an AI to drive. I handed it to Claude and asked for a fire magic effect, and at first the pastel flames got buried in the bright notebook background color and were hard to see. Just adding an option for a dark outline instantly gave us game-worthy quality.
 
 <figure><img src="/assets/img/posts/reference-sites/pxl-fire.webp" alt="Five fire magic scenes. Top is default colors, bottom is notebook colors with an outline" loading="lazy"><figcaption>Top is the fire magic with default settings, bottom is the version with an outline added to fit the notebook background.</figcaption></figure>
 
@@ -52,9 +52,9 @@ Quite a few sites paid off nicely that way, but the problem was that after just 
 
 ## Treasure chest of effect ideas
 
-**[Opus 5.5 video collection](https://github.com/yihui-dev/awesome-opus5-5-videos)** · A repository gathering 703 videos of results from having AI write animations in code, along with the actual prompts. When it's frustrating to explain an effect that only exists in your head, you can find a video with a similar feel here and borrow the prompt wording, which gets you there directly. The analog effect in our game where pencil lines jitter slightly came from a hint found right here, and I applied it in the [video-making post](/en/2026/10/27/ai-clip/).
+**[Opus 5.5 video collection](https://github.com/yihui-dev/awesome-opus5-5-videos)** · A repository gathering 703 videos of results from having AI write animations in code, along with the actual prompts. When it's frustrating to explain an effect that only exists in your head, you can find a video with a similar feel here and borrow the prompt wording, which is a huge shortcut. The analog effect in our game where pencil lines jitter slightly came from a hint found right here, and I applied it in the [video-making post](/en/2026/10/27/ai-clip/).
 
-**DCInside [AI game dev gallery post](https://gall.dcinside.com/mgallery/board/view/?id=aidevelop&no=2572)** (Korean) · True to its title, "I asked an AI to make a game, so why does it feel so cheap?", it explains through game feel and juice why a game where every feature works can still taste of nothing. The key advice: "make it juicy" is not a magic spell, so diagnose the gaps first, rank them, then give each action a stated intensity. I had Claude measure our game in exactly that order, and it found that in fights the hero gets bitten on screen a full 1.1 seconds before the die stops rolling. I'd watched that dozens of times and never noticed.
+**DCInside [AI game dev gallery post](https://gall.dcinside.com/mgallery/board/view/?id=aidevelop&no=2572)** (Korean) · True to its title, "I asked an AI to make a game, so why does it feel so cheap?", it explains through game feel and juice why a game where every feature works can still feel flat. The key advice: "make it juicy" is not a magic spell, so diagnose the gaps first, rank them, then give each action a stated intensity. I had Claude measure our game in exactly that order, and it found that in fights the hero gets bitten on screen a full 1.1 seconds before the die stops rolling. I'd watched that dozens of times and never noticed.
 
 **[Names of Game Feel](https://tuiella.github.io/b3/sonmat/)** (Korean) · Another column by the same author, this time turning "please make the hits feel better" into words that actually get things fixed. Each of its thirteen game-feel parts, hitstop, easing, count-up and so on, comes with a request that has the numbers baked in, like "pause for 0.06 seconds," so you just copy it and hand it to the AI. After reading it I had Claude hold the "collect to HUD" entry up against our gold coins. We already had coins flying from the hero to the gold slot, but the number itself was changing all at once before the coins had even left. Funny how learning one name puts the fix right in front of you.
 
@@ -64,10 +64,10 @@ Quite a few sites paid off nicely that way, but the problem was that after just 
 
 ## Balance and play data
 
-**DCInside [indie game dev gallery post](https://gall.dcinside.com/mgallery/board/view/?id=game_dev&no=233476)** (Korean) · The developer of the pachinko roguelite *Hyper Roller Penny* shares how they tuned balance from 58,000 recorded runs. Instead of math models, they started with questions like "which stage kills the most players?" and shaped the records so the answers would fall out. I had Claude read it and map it onto our game, and out came an eight-row question sheet: life stages and causes of death instead of win rate, and "the choice you picked and the life that followed" instead of item win rate. That's when I noticed we'd been collecting records all along with no questions to ask them.
+**DCInside [indie game dev gallery post](https://gall.dcinside.com/mgallery/board/view/?id=game_dev&no=233476)** (Korean) · The developer of the pachinko roguelite *High Roller Penny* shares how they tuned balance from 58,000 recorded runs. Instead of math models, they started with questions like "which stage kills the most players?" and shaped the records so the answers would fall out. I had Claude read it and map it onto our game, and out came an eight-row question sheet: life stages and causes of death instead of win rate, and "the choice you picked and the life that followed" instead of item win rate. That's when I noticed we'd been collecting records all along with no questions to ask them.
 
 ## Three-line summary
 
 1. When you find a good tip site, first toss it to the AI to cross-check against the official docs, then take only the real gems.
-2. For AI pixel art, line up the grid with Pixel Refiner, stamp out effects with claude-pxl, and hold quality with the glossary checklist, and you're in good shape. Check your game screen against the UI Glossary line by line and the gaps show up.
+2. For AI pixel art, line up the grid with Pixel Refiner, stamp out effects with claude-pxl, and hold quality with the glossary checklist, and you're set. Check your game screen against the UI Glossary line by line and the gaps show up.
 3. Turn one good essay on asking well into a standing instruction and you stop having to think about it every time. I'll keep adding tools that earn their keep here.

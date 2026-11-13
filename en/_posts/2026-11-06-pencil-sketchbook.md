@@ -20,7 +20,7 @@ All I said was that the screen felt choppy. Claude measured the feeling first. I
 
 ## The notebook is mine, the sketchbook is the pencil's
 
-Then came my wish list. I wanted the game to keep starting from the notebook cover, and when I press the pencil button, the view should slide over to a sketchbook lying next to it. My notebook where I write myself, and the pencil's sketchbook where it draws for me, side by side on one desk. Claude added a desk slide, and since an outside review suggested going slow the first time and quick after that, it runs 1.1 seconds once and 0.7 seconds from then on.
+Then came my wish list. I wanted the game to keep starting from the notebook cover, and when I press the pencil button, the view should slide over to a sketchbook lying next to it—my notebook where I write myself, and the pencil's sketchbook where it draws for me, side by side on one desk. Claude added a desk slide, and since an outside review suggested going slow the first time and quick after that, it runs 1.1 seconds once and 0.7 seconds from then on.
 
 <figure><img src="/assets/img/posts/pencil-sketchbook/desk.webp" alt="Three frames of the view sliding from the notebook cover to the sketchbook" loading="lazy"><figcaption>Press the pencil button on the cover and the desk slides sideways.</figcaption></figure>
 

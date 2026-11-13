@@ -26,17 +26,17 @@ You live by rolling a 20-sided die at every crossroads of life, and a whole life
 
 When a life ends, the game retraces on a map everywhere that person went.
 
-<figure><video src="/assets/img/posts/first-week/journey.mp4" poster="/assets/img/posts/first-week/journey-poster.jpg" controls muted playsinline preload="none"></video><figcaption>A recap video that toddles across the map from the birthplace village, following the big events.</figcaption></figure>
+<figure><video src="/assets/img/posts/first-week/journey.mp4" poster="/assets/img/posts/first-week/journey-poster.jpg" controls muted playsinline preload="none"></video><figcaption>A recap video that retraces your footsteps across the map from the birthplace village, following the big events.</figcaption></figure>
 
 It looks like an adventure RPG a kid doodled in a notebook during class: ruled paper, spiral binding, wobbly pencil handwriting, even scrapbook stickers. But what happens inside is anything but sweet. **"Harmless and cute on the outside, ruthless and blunt in the results."** That's the core philosophy I nailed down on day one.
 
 <figure class="narrow"><img src="/assets/img/posts/first-week/play-phone.webp" alt="Game screen on a phone: character sticker scene on top, a route-map style travel map in the middle, a log of what happened below" loading="lazy"><figcaption>Living a life on a smartphone. The current scene is on top, a subway-map style travel map is in the middle, and the log of every wild thing that's happened so far is at the bottom.</figcaption></figure>
 
-## How to code with your mouth (feat. the guy who only makes decisions)
+## Coding without touching the keyboard (feat. the guy who only makes decisions)
 
 The way we work is simple. I decide, and the AI does the legwork.
 
-When we hit a fork in the road, Claude brings me two or three alternatives plus its own recommended pick, neatly laid out as a "decision card." Then I just say "Hmm, let's go with B," like a boss. I signed off (?) on dozens of items that way this week. My tips for getting an AI to file reports like this are collected separately in [how to make it let you choose](/en/2026/10/27/ai-decision-cards/).
+When we hit a fork in the road, Claude brings me two or three alternatives plus its own recommended pick, neatly laid out as a "decision card." Then I just say "Hmm, let's go with B," like a boss. I "approved" dozens of items that way this week. My tips for getting an AI to file reports like this are collected separately in [how to make it let you choose](/en/2026/10/27/ai-decision-cards/).
 
 I'm greedy, so I often open several windows and run big jobs at once, like polishing combat or adding login. It's definitely faster, but now and then the AIs would touch the same file at the same time and get into a brawl (a conflict). Luckily, I now have an automation command that tidies up the overlapping parts when code gets merged, and peace has been restored ([parallel work post](/en/2026/10/27/ai-parallel/)).
 
@@ -54,7 +54,7 @@ What I really took to heart this time: dropping one reference image you like is 
 
 ## Dissecting it with numbers instead of "vibes"
 
-By October 24, while testing, the complaints started creeping up on me. Things like *"too many random events keep firing, so I'm not getting anywhere"* and *"getting the job I want is like plucking a star from the sky."*
+By October 24, while testing, the complaints started creeping up on me. Things like *"too many random events keep firing, so I'm not getting anywhere"* and *"getting the job I want is next to impossible."*
 
 In the old days I'd have gone straight to tweaking the probabilities, but this time I decided to measure first. I had the AI run an auto-play bot through more than a hundred lives, then crunch stats on where characters actually spend their time once they grow up.
 

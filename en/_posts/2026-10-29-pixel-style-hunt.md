@@ -71,7 +71,7 @@ Claude owned the cause right away. Anima's drawings aren't pixel art to begin wi
 
 So the finish is locked back to the r25 pipeline (Krea 2 redraw at 0.45), and the style will be picked from the r25 branches. The artist tests and the new pipeline went into the drawer as a record of what not to do.
 
-A word on licences. The Anima model itself is under a non-commercial licence, but its terms say generated images may be used for any purpose, commercial included. What's off-limits is running the model inside a revenue-generating service. Krea 2 can be used commercially while yearly revenue is under $1M. Next up: pick one r25 style and feed that image as a reference to draw the same character in several poses.
+One quick note on licences. The Anima model itself is under a non-commercial licence, but its terms say generated images may be used for any purpose, commercial included. What's off-limits is running the model inside a revenue-generating service. Krea 2 can be used commercially while yearly revenue is under $1M. Next up: pick one r25 style and feed that image as a reference to draw the same character in several poses.
 
 ## Three-line summary
 

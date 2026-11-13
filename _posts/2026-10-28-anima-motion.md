@@ -45,7 +45,7 @@ Claude는 바로 깔지 않고 먼저 물었습니다. 남이 만든 코드를 �
 
 <figure><video src="/assets/img/posts/anima-motion/walk.mp4" controls muted playsinline preload="none" poster="/assets/img/posts/anima-motion/walk.jpg"></video><figcaption>왼쪽부터 한 장 시트, 편집, 참조 어댑터. 오른쪽만 제대로 걷습니다.</figcaption></figure>
 
-물론 완벽하진 않았습니다. "오른쪽을 봐"라고 해도 대부분 왼쪽을 봐서 좌우를 뒤집어야 했고 발밑에 시키지도 않은 바닥 선을 그려 넣었습니다. 공격 동작은 쇠스랑을 새로 쥐여 줘야 하다 보니 프레임마다 쇠스랑 모양이 조금씩 달랐고 2번 길의 그림을 참조로 넣었을 땐 앞치마 덧댐이 꽃무늬로 바뀌기도 했습니다. 프레임당 55초로 가장 느리기도 했고요.
+물론 완벽하진 않았습니다. "오른쪽을 봐"라고 해도 대부분 왼쪽을 봐서 좌우를 뒤집어야 했고, 발밑에 시키지도 않은 바닥 선을 그려 넣었습니다. 공격 동작은 쇠스랑을 새로 쥐여 줘야 하다 보니 프레임마다 쇠스랑 모양이 조금씩 달랐고, 2번 길의 그림을 참조로 넣었을 땐 앞치마 덧댐이 꽃무늬로 바뀌기도 했습니다. 프레임당 55초로 가장 느리기도 했고요.
 
 <figure><video src="/assets/img/posts/anima-motion/attack.mp4" controls muted playsinline preload="none" poster="/assets/img/posts/anima-motion/attack.jpg"></video><figcaption>공격 동작 비교입니다. 오른쪽 소녀는 쇠스랑을 머리 위로 번쩍 들어 올립니다.</figcaption></figure>
 
@@ -53,7 +53,7 @@ Claude는 바로 깔지 않고 먼저 물었습니다. 남이 만든 코드를 �
 
 ## 그래서 어떻게 쓰면 되나
 
-세 길을 정리하면 이렇습니다.
+세 길을 한눈에 비교하면 이렇습니다.
 
 1. 한 장 시트: 일관성은 최고지만 동작이 작고 프레임당 1초로 가장 빠릅니다.
 2. 기준 그림 + 편집: 동작은 크지만 방향과 크기가 흔들리고 프레임당 약 31초입니다.

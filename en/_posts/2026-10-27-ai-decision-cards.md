@@ -52,12 +52,12 @@ Back when questions arrived one at a time, I was chained to my monitor all day. 
 
 After a week of bumping around, the line between "what I decide" and "what I delegate to the AI" got clear.
 
-The game's overall tone and feel, picking the final winner among mockups, and **anything hard to undo once done** (like changing deployment settings or mass-deleting data) I always handle myself. On the other hand, churning out multiple mockups, experiments that can be cancelled any time, and verifying there are no technical bugs all go to the AI. I just check whether the result suits me.
+The game's overall tone and feel, picking the final winner among mockups, and **anything painful to undo** (like changing deployment settings or mass-deleting data) I always handle myself. On the other hand, churning out multiple mockups, experiments that can be cancelled any time, and verifying there are no technical bugs all go to the AI. I just check whether the result suits me.
 
-Sometimes I ignore the AI's recommendation and perversely pick a different number. Honestly, that's exactly when my real taste as the director shows. In those cases I always add one line: **"Write in your notes why I picked this over your recommendation."** Then, strangely enough, next time in a similar situation the AI brings a recommendation that fits my taste. I covered this memory-training method in more detail in [the memory post](/en/2026/10/27/ai-memory/).
+Sometimes I ignore the AI's recommendation and stubbornly pick a different number. Honestly, that's exactly when my real taste as the director shows. In those cases I always add one line: **"Write in your notes why I picked this over your recommendation."** Then, strangely enough, next time in a similar situation the AI brings a recommendation that fits my taste. I covered this memory-training method in more detail in [the memory post](/en/2026/10/27/ai-memory/).
 
 ## Three-line summary
 
 1. When it's hard to put a feeling into words, tell the AI to "make three clearly different mockups as real screens, side by side," and pick one.
 2. For big jobs, don't start with coding. Rein it in with "idea research, narrowed options, step-by-step progress."
-3. Take the AI's questions as multiple-choice cards with recommendations, all at once, and have it note down the reason whenever I pick something that reflects my taste.
+3. Take the AI's questions as multiple-choice cards with recommendations, all at once, and have it jot down the reason whenever my personal taste overrides its pick.

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "엘프는 보통 숲속에서 태어날 것 아니야"
+title: "유리 통에서 깨어난 호문쿨루스가 까꿍 놀이를 하고 있었습니다"
 date: 2026-10-30 14:50:00 +0900
 category: notebook-rpg
 tags: [AI협업, 결정, 측정, 설계]
