@@ -17,7 +17,7 @@ Ask an AI for pixel characters and the first few look fine. Flip through a few m
 
 It started as a grumble: I wanted proper pixel characters instead of these weird pictures, and I added, "using the newest models and techniques you can."
 
-Claude looked at how people make pixel characters in ComfyUI and pitted four engines against each other. Anima with a pixel LoRA had the best drawing; the newly released Krea 2 with a pixel LoRA had the cleanest dots. So it chained them: draw with Anima, then let Krea 2 redraw only the dots. I looked at the four results and said, "This feel is the best."
+Claude looked at how people make pixel characters in ComfyUI and pitted four engines against each other. Anima with a pixel LoRA had the best drawing; the newly released Krea 2 with a pixel LoRA had the cleanest dots. So it chained them: draw with Anima, then let Krea 2 redraw only the dots. I looked at the four results and said, "I like this look best."
 
 <figure><img src="/assets/img/posts/pixel-style-hunt/start.webp" alt="Four anime pixel characters: a vampire girl, a witch on a broom, a farm girl with a pitchfork, a knight with sword and shield" loading="lazy"><figcaption>The starting point, and the moment I started wondering whether something even better was out there.</figcaption></figure>
 
@@ -25,7 +25,7 @@ Claude looked at how people make pixel characters in ComfyUI and pitted four eng
 
 I got greedy. I asked for as many styles as possible in that direction, with detailed and varied prompts, and told Claude to find out how people craft prompts when they hunt for their own style.
 
-From the official model card and community guides, Claude brought back three habits:
+From the official model card and community guides, Claude brought back three rules of thumb:
 
 1. Change one thing at a time.
 2. Every time you change something, compare at least four seeds side by side.
@@ -33,17 +33,17 @@ From the official model card and community guides, Claude brought back three hab
 
 With that we drew 12 styles and 12 new characters, from an elf archer and a dwarf smith to a cat thief, a fox shrine maiden and a bard. The detailed descriptions clearly worked. Aiming a bow, praying, crouching, curtsying with a skirt in hand: every pose came out as described.
 
-The styles, though, were **twelve identical twins**. The culprit was the pixel LoRA. It was turned up so high that it flattened every style word, "thick outlines", "pastel" and "90s retro" alike. Halving its strength and pushing the style harder finally made the branches split.
+The styles, though, were **twelve identical twins**. The culprit was the pixel LoRA. It was turned up so high that it flattened every style keyword, "thick outlines", "pastel" and "90s retro" alike. Halving its strength and pushing the style harder finally made the branches split.
 
 <figure><img src="/assets/img/posts/pixel-style-hunt/styles.webp" alt="Comparison of an elf archer, priestess, cat thief and princess in four styles; the bottom two rows have bigger, rounder heads" loading="lazy"><figcaption>Top: the original style. Bottom two rows: style LoRAs mixed in. Bigger heads, rounder faces.</figcaption></figure>
 
 ## "Even the official docs say it's weak without them"
 
-Here we bumped heads. Claude said it wouldn't put specific artist names in the prompt: copying someone's style wouldn't be our style, and it could cause trouble if the game is ever sold. I disagreed. **I told it to list artists whose style is close to what we want, since we'd just mix in our own colour, and pointed out that the official docs say the style is weak without the artist tag.**
+Here we butted heads. Claude said it wouldn't put specific artist names in the prompt: copying someone's style wouldn't be our style, and it could cause trouble if the game is ever sold. I disagreed. **I told it to list artists whose style is close to what we want, since we'd just mix in our own colour, and pointed out that the official docs say the style is weak without the artist tag.**
 
-Claude turned around straight away. It pulled the 400 artists most often tagged alongside pixel and chibi art on an image board, matched them against the 59,000 artists the model actually learned, and got down to 243. After dropping artists with a high share of adult work, it tried 30 of them one by one, same seed and same character, so only the artist changed.
+Claude pivoted right away. It pulled the 400 artists most often tagged alongside pixel and chibi art on an image board, matched them against the 59,000 artists the model actually learned, and got down to 243. After dropping artists with a high share of adult work, it tried 30 of them one by one, same seed and same character, so only the artist changed.
 
-And then **it found the disaster.** The artist names clearly worked at the Anima stage: sharper eyes, bigger heads, darker lines. But after the final step where Krea 2 redraws the dots, almost all of that difference was gone. It was like seasoning a dish carefully and then rinsing it under the tap.
+And then **we uncovered a disaster.** The artist names clearly worked at the Anima stage: sharper eyes, bigger heads, darker lines. But after the final step where Krea 2 redraws the dots, almost all of that difference was gone. It was like seasoning a dish carefully and then rinsing it under the tap.
 
 <figure><img src="/assets/img/posts/pixel-style-hunt/erased.webp" alt="Two rows of an elf archer. The large drawings on the left differ clearly, but the redrawn pixel versions on the right look almost the same" loading="lazy"><figcaption>Top: no artist. Bottom: one artist added. Different on the left, nearly the same in the dots on the right.</figcaption></figure>
 
@@ -57,7 +57,7 @@ So Claude suggested changing the finishing order. Dropping the redraw and pixeli
 
 <figure><img src="/assets/img/posts/pixel-style-hunt/outline.webp" alt="A boy swordsman and a princess compared with no outline and three outline methods; the edges get darker to the right" loading="lazy"><figcaption>Far left: no outline. Further right, the edges get crisper and read well even on white.</figcaption></figure>
 
-The final pick happened on a decision card: the sharp-eyed artist, the round-faced artist, or a mix of both. Claude recommended the mix and I chose it too. Not copying one person's look also matched my original idea of adding our own colour. Here are the 12 characters, drawn again four times each.
+The final call came down to a decision card: the sharp-eyed artist, the round-faced artist, or a mix of both. Claude recommended the mix and I chose it too, which fit my original goal of blending in our own flavour rather than copying one person's look. Here are the 12 characters, drawn again four times each.
 
 <figure><img src="/assets/img/posts/pixel-style-hunt/cast.webp" alt="Twelve characters in the same pixel style: elf archer, dwarf smith, priestess, cat thief, dark mage, dragon knight, merchant, fox shrine maiden, old wizard, princess, ninja and bard" loading="lazy"><figcaption>Twelve characters from the new pipeline. At the time I thought this was final.</figcaption></figure>
 
@@ -65,7 +65,7 @@ The final pick happened on a decision card: the sharp-eyed artist, the round-fac
 
 Next morning I zoomed into the results one by one and said: **everything from r27 on has dots so jittery they're unusable; r25 kept the dots best.** I also summed up the artist-tag tests as useful only up to r25, not much use from r26 on.
 
-Claude owned the cause right away. Anima's drawings aren't pixel art to begin with, so slicing them straight into cells mixes colours inside each cell and leaves jittery specks. The strong Krea redraw erased the artist flavour, but it also rebuilt a clean pixel structure. **Chasing the artist flavour had cost us the dot quality.** It looked fine small, but at in-game size it showed immediately.
+Claude spotted the cause right away. Anima's drawings aren't pixel art to begin with, so slicing them straight into cells mixes colours inside each cell and leaves jittery specks. The strong Krea redraw erased the artist flavour, but it also rebuilt a clean pixel structure. **Chasing the artist flavour had cost us the dot quality.** It looked fine small, but at in-game size it showed immediately.
 
 <figure><img src="/assets/img/posts/pixel-style-hunt/jitter.webp" alt="Two zoomed princesses. The left has even colours per cell and smooth outlines; the right has mixed-colour specks jittering in the hair and skirt" loading="lazy"><figcaption>Left: the r25 pipeline. Right: the new one. Zoom in and the right one's hair and skirt jitter.</figcaption></figure>
 
@@ -75,6 +75,6 @@ One quick note on licences. The Anima model itself is under a non-commercial lic
 
 ## Three-line summary
 
-1. If style words aren't landing, check whether another LoRA is overpowering them and lower it before writing more prompt.
+1. If style keywords aren't landing, check whether another LoRA is overpowering them and lower its strength before writing more prompt.
 2. In a multi-step pipeline, look at the image after every step, and make the final call zoomed to the size you'll actually use.
 3. When the AI says it won't do something and the reason doesn't convince you, push back with your evidence. One line is enough to change direction.

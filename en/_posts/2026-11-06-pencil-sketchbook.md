@@ -20,7 +20,7 @@ All I said was that the screen felt choppy. Claude measured the feeling first. I
 
 ## The notebook is mine, the sketchbook is the pencil's
 
-Then came my wish list. I wanted the game to keep starting from the notebook cover, and when I press the pencil button, the view should slide over to a sketchbook lying next to it—my notebook where I write myself, and the pencil's sketchbook where it draws for me, side by side on one desk. Claude added a desk slide, and since an outside review suggested going slow the first time and quick after that, it runs 1.1 seconds once and 0.7 seconds from then on.
+Then came my wish list. I wanted the game to keep starting from the notebook cover, and when I press the pencil button, the view should slide over to a sketchbook lying next to it—my notebook where I write myself, and the pencil's sketchbook where it draws for me, side by side on one desk. Claude added a desk slide, and since an outside review suggested going slow the first time and quick after that, it takes 1.1 seconds the first time and 0.7 seconds after that.
 
 <figure><img src="/assets/img/posts/pencil-sketchbook/desk.webp" alt="Three frames of the view sliding from the notebook cover to the sketchbook" loading="lazy"><figcaption>Press the pencil button on the cover and the desk slides sideways.</figcaption></figure>
 
@@ -40,6 +40,6 @@ This round covered auto mode only. The hand-turned two-page notebook comes next,
 
 ## Three-line summary
 
-1. Auto-play no longer streams text. It shows a sketchbook summary board that rewrites itself once a year.
-2. Fights always get their own board, and you can hand just that fight to the pencil from inside it.
-3. When a screen feels off, ask the AI to measure it first. The number 73 pointed to both the fix and the culprit.
+1. Auto-play no longer streams a wall of text; instead, it shows a sketchbook summary board that updates once a year.
+2. Fights always open their own board, with a button inside to hand just that fight back to the pencil.
+3. When a screen feels off, ask the AI to measure it first. That "73" pointed straight to both the fix and the culprit.

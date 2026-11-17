@@ -25,7 +25,7 @@ When Claude handed over its first design, I pasted in an improvement proposal I'
 After that, all I really said was "Go" and "Next stage." Each stage, Claude built it, measured it and came back with the numbers.
 
 1. You choose per leg: walk, take the coach, or take a boat. Boats and coaches only leave at set times.
-2. Weather changes the road. Summer storms cut sea lanes, and snow slows you down. A travel kit card and hired guides arrived too.
+2. Weather changes the road. Summer storms cut sea lanes, and snow slows you down. We also added a travel kit card and hired guides.
 3. Dwarf tunnels need a light to enter, and winter passes get snowed in.
 4. You can buy, feed and ride horses and mules. The new salt desert can only be crossed by following a caravan wagon.
 
@@ -35,7 +35,7 @@ After that, all I really said was "Go" and "Next stage." Each stage, Claude buil
 
 With all four stages live, I made one last request: "Check carefully what needs fixing and fix it." Claude re-ran 110 lives, and what came out was funny and a little painful.
 
-1. **Riders were twisting their ankles.** Events meant for people on foot were also firing on horseback and in coaches. After the fix, all 47 ankle events happened to people walking.
+1. **Riders were twisting their ankles.** Events meant for people on foot were also firing on horseback and in coaches. After the fix, all 47 ankle events happened to people on foot.
 2. 25 events had one choice picked more than 85% of the time. Letting personality pull toward different choices brought that down to 17. Most of the rest are things like a broke person taking a paid job, so I left them. Causes and consequences that make sense come before forcing a number.
 3. Five stations trapped anyone with zero coins. So now there are penniless roads: you sneak around toll posts on back paths and pay for passage by working on deck. If your leg is broken and you can't pay for a cart, you limp.
 
@@ -51,6 +51,6 @@ Travel now feels quite different from land to land. Next I want to give people w
 
 ## Three-line summary
 
-1. Don't let "can you feel the difference?" be answered by gut feeling; have it counted with simulated play.
+1. Don't let "can you feel the difference?" be answered by gut feeling; have it measured with simulated play.
 2. Don't paste in another AI's proposal as is; have its evidence checked against the code.
 3. Numbers checks and screen checks catch different bugs, so ask for both.

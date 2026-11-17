@@ -14,7 +14,7 @@ In the morning we shipped the sketchbook summary board, so I left it running on 
 
 ## Fewer stops, or a slower clock?
 
-When I said choices popped up too often, Claude didn't just patch it. It offered two roads: cut the number of stops, or slow 1× down so the stops spread out. It also pointed out that 16× in *1 in 8 Billion*, the game we've been borrowing ideas from, is roughly our old 1×. I kept the stops and slowed 1× down. Now a year takes 40 seconds at 1×, and 8× and 16× were added on top.
+When I said choices popped up too often, Claude didn't just patch it. It offered two paths: cut the number of stops, or slow 1× down so the stops spread out. It also pointed out that 16× in *1 in 8 Billion*, the game we've been borrowing ideas from, is roughly our old 1×. I kept the stops and slowed 1× down. Now a year takes 40 seconds at 1×, and 8× and 16× were added on top.
 
 A little later Claude came back with a confession on its own. A per-move cap of 8 seconds meant a year of work was actually finishing in about 10 seconds. **Hearing "the 40 seconds I told you was wrong" before I noticed made me trust the numbers more, not less.** The cap is now a full year, so 40 seconds really is 40 seconds.
 
@@ -48,6 +48,6 @@ Some things are left for later. Showing the result inside the phone's event note
 
 ## Three-line summary
 
-1. 1× now takes 40 seconds a year without touching the number of stops, and a walking pencil plus a per-move log show that the game is still running.
-2. The hands-on phone screen is locked into four cells, the choice cell turns into an event note when something happens, and on PC the whole right page is for choices.
-3. Even with a planned order, ask "do we really have to wait?" If there's no reason, the AI will tell you so.
+1. 1× now takes 40 seconds a year without touching the number of stops, while a walking pencil and a per-move log show the game is still alive.
+2. The hands-on phone screen locks into four cells—turning the choice cell into an event note when something happens—while PC gives choices the entire right page.
+3. Even when there's a planned sequence, ask "do we really have to wait?" If there's no real reason, the AI will tell you.

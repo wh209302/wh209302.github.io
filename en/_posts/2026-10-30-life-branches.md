@@ -33,7 +33,7 @@ Version 2, with the review folded in, gained a new stage 0. Before adding more s
 Adding scenes really did make them collide. Elves live for centuries, so a wedding, a child and a war could all pile into one year. So three rules came first.
 
 1. **What comes first**: birth, losing someone, the era of a great event, growing up, then marriage and children.
-2. **Half a year apart**: scheduled scenes keep six months between them. At first we tried stretching that by each race's pace, but for elves it became ten years and every scene got dropped.
+2. **Half a year apart**: scheduled scenes keep six months between them. At first we tried stretching that by each race's lifespan pace, but for elves it became ten years and every scene got dropped.
 3. **Same-meaning bundles**: the wartime recruiter, the levy that comes with your origin, and the recruiter in human villages all tell the same story, "the army calls," so only one comes within ten years.
 
 Then the new tool ran 1,610 lives. The share of eras where you saw at least one era scene jumped from 1% to 90% for human adults, and from 0% to 94 to 100% for adults of other races.
@@ -46,13 +46,13 @@ The tool also found a hidden hole. We had written eight new era scenes for child
 
 One number still bothered me. After adding war scenes, lives that took the soldier road went from 1% to 11%, and lives with children dipped a little. Were the scenes dragging lives in one direction?
 
-So we measured with different pencils. The pencil is the autoplay that picks choices for you, and we had it choose carefully, boldly, and at random per life. Then we lined up the same twenty seeds in front of the recruiter and forced half to enlist and half to hide.
+So we measured with different pencils. The "pencil" is our autoplay bot that picks choices for you, and we had it choose carefully, boldly, and at random per life. Then we lined up the same twenty seeds in front of the recruiter and forced half to enlist and half to hide.
 
 <figure><img src="/assets/img/posts/life-branches/pencil-en.webp" alt="Share of lives on the soldier arc by pencil temper. Default 9%, careful 6%, bold 3%, random 4%, forced to enlist 100%, forced to hide 0%" loading="lazy"><figcaption>All twenty who enlisted became soldiers. None of the twenty who hid did.</figcaption></figure>
 
-The culprit was the default pencil, which had a habit of enlisting in front of the recruiter. It also means that when a person chooses, the life really does split. We learned something about personality as a bonus. Even with a random pencil, 72% of lives came out hot-headed, so that skew comes from the events and choices, not the pencil. That gets fixed in the stage that deals with personality.
+The culprit was the default pencil, which had a habit of enlisting in front of the recruiter. It also means that when a human player chooses, lives really do branch apart. We learned something about personality as a bonus. Even with a random pencil, 72% of lives came out hot-headed, so that skew comes from the events and choices, not the pencil. That gets fixed in the stage that deals with personality.
 
-That's what went out this time. Slightly fewer lives with children, and married and single lives still not splitting much, get measured again in the next stage, which gives each race its own family shape. Before that, I want to sort out five states such as legal status, affiliation and livelihood, plus how a neighborhood decides how it looks at you.
+That's what shipped in this build. Slightly fewer lives with children, and married and single lives still not splitting much, get measured again in the next stage, which gives each race its own family shape. Before that, I want to sort out five states such as legal status, affiliation and livelihood, plus how a neighborhood calculates your reputation.
 
 ## Three-line summary
 

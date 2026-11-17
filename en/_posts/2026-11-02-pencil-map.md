@@ -18,7 +18,7 @@ Claude didn't blindly install the skill; it read it first. And the verdict was r
 
 <figure><img src="/assets/img/posts/pencil-map/fixes.webp" alt="Before and after of the header chips and route board text. After the fix, chips have no color by default and the sound button sits at the far right" loading="lazy"><figcaption>Six header chips used to be six different colors. Now they're plain paper until something matters.</figcaption></figure>
 
-The list was surprisingly revealing: every header chip had its own bright color so real warnings didn't stand out, the route board text was tiny, winter snowflakes drifted right across the words, bag slot labels were faint, one cover button was stuck in default browser grey, and the PC diary box sat half empty. Best of all, the game was juggling *twenty-seven* different font sizes. I clicked start on the card, and those 27 sizes got wrangled into six clean steps from 12 to 28 pixels.
+The list was surprisingly revealing: every header chip had its own bright color so real warnings didn't stand out, the route board text was tiny, winter snowflakes drifted right across the words, bag slot labels were faint, one cover button was stuck in default browser grey, and the PC diary box sat half empty. Best of all, the game was juggling *twenty-seven* different font sizes. I hit "Start" on the decision card, and those 27 sizes got wrangled into six clean steps from 12 to 28 pixels.
 
 ## Confession #1: the route board was lame
 
@@ -48,7 +48,7 @@ By then, the leftover pieces were sticking out like sore thumbs. The world map s
 
 On the world map, roads cross colored land tiles, so copying the route board as-is made the bands disappear into the terrain. Pressing the colored pencil one shade darker fixed that, and the last three doodles followed in the same style.
 
-<figure><img src="/assets/img/posts/pencil-map/doodles3-en.webp" alt="Bunting, footprints and frost before and after. Flags in four hatched colors with patterns, footprints as boot soles, frost as a hatched corner with a snowflake" loading="lazy"><figcaption>Bunting, boot prints and a frosted corner. The frost is shown five times bigger.</figcaption></figure>
+<figure><img src="/assets/img/posts/pencil-map/doodles3-en.webp" alt="Bunting, footprints and frost before and after. Flags in four hatched colors with patterns, footprints as boot soles, frost as a hatched corner with a snowflake" loading="lazy"><figcaption>Bunting, boot prints and a frosted corner. The frost is shown at 5x scale.</figcaption></figure>
 
 The bunting hid a funny trap. The old version was a single image stretched to fit the screen width, so on a wide PC monitor the flags got squashed like pancakes. Now only the string stretches, and each flag hangs individually so they keep their crisp triangle shape at any width.
 

@@ -9,44 +9,38 @@ image: /assets/img/posts/ai-screens/before-after.webp
 summary: AI would cheerfully announce "All screens fixed!", and then I'd open it on my phone to find clipped text and buttons that had run away from home. This is the peace I found after making it report with photos and video instead of words.
 ---
 
-In the early days, Claude would proudly announce **"I've cleaned up the screen!"** and I'd open it on my phone, all excited, only to find text cut in half or buttons piled on top of each other in the wrong place. A small disaster, and not a rare one.
+Early on, whenever Claude announced "I've cleaned up the screen!", I'd take its word for it. Then I'd open the page on my phone, all excited, only to find half a sentence chopped off or two buttons sitting in each other's laps. No errors in the code meant the AI genuinely thought it was done. Hard to blame it when it doesn't have eyes.
 
-There were no errors in the code, so the AI honestly believed it was done. What my eyes saw was something else entirely. So I changed the rule. For any task that touches the screen, the AI has to open a virtual browser itself, take captures, and **report with photos and a screen recording attached**.
+So I stopped taking "done" at face value. Any time a task touches the UI, the AI has to spin up a headless browser, take screenshots itself, and bring back photo or video proof.
 
 <figure><img src="/assets/img/posts/ai-screens/talk-en.webp" alt="A table of four scenes about switching from 'fixed it' to photos and video: what I said, Claude's answer, what changed" loading="lazy"><figcaption>How the "no more done-reports in words only" rule came to be, as a conversation.</figcaption></figure>
 
 ## No photo, no "done"
 
-The first rule I nailed down was just one. **"If you fixed a screen, bring captures at phone size and at PC size. No photo proof, no done-report."**
+The first rule was dead simple: if you touched a screen, bring a phone-sized capture and a PC-sized capture. No pair of screenshots, no sign-off.
 
-A screen that looks perfect on a PC falls apart on a narrow phone so often that I made the two sizes a mandatory pair.
+Layouts that look crisp on a desktop monitor have a habit of collapsing the second they hit a narrow phone screen, so making the two sizes a mandatory combo saved me a lot of grief. Best side effect? Claude started **catching its own broken layouts while taking the screenshots**, quietly fixing them, and only then handing over a clean picture. Nothing cures overconfidence like having to look at your own work.
 
-That one rule cut way down on the ping-pong where I check on my phone, shout "hey, this is broken!", and send it back. Funnily enough, Claude started **spotting the breakage itself while taking the report photos, quietly fixing it with a bit of embarrassment, and only then coming back with a clean picture**.
-
-<figure><img src="/assets/img/posts/ai-screens/pc.webp" alt="Game screen captured at PC size. Scene and log on the left, route map and to-dos on the right" loading="lazy"><figcaption>The PC-size proof shot Claude took and handed over. A phone-ratio capture always comes along as a pair.</figcaption></figure>
+<figure><img src="/assets/img/posts/ai-screens/pc.webp" alt="Game screen captured at PC size. Scene and log on the left, route map and to-dos on the right" loading="lazy"><figcaption>The PC-size proof shot Claude took and handed over. A phone-ratio capture always comes paired with it.</figcaption></figure>
 
 ## Plastic-surgery style: before and after, side by side
 
-Once I looked at a redesigned screen and bluntly said, **"Ugh, this looks lame. Make it more polished."**
+At one point I looked at a redesigned screen and gave the deeply technical feedback: "Ugh, this looks kind of lame. Make it sleeker."
 
-Since then, Claude doesn't just bring the finished result. It **stitches the Before and After photos into one picture, side by side**. Looking at the new screen alone, I often can't remember what's actually better than before. With before and after next to each other, I can rule in three seconds: "Oh, way better! Approved."
+Ever since, Claude stopped dropping off the "after" shot by itself and started stitching Before and After into a single side-by-side image. When you stare at a new screen in isolation, it's surprisingly hard to tell if it's actually better or just different. Put them next to each other, and you can call it in three seconds: "Yep, way better. Ship it."
 
 <figure><img src="/assets/img/posts/ai-screens/before-after.webp" alt="A side-by-side comparison of the phone screen before and after the fix" loading="lazy"><figcaption>The phone screen before (left) and after (right). Side by side, you don't even have to squint.</figcaption></figure>
 
 ## Anything that moves comes as a video
 
-The first time I added the animation where the notebook flips open when the game starts, the cover and the pages moved awkwardly, like two strangers who hadn't rehearsed. So I asked: **"The cover and the paper are moving separately. Make it as realistic as possible, like turning a real notebook."**
+When I first added the opening animation where the notebook flips open, the cover and the pages moved like they weren't even in the same scene. I told Claude they were drifting apart and to make it feel like turning a real notebook—and from that day on, anything animated had to come back as an mp4 recording of the phone screen.
 
-From then on, Claude started recording the phone screen as a video (mp4) for its reports. You can never judge how an animation feels or how its timing works from a single still screenshot, so video reports became a must.
+You can't judge timing or weight from a still frame, no matter how many screenshots you take. Video made feedback ridiculously effortless, too. When a rain-and-snow weather clip came back, I replied with three words—**"Hurts my eyes."**—and Claude immediately halved the raindrop count and sent a fresh clip. You don't need CSS jargon or frame-rate math when you can just point at a video and say what bothers your eyes.
 
-<figure class="narrow"><video src="/assets/img/posts/ai-screens/book-open-phone.mp4" poster="/assets/img/posts/ai-screens/book-open-phone.jpg" controls muted playsinline preload="none"></video><figcaption>A report video of the notebook-opening effect, recorded on the phone screen.</figcaption></figure>
-
-When I got a video of the rain and snow weather effect, I replied in three words: **"Hurts my eyes."** Claude got it right away, cut the raindrops in half, and came back with a new video. Even without technical terms, trading videos like this keeps the conversation flowing when all I do is toss out how it feels.
-
-By the way, the story of how I fixed the choppy video problem when the AI records the screen, with a neat trick, is in a separate post: [the one about making video from one frame at a time](/en/2026/10/27/ai-clip/).
+(If you're wondering how we stopped those headless browser recordings from stuttering like a slideshow, I wrote up the time-freezing trick in [the post about making video one frame at a time](/en/2026/10/27/ai-clip/).)
 
 ## Three-line summary
 
-1. For UI work, make the AI capture at phone and PC resolutions itself, and don't accept a done-report without proof photos. (It catches its own bugs while shooting.)
+1. For UI work, make the AI capture at phone and PC resolutions itself, and don't accept a verbal "done" without proof photos. (It catches its own bugs while shooting.)
 2. Have it report every fixed screen with before and after side by side, and the sign-off takes three seconds.
-3. For motion like animation, take a video, and feeling-level feedback like "they're moving separately" or "hurts my eyes" is enough, no jargon required.
+3. For motion like animation, ask for a video—gut-reaction feedback like "they're drifting apart" or "hurts my eyes" is plenty, no jargon required.

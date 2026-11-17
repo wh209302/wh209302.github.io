@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "I Tossed Over One Link and Six Parts of the Screen Changed"
+title: "I Dropped One Link and Six Parts of the Screen Changed"
 date: 2026-10-28 10:20:00 +0900
 category: ai-work
 series: ai-tips
@@ -19,7 +19,7 @@ Then I found a Korean [UI glossary](https://tuiella.github.io/ui-glossary/) that
 
 Claude read the glossary front to back and searched our game's code for each term. The answer came back in three piles: **things we already have, things that don't fit this game, and things that are actually missing.**
 
-Choices that write themselves out one by one, and a success-chance preview, were already there. Crosshairs, battle passes and gacha animations got dropped, since they belong to real-time shooters or pay-to-play games. Closed captions for sounds clashed with my old rule of "no onomatopoeia," and Claude filtered that out on its own. Seeing it remember a decision from weeks ago was oddly heartwarming.
+Typewriter-style choices and a success-chance preview were already there. Crosshairs, battle passes and gacha animations got dropped, since they belong to real-time shooters or pay-to-play games. Closed captions for sounds clashed with my old rule of "no onomatopoeia," and Claude filtered that out on its own. Seeing it remember a decision from weeks ago was oddly heartwarming.
 
 Six were left: a notebook edge for when you're near death, shadows of monsters you haven't met, a proper confirm dialog, word-explanation notes, a cut-in for big moves, and buttons that are easier to tap.
 
@@ -29,7 +29,7 @@ Six were left: a notebook edge for when you're near death, shadows of monsters y
 
 Choosing from a list alone gave me no feel for it. So I said, **"Show me mockups of what it looks like with them in."**
 
-Without touching the code, Claude launched the actual game, laid each mockup over it temporarily, and brought back before-and-after shots. Left is now, right is with the change, like a makeover photo. Because they sat on the real game screen, I could see right away what it would be like in our game. My only job was flipping through photos and nodding.
+Without touching the code, Claude launched the actual game, laid each mockup over it temporarily, and brought back before-and-after shots. Left was the current screen, right was with the change—like a before-and-after makeover photo. Because they sat on the real game screen, I could see right away what it would be like in our game. My only job was flipping through photos and nodding.
 
 <figure><img src="/assets/img/posts/ui-glossary/confirm.webp" alt="A gray default browser confirm box next to a notebook-note confirm that lists what gets erased with red Xs" loading="lazy"><figcaption>The gray confirm box that broke the notebook mood became a notebook note. The button says what it actually does, like "Erase all," instead of "OK."</figcaption></figure>
 
@@ -37,7 +37,7 @@ Without touching the code, Claude launched the actual game, laid each mockup ove
 
 The sixth one, "easy to read," was different from the other five. You can't show it in a picture; you have to measure it. Claude measured every button size and text contrast on the phone screen and came back with numbers.
 
-22 buttons were too short for a finger. The recommended height is 44px, and the header chips were 24px, barely more than half. **The screen looked fine to me, so without the numbers I'd have walked right past it.** The fix was clever too: the buttons look exactly the same, and only the invisible area your finger can hit got bigger.
+Twenty-two buttons were too short for a thumb. The recommended height is 44px, and the header chips were 24px, barely more than half. **The screen looked fine to me, so without the numbers I'd have walked right past it.** The fix was clever too: the buttons look exactly the same, and only the invisible area your finger can hit got bigger.
 
 <figure><img src="/assets/img/posts/ui-glossary/measure.webp" alt="Check results on the phone screen: buttons too small to tap in pink dashes, low-contrast text in orange boxes" loading="lazy"><figcaption>Pink dashes are buttons too small to tap; orange boxes are text that blends into the background.</figcaption></figure>
 
@@ -52,5 +52,5 @@ After seeing all the mockups, that was all I said. Claude built numbers 1 throug
 ## Three-line summary
 
 1. When you find a good glossary, have the AI compare it line by line with your project. What you have, what doesn't fit and what's missing sort themselves out.
-2. Before choosing, get mockups laid over the real screen. Deciding gets several times faster than with a list of words.
+2. Before choosing, get mockups laid over the real screen. You'll decide way faster than you would from a text list.
 3. For things that are hard to judge by eye, like readability, ask it to measure. Numbers turn up even on screens that look fine.

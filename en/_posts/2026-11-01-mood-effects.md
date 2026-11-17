@@ -47,4 +47,4 @@ Now the page splits cleanly into two columns. There was a sneaky trap where an o
 
 1. Ask the AI for a numbered list of ideas, and "go through them in order" is all the sign-off you need.
 2. Have it screenshot each piece as it finishes—it will catch slips like grey shadows or poison blotches on someone's face on its own.
-3. Re-run the checker you built last time whenever you add something new. It almost always hands you a free bug.
+3. Re-run the checker you built last time whenever you add something new. It almost always catches a bonus bug for free.

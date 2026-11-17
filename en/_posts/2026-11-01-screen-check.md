@@ -20,7 +20,7 @@ Claude didn't dive straight into fixing. First it built **a checker to scan scre
 
 <figure><img src="/assets/img/posts/screen-check/sizes.webp" alt="The same game scene shown at nine sizes: three phones, a phone in landscape, two tablets, a laptop, a PC and a large screen" loading="lazy"><figcaption>Lay the same scene out at nine sizes and the hidden problems show up.</figcaption></figure>
 
-The first pass came back with 380 issue groups. Not all of them were real bugs, of course. Stamps stuck on at a jaunty angle and giant monsters bursting out of the notebook also look like "overlaps" to a machine. After weeding out those false alarms screenshot by screenshot, the real fixes were left.
+The first pass came back with 380 issue groups. Not all of them were real bugs, of course. Stamps stuck on at a jaunty angle and giant monsters bursting out of the notebook also look like "overlaps" to a machine. After weeding out those false alarms screenshot by screenshot, only the real bugs were left to fix.
 
 ## The choices were hiding under the bag
 

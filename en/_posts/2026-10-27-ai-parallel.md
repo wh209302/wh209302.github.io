@@ -6,12 +6,12 @@ category: ai-work
 series: ai-tips
 tags: [AI collaboration, git, automation, cost]
 image: /assets/img/posts/ai-parallel/talk-en.webp
-summary: I'm impatient, so I put several Claudes to work in one repository at the same time. Development got several times faster, but they overwrote each other's code and burned through the free server time in two days. A record of the trial and error.
+summary: Too impatient to wait, I put multiple Claudes to work in the same repository at once. Development sped up dramatically, but they kept stepping on each other's toes and burned through a month of free server time in two days.
 ---
 
-I'm not the most patient person, so when making this game I keep several Claude windows open and put them all to work at once. Room 1 polishes the battle balance, Room 2 writes class events, Room 3 runs the English translation, and so on.
+I'm not the most patient person, so when building this game I keep several Claude windows open and run them in parallel. Window 1 tunes battle balance, Window 2 writes class events, Window 3 handles the English translation, and so on.
 
-Progress got dazzlingly fast compared to working alone, but too many cooks spoil the broth, as they say. The moment several AIs started sharing one house, all sorts of bizarre collisions broke out.
+Progress was dazzlingly fast compared to going one task at a time, but you know what they say about too many cooks. The moment multiple AIs started sharing one codebase, all sorts of bizarre collisions broke out.
 
 <figure><img src="/assets/img/posts/ai-parallel/talk-en.webp" alt="A table of three things that happened while running several jobs at once: what I said, Claude's answer, what changed" loading="lazy"><figcaption>Three crises I went through running the multi-job setup, and how they got solved.</figcaption></figure>
 
@@ -19,37 +19,37 @@ Progress got dazzlingly fast compared to working alone, but too many cooks spoil
 
 At first, Claude did things by the book: for every job it made a separate branch and asked me for permission to merge it (a PR). But this is a solo project anyway, and clicking a confirm button every time was a chore.
 
-In the end, on October 20, I ordered: **"Why do you keep branching off to upload? It's a hassle, just push straight to the main line (main)!"** I'd paved a nice open highway, but I hadn't foreseen the pile-up coming right behind it.
+So on October 20, I laid down the law: **"Why do you keep making branches? It's a hassle—just push straight to `main`!"** I thought I was opening up a nice expressway. I didn't see the multi-car pile-up waiting just ahead.
 
-## I gave them different jobs, so why are they grabbing each other by the collar?
+## They had totally different jobs, so why were they at each other's throats?
 
-As soon as every job went straight to the main line (`main`), conflict alarms went off all over. One was fixing battles and another was fixing translations, so why were they colliding?
+As soon as everything started going straight to `main`, merge-conflict alarms went off everywhere. One AI was tweaking battles and another was updating translations—how on earth were they colliding?
 
-The culprit was **the shared spots everyone has to touch**. The content version number, the file integrity fingerprint (hash), the translation list, the last line of the patch notes—whatever the job, everyone has to touch these shared zones on the way out, and that's where the crashes kept happening. After about two days of this I'd hit my limit and asked: **"Can't we make these shared zones merge themselves automatically when uploading?"**
+The culprit was **the shared spots everyone had to touch**. The content version number, the file integrity hash, the translation index, the bottom line of the patch notes—no matter the task, every AI had to stamp those exact same files on the way out. After two days of playing traffic cop, I hit my limit and asked: **"Can't we make these shared files merge themselves automatically on push?"**
 
 <figure><img src="/assets/img/posts/ai-parallel/shared-cells.webp" alt="A diagram of three jobs colliding in shared cells, and the steps that auto-fix them with the upload command" loading="lazy"><figcaption>The accident-prone zones were always the same: the shared cells where everyone stamps their seal on the way out.</figcaption></figure>
 
 Claude dug through the recent conflict records, put the repeat-offender zones in a table, and set up two traffic rules.
 
-1. **Values you can get by running the numbers**, like version numbers or file fingerprints, are not touched mid-work. They get calculated and stamped at the very last moment, when uploading to the server.
-2. When it's something like docs or translation lists where **both sides only added lines at the end of the file**, don't fight, just keep both lines and join them together smoothly.
+1. **Values you can calculate mechanically**, like version numbers or file hashes, aren't touched mid-task. They get computed and stamped at the very last second, right at upload time.
+2. For files like docs or translation tables where **both sides simply appended lines at the end**, don't fight over them—keep both lines and stitch them together cleanly.
 
-I bundled these two steps into one dedicated "upload command," then nailed a line at the very top of the constitution every AI reads (`CLAUDE.md`): **"When uploading code, use only this command."** After that, it only stops and waits for my ruling in the truly special case where two AIs edited the very same sentence in different ways. The rest of the little fender-benders get settled smoothly on their own.
+I wrapped those two rules into a dedicated "upload command" and pinned a line to the very top of our shared constitution (`CLAUDE.md`): **"Always use this command to push code."** Now it only stops for my ruling in the rare case where two AIs rewrote the exact same line differently. Every minor fender-bender resolves itself.
 
 ## The mysterious "payment failed" message at dawn
 
-Just when I thought peace had arrived, at dawn on October 22, a **"payment failed"** notification suddenly came from GitHub. I woke up with my heart sinking, thinking the code had blown up, but when I had Claude investigate, the cause was somewhere I'd never have guessed.
+Just when I thought peace had finally arrived, at dawn on October 22, GitHub hit me with a **"payment failed"** alert. I woke up with my heart in my throat, assuming the codebase had exploded. I sent Claude to investigate, and the culprit was somewhere I never would have guessed.
 
-I had **burned through the 2,000 minutes of automatic check (CI) time that GitHub gives free each month for private repositories, all in just two days**.
+We had **burned through GitHub's entire 2,000-minute monthly free CI allowance for private repos—in just two days**.
 
 <figure><img src="/assets/img/posts/ai-parallel/ci-minutes.webp" alt="The math: 1 upload times 2 Node versions times 25 minutes is 50 minutes, so 40 uploads finish a month's worth" loading="lazy"><figcaption>The math is honest. Every upload evaporates 50 minutes, so just 40 uploads turn the monthly free coupon to dust.</figcaption></figure>
 
-Doing the math was jaw-dropping. Every time I uploaded code, a 25-minute full check ran in two environments (50 minutes total), and with several AIs let loose uploading dozens of times a day, a month's worth vanished in two days, no surprise.
+When I ran the numbers, my jaw dropped. Every single push triggered a 25-minute full test suite across two environments (50 minutes total). With multiple AIs unleashed and pushing dozens of times a day, a whole month's quota vanished in 48 hours.
 
-I hurriedly cut the heavy automatic check on the server down to once a day, and instead changed things so each AI runs the check on its own computer (locally) before uploading. If I'd multiplied **"number of uploads x check time per run"** just once before turning on the automation, I wouldn't have had that heart-stopping dawn.
+I scrambled to dial the heavy server-side CI back to once a day, and had each AI run the checks locally on my machine before pushing instead. If I had multiplied **"pushes × minutes per run"** just once before flipping on automation, I could have skipped that heart-stopping wake-up call.
 
 ## Three-line summary
 
-1. Even if you give several AIs different jobs, collisions are certain at the chokepoints everyone passes through, like version numbers and list tables.
-2. For repeat-collision zones, I had the AI survey them all, then solved it with a dedicated command that merges automatically at upload time.
-3. Before giving eager AIs unlimited upload permission, do the multiplication first and check that the cloud's free check time isn't melting away.
+1. Even when multiple AIs work on completely different tasks, they'll still collide at shared bottlenecks like version numbers and index files.
+2. Have the AI audit your repeat-conflict zones and wrap an auto-merge routine into a single dedicated upload command.
+3. Before giving eager AIs unlimited push access, do the multiplication first so you don't melt through your free cloud CI minutes.

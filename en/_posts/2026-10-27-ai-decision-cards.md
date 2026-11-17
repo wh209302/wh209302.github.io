@@ -10,29 +10,29 @@ image: /assets/img/posts/ai-decide/three-layouts.webp
 summary: The secret to getting a game into shape in a week with zero coding knowledge is simple. Instead of explaining everything at length, I just picked from the options the AI brought me.
 ---
 
-I can't read code, and I can't write it. Yet I got a decent-looking game together in a week, thanks to a strict division of labor.
+I can't read code, and I can't write it. Yet I managed to pull a decent-looking game together in a week, all thanks to a strict division of labor.
 
-The rule is simple. At the important forks in the road, I pick the direction, and the AI paves everything leading there. In fact, about 80% of what I type into the chat window all day is something like **"Hmm, let's go with B."**
+The rule is simple. At every major fork in the road, I point the way, and the AI paves the road. In fact, about 80% of what I type into the chat window all day is something like **"Hmm, let's go with B."**
 
-<figure><img src="/assets/img/posts/ai-decide/talk-en.webp" alt="A table of four moments, stuck trying to explain and unstuck by picking: what I said, Claude's answer, what changed" loading="lazy"><figcaption>The key moments when I got tired of explaining at length and switched to multiple-choice picking.</figcaption></figure>
+<figure><img src="/assets/img/posts/ai-decide/talk-en.webp" alt="A table of four moments, stuck trying to explain and unstuck by picking: what I said, Claude's answer, what changed" loading="lazy"><figcaption>The turning points where I gave up on long-winded explanations and switched to multiple-choice picking.</figcaption></figure>
 
 ## I nearly lost my mind explaining it in words
 
-At first, I tried to describe the PC screen layout exactly as it was in my head. "Put this here, that there..." I sent it back several times, and the results were never quite right. Looking back, the culprit wasn't the AI, it was me. I didn't know exactly what I wanted myself, and I was just chanting orders.
+At first, I tried to describe the PC layout straight from my head. "Put this here, move that there..." I sent the AI back to redo it several times, and the results were still off. Looking back, the culprit wasn't the AI—it was me. I didn't really know what I wanted yet, and I was just reciting vague wishes.
 
-So I changed tactics. I said, **"Make three mockups that feel clearly different from each other as actual screens, and show them side by side."** And, like magic, ten seconds after seeing them, I went "That's the one!" and picked option A.
+So I changed tactics. I said, **"Build three working mockups that feel genuinely different from each other, and put them side by side."** And, like magic, ten seconds after seeing them, I said, "That's the one!" and picked option A.
 
 <figure><img src="/assets/img/posts/ai-decide/three-layouts.webp" alt="Three PC screen layouts. A: open two-page spread, B: three columns, C: big illustration" loading="lazy"><figcaption>The three PC screen mockups, side by side. The moment I saw them, I fell for option A (the open notebook spread) with no second thoughts.</figcaption></figure>
 
-The key phrase here is **"clearly different from each other."** Leave it out, and the AI gets clever and brings three twin mockups with only the button color tweaked.
+The key phrase here is **"genuinely different from each other."** Leave that out, and the AI gets cute and brings back three identical twins with only the button color tweaked.
 
-## Don't grab the shovel for big jobs
+## Don't break out the shovel for big jobs
 
-While playing the game, a problem showed up: "random events pop up too often and the pacing drags." In the old days I'd have said "make fewer events" right away, but this time I hit the brakes first.
+While playtesting, a problem popped up: "random events trigger too often and the pacing drags." Normally I would have blurted out "make fewer events" right away, but this time I hit the brakes.
 
-**"Don't fix the code yet. Brainstorm solution ideas first, and also research how similar games solved this problem."**
+**"Don't touch the code yet. Brainstorm ways to fix this first, and look up how similar games handle it."**
 
-Claude came back with seven ideas, neatly grouped into three strategies, and even pointed out the one it recommended most. I picked that recommendation, then told it not to fix everything at once but to build it in stages and report in between. That's far faster and safer than rushing into a huge project and tearing it all up because I don't like it.
+Claude came back with seven ideas neatly grouped into three strategies, and even flagged its top pick. I greenlit that one, then told it to build in stages with check-ins along the way instead of rewriting everything in one shot. That's way faster and safer than kicking off a massive overhaul, hating it, and scrapping the whole thing.
 
 ## Questions come like approval paperwork, all at once
 
@@ -42,22 +42,22 @@ I also set rules for how the AI asks me questions.
 - Summarize the pros and cons of each option in one line
 - Always mark the AI's own top pick (recommendation)
 
-And if there are several things to ask, don't dribble them out one by one, bring them all together like a pile of documents for sign-off. Even if I'm away and my answer comes late, if the work is easy to undo later, the AI goes ahead with its recommendation first.
+And if there are multiple questions, don't drip-feed them one by one—bundle them up like a stack of forms for sign-off. Even if I step away and reply late, the AI is free to go ahead with its top pick as long as the work is easy to undo.
 
-Back when questions arrived one at a time, I was chained to my monitor all day. Now I run my errands, come back, glance at a few cards, and press "approve." Done.
+Back when questions trickled in one at a time, I was chained to my monitor all day. Now I can run errands, come back, skim a few decision cards, hit "approve," and call it a day.
 
 <figure><img src="/assets/img/posts/ai-decide/final.webp" alt="The finished PC home screen, shaped like an open notebook spread" loading="lazy"><figcaption>The final screen, after polishing option A. Pretty decent, right?</figcaption></figure>
 
 ## What this human has to keep a grip on
 
-After a week of bumping around, the line between "what I decide" and "what I delegate to the AI" got clear.
+After a week of trial and error, the line between what I decide and what I delegate became crystal clear.
 
-The game's overall tone and feel, picking the final winner among mockups, and **anything painful to undo** (like changing deployment settings or mass-deleting data) I always handle myself. On the other hand, churning out multiple mockups, experiments that can be cancelled any time, and verifying there are no technical bugs all go to the AI. I just check whether the result suits me.
+I always keep a firm grip on the game's overall tone and feel, picking the winning mockup, and **anything painful to undo** (like changing deployment settings or bulk-deleting data). Everything else—churning out mockups, running reversible experiments, and checking for technical bugs—goes straight to the AI. All I have to do is decide if the result feels right.
 
-Sometimes I ignore the AI's recommendation and stubbornly pick a different number. Honestly, that's exactly when my real taste as the director shows. In those cases I always add one line: **"Write in your notes why I picked this over your recommendation."** Then, strangely enough, next time in a similar situation the AI brings a recommendation that fits my taste. I covered this memory-training method in more detail in [the memory post](/en/2026/10/27/ai-memory/).
+Sometimes I ignore the AI's top pick and stubbornly choose another option. Honestly, that's when my real taste as the director comes through. Whenever I do that, I tack on one line: **"Jot down in your notes why I picked this over your recommendation."** Sure enough, the next time a similar choice comes up, the AI's recommendation is right in line with my taste. I covered this memory-training method in more detail in [the memory post](/en/2026/10/27/ai-memory/).
 
 ## Three-line summary
 
-1. When it's hard to put a feeling into words, tell the AI to "make three clearly different mockups as real screens, side by side," and pick one.
-2. For big jobs, don't start with coding. Rein it in with "idea research, narrowed options, step-by-step progress."
-3. Take the AI's questions as multiple-choice cards with recommendations, all at once, and have it jot down the reason whenever my personal taste overrides its pick.
+1. When it's hard to put a vibe into words, tell the AI to "build three clearly different mockups as real screens, side by side," and just pick one.
+2. For big jobs, don't jump straight into code. Keep the reins tight: brainstorm ideas, narrow the options, and build in stages.
+3. Have the AI bundle its questions into multiple-choice cards with recommendations, and make it note down the reason whenever your taste overrides its pick.
