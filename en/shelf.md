@@ -124,6 +124,37 @@ Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories
 - **Status:** Looked into (2026-11-07)
 - **Verdict:** We make our art with ComfyUI on a home PC, so the Scenario skills have no job here yet. The home PC has Blender 5.2, though, so the Blender set is the first thing to try next time we pose mannequins.
 
+## Making motion (AI video)
+
+Image models don't remember anything between frames, so stitching together poses drawn one at a time gives jerky motion. The trick the community leans on now is to **make the character move in a video model, then cut frames out of the video**. My current game uses five still poses plus code-driven motion, so it doesn't need this, but I'll pull it out for a game that needs lots of walk and run frames.
+
+### Making 2D character motion with AI video (community recipe)
+
+- **What:** A six-step recipe that's been going around. ① Draw an 8-direction character sheet with an image AI like GPT. ② Put the motion you want on a 3D mannequin (you can have an AI set the joint angles) or film yourself doing it. ③ Feed the motion video and the character picture to a video model that takes both (Alibaba's Wan family) and render the frame count you want. ④ Use an acceleration LoRA to cut steps and render faster. ⑤ Cut the character out with SAM2. ⑥ Fill in between-frames with RIFE for smoothness.
+- **Where it fits:** Games with many directions × actions, like 8-direction top-down RPGs, and games with smooth hand-drawn-style characters that should move fluidly.
+- **License:** Wan 2.2 (including Animate), the acceleration LoRAs and SAM2 are Apache-2.0; RIFE is MIT. All usable commercially. Under OpenAI's terms, GPT images belong to whoever made them.
+- **Specs:** Step ③ is the heavy one. It's a 14B model, so on a 12GB card it only just runs as a 4-bit (GGUF) build.
+- **Status:** Looked into (2026-11-18); step ③ tested on its own (2026-10-28)
+- **Verdict:** Ready to use for smooth art styles. **For pixel art, two steps go the wrong way.** Video frames are smooth, so turning them into pixels makes the dots shimmer (lock the grid and palette from the first frame onto every frame). And RIFE adds frames, while pixel sprites get their charm from snappy 6–8 frame cycles, so you should **pick and drop** frames instead. For pixel art, swap ⑥ for "pick one cycle → pin the feet → lock grid and palette".
+
+### [Wan 2.2](https://huggingface.co/Wan-AI/Wan2.2-I2V-A14B) video models (I2V · [Animate](https://huggingface.co/Wan-AI/Wan2.2-Animate-14B))
+
+- **What:** Alibaba's open video models. I2V makes a video from one picture plus text; Animate takes one picture plus a **motion video** and makes that character copy the movement. A follow-up, [Wan-Animate-2](https://huggingface.co/Wan-AI/Wan2.2-Animate-2-14B), is out too. 12GB-friendly builds are at [QuantStack GGUF](https://huggingface.co/QuantStack/Wan2.2-Animate-14B-GGUF).
+- **Where it fits:** Whole-body motions that have to flow, like walking and attacks. Put the same picture as the first and last frame and you get a seamless walk loop.
+- **License:** Apache-2.0.
+- **Specs:** I2V 14B Q4 GGUF on 12GB: about 89 seconds per short clip, 11.8GB of video memory (nearly full).
+- **Status:** I2V tested (2026-10-28), Animate looked into (2026-11-18)
+- **Verdict:** Walks flowed and looped, clearly better motion than drawing one frame at a time. Tips: putting the Lightning acceleration LoRA on the high-noise side freezes the legs; attacks need "feet planted" in the prompt or the feet slide; a fixed pixel grid was steadier than auto-detecting one. The look drifted away from the cute pixel style I wanted, though, so I went back to hunting for a style. Reference pipeline: [pixel-video-sprites](https://github.com/cueqzapper/pixel-video-sprites) (MIT).
+
+### Finishing tools: [SAM2](https://github.com/facebookresearch/sam2) cutouts · [RIFE](https://github.com/hzwer/Practical-RIFE) frame interpolation
+
+- **What:** SAM2 follows a character through a video after one click on the first frame and removes the background. RIFE invents in-between frames to smooth a video. In ComfyUI it comes as the [Frame-Interpolation nodes](https://github.com/Fannovel16/ComfyUI-Frame-Interpolation).
+- **Where it fits:** SAM2 when the background color overlaps the character's colors and chroma key fails; RIFE when stretching smooth-art motion to 24–60 frames.
+- **License:** SAM2 Apache-2.0, RIFE MIT.
+- **Specs:** Both are light, nearly free next to the video model.
+- **Status:** Looked into (2026-11-18)
+- **Verdict:** If the video model gives a clean flat background, chroma key is enough and SAM2 can wait. Skip RIFE for pixel sprites: in-between frames blend two pictures into blurry dots and the crisp pixels are gone.
+
 ## Backgrounds and depth
 
 ### 3D blockout + AI paintover for 2D backgrounds with depth ([HD-2D](https://en.wikipedia.org/wiki/HD-2D), [Midjourney→Blender 2.5D test](https://hitmarker.net/news/utilizing-midjourney-generated-ai-artworks-to-create-a-2-5d-location-for-an-adventure-game-522580))
