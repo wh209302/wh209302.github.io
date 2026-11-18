@@ -273,6 +273,15 @@ Image models don't remember anything between frames, so stitching together poses
 - **Status:** Looked into (2026-11-09)
 - **Verdict:** Much of it is about 3D engines, but the single question "where did the blending happen?" sorts out most color problems in a 2D game too.
 
+### [Dynamic Lights: How They Work and How to Use Them](https://tuiella.github.io/b3/light2/) (Korean)
+
+- **What:** Part 2 of the same column. It starts from the difference between light painted into the art, light that only looks at distance, and light that also reads surface direction (normal maps), then covers light types, range and falloff, choosing what a light hits, 2D shadows and cost. The last chapter walks through adding one torch, time-of-day moods, darkness as a gameplay rule, and where lighting fights pixel art. A tavern scene lets you switch each effect on and off.
+- **Where it helps:** Adding night scenes, lanterns and torches, or a day/night cycle. Two lines carry over even to a web game with no engine: "with high ambient light, dynamic lighting is just a decoration you pay for," and "pixel art keeps its palette when brightness is quantized to a few steps."
+- **License:** None stated. Linked only (the torch sprite in the demo is MIT).
+- **Requirements:** A recent browser with WebGL2.
+- **Status:** Looked into (2026-11-18)
+- **Verdict:** Most games never need normal maps. What design should write down first is two lists: the lights that turn on and off during play, and the things that must stay visible however dark it gets.
+
 ### Recovering the pixel grid ([unfake](https://pypi.org/project/unfake/), [proper-pixel-art](https://github.com/KennethJAllen/proper-pixel-art))
 
 - **What:** Finds the original grid in an AI's "big picture that looks like pixel art" and reads one representative color per cell to get true 1× pixel art back. We used our own post-processing built in the same order.
