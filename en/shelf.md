@@ -299,3 +299,12 @@ Image models don't remember anything between frames, so stitching together poses
 - **Specs:** Node 18+, no other packages.
 - **Status:** In use (2026-11-03, 11 spell effects)
 - **Verdict:** Built to glow on dark backgrounds, so on a bright notebook page the light simply disappears. Kept at native size (a 24×38-pixel dummy) with our colors swapped in, it fit well; scaled up, the pixels got too chunky. Turning the light off and redrawing its job as solid bands made it crisp on the bright page too.
+
+### [Sprite stacking](https://www.spritecook.ai/blog/sprite-stacking-pixel-art)
+
+- **What:** Slice an object into one-pixel-thick horizontal layers and draw them bottom to top. Rotate every layer by the same angle and lift each one a pixel higher than the last, and a pixel sprite turns in any of 360 directions with no 3D model. The write-up is on the SpriteCook blog (2026-11-14) and walks a race car from slicing to drawing in several engines.
+- **Where it fits:** Rigid things that turn a lot in top-down games: cars, boats, tanks, houses, trees. Not for characters with moving limbs or side-view games.
+- **License:** The technique is old and public, so no particular tool is needed. The slicing tools in the article are SpriteCook's (free generator, paid credits for AI art); MagicaVoxel layer export works for free.
+- **Specs:** Any browser with Canvas 2D. Cost is layers × objects per frame, so hundreds of turning objects get heavy.
+- **Status:** Tested (2026-11-20, a 14-layer house made in code, turning and camera tilt compared)
+- **Verdict:** Keep the order (lift, squash vertically, rotate) and it fits in under twenty lines of code. A squash near 0.75 looked right; at 0.5 the layers pulled apart and the roof split. Outline the finished stack once, not each layer, or lines cut through the body.
