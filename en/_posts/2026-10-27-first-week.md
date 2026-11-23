@@ -7,7 +7,7 @@ tags: [retrospective, AI collaboration, decisions, measurement]
 series: rpg-weekly
 pin: true
 image: /assets/img/posts/first-week/cover.webp
-summary: A non-coder's week-one survival log: running AI as my entire dev team, making executive calls, flailing around, and fact-checking my gut with real numbers.
+summary: "A non-coder's week-one survival log: running AI as my entire dev team, making executive calls, flailing around, and fact-checking my gut with real numbers."
 ---
 
 I broke ground on October 20, so today makes exactly one week.
