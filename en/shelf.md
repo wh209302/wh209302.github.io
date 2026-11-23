@@ -155,6 +155,17 @@ Image models don't remember anything between frames, so stitching together poses
 - **Status:** Looked into (2026-11-18)
 - **Verdict:** If the video model gives a clean flat background, chroma key is enough and SAM2 can wait. Skip RIFE for pixel sprites: in-between frames blend two pictures into blurry dots and the crisp pixels are gone.
 
+## Making 3D models
+
+### One picture → a game-ready 3D prop (ComfyUI community pipeline, [original post](https://gall.dcinside.com/mgallery/board/view/?id=aidevelop&no=8429))
+
+- **What:** A ComfyUI graph that takes one front-view picture and gives back a low-poly GLB of about 2,000 faces plus 2048px color, roughness, metallic and normal maps. The order is background removal (BiRefNet) → camera angle estimate (MoGe 2) → shape ([TRELLIS.2](https://github.com/microsoft/TRELLIS.2) or [Pixal3D](https://huggingface.co/TencentARC/Pixal3D)) → seal holes and cut faces (WTiVo, LODTailor, which call Blender behind the scenes) → paint textures ([UltraTex](https://github.com/Mstafa-awad/UltraTex-ComfyUI-nodes)). The whole point: no Tripo or Meshy credits, so you can re-roll at home as often as you like.
+- **Where it could fit:** Small props like crates, weapons and furniture, in 3D games that aren't first person. No skeleton comes out, so characters need AccuRIG or Mixamo afterwards. The back of the object is invented by the AI.
+- **License:** The shape side (TRELLIS.2, Pixal3D, MoGe code, BiRefNet) is MIT and the cleanup nodes are MIT or GPL-3.0, so that part is fine. The trap is texturing. UltraTex runs on FLUX.2 klein base 9B, which has a **non-commercial license**, so for a game you sell, use the pipeline for shape only and swap texturing for TRELLIS.2's own painter or hand painting.
+- **Hardware:** On the author's RTX 5070 Ti 16GB: 1024 about 4.5 min, 2048 about 9.5 min, 4096 about 20 min. The author says to install a separate ComfyUI on Python 3.12 and torch 2.8 rather than mixing it into an existing one. On a Korean-language Windows one node crashes over text encoding; starting in UTF-8 fixes it.
+- **Status:** Looked at (2026-11-23)
+- **Verdict:** Notebook RPG is 2D, so there's nowhere to use it today, but for a future 3D game it's the first candidate for mass-producing props. Our PC has 12GB of graphics memory, so 1024 is the right place to start testing.
+
 ## Backgrounds and depth
 
 ### 3D blockout + AI paintover for 2D backgrounds with depth ([HD-2D](https://en.wikipedia.org/wiki/HD-2D), [Midjourney→Blender 2.5D test](https://hitmarker.net/news/utilizing-midjourney-generated-ai-artworks-to-create-a-2-5d-location-for-an-adventure-game-522580))

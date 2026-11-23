@@ -155,6 +155,17 @@ AI와 일하다 보면 "오, 이거 대박인데?" 싶은 기술이 하루에도
 - **상태:** 살펴봄 (2026-11-18)
 - **한 줄 판단:** 영상 모델이 단색 배경을 깔끔하게 내주면 SAM2 없이 색 지우기로 충분합니다. RIFE는 도트 스프라이트에는 쓰지 않습니다. 중간 프레임이 두 그림을 섞어 만든 흐릿한 점이 생겨서, 도트의 또렷함이 사라집니다.
 
+## 3D 모델 만들기
+
+### 그림 한 장 → 게임용 3D 소품(ComfyUI 커뮤니티 공정, [원글](https://gall.dcinside.com/mgallery/board/view/?id=aidevelop&no=8429))
+
+- **무엇:** 정면 그림 한 장을 넣으면 면 2,000개쯤 되는 저폴리 GLB와 2048px 색·거칠기·금속·노멀 맵이 나오는 ComfyUI 그래프입니다. 바탕 지우기(BiRefNet) → 카메라 각도 추정(MoGe 2) → 모양 만들기([TRELLIS.2](https://github.com/microsoft/TRELLIS.2) 또는 [Pixal3D](https://huggingface.co/TencentARC/Pixal3D)) → 구멍 메우고 면 줄이기(WTiVo·LODTailor, 블렌더를 뒤에서 부름) → 텍스처 칠하기([UltraTex](https://github.com/Mstafa-awad/UltraTex-ComfyUI-nodes)) 순서입니다. Tripo·Meshy처럼 크레딧을 태우지 않고 집 PC에서 몇 번이고 다시 뽑을 수 있다는 게 핵심입니다.
+- **쓸 만한 자리:** 상자·무기·가구 같은 작은 소품, 1인칭이 아닌 3D 게임. 뼈대는 안 나오니 캐릭터는 AccuRIG·Mixamo로 따로 심어야 합니다. 그림에 없는 뒷면은 AI가 지어냅니다.
+- **라이선스:** 모양 쪽(TRELLIS.2·Pixal3D·MoGe 코드·BiRefNet)은 MIT, 다듬는 노드는 MIT·GPL-3.0이라 문제없습니다. 함정은 텍스처입니다. UltraTex가 기대는 FLUX.2 klein base 9B가 **비상업 라이선스**라서, 파는 게임에는 모양까지만 쓰고 텍스처는 TRELLIS.2 자체 칠하기나 손으로 바꿔야 합니다.
+- **사양:** 글쓴이 RTX 5070 Ti 16GB에서 1024 약 4분 반, 2048 약 9분 반, 4096 약 20분. 기존 ComfyUI와 섞지 말고 Python 3.12·torch 2.8 판으로 따로 설치하라고 합니다. 한국어 Windows에서는 글자 인코딩 때문에 한 노드가 죽는데, UTF-8로 띄우면 됩니다.
+- **상태:** 살펴봄 (2026-11-23)
+- **한 줄 판단:** 공책 RPG는 2D라 당장 쓸 곳은 없지만, 다음에 3D 게임을 만든다면 소품 대량 생산 1순위 후보입니다. 우리 PC는 그래픽 메모리가 12GB라 1024부터 시험해 보는 게 맞겠습니다.
+
 ## 배경·공간감
 
 ### 3D 모형 + AI 덧칠로 2D 배경에 깊이 주기([HD-2D](https://en.wikipedia.org/wiki/HD-2D), [Midjourney→Blender 2.5D 시범](https://hitmarker.net/news/utilizing-midjourney-generated-ai-artworks-to-create-a-2-5d-location-for-an-adventure-game-522580))
