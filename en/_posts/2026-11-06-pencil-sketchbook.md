@@ -1,45 +1,51 @@
 ---
 layout: post
-title: "I handed the game to the pencil, and the screen jumped 73 times in 40 seconds"
+title: "73 layout shifts in 40 seconds: rebuilding autoplay as a sketchbook"
 date: 2026-11-06 14:30:00 +0900
 category: notebook-rpg
 tags: [AI collaboration, design, measurement, decisions]
 image: /assets/img/posts/pencil-sketchbook/before-after.webp
-summary: Auto-play was too fast and kept jolting, so we put a sketchbook summary board next to the notebook and gave fights a board of their own.
+summary: "Autoplay flew by too fast and jolted the screen nonstop, so we placed a calm sketchbook summary board beside the notebook and spun combat out into its own screen."
 ---
 
-Our game has a button called "Let the pencil write." Press it and the pencil plays your life for you. The trouble was that the pencil was far too eager. Text flew past before I could read it, and the whole screen kept lurching. Those were the only two things I complained about.
+Our RPG has a button called "Let the pencil write"—press it, and an autoplay bot plays your character's life for you. The problem was that this pencil was way too caffeinated. Text flew past before I could read it, and the whole screen kept lurching. Those two gripes were all I sent to Claude.
 
-<figure><img src="/assets/img/posts/pencil-sketchbook/talk-en.webp" alt="The pencil-mode rework in five scenes: what I said, what Claude answered, and what changed" loading="lazy"><figcaption>One grumble turned into the fourth draft of a design doc.</figcaption></figure>
+<figure><img src="/assets/img/posts/pencil-sketchbook/talk-en.webp" alt="The pencil-mode rework in five scenes: what I said, what Claude answered, and what changed" loading="lazy"><figcaption>One grumble turned into the fourth revision of a design doc.</figcaption></figure>
 
-## A feeling, turned into a number
+## Turning "feels choppy" into a number
 
-All I said was that the screen felt choppy. Claude measured the feeling first. It handed the same baby, at the same age, to the pencil and counted how often the layout shifted in 40 seconds. On PC: 73 times. Every new line of text shoved everything below it down a notch. **Once "annoying" became "73," the fix was obvious.** In auto mode, stop streaming text and show a summary board that rewrites itself just once a year.
+All I said was that the screen felt jittery. Claude measured the annoyance first: same baby, same age, 40 seconds of autoplay.
 
-<figure><img src="/assets/img/posts/pencil-sketchbook/before-after.webp" alt="Left: the old auto-play screen with text piling up. Right: the new summary board with age, this year's line, gold and family cells" loading="lazy"><figcaption>Left, the old waterfall of text. Right, the new board that updates once a year.</figcaption></figure>
+On PC, the layout shifted **73 times**—nearly twice a second, every new line shoving the UI down a notch. **Once "annoying" became "73," the fix was obvious:** stop streaming text in autoplay and switch to a summary board that updates once a year.
 
-## The notebook is mine, the sketchbook is the pencil's
+<figure><img src="/assets/img/posts/pencil-sketchbook/before-after.webp" alt="Left: the old auto-play screen with text piling up. Right: the new summary board with age, this year's line, gold and family cells" loading="lazy"><figcaption>Left, the old waterfall of text. Right, the new summary board that rewrites itself once a year.</figcaption></figure>
 
-Then came my wish list. I wanted the game to keep starting from the notebook cover, and when I press the pencil button, the view should slide over to a sketchbook lying next to it—my notebook where I write myself, and the pencil's sketchbook where it draws for me, side by side on one desk. Claude added a desk slide, and since an outside review suggested going slow the first time and quick after that, it takes 1.1 seconds the first time and 0.7 seconds after that.
+## My notebook on the left, the pencil's sketchbook on the right
 
-<figure><img src="/assets/img/posts/pencil-sketchbook/desk.webp" alt="Three frames of the view sliding from the notebook cover to the sketchbook" loading="lazy"><figcaption>Press the pencil button on the cover and the desk slides sideways.</figcaption></figure>
+Next I slipped in a bit of personal indulgence. I wanted every run to still start on the notebook cover, and pressing "Let the pencil write" to slide the camera sideways onto a sketchbook sitting beside it—my notebook for playing by hand, the pencil's sketchbook for watching it draw, side by side on the same desk. Claude wired up the desk-slide transition, and after an outside review suggested letting players savor it once and keep it snappy afterward, we set the first slide to 1.1 seconds and every slide after that to 0.7 seconds.
 
-## People who fight 31 times a life
+<figure><img src="/assets/img/posts/pencil-sketchbook/desk.webp" alt="Three frames of the view sliding from the notebook cover to the sketchbook" loading="lazy"><figcaption>Press the pencil button on the cover and the desk glides sideways onto the sketchbook.</figcaption></figure>
 
-I also asked for fights to get their own screen. Instead of building it right away, Claude ran 162 lives first and found that fighter jobs fight about 31 times per life. A popup every time would defeat the point of handing over the controls. So it laid the options out on a card, and I picked "always opens, with a 'hand it over' button inside." Want to watch? Play the moves yourself. Can't be bothered? Hand that one fight to the pencil from inside the board. Only the last-ditch push, where your life is on the line, always stays my call.
+## Careers that fight 31 times a lifetime
 
-<figure><img src="/assets/img/posts/pencil-sketchbook/fight.webp" alt="The fight board on PC and phone: my portrait, the foe, move buttons and the hand-over button" loading="lazy"><figcaption>Me versus the foe, the score, the move buttons, and "Let the pencil take this fight" at the bottom.</figcaption></figure>
+I also asked to break combat out into its own dedicated board. Before writing any UI, Claude simulated 162 lives and came back with a reality check: fighter careers average 31 battles per lifetime. Popping open a mandatory fight modal 31 times would completely wreck the point of autoplay.
 
-## The culprit was the screen shake
+Claude laid out the options on a card, and I picked **"always open, with a 'hand it over' button inside."** In the mood to trade blows? Pick your moves yourself. Feeling lazy? Tap "Let the pencil take this fight" right on the board and sit back. Only the desperate last-ditch move—when your life hangs in the balance—stays strictly a human call.
 
-After I said "start it," Claude built everything and measured again. On PC, the choice note was still jumping 15px at a time. The culprit turned out to be the effect that shakes the notebook when you take a hit or arrive somewhere new. While the frame shook, a note that should have been pinned to the screen got dragged along with it. Turning the shake off in the sketchbook dropped the shift score from 1.95 to 0.0003. The few shifts left come from the ruler growing one cell a year, which the eye barely notices, so we left them alone.
+<figure><img src="/assets/img/posts/pencil-sketchbook/fight.webp" alt="The fight board on PC and phone: my portrait, the foe, move buttons and the hand-over button" loading="lazy"><figcaption>My portrait versus the foe, the score, the move buttons, and "Let the pencil take this fight" at the bottom.</figcaption></figure>
 
-<figure><img src="/assets/img/posts/pencil-sketchbook/shifts-en.webp" alt="Layout shifts in 40 seconds: phone 15 to 5, PC 73 to 8. Shift score: phone 1.69 to 0.001, PC 1.95 to 0.0003" loading="lazy"><figcaption>Shifts went from 73 to 8, and the score dropped to almost zero.</figcaption></figure>
+## The surprise culprit: screen shake
 
-This round covered auto mode only. The hand-turned two-page notebook comes next, after I've used the sketchbook for a few days.
+I typed "start it," Claude built the lot, and then ran the 40-second shift check again. On PC, the choice note was still hopping 15 pixels at a time. Tracking down the bug turned up an absurd culprit: the **screen-shake effect** that jiggles the notebook whenever you take a hit or arrive at a new station. Every time the notebook frame shook, the choice note—supposed to stay pinned neatly to the viewport—got dragged right along with it.
+
+Disabling screen shake inside the sketchbook sent our layout-shift score plummeting from 1.95 down to **0.0003**. The handful of tiny shifts left come from the yearly timeline ruler adding one cell per year, virtually invisible to the eye, so we left them alone.
+
+<figure><img src="/assets/img/posts/pencil-sketchbook/shifts-en.webp" alt="Layout shifts in 40 seconds: phone 15 to 5, PC 73 to 8. Shift score: phone 1.69 to 0.001, PC 1.95 to 0.0003" loading="lazy"><figcaption>PC shifts dropped from 73 to 8, and the layout-shift score dropped to effectively zero.</figcaption></figure>
+
+This round tackled autoplay only. The hands-on two-page notebook was supposed to wait until I'd lived with the sketchbook for a few days.
 
 ## Three-line summary
 
-1. Auto-play no longer streams a wall of text; instead, it shows a sketchbook summary board that updates once a year.
-2. Fights always open their own board, with a button inside to hand just that fight back to the pencil.
-3. When a screen feels off, ask the AI to measure it first. That "73" pointed straight to both the fix and the culprit.
+1. Autoplay traded its nonstop wall of text for a sketchbook summary board that updates cleanly once a year.
+2. Combat now gets its own board, paired with an in-board button to hand any individual fight back to the pencil—essential for careers that fight 31 times a life.
+3. When a UI feels subtly awful, have your AI measure it before redesigning. Counting "73 shifts" revealed both the right layout and the hidden screen-shake bug.
