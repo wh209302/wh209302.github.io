@@ -5,57 +5,57 @@ date: 2026-10-30 20:30:00 +0900
 category: notebook-rpg
 tags: [AI collaboration, measurement, design, decisions]
 image: /assets/img/posts/life-branches/chart-en.webp
-summary: I measured whether lives really branch apart, and 335 wartime periods left only 8 lines in the notebook. This is how we weighed an outside review, built a measuring tool first, and measured again.
+summary: "Across 335 wartime and famine eras, only 8 lines ever showed up in the notebook. Here is how we weighed a 14-point outside review, built a measurement tool first, and re-tested 1,610 lives."
 ---
 
-In this game, when you die you move on to the next life. So each life had better feel different, or what's the point? I started wondering whether it actually does. Does a noble's life read differently from a serf's? Does a childhood in wartime read differently from one in a year of plenty? So I asked Claude to measure it. The answer was a little embarrassing.
+If a war breaks out across the kingdom and your diary only talks about quiet village chores, something has gone sideways. In the Notebook RPG I'm building, when your character dies you flip to a fresh notebook for the next life—so each run really ought to branch into a different story. One day I stopped assuming it did and asked Claude to actually measure it. Does a noble's life read differently from a serf's? Does growing up in wartime read differently from a year of plenty? The numbers came back a little humbling.
 
-<figure><img src="/assets/img/posts/life-branches/talk-en.webp" alt="Five scenes from the life-branch check to the re-measurement, laid out as what I said, Claude's answer, and what changed" loading="lazy"><figcaption>Five scenes, from asking for a check, to handing over someone else's review, to tapping one card.</figcaption></figure>
+<figure><img src="/assets/img/posts/life-branches/talk-en.webp" alt="Five scenes from the life-branch check to the re-measurement, laid out as what I said, Claude's answer, and what changed" loading="lazy"><figcaption>Five scenes, from asking for a check, to handing over an outside review, to tapping one decision card.</figcaption></figure>
 
 ## 335 wars, 8 lines in the notebook
 
-Claude lived 420 lives across twenty-one origins and came back with numbers. Born a serf's kid or a temple novice in the same reed village, you ended up living almost the same adult life. Run the same seed as a man and as a woman, 84 pairs, and **not a single pair lived through a different event.** The one that really stung was something else. Over 335 periods of war, famine and the like, the era's own events showed up 8 times. A war broke out, and the notebook carried on as if nothing happened.
+Claude auto-played 420 lives across twenty-one origins and returned with a report. Born a serf's kid or a temple novice in the same reed village, you ended up living nearly the same adult life. Run the same seed as a man and as a woman across 84 pairs, and **not a single pair experienced a different event.** The real gut punch came last: across 335 periods of war, famine, and other major upheavals, era-specific scenes showed up exactly 8 times. The country was on fire, and the notebook kept doodling like it was a sunny Tuesday.
 
-Meanwhile, another thread was working on race differences. Both jobs touched the same pool of events, so they were bound to step on each other. I merged them and asked: "Look again, carefully, at whether the two designs mesh with each other, and whether the directions I gave are actually covered by that design, and redesign it." The merged design, version 1, came back in five stages.
+Meanwhile, another thread was reworking racial differences. Both jobs touched the same event pool, so running them in parallel was asking for a head-on collision. I merged the two and asked Claude: "Look again, carefully, at whether the two designs mesh with each other, and whether the directions I gave are actually covered by that design, and redesign it." Out came merged design v1, laid out in five stages.
 
 ## "Don't just accept it all"
 
-I got version 1 reviewed elsewhere, and it came back with fourteen things to fix. Pasting them straight in would have been easy, but swallowing someone else's notes whole is a good way to turn a design into a patchwork. So I handed them over like this: "This isn't something to accept unconditionally. Look at it, and carefully check which parts hold up or need more work, then design from there."
+I sent v1 out for a second opinion elsewhere, and it came back with fourteen critiques. Pasting all fourteen straight in would have been easy, sure, but swallowing outside feedback whole is the fastest way to turn a design into Frankenstein's monster. So I handed the list to Claude with a caveat: "This isn't something to accept unconditionally. Look at it, and carefully check which parts hold up or need more work, then design from there."
 
-Claude weighed the fourteen one by one and accepted all of them. Better than that, along the way it **owned up to its own mistakes first**. Two things it had marked "met" in version 1 hadn't been met, and one number couldn't be recounted because the counting method was never written down.
+Claude weighed all fourteen points one by one and decided every single one held water. Even better, auditing someone else's notes made it **confess its own mistakes first**. Two items it had marked "met" in v1 had actually missed their targets, and one figure couldn't be reproduced at all because the counting method was never saved.
 
-<figure><img src="/assets/img/posts/life-branches/fix-en.webp" alt="A table setting Claude's verdicts in version 1 beside the corrected ones: same origin 4.5% missed, era scenes only for adults, the soldier-arc number could not be recounted" loading="lazy"><figcaption>The target was 4% and it wrote "met" next to 4.5%. Now every number keeps its counting script next to the raw data.</figcaption></figure>
+<figure><img src="/assets/img/posts/life-branches/fix-en.webp" alt="A table setting Claude's verdicts in version 1 beside the corrected ones: same origin 4.5% missed, era scenes only for adults, the soldier-arc number could not be recounted" loading="lazy"><figcaption>The target was 4%, and it had casually stamped "met" beside 4.5%. Now every metric keeps its counting script right next to the raw data.</figcaption></figure>
 
-Version 2, with the review folded in, gained a new stage 0. Before adding more scenes, set the rules for when scenes collide, and build the tool to measure it. I tapped "Go with v2, multiply both factors" on the decision card.
+Version 2 folded in the review and added a brand-new stage 0: before writing a single extra scene, establish traffic rules for when scenes collide, and build the measuring tool to verify them. On the decision card, I clicked "Go with v2, multiply both factors."
 
 ## Rules first, then 1,610 lives
 
-Adding scenes really did make them collide. Elves live for centuries, so a wedding, a child and a war could all pile into one year. So three rules came first.
+The moment we added more scenes, the collisions showed up right on cue. Elves live for centuries, so a wedding, a newborn, and a war could easily pile into the same calendar year. Three traffic rules went in first:
 
-1. **What comes first**: birth, losing someone, the era of a great event, growing up, then marriage and children.
-2. **Half a year apart**: scheduled scenes keep six months between them. At first we tried stretching that by each race's lifespan pace, but for elves it became ten years and every scene got dropped.
-3. **Same-meaning bundles**: the wartime recruiter, the levy that comes with your origin, and the recruiter in human villages all tell the same story, "the army calls," so only one comes within ten years.
+1. **Priority order**: birth, losing someone, major era events, growing up, then marriage and children.
+2. **Half a year apart**: scheduled scenes keep six months between them. At first we tried scaling that spacing by each race's lifespan pace—which stretched it to ten years for elves and quietly dropped almost every scene.
+3. **Same-meaning bundles**: the wartime recruiter, the origin-based levy, and the human-village recruiter all tell the same "army comes calling" story, so only one can trigger within ten years.
 
-Then the new tool ran 1,610 lives. The share of eras where you saw at least one era scene jumped from 1% to 90% for human adults, and from 0% to 94 to 100% for adults of other races.
+With the new tool, we simulated 1,610 lives. The share of eras where a character saw at least one era scene leaped from 1% to 90% for human adults, and from 0% to 94–100% for adults of other races.
 
-<figure><img src="/assets/img/posts/life-branches/chart-en.webp" alt="Share of eras where at least one era scene appeared. Before, 0 to 1%. After, 90 to 100% for adults and 100% for children" loading="lazy"><figcaption>The grey bars you can barely see are the before. The child bars count wartime only.</figcaption></figure>
+<figure><img src="/assets/img/posts/life-branches/chart-en.webp" alt="Share of eras where at least one era scene appeared. Before, 0 to 1%. After, 90 to 100% for adults and 100% for children" loading="lazy"><figcaption>The grey bars you have to squint to see are the before. Child bars count wartime only.</figcaption></figure>
 
-The tool also found a hidden hole. We had written eight new era scenes for children, and six of them never showed up once in 700 lives. It turned out children could only live through three great events, a flood, a war and a comet, and only the war left an era behind. **We had written the famine scenes and never built a road for famine to arrive.** So we added a childhood lean year, plague and great harvest.
+The measuring tool also exposed a sneaky blind spot. We had written eight new childhood era scenes, yet six of them never triggered once across 700 lives. Turned out children could only experience three major events—a flood, a war, and a comet—and only war actually spawned an era. **We had written the famine scenes and forgotten to build a road for famine to arrive.** We added a childhood lean year, plague, and great harvest right away.
 
-## The extra soldiers were the pencil's fault
+## The surge of soldiers was the pencil's fault
 
-One number still bothered me. After adding war scenes, lives that took the soldier road went from 1% to 11%, and lives with children dipped a little. Were the scenes dragging lives in one direction?
+One number still rubbed me the wrong way. After adding war scenes, lives entering the soldier arc jumped from 1% to 11%, while lives with children dipped slightly. Were the new scenes railroading players into the barracks?
 
-So we measured with different pencils. The "pencil" is our autoplay bot that picks choices for you, and we had it choose carefully, boldly, and at random per life. Then we lined up the same twenty seeds in front of the recruiter and forced half to enlist and half to hide.
+To find out, we swapped out our "pencil"—the autoplay bot that picks choices for you—and tested careful, bold, and per-life random personalities. We also lined up the same twenty seeds in front of the recruiter and forced one group to enlist and the other to hide.
 
 <figure><img src="/assets/img/posts/life-branches/pencil-en.webp" alt="Share of lives on the soldier arc by pencil temper. Default 9%, careful 6%, bold 3%, random 4%, forced to enlist 100%, forced to hide 0%" loading="lazy"><figcaption>All twenty who enlisted became soldiers. None of the twenty who hid did.</figcaption></figure>
 
-The culprit was the default pencil, which had a habit of enlisting in front of the recruiter. It also means that when a human player chooses, lives really do branch apart. We learned something about personality as a bonus. Even with a random pencil, 72% of lives came out hot-headed, so that skew comes from the events and choices, not the pencil. That gets fixed in the stage that deals with personality.
+The culprit was the default pencil, which had a reflex for signing up whenever a recruiter walked by. Flip that around and it was actually good news: when a real human makes the choice, lives genuinely branch apart. We caught a bonus quirk about personality, too. Even with a completely random pencil, 72% of lives ended up hot-headed—meaning that skew lives inside the events and choices themselves, not the bot. We parked that for the upcoming personality stage.
 
-That's what shipped in this build. Slightly fewer lives with children, and married and single lives still not splitting much, get measured again in the next stage, which gives each race its own family shape. Before that, I want to sort out five states such as legal status, affiliation and livelihood, plus how a neighborhood calculates your reputation.
+That's what shipped in this update. The small dip in lives with children, along with married and single runs still overlapping a bit too much, gets re-measured next when each race gets its own family structure. First, though, I want to untangle five core states—including legal status, affiliation, and livelihood—plus how a neighborhood calculates your reputation.
 
 ## Three-line summary
 
-1. Don't settle "is it really different?" by feel. Ask the AI to measure it. Numbers like 335 wars and 8 lines never come out in words.
-2. Hand over outside reviews with "weigh it, don't just accept it." While weighing the review, the AI will find its own mistakes first.
-3. Leave a counting method next to every number. A number you can't recount can't hold up a decision.
+1. Don't judge "do lives actually branch?" by gut feel. Have the AI simulate it—numbers like 335 wars and 8 diary lines never surface in conversation.
+2. Hand over outside feedback with "weigh it, don't blindly adopt it." Checking someone else's critique often prompts the AI to catch its own earlier slips.
+3. Keep the counting script right next to every metric. A number you can't reproduce can't support your next decision.
