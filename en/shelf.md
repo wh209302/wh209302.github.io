@@ -2,320 +2,320 @@
 layout: page
 title: Tech Shelf
 permalink: /en/shelf/
-description: Tools and references I'm not using right now but might pull out for a future game.
+description: Tools, models and references I'm not using today, saved in one drawer for whatever game comes next.
 ---
 
-Working with AI, you trip over a "whoa, this is huge" tool almost every day. The catch is that **most of them don't fit the game I'm making right now**. Let them slip by, though, and three months later I'm back in the search bar going "what was that thing again?"
+Working with AI, you stumble across a "wait, this is wild" tool almost every day. The catch is that **most of them don't fit the game I'm making right now**. Let them float past, though, and three months later I'm digging through browser history muttering, "What was that thing called again?"
 
-So I made a shelf. Every time I toss a link over, Claude checks what it does, whether it's OK for commercial use, and whether my home PC can run it, then files it here. When I start the next game, this shelf is the first thing I'll open.
+So I built a shelf. Whenever I toss a link over, Claude checks what it actually does, whether the license allows commercial use, and whether my home PC can run it without melting, then files it here. When the next game starts, this drawer is the first place I'll look.
 
-**Status:** Looked at (read and weighed) · Tried (actually ran it) · In use · Dropped
+**Status:** Looked at (read and weighed) · Tested (actually ran it) · In use · Dropped
 
 ## Art and characters
 
 ### [see-through](https://github.com/shitagaki-lab/see-through)
 
-- **What:** Feed it one anime-style illustration and it splits hair, face, eyes, clothes and more into up to 23 transparent layers, fills in the hidden parts, and hands back a Photoshop file (PSD). It's a SIGGRAPH 2026 paper. It doesn't rig anything, so free tools like Anime2.5DRig below take over from there.
-- **Where it could fit:** Big standing portraits on a dialogue screen with blinking and lip movement. The tedious hand-splitting of layers just disappears.
-- **License:** Code is Apache-2.0, the layer model is OpenRAIL++ (commercial use allowed, with misuse restrictions), the body-part model is Apache-2.0. The depth model's page wouldn't load, so that one isn't confirmed yet.
-- **Hardware:** A 12GB graphics card runs it at about 10GB with the memory-saving setting (about 1.5x slower). There's a lighter 8GB version, and ComfyUI nodes exist.
+- **What:** Feed it a single anime-style illustration and it splits hair, face, eyes, clothes and more into up to 23 transparent layers, paints in the hidden areas behind them, and hands back a Photoshop file (PSD). It's a SIGGRAPH 2026 paper. It doesn't rig anything, so a free tool like Anime2.5DRig below takes the baton from there.
+- **Where it fits:** Large standing portraits in dialogue scenes that need blinking and lip movement. The mind-numbing chore of cutting out every layer by hand disappears overnight.
+- **License:** Code is Apache-2.0, the layer model is OpenRAIL++ (commercial use allowed, with misuse restrictions), and the body-part model is Apache-2.0. The depth model's page wouldn't load, so that one is still unconfirmed.
+- **Specs:** Runs at about 10GB on a 12GB GPU with the memory-saving flag (~1.5× slower). There's a lighter 8GB build, and ComfyUI nodes already exist.
 - **Status:** Looked at (2026-10-28)
-- **Verdict:** Notebook RPG draws face parts, head and body separately from the start, and they're small pixel stickers, so there's nothing to split. For a next game with big illustrated characters, it's the top candidate.
+- **Verdict:** Notebook RPG draws face parts, head and body separately from the start as tiny pixel stickers, so there's nothing to slice. For a future game with large illustrated portraits, this is first in line.
 
 ### [Anime2.5DRig](https://github.com/852wa/Anime2.5DRig)
 
-- **What:** Drop a PSD split into parts into the browser and it rigs it on its own, adding breathing, blinking, mouth movement and swaying hair. It's built to take see-through's PSD as is, so the two snap together. You can try it on the [demo page](https://852wa.github.io/Anime2.5DRig/) with no install.
-- **Where it could fit:** Turning a dialogue portrait into a short breathing, blinking loop for a game. It records transparent WebM, so you just play the clip. The real-time renderer (WebGL) is open too, so with some work it could run inside the game itself.
-- **License:** MIT (commercial use OK, keep the notice). The bundled PSD reader is MIT and face tracking is Apache-2.0. The sample art belongs to its artists, so don't use it.
-- **Hardware:** Just a browser. Everything runs on your own machine and the art never leaves it.
-- **Status:** Tried (2026-10-28, breathing and blinking checked with the sample)
-- **Verdict:** It's made for front-facing upper-body anime illustrations, so it doesn't fit small pixel stickers. Paired with see-through, "one picture → moving portrait" is nearly automatic, so it comes off the shelf together with see-through for a next game with big portraits.
+- **What:** Drag a layered PSD into the browser and it rigs it automatically, adding breathing, blinking, mouth movement and swaying hair on the spot. It's built to ingest see-through's PSDs straight out of the box, so the two snap together like Lego bricks. Try it with no install on the [demo page](https://852wa.github.io/Anime2.5DRig/).
+- **Where it fits:** Turning a static dialogue portrait into a short breathing, blinking loop. It records transparent WebM, ready to drop into a game. The real-time WebGL renderer is open too, so you could embed it directly if you're feeling ambitious.
+- **License:** MIT (commercial use OK, keep the notice). The bundled PSD reader is MIT and face tracking is Apache-2.0. The sample art belongs to its artists, so don't reuse it.
+- **Specs:** Just a browser. Everything runs locally and your art never leaves your machine.
+- **Status:** Tested (2026-10-28, breathing and blinking verified on the sample)
+- **Verdict:** Built for front-facing upper-body anime portraits, so tiny pixel stickers are out. Paired with see-through, "one picture → living portrait" is nearly automatic—definitely coming off the shelf together next time we do big portraits.
 
 ### Fixing AI-drawn fingers (community tips)
 
-- **What:** What people do when an image AI like GPT keeps getting the fingers wrong in one pose no matter how often you ask. Roughly in order of popularity: (1) change the hand so the problem goes away (a fist gripping the staff, hand in a sleeve, behind the back); (2) stop repeating in the same chat, open a new one with the original picture and one line about the hand only; (3) paint just the hand with the select (brush) tool and fix that; (4) paste a good hand from another frame or touch up a few pixels by hand; (5) crop the hand large, redraw it in another tool, shrink it back.
-- **Where it could fit:** Small-hand art like 2-head-tall stickers. When a hand is a few pixels, (1) and (4) are fastest. ComfyUI hand-fix nodes (HandRefiner, MeshGraphormer) were trained on realistic hands and don't suit chibi art well.
-- **License:** Not applicable, these are techniques.
-- **Hardware:** (5) needs an edit model such as Qwen-Image-Edit in ComfyUI plus a crop-and-stitch node ([Inpaint CropAndStitch](https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch)).
-- **Status:** Looked into (2026-10-29)
-- **Verdict:** Making a "check every finger" instruction longer shook the other instructions. Naming a concrete hand shape, or fixing the hand on its own, works better than adding more rules.
+- **What:** Practical workarounds for when an image AI like GPT stubbornly mangles a hand no matter how politely you ask. Roughly in order of popularity: (1) dodge the pose altogether (a fist gripping a staff, hands tucked in sleeves or behind the back); (2) stop arguing in the same thread—open a fresh chat with the original image and one line about the hand only; (3) mask just the hand with a brush tool and redraw it; (4) graft a good hand from another frame or fix a few pixels manually; (5) crop the hand large, fix it in another tool, and shrink it back down.
+- **Where it fits:** Small-hand art like 2-head-tall stickers. When a hand is only a handful of pixels, (1) and (4) save the most sanity. ComfyUI hand-fix nodes (HandRefiner, MeshGraphormer) were trained on realistic hands and get confused by chibi proportions.
+- **License:** Not applicable—just hard-won workflow habits.
+- **Specs:** Option (5) pairs an edit model like Qwen-Image-Edit in ComfyUI with a crop-and-stitch node ([Inpaint CropAndStitch](https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch)).
+- **Status:** Looked at (2026-10-29)
+- **Verdict:** Adding longer scoldings like "check every finger carefully" only makes the model forget your other instructions. Naming a simpler hand shape—or isolating the hand—beats lecturing the prompt.
 
 ## Image generation (ComfyUI)
 
-Things I ran myself in ComfyUI on my PC (12GB of video memory). The test stories are in the [AI lab](/en/categories/ai-lab/) category.
+Things I ran myself in ComfyUI on my home PC (12GB VRAM). Full lab write-ups live in the [AI lab](/en/categories/ai-lab/) section.
 
 ### [Anima](https://huggingface.co/circlestone-labs/Anima) + pixel/sprite LoRAs
 
-- **What:** A 2B image model that is strong at anime styles. Its structure differs from SDXL, so SDXL pixel checkpoints and LoRAs can't be mixed in; you use Anima-specific LoRAs from Civitai. For the test I grabbed an RPG side-view battle sheet LoRA (svactors), a pixel sprite style (Elin) and an RPG walk sheet (rpgchara).
-- **Where it fits:** Getting many motions of one character as a single sheet. Because it's all drawn in one image, face, clothes, colors and pixel size barely drift between frames.
-- **License:** The model is under the CircleStone Labs Non-Commercial License, but generated images may be used commercially (section 2(e)). Running the model inside a revenue-generating service or using it to train models commercially is not allowed. The LoRAs block or restrict selling images, so test use only.
-- **Specs:** About 55 seconds for one 2048×1360 sheet on 12GB (roughly 1 second per frame).
+- **What:** A 2B anime-focused image model. Its architecture differs from SDXL, so SDXL pixel checkpoints and LoRAs don't mix in—you grab Anima-specific LoRAs from Civitai. I tested an RPG side-view battle sheet LoRA (svactors), a pixel sprite style (Elin) and an RPG walk sheet (rpgchara).
+- **Where it fits:** Generating multiple actions of one character on a single sheet. Because every frame is drawn inside one canvas, face, clothes, palette and pixel scale barely drift.
+- **License:** The model itself is under the CircleStone Labs Non-Commercial License, but generated images may be used commercially (section 2(e)). Hosting it as a paid service or training commercial models on it is barred. The LoRAs block or restrict selling art, so test use only.
+- **Specs:** About 55 seconds for one 2048×1360 sheet on 12GB (roughly a second per frame).
 - **Status:** Tested (2026-10-28)
-- **Verdict:** Best consistency, small motions. The walk is closer to breathing in place and the attack is just an arm thrust, so big motions came out best with the reference adapter below.
+- **Verdict:** Top-notch consistency, timid motion. "Walking" looked more like breathing in place, and attacks were barely a nudge of the arm. For bold poses, the reference adapter below beat it hands down.
 
 ### [Anima Ref Adapter](https://github.com/ElectronGirl/ComfyUI-Anima-Ref-Adapter)
 
-- **What:** ComfyUI nodes plus a small LoRA (92MB) that keep a character's hair, eyes and outfit from one reference image while the prompt changes pose and background. No character name or appearance tags needed, so it works for original characters.
-- **Where it fits:** After settling a character with a one-image sheet, feed one cell in as the reference to get big motions like walking or swinging with the same face.
-- **License:** Node code Apache-2.0; adapter weights under the CircleStone Non-Commercial License. As with Anima, generated images may be used commercially.
-- **Specs:** Anima base v1.0 and bf16 only (fp16 overflows), 30 steps, cfg 4.5, ref_guidance 4.5–5. V2 (183MB) arrived on 2026-10-29: a single node to drop in, and one image went from 55 to 33 seconds on 12GB. Two reference images side by side give two characters. The author says development has stopped for lack of funding.
+- **What:** ComfyUI nodes plus a tiny LoRA (92MB) that lock a character's hair, eyes and outfit to one reference picture while your prompt changes pose and background. No character name or appearance tags needed, so original characters work out of the box.
+- **Where it fits:** Locking down a character from a sheet, then feeding one cell back in to generate big motions—walking, swinging, casting—without losing the face.
+- **License:** Node code is Apache-2.0; adapter weights are under the CircleStone Non-Commercial License. As with Anima, output images may be used commercially.
+- **Specs:** Anima base v1.0 and bf16 only (fp16 overflows), 30 steps, cfg 4.5, ref_guidance 4.5–5. V2 (183MB) dropped on 2026-10-29 as a single node and cut generation on 12GB from 55 seconds down to 33. Two reference images side by side even handle two characters. The author has since paused development due to funding.
 - **Status:** Tested (2026-10-28, V2 2026-10-29)
-- **Verdict:** The only route so far that gave both consistency and big motion. It mostly faces left (flip to fix), draws a ground line under the feet, and small patterns and held props shift a little per frame. The test story is in [Same Face, Walking and Swinging](/en/2026/10/28/anima-motion/). With V2, a pose written in plain text was enough for attack, cast and knocked-down poses, so it became our default for one character in many poses ([Pose by Words, Face by Picture](/en/2026/10/29/same-character-poses/)).
+- **Verdict:** The only route so far that delivered both consistency and big movement. Quirks: it strongly prefers facing left (easy flip), likes drawing a ground line under the feet, and small patterns or held props wander slightly between frames. Full story in [Same Face, Walking and Swinging](/en/2026/10/28/anima-motion/). With V2, plain-text poses were enough for attacks, spells and knockdowns, making it our go-to for multi-pose sheets ([Pose by Words, Face by Picture](/en/2026/10/29/same-character-poses/)).
 
 ### [Anima ControlNet VACE Depth](https://huggingface.co/TaihoC/Anima-ControlNet-VACE-Depth)
 
-- **What:** Weights that steer an Anima drawing's pose and silhouette from a depth map (a grey image where near is bright and far is dark). Needs a patched Advanced-ControlNet node.
-- **Where it fits:** Making a drawing follow a pose built in Blender or with a mannequin. It ran together with the reference adapter without the two getting in each other's way.
+- **What:** Weights that steer an Anima pose and silhouette from a depth map (a grayscale image where near is bright and far is dark). Requires a patched Advanced-ControlNet node.
+- **Where it fits:** Forcing a drawing to follow a pose staged in Blender or with a mannequin. Plays nicely alongside the reference adapter without stepping on its toes.
 - **License:** Weights under the CircleStone Non-Commercial License; node under GPL-3.
-- **Specs:** 596MB; about 37 seconds per image on 12GB together with the reference adapter.
+- **Specs:** 596MB; about 37 seconds per image on 12GB paired with the reference adapter.
 - **Status:** Tested (2026-10-29)
-- **Verdict:** The silhouette follows, but blunt depth maps from a mannequin couldn't place arms or weapons, so it wasn't much better than writing the pose in text. Depth alone without the adapter sometimes drew two people. Worth another look once we have crisp Blender depth maps showing arms and weapons.
+- **Verdict:** Follows the silhouette, but chunky mannequin depth maps couldn't tell arms from weapons, so it barely beat writing the pose in plain text. Depth without the adapter also occasionally spawned a bonus second person. Worth revisiting once we have crisp Blender depth passes.
 
 ### [Krea 2 Turbo](https://huggingface.co/krea/Krea-2-Turbo) + [pixel LoRA](https://huggingface.co/e-n-v-y/Krea-2-Pixel-Art)
 
-- **What:** The 8-step version of a 2026 image model, plus a pixel-art LoRA on top. The LoRA draws on a 128-cell grid, so the dots come out very even.
-- **Where it helps:** Cleaning up the dots of an image drawn by another model. A 0.45 redraw gives the cleanest dots. It erases artist flavour added earlier, but going lighter (0.20–0.30) or skipping it left the dots jittery and unusable in practice.
-- **Licence:** Model under the Krea 2 Community License (commercial use allowed for companies under $1M yearly revenue); pixel LoRA under MIT.
-- **Specs:** fp8 build 13.1GB, about 13 seconds per 1024² image, peak VRAM about 11.2GB. "full body" alone crops the feet, so always add "head to toe, with margin".
+- **What:** The fast 8-step edition of a 2026 image model topped with a pixel-art LoRA that draws cleanly onto a 128-cell grid.
+- **Where it fits:** Ironing out messy dots from another model as a finishing pass. Redrawing at 0.45 strength gives the crispest grid. It does wipe out artist flavor from earlier stages, though—and dialing it down (0.20–0.30) or skipping it left the dots too jittery for real use.
+- **License:** Model under the Krea 2 Community License (commercial use allowed under $1M annual revenue); pixel LoRA under MIT.
+- **Specs:** fp8 build is 13.1GB, ~13 seconds per 1024² image, peaking around 11.2GB VRAM. Writing just "full body" loves to chop off the feet, so always add "head to toe, with margin."
 - **Status:** Tested (2026-10-28)
-- **One-line verdict:** The cleanest dots among pixel routes with open commercial terms. On its own, different seeds give similar pictures, so leave the drawing to another model and use this for finishing. The story is in [Hunting an anime pixel style](/en/2026/10/29/pixel-style-hunt/).
+- **Verdict:** Cleanest pixel grid of any commercially friendly route I've tried. On its own, different seeds look weirdly similar, so let another model supply the style and keep this for the final polish. Full tale in [Hunting an anime pixel style](/en/2026/10/29/pixel-style-hunt/).
 
 ### [Anima Style Explorer](https://github.com/ThetaCursed/Anima-Style-Explorer)
 
-- **What:** A list of the 59,000-plus artist names Anima learned, and a page to browse one sample per artist drawn with the same prompt.
-- **Where it helps:** Steering style with artist tags. A name that isn't on the list does nothing, so check it first.
-- **Licence:** As stated in the repository. We only used the name list.
-- **Status:** Used (2026-10-28)
-- **One-line verdict:** We matched 400 pixel/chibi artists from an image board against this list and got 243. Artist tags work well at the Anima stage, but a later redraw step can erase them, so look at the image after every step.
+- **What:** A catalog of the 59,000+ artist names Anima actually knows, complete with a sample generated from the same prompt for each one.
+- **Where it fits:** Steering style with artist tags. Putting in a name the model never learned does nothing, so checking here first saves hours of guesswork.
+- **License:** Per the repository terms. We only used the name list.
+- **Status:** Tested (2026-10-28)
+- **Verdict:** Cross-checking 400 pixel/chibi artists from an image board against this list narrowed it down to 243 that Anima actually recognizes. Artist tags shine at the Anima stage, but a later redraw pass can erase them—always inspect outputs after every step.
 
 ### [Qwen-Image-Edit-2511](https://huggingface.co/Qwen/Qwen-Image-Edit-2511)
 
-- **What:** An edit model that changes an image by instruction ("change only the pose", "add a kerchief") instead of drawing from scratch. With the 4-step Lightning LoRA and a 4-bit GGUF build it runs on 12GB.
-- **Where it fits:** Making swing, pray, hurt and fall poses from one standing character. Face, clothes, colors and style stay almost intact.
+- **What:** An edit model that modifies an existing picture by instruction ("change only the pose", "add a kerchief") rather than starting from scratch. With the 4-step Lightning LoRA and a 4-bit GGUF build, it fits inside 12GB VRAM.
+- **Where it fits:** Turning one standing character into swing, pray, hurt and knockdown frames while keeping face, outfit, palette and style remarkably intact.
 - **License:** Apache-2.0 (model, Lightning LoRA and GGUF builds).
-- **Specs:** About 23GB of downloads, 20–25 seconds per image, peak video memory about 11.4GB.
+- **Specs:** ~23GB download, 20–25 seconds per image, peaking around 11.4GB VRAM.
 - **Status:** Tested (2026-10-21, retested on Anima art 10-28)
-- **Verdict:** The most reliable way I've seen to get many poses of one character. Direction and size can change between frames, so plan on a post-processing pass to align them.
+- **Verdict:** Still the most dependable tool I've tested for multi-pose consistency. Facing direction and scale can drift slightly between frames, so budget for a quick alignment pass afterward.
 
 ### [Z-Image Turbo](https://huggingface.co/Tongyi-MAI/Z-Image-Turbo)
 
-- **What:** A fast 8-step image model that follows sentence prompts better than tags.
-- **Where it fits:** Drafting pixel characters when commercial release is on the table. It follows asks like two heads tall, big eyes and blushing cheeks.
+- **What:** A zippy 8-step image model that responds better to plain sentences than tag soup.
+- **Where it fits:** Drafting commercially safe pixel characters—follows requests like two heads tall, big eyes and rosy cheeks surprisingly well.
 - **License:** Apache-2.0.
-- **Specs:** On 12GB use the int8 build (bf16 doesn't fit).
+- **Specs:** Use the int8 build on 12GB (bf16 overflows).
 - **Status:** Tested (2026-10-20)
-- **Verdict:** First pick for a commercially safe pixel route. Negative prompts don't work, and writing "no white" actually paints white.
+- **Verdict:** First stop when you need an unambiguously commercial pixel route. Fair warning: negative prompts are ignored, and writing "no white" will stubbornly paint white anyway.
 
 ### Baking a style LoRA with [kohya sd-scripts](https://github.com/kohya-ss/sd-scripts)
 
-- **What:** A LoRA training tool that teaches a model your style from a handful of examples.
-- **Where it fits:** Once the style is fixed and you need a steady stream of new characters in the same look.
-- **License:** The tool is Apache-2.0; the resulting LoRA follows the base model's license.
-- **Specs:** SDXL base, 13 examples, 2,100 steps in 26 minutes, 8.4GB of video memory.
+- **What:** A LoRA trainer that teaches a base model your look from a small batch of reference images.
+- **Where it fits:** Once your art direction is locked and you need to crank out new characters in the exact same style.
+- **License:** Apache-2.0 for the tool; the trained LoRA inherits the base model's license.
+- **Specs:** SDXL base, 13 reference images, 2,100 steps in 26 minutes, 8.4GB VRAM.
 - **Status:** Tested (2026-10-21)
-- **Verdict:** Colors and details come quickly, but teaching a stubborn proportion like two heads tall needs dozens of examples. About 1,400 steps was best.
+- **Verdict:** Picks up palette and fabric details fast, but teaching a stubborn proportion like two-heads-tall takes dozens of samples, not a baker's dozen. Around 1,400 steps was the sweet spot.
 
 ### [Scenario Agent Skills](https://github.com/scenario-labs/skills)
 
-- **What:** A skill pack for AI coding agents from the game-art service Scenario. It has 175 skills as of 2026-11 and works with Claude Code. Most of them teach an agent to make images, sprite animation, textures, 3D, video and audio through Scenario's server (MCP). A separate set of "expert tools" drives Blender, Unity, Godot, Unreal, Maya, ZBrush and Roblox Studio directly on your machine. The Blender set, for example, has 15 skills distilled from about 200 videos, and its notes say it was tested on Blender 5.2.
-- **Where it helps:** The skill texts are worth reading even if you don't use Scenario. They cover things like sprite-sheet frame math and keeping one character consistent across many actions. The expert tools only need the app itself, not Scenario.
-- **License:** MIT (commercial use OK, keep the notice). Actually running the Scenario skills needs a Scenario account and paid credits.
-- **Requirements:** Install with `npx skills add`. The expert tools need the app installed.
-- **Status:** Looked into (2026-11-07)
-- **Verdict:** We make our art with ComfyUI on a home PC, so the Scenario skills have no job here yet. The home PC has Blender 5.2, though, so the Blender set is the first thing to try next time we pose mannequins.
+- **What:** A pack of 175 skills (as of 2026-11) for AI coding agents like Claude Code from the game-art platform Scenario. Most connect to Scenario's MCP server to make art, sprite animations, textures, 3D, video and audio. A separate "expert tools" set drives Blender, Unity, Godot, Unreal, Maya, ZBrush and Roblox Studio right on your own PC—the 15 Blender skills alone were distilled from ~200 tutorial videos and tested on Blender 5.2.
+- **Where it fits:** Worth reading even if you never sign up for Scenario. The docs pack solid notes on sprite-sheet grid math and cross-frame character consistency, and the local expert tools don't need a Scenario account at all.
+- **License:** MIT (commercial use OK, keep the notice). Running Scenario's hosted skills requires an account and paid credits.
+- **Specs:** Install with `npx skills add`; local expert tools require the host app installed.
+- **Status:** Looked at (2026-11-07)
+- **Verdict:** Since we generate art locally in ComfyUI, Scenario's cloud skills can sit on the shelf. Our home PC does have Blender 5.2, though, so the Blender pack is first up next time we stage 3D mannequins.
 
 ## Making motion (AI video)
 
-Image models don't remember anything between frames, so stitching together poses drawn one at a time gives jerky motion. The trick the community leans on now is to **make the character move in a video model, then cut frames out of the video**. My current game uses five still poses plus code-driven motion, so it doesn't need this, but I'll pull it out for a game that needs lots of walk and run frames.
+Image models have goldfish memory between frames—generate poses one at a time and stitching them together looks choppy. The community workaround gaining steam is to **animate the character in a video model, then slice out frames**. My current game relies on five still poses plus code-driven bounce, so I don't need this yet, but the moment I build a game with full walk and run cycles, I'm reaching right here.
 
 ### Making 2D character motion with AI video (community recipe)
 
-- **What:** A six-step recipe that's been going around. ① Draw an 8-direction character sheet with an image AI like GPT. ② Put the motion you want on a 3D mannequin (you can have an AI set the joint angles) or film yourself doing it. ③ Feed the motion video and the character picture to a video model that takes both (Alibaba's Wan family) and render the frame count you want. ④ Use an acceleration LoRA to cut steps and render faster. ⑤ Cut the character out with SAM2. ⑥ Fill in between-frames with RIFE for smoothness.
-- **Where it fits:** Games with many directions × actions, like 8-direction top-down RPGs, and games with smooth hand-drawn-style characters that should move fluidly.
-- **License:** Wan 2.2 (including Animate), the acceleration LoRAs and SAM2 are Apache-2.0; RIFE is MIT. All usable commercially. Under OpenAI's terms, GPT images belong to whoever made them.
-- **Specs:** Step ③ is the heavy one. It's a 14B model, so on a 12GB card it only just runs as a 4-bit (GGUF) build.
-- **Status:** Looked into (2026-11-18); step ③ tested on its own (2026-10-28)
-- **Verdict:** Ready to use for smooth art styles. **For pixel art, two steps go the wrong way.** Video frames are smooth, so turning them into pixels makes the dots shimmer (lock the grid and palette from the first frame onto every frame). And RIFE adds frames, while pixel sprites get their charm from snappy 6–8 frame cycles, so you should **pick and drop** frames instead. For pixel art, swap ⑥ for "pick one cycle → pin the feet → lock grid and palette".
+- **What:** A six-step pipeline making the rounds: ① draw an 8-direction sheet with an image AI like GPT; ② stage the target motion on a 3D mannequin (or just film yourself doing it); ③ feed both character art and motion clip to a video model like Alibaba's Wan family; ④ attach an acceleration LoRA to cut step count; ⑤ pull the character off the background with SAM2; ⑥ pad between-frames with RIFE for silky motion.
+- **Where it fits:** Top-down 8-direction RPGs where direction × action explodes combinatorially, or smooth hand-drawn games that want fluid animation.
+- **License:** Wan 2.2 (including Animate), acceleration LoRAs and SAM2 are Apache-2.0; RIFE is MIT. All commercially usable. Under OpenAI's terms, GPT outputs belong to you.
+- **Specs:** Step ③ is the beast—a 14B model that barely squeezes onto 12GB VRAM as a 4-bit (GGUF) build.
+- **Status:** Looked at (2026-11-18); step ③ tested on its own (2026-10-28)
+- **Verdict:** Good to go for smooth art. **For pixel art, two steps actually work against you.** Smooth video frames shimmer when quantized into dots (lock the first frame's grid and palette onto every frame), and RIFE invents extra frames when pixel animation lives on snappy 6–8 frame cycles—you want to **prune** frames, not pad them. For pixel sprites, replace ⑥ with "pick one clean cycle → pin the feet → lock grid and palette."
 
 ### [Wan 2.2](https://huggingface.co/Wan-AI/Wan2.2-I2V-A14B) video models (I2V · [Animate](https://huggingface.co/Wan-AI/Wan2.2-Animate-14B))
 
-- **What:** Alibaba's open video models. I2V makes a video from one picture plus text; Animate takes one picture plus a **motion video** and makes that character copy the movement. A follow-up, [Wan-Animate-2](https://huggingface.co/Wan-AI/Wan2.2-Animate-2-14B), is out too. 12GB-friendly builds are at [QuantStack GGUF](https://huggingface.co/QuantStack/Wan2.2-Animate-14B-GGUF).
-- **Where it fits:** Whole-body motions that have to flow, like walking and attacks. Put the same picture as the first and last frame and you get a seamless walk loop.
+- **What:** Alibaba's open video models. I2V animates one picture from text; Animate pairs one picture with a **motion clip** so your character mirrors the movement. A follow-up, [Wan-Animate-2](https://huggingface.co/Wan-AI/Wan2.2-Animate-2-14B), is out as well, and 12GB-friendly builds live at [QuantStack GGUF](https://huggingface.co/QuantStack/Wan2.2-Animate-14B-GGUF).
+- **Where it fits:** Full-body motions that need real weight and continuity—walking, swinging, casting. Put the same image at both start and end and you get a clean walk loop.
 - **License:** Apache-2.0.
-- **Specs:** I2V 14B Q4 GGUF on 12GB: about 89 seconds per short clip, 11.8GB of video memory (nearly full).
-- **Status:** I2V tested (2026-10-28), Animate looked into (2026-11-18)
-- **Verdict:** Walks flowed and looped, clearly better motion than drawing one frame at a time. Tips: putting the Lightning acceleration LoRA on the high-noise side freezes the legs; attacks need "feet planted" in the prompt or the feet slide; a fixed pixel grid was steadier than auto-detecting one. The look drifted away from the cute pixel style I wanted, though, so I went back to hunting for a style. Reference pipeline: [pixel-video-sprites](https://github.com/cueqzapper/pixel-video-sprites) (MIT).
+- **Specs:** I2V 14B Q4 GGUF on 12GB takes ~89 seconds per short clip and fills 11.8GB VRAM (practically touching the ceiling).
+- **Status:** Tested (I2V 2026-10-28; Animate looked at 2026-11-18)
+- **Verdict:** Walks flowed and looped far better than frame-by-frame image generation. Three lessons from testing: putting the Lightning LoRA on the high-noise side freezes the legs, attacks need "feet planted" or the character ice-skates, and a fixed pixel grid beats auto-detection. The look drifted too far from the cute pixel style I wanted, so I pivoted back to style hunting. Reference pipeline: [pixel-video-sprites](https://github.com/cueqzapper/pixel-video-sprites) (MIT).
 
 ### Finishing tools: [SAM2](https://github.com/facebookresearch/sam2) cutouts · [RIFE](https://github.com/hzwer/Practical-RIFE) frame interpolation
 
-- **What:** SAM2 follows a character through a video after one click on the first frame and removes the background. RIFE invents in-between frames to smooth a video. In ComfyUI it comes as the [Frame-Interpolation nodes](https://github.com/Fannovel16/ComfyUI-Frame-Interpolation).
-- **Where it fits:** SAM2 when the background color overlaps the character's colors and chroma key fails; RIFE when stretching smooth-art motion to 24–60 frames.
-- **License:** SAM2 Apache-2.0, RIFE MIT.
-- **Specs:** Both are light, nearly free next to the video model.
-- **Status:** Looked into (2026-11-18)
-- **Verdict:** If the video model gives a clean flat background, chroma key is enough and SAM2 can wait. Skip RIFE for pixel sprites: in-between frames blend two pictures into blurry dots and the crisp pixels are gone.
+- **What:** Click your character once on frame one and SAM2 tracks and cuts them out across the whole clip. RIFE invents intermediate frames to smooth out motion; in ComfyUI it's available via [Frame-Interpolation nodes](https://github.com/Fannovel16/ComfyUI-Frame-Interpolation).
+- **Where it fits:** SAM2 when character colors bleed into the background and simple chroma key fails; RIFE when stretching smooth-art motion up to 24–60 fps.
+- **License:** SAM2 is Apache-2.0, RIFE is MIT.
+- **Specs:** Featherweight compared to the video model—practically free to run.
+- **Status:** Looked at (2026-11-18)
+- **Verdict:** If your video model gives a clean flat background, plain chroma key is enough and SAM2 can wait. Keep RIFE away from pixel sprites: blended in-between frames turn crisp pixels into blurry mush.
 
 ## Making 3D models
 
 ### One picture → a game-ready 3D prop (ComfyUI community pipeline, [original post](https://gall.dcinside.com/mgallery/board/view/?id=aidevelop&no=8429))
 
-- **What:** A ComfyUI graph that takes one front-view picture and gives back a low-poly GLB of about 2,000 faces plus 2048px color, roughness, metallic and normal maps. The order is background removal (BiRefNet) → camera angle estimate (MoGe 2) → shape ([TRELLIS.2](https://github.com/microsoft/TRELLIS.2) or [Pixal3D](https://huggingface.co/TencentARC/Pixal3D)) → seal holes and cut faces (WTiVo, LODTailor, which call Blender behind the scenes) → paint textures ([UltraTex](https://github.com/Mstafa-awad/UltraTex-ComfyUI-nodes)). The whole point: no Tripo or Meshy credits, so you can re-roll at home as often as you like.
-- **Where it could fit:** Small props like crates, weapons and furniture, in 3D games that aren't first person. No skeleton comes out, so characters need AccuRIG or Mixamo afterwards. The back of the object is invented by the AI.
-- **License:** The shape side (TRELLIS.2, Pixal3D, MoGe code, BiRefNet) is MIT and the cleanup nodes are MIT or GPL-3.0, so that part is fine. The trap is texturing. UltraTex runs on FLUX.2 klein base 9B, which has a **non-commercial license**, so for a game you sell, use the pipeline for shape only and swap texturing for TRELLIS.2's own painter or hand painting.
-- **Hardware:** On the author's RTX 5070 Ti 16GB: 1024 about 4.5 min, 2048 about 9.5 min, 4096 about 20 min. The author says to install a separate ComfyUI on Python 3.12 and torch 2.8 rather than mixing it into an existing one. On a Korean-language Windows one node crashes over text encoding; starting in UTF-8 fixes it.
+- **What:** A ComfyUI graph that turns a single front-facing picture into a ~2,000-face low-poly GLB with 2048px color, roughness, metallic and normal maps. The assembly line: background removal (BiRefNet) → camera angle estimate (MoGe 2) → mesh generation ([TRELLIS.2](https://github.com/microsoft/TRELLIS.2) or [Pixal3D](https://huggingface.co/TencentARC/Pixal3D)) → hole filling and decimation (WTiVo, LODTailor, calling Blender under the hood) → texturing ([UltraTex](https://github.com/Mstafa-awad/UltraTex-ComfyUI-nodes)). The appeal: zero Tripo or Meshy credits, so you can re-roll on your own PC all afternoon.
+- **Where it fits:** Small props—crates, weapons, furniture—for non-first-person 3D games. No rig comes out, so characters still need AccuRIG or Mixamo, and whatever isn't in the picture (like the back) gets improvised by the AI.
+- **License:** The geometry side (TRELLIS.2, Pixal3D, MoGe code, BiRefNet) is MIT and cleanup nodes are MIT or GPL-3.0—all clear. The landmine is texturing: UltraTex leans on FLUX.2 klein base 9B, which is **non-commercial**, so for a paid game stop after the mesh and paint textures with TRELLIS.2's built-in painter or by hand.
+- **Specs:** On the author's RTX 5070 Ti 16GB: ~4.5 min at 1024, ~9.5 min at 2048, ~20 min at 4096. Keep it in a separate ComfyUI install (Python 3.12, torch 2.8) so it doesn't collide with your main setup. On Korean-locale Windows, one node trips over text encoding; launching in UTF-8 clears it up.
 - **Status:** Looked at (2026-11-23)
-- **Verdict:** Notebook RPG is 2D, so there's nowhere to use it today, but for a future 3D game it's the first candidate for mass-producing props. Our PC has 12GB of graphics memory, so 1024 is the right place to start testing.
+- **Verdict:** Notebook RPG is 2D, so no job for it yet—but if I ever build a 3D game, this is candidate #1 for mass-producing props. With 12GB VRAM on my PC, 1024 is the sensible starting rung.
 
 ## Backgrounds and depth
 
 ### 3D blockout + AI paintover for 2D backgrounds with depth ([HD-2D](https://en.wikipedia.org/wiki/HD-2D), [Midjourney→Blender 2.5D test](https://hitmarker.net/news/utilizing-midjourney-generated-ai-artworks-to-create-a-2-5d-location-for-an-adventure-game-522580))
 
-- **What:** I ran into a post with this recipe: "make character sprites with an AI sprite generator → build a gray 3D model in Blender and put the character in it → paint over that render with GPT image → rebuild the 3D background in Blender from that painting." Pull it apart and it isn't a new trick so much as two old ones stitched together with AI. One is concept art's **paint over a gray blockout**, the other is film compositing's **project a painting onto 3D surfaces** (camera projection). 3D nails the perspective and scale, AI adds texture and mood, and going back to 3D buys the parallax, lighting and occlusion a single picture can't give you.
-- **Where it could fit:** Quarter-view or top-down RPGs and adventure games where the camera barely moves. HD-2D (Octopath Traveler: 3D sets with pixel characters) and Disco Elysium (hand paintover on 3D renders) work on the same idea. The closest AI case is a 2023 2.5D adventure test that recovered the camera of Midjourney images with fSpy and rebuilt them in 3D in Blender. I haven't found a shipped game that used all four steps as written.
-- **Tools:** AI sprite generators like [SpriteGen](https://spritegen.ai/) or [Ludo.ai](https://ludo.ai/features/sprite-generator) for sprites, Blender (free) for blockout and projection, fSpy (free) to recover the camera from one picture, and [StableGen](https://github.com/sakalond/StableGen) (a Blender add-on wired to ComfyUI) to paint over and project in one go inside Blender.
-- **License:** Blender is GPL, StableGen is GPL-3.0. Check the image model used for the paintover on its own. SpriteGen allows commercial use of sprites made with paid credits.
-- **Hardware:** Blender and fSpy run on an ordinary PC. Local paintover with StableGen wants 8GB+ of graphics memory (for SDXL).
+- **What:** I came across a four-step workflow: "generate character sprites with AI → build a gray 3D blockout in Blender and place the character → paint over that render with GPT Image → rebuild the 3D background in Blender from the painted render." Under the hood it isn't brand-new magic—it stitches together two classic tricks with AI: concept art's **gray blockout + paintover** and film VFX's **camera projection**. 3D locks down perspective and scale, AI supplies texture and mood, and returning to 3D buys parallax, lighting and occlusion that flat art can't fake.
+- **Where it fits:** Quarter-view or top-down RPGs and adventures with a mostly fixed camera. HD-2D (*Octopath Traveler*: 3D sets with pixel characters) and *Disco Elysium* (hand paintover on 3D renders) run on the same principle. The closest AI example is a 2023 2.5D adventure demo that recovered Midjourney cameras with fSpy and rebuilt the scenes in Blender. I haven't spotted a shipped game using all four steps verbatim yet.
+- **Tools:** [SpriteGen](https://spritegen.ai/) or [Ludo.ai](https://ludo.ai/features/sprite-generator) for sprites, Blender (free) for blockout and projection, fSpy (free) for camera matching from one image, and [StableGen](https://github.com/sakalond/StableGen) (a Blender–ComfyUI add-on) to paint and project right inside Blender.
+- **License:** Blender is GPL, StableGen is GPL-3.0; check whatever image model you use for paintovers separately. SpriteGen allows commercial use of sprites made with paid credits.
+- **Specs:** Blender and fSpy run on any ordinary PC; local StableGen paintovers want 8GB+ VRAM (SDXL baseline).
 - **Status:** Looked at (2026-10-28)
-- **Verdict:** Notebook RPG is a side view of small pixel stickers, so there's no room for a 3D set. But "fix the perspective with a gray model first, then let the AI paint" is worth pulling out on its own to keep perspective consistent across many backgrounds, and for a quarter-view next game the whole recipe is a candidate.
+- **Verdict:** Side-view pixel stickers leave no room for 3D sets in Notebook RPG. Still, "lock perspective with a gray blockout first, then let AI paint" is worth stealing on its own whenever you need consistent angles across multiple backgrounds—and for a quarter-view next game, the whole recipe is on the table.
 
 ## Game screens (UI)
 
 ### [UI Glossary](https://tuiella.github.io/ui-glossary/) (Korean)
 
-- **What:** A Korean dictionary of about 140 game screen parts, like health bar trails, hit vignettes and bestiary silhouettes, each with an example picture.
-- **Where it could fit:** Go through it line by line while designing a new game's screens and the missing parts jump out. You can also order things from AI by their proper name instead of "you know, that thing."
-- **License:** None stated. Linking is fine, but I don't copy its contents here.
-- **Hardware:** Any web browser.
+- **What:** A Korean illustrated dictionary of ~140 game UI components—health-bar trails, hit vignettes, bestiary silhouettes and more—each with a visual example.
+- **Where it fits:** Skim it while designing a new screen and every missing piece jumps out. Better yet, you can ask an AI for things by their real name instead of waving your hands at "you know, that red flash on the edges."
+- **License:** None stated. Fine to link; we don't republish its contents.
+- **Specs:** Any web browser.
 - **Status:** In use (2026-10-28)
-- **Verdict:** Checking Notebook RPG's screens against it turned up six improvement ideas. It'll stay useful whatever the game.
+- **Verdict:** Running Notebook RPG's screens against it surfaced six concrete improvements right away. Staying permanently open on the desk.
 
 ### [Game UI Database](https://www.gameuidatabase.com/)
 
-- **What:** A free collection of game screens run by UI designer Edd Coates. You can browse screenshots from 300-odd games by screen type (shops, inventories, HUDs, popups) and by mood (wood, paper, grunge). It includes 2D pixel games, roguelites and card or turn-based games such as Celeste, Shovel Knight and Rogue Legacy.
-- **Where it helps:** Before designing a new screen, when you want to see how ten other games solved the same one. Giving an AI the screen type plus a few reference game names gets much closer than describing it in words.
-- **License:** The site states no reuse terms. The screenshots belong to their game companies, so we look and learn but don't republish them.
-- **Requirements:** A web browser. Free with no sign-up, just a donation button.
-- **Status:** Looked into (2026-11-06)
-- **Verdict:** If the UI glossary gives you the names, this shows you the real thing. Used together they make screen meetings faster.
+- **What:** A free library of game screenshots curated by UI designer Edd Coates, covering 300+ titles filterable by screen type (shops, inventories, HUDs, popups) and vibe (wood, paper, grunge). Plenty of 2D pixel games, roguelites and turn-based/card games like *Celeste*, *Shovel Knight* and *Rogue Legacy*.
+- **Where it fits:** Before mocking up a new screen, when you want to see how ten shipped games solved the same layout. Handing an AI a screen type plus two reference games beats three paragraphs of description.
+- **License:** No reuse terms stated; screenshots belong to their respective studios, so browse for inspiration only.
+- **Specs:** A web browser. Free, no sign-up, just a tip jar.
+- **Status:** Looked at (2026-11-06)
+- **Verdict:** The UI Glossary gives you the names; this shows you the real furniture. Together they cut UI back-and-forth with AI in half.
 
 ### [skullet](https://github.com/lochie/skullet)
 
-- **What:** A library that draws a gray skeleton the exact size of the content that's on its way. It works with React, Vue, Svelte and plain JS, measures a bar for every line of text and a box for every image, so nothing jumps when the content lands. Shimmer or pulse motion and colors are themeable.
-- **Where it could fit:** Screens full of server-fed slots like lists, cards and profiles, where the app is already running and only a few slots inside it are waiting.
+- **What:** A library that draws gray loading skeletons sized to the exact content about to arrive. Works with React, Vue, Svelte and plain JS, measuring bars for text lines and boxes for images so nothing jumps when data lands. Themeable shimmer, pulse and colors.
+- **Where it fits:** Data-heavy screens—lists, cards, profiles—where the app shell is already loaded and only a few slots are waiting on the server.
 - **License:** MIT (commercial use OK, keep the copyright notice).
-- **Hardware:** A web browser. Version 0.0.3 as of 2026-11, so it's very early.
+- **Specs:** Any web browser. Still at v0.0.3 as of 2026-11, so very early days.
 - **Status:** Looked at (2026-11-04)
-- **Verdict:** Our game's long wait happens while the game code itself downloads, and at that point skullet hasn't arrived either. Borrowing just the idea, "sketch the outline of the coming screen in the same spot", and putting a pencil-sketch loading screen straight into the first HTML fit better than the library.
+- **Verdict:** Our longest wait happens while the game bundle itself downloads, before skullet would even arrive. Borrowing just the core idea—sketching the incoming screen's outline in place—as a pencil-draft loading screen baked right into the initial HTML was a much better fit.
 
 ### [Impeccable](https://github.com/pbakaus/impeccable)
 
-- **What:** A skill that gives coding agents like Claude Code a design vocabulary. It has 24 commands such as `bolder`, `quieter`, `polish`, `critique` (a scored usability review) and `audit` (accessibility, performance and responsiveness checks). It also ships 62 rules that catch the usual "an AI made this" tells: purple gradients, cards inside cards, Inter everywhere. Those rules run without any AI, so they work in a terminal or CI too.
-- **Where it helps:** When "make it look nicer" is hard to put into words. Pick one command for the direction and point it at one target (`critique the pricing cards`), and the results wobble far less.
+- **What:** A skill pack that hands coding agents like Claude Code a real design vocabulary: 24 commands including `bolder`, `quieter`, `polish`, `critique` (scored usability review) and `audit` (accessibility, performance and responsiveness). It also ships 62 deterministic rules that catch classic "AI-generated page" tells—purple gradients, cards inside cards, Inter everywhere—and those run without an LLM in your terminal or CI.
+- **Where it fits:** When "make it look nicer" is too vague to be useful. Pick one command for direction and point it at one target (`critique the pricing cards`), and the output stops drifting.
 - **License:** Apache-2.0 (commercial use OK, keep the notices).
-- **Requirements:** `npx impeccable install`. It needs Node and downloads an engine binary on first use. One caution: in live mode, which edits right in the browser, Apply runs codex or claude with permission checks off when no chat agent is polling. Setting `IMPECCABLE_LIVE_COPY_AGENT=chat` is the safer choice.
+- **Specs:** `npx impeccable install`. Needs Node and downloads an engine binary on first run. One heads-up: in browser live mode, Apply invokes codex or claude with permission checks off if no chat agent is listening. Set `IMPECCABLE_LIVE_COPY_AGENT=chat` to stay safe.
 - **Status:** Tested (2026-11-07)
-- **What we found:** We ran just the checker on our game. It flagged 18 spots in the code and 8 on the cover screen, and none needed fixing. Most were thick left borders read as an "AI tell," which on our screens are notebook margin lines and red-pen marks. The grid background is graph paper, the stripes are ruled lines, and the cyan shine is a sticker's hologram. On the other hand, the contrast and tiny-text checks found nothing on the main game screen, PC or phone. One catch: scanning by URL only sees the first screen. For screens deeper in the game we had to save the HTML and feed it in separately.
-- **Verdict:** Same family as unslop, which we used earlier, but with more commands and a mechanical checker attached. It's tuned for company web pages, so rules that fight our deliberately wobbly, cute notebook screens need filtering out first. For new screens, `critique` and `audit` alone look like a good fit.
+- **What we found:** Running just the checker flagged 18 spots in code and 8 on our cover screen—and zero actually needed fixing. Most were thick left borders mistaken for an "AI tell," when in our game they're literally notebook margin lines and red-pen marks; the grid is graph paper, the stripes are ruled lines, and the cyan glint is a sticker hologram. Contrast and tiny-text checks, meanwhile, passed cleanly on both PC and phone. One quirk: scanning a URL only inspects the landing screen, so deeper screens needed saved HTML snapshots.
+- **Verdict:** Same family as unslop, but richer commands and a mechanical linter attached. Tuned for crisp corporate sites, so filter out rules that clash with deliberately wobbly, hand-drawn charm. Great to pull out `critique` and `audit` on new screens.
 
 ## Game feel
 
 ### [Game Feel demo (Deepnight)](https://deepnight.net/games/game-feel/)
 
-- **What:** A small 2D action prototype Deepnight Games made to teach game feel (v2, May 2024). Each press of Enter switches one feel feature on or off, so you can watch the same rules turn flat the moment the feedback is gone. Windows and WebGL builds are downloadable and the [source](https://github.com/deepnight/gamefeel) is public.
-- **Where it helps:** The first prototype of a new game. Play with it before asking an AI to "add juice" and your requests get a lot more precise.
-- **License:** Not stated on the page. We won't reuse the code until we've checked the source repository's license.
-- **Specs:** Windows, or download the WebGL build and open it in a browser.
-- **Status:** Looked into (2026-11-03)
-- **Verdict:** Shows in thirty seconds that the same rules with different feedback make a different game.
+- **What:** A tiny 2D action toy Deepnight Games built to demonstrate game feel (v2, May 2024). Tap Enter to toggle one feel ingredient at a time and watch identical mechanics go completely lifeless the instant feedback disappears. Windows and WebGL downloads available, plus public [source](https://github.com/deepnight/gamefeel).
+- **Where it fits:** Early prototype stage. Spend two minutes here before telling an AI to "add juice," and your requests suddenly sound like you know what you're talking about.
+- **License:** Not stated on the page; check the source repository's license before borrowing any code.
+- **Specs:** Windows, or grab the WebGL build and open it in a browser.
+- **Status:** Looked at (2026-11-03)
+- **Verdict:** Proves in thirty seconds that the exact same rules with different feedback feel like an entirely different game.
 
 ### [Juice It or Lose It](https://www.youtube.com/watch?v=Fy0aCDmgnxg)
 
-- **What:** A talk by Martin Jonasson and Petri Purho (video, 2012). They take a plain brick-breaker and add particles, sound, squash and stretch and screen reactions one at a time to show what "juice" means.
-- **Where it helps:** Deciding the order to add effects in, and where to stop.
-- **License:** It's a video, so we only link to it.
-- **Specs:** A web browser.
-- **Status:** Looked into (2026-11-03)
-- **Verdict:** The classic every game-feel discussion cites. For a quiet game like a notebook RPG, half of it is already plenty.
+- **What:** Martin Jonasson and Petri Purho's classic 2012 talk. They start with a bare-bones brick-breaker and layer on particles, audio, squash-and-stretch and screen shake one piece at a time to show what "juice" really does.
+- **Where it fits:** Deciding what order to layer polish in—and where to stop before the screen turns into a fireworks show.
+- **License:** Video—link only.
+- **Specs:** Any web browser.
+- **Status:** Looked at (2026-11-03)
+- **Verdict:** The classic everyone cites for a reason. For a quiet game like Notebook RPG, half of what's in this talk is already plenty.
 
 ### [Names of Game Feel](https://tuiella.github.io/b3/sonmat/) (Korean)
 
-- **What:** A new column series (B3) from the author of the two glossaries above. It covers thirteen game-feel parts, from damage number pop, count-up, easing, hitstop and screen shake to coyote time, each laid out as "when it feels flat → A/B demo → how to ask for it." The demos can be played in slow motion.
-- **Where it helps:** When you need a sentence to hand an AI instead of "make the hits feel better." Every entry comes with a request that already has numbers in it, like "pause both for 0.06 seconds," plus the English term, so you can copy it as is.
-- **License:** None stated. Linking is fine, but we don't republish the content.
-- **Requirements:** A web browser.
-- **Status:** Looked into (2026-11-06)
-- **Verdict:** If game-feel talks tell you why, this tells you what to say. "Feedback tiers," saving the big effects so a big number feels like a big deal, fits a quiet game like ours especially well.
+- **What:** A B3 column from the author of the two glossaries above, breaking down thirteen game-feel parts—popping damage numbers, rolling counters, easing, hitstop, screen shake, coyote time—in a tight "when it feels flat → A/B demo → how to ask for it" format, complete with slow-motion playback.
+- **Where it fits:** When you want exact words to hand an AI instead of "make hits feel punchier." Every entry includes a ready-to-copy prompt with real numbers ("pause both for 0.06 seconds") plus the English term.
+- **License:** None stated. Link freely; don't republish.
+- **Specs:** Any web browser.
+- **Status:** Looked at (2026-11-06)
+- **Verdict:** If talks teach you *why* feel matters, this teaches you *what to say*. "Feedback tiers"—saving big effects so big moments actually land—fits a calm game like ours like a glove.
 
 ### Measuring the moment of a press (screen recording + response time)
 
-- **What:** A check we built ourselves. Headless Chrome's screencast (CDP) hands us a timestamped frame every 1/60 s after a press, and the browser's Event Timing measures "press → next frame" in milliseconds. Throttling the CPU 4× stands in for a slow phone.
-- **Where it helps:** Turning "something feels sluggish" into numbers, and catching beats that land out of order, where the result shows before its cause.
-- **License:** Built-in Chrome and Playwright features.
+- **What:** A homegrown check we built ourselves. Headless Chrome's screencast (CDP) captures timestamped frames every 1/60 s after a click, while Event Timing measures "press → next frame" in milliseconds. A 4× CPU throttle mimics a tired old phone.
+- **Where it fits:** Turning a vague "feels a bit sluggish" into hard numbers, and catching beats out of order—like an outcome showing up before its cause.
+- **License:** Standard Chrome and Playwright features.
 - **Specs:** Any laptop.
 - **Status:** Tested (2026-11-03)
-- **Verdict:** This is how we caught our scene showing the result 1.1 s before the die stopped. We never noticed it by eye.
+- **Verdict:** This caught our scene spoiling the outcome 1.1 seconds before the die even finished rolling. By eye alone, we never spotted it.
 
 ## Pixel art
 
 ### [Pixel Shading Glossary](https://tuiella.github.io/pixel-glossary/) (Korean)
 
-- **What:** A Korean guide to pixel art terms for light, shadow, color, animation and production, explained with before-and-after pictures.
-- **Where it could fit:** A checklist for reviewing pixel art that AI drew. One proper term works far better than "make the shadows look natural."
-- **License:** None stated. Linking is fine, but I don't copy its contents here.
-- **Hardware:** Any web browser.
+- **What:** An illustrated Korean guide to pixel-art vocabulary—light, shadow, color, animation and workflow—with crisp before-and-after examples.
+- **Where it fits:** A review checklist for AI-generated pixel art. One precise term gets ten times further than "make the shading nicer."
+- **License:** None stated. Link only; don't copy contents.
+- **Specs:** Any web browser.
 - **Status:** In use (2026-10-28)
-- **Verdict:** Worth keeping nearby for any game that uses pixel art.
+- **Verdict:** Permanent bookmark for any project that touches pixels.
 
 ### [Names of Pixel Problems](https://tuiella.github.io/b3/dot/) (Korean)
 
-- **What:** Another B3 column by the same author. Fifteen pixel-art problems, the "it looks jittery" and "it's bubbling" kind, sorted into symptom → cause → fix: boiling, pivot jitter, alpha fringe, mixels, integer scaling, rotation artifacts, fixed palettes and more. Buttons like "show changed pixels" and "overlay grid" let you poke at each problem yourself.
-- **Where it helps:** Reviewing AI-drawn pixel art or animation. Where the pixel shading glossary is about how to paint, this one is a checklist for what went wrong.
-- **License:** None stated. Linking is fine, but we don't republish the content.
-- **Requirements:** A web browser.
-- **Status:** Looked into (2026-11-06)
-- **Verdict:** If you generate frames one at a time with AI, start with the first entry, "boiling." Frames drawn separately change pixels that should stay still, and the result shimmers.
+- **What:** Another B3 column from the same author, sorting fifteen pixel-art complaints—the "why is it buzzing?" kind—into symptom → cause → fix: boiling, pivot jitter, alpha fringe, mixels, integer scaling, rotation artifacts, fixed palettes and more. Interactive buttons let you highlight changed pixels or toggle a grid overlay.
+- **Where it fits:** Reviewing AI-generated sprites and animations. If the shading glossary teaches how to paint, this one is the diagnostic chart for what went sideways.
+- **License:** None stated. Link only; don't republish.
+- **Specs:** Any web browser.
+- **Status:** Looked at (2026-11-06)
+- **Verdict:** If you generate animation frames one by one with AI, start with entry #1: "boiling." Separately drawn frames wiggle pixels that had no business moving.
 
 ### [You Need to Know Light](https://tuiella.github.io/b3/light/) (Korean)
 
-- **What:** Part 1 of the same author's B3 column on graphics engines and light math. Eight hands-on entries walk one pixel from texture to monitor: encoded values vs. linear light, the gamma curve, doing math in linear, HDR and exposure, tone mapping, color grading with LUTs, gamuts, and output encoding. It ends with five questions to ask when "the colors look off" and a term table.
-- **Where it helps:** Reports like "the colors look muddy," "the highlights blow out," or "it looks different on my phone." Even a 2D game hits the same rules when it layers transparency, shrinks art, or tints for time of day.
-- **License:** None stated. Linking is fine, but we don't republish the content.
-- **Requirements:** A web browser.
-- **Status:** Looked into (2026-11-09)
-- **Verdict:** Much of it is about 3D engines, but the single question "where did the blending happen?" sorts out most color problems in a 2D game too.
+- **What:** Part 1 of the same author's B3 series on graphics engines and light math. Eight interactive chapters follow a pixel from texture to screen: encoded values vs. linear light, gamma curves, linear math, HDR and exposure, tone mapping, LUT color grading, color gamuts and output encoding—ending with five questions to ask when colors look off.
+- **Where it fits:** Troubleshooting "the colors look muddy," "highlights are blown out," or "it looks totally different on my phone." Even 2D games hit the exact same math whenever you layer alpha, downscale art, or tint for time of day.
+- **License:** None stated. Link only; don't republish.
+- **Specs:** Any web browser.
+- **Status:** Looked at (2026-11-09)
+- **Verdict:** Plenty of 3D engine talk, sure, but carrying away just one question—"where did the blending happen?"—untangles most 2D color mysteries too.
 
 ### [Dynamic Lights: How They Work and How to Use Them](https://tuiella.github.io/b3/light2/) (Korean)
 
-- **What:** Part 2 of the same column. It starts from the difference between light painted into the art, light that only looks at distance, and light that also reads surface direction (normal maps), then covers light types, range and falloff, choosing what a light hits, 2D shadows and cost. The last chapter walks through adding one torch, time-of-day moods, darkness as a gameplay rule, and where lighting fights pixel art. A tavern scene lets you switch each effect on and off.
-- **Where it helps:** Adding night scenes, lanterns and torches, or a day/night cycle. Two lines carry over even to a web game with no engine: "with high ambient light, dynamic lighting is just a decoration you pay for," and "pixel art keeps its palette when brightness is quantized to a few steps."
-- **License:** None stated. Linked only (the torch sprite in the demo is MIT).
-- **Requirements:** A recent browser with WebGL2.
-- **Status:** Looked into (2026-11-18)
-- **Verdict:** Most games never need normal maps. What design should write down first is two lists: the lights that turn on and off during play, and the things that must stay visible however dark it gets.
+- **What:** Part 2 of the series. Starts from baked light vs. distance-only light vs. surface-direction light (normal maps), then walks through light types, falloff, masking, 2D shadows and performance cost. Wraps up with adding a single torch, time-of-day moods, darkness as gameplay, and where lighting clashes with pixel art—backed by a tavern demo where you can flip every effect on and off.
+- **Where it fits:** Night scenes, lanterns, torches and day/night cycles. Two takeaways transfer straight to an engine-less web game: "when ambient light is high, dynamic lights are just expensive decoration," and "pixel art keeps its palette when brightness snaps to a few steps."
+- **License:** None stated. Link only (the demo's torch sprite is MIT).
+- **Specs:** Any modern browser with WebGL2.
+- **Status:** Looked at (2026-11-18)
+- **Verdict:** Most games never need normal maps. Design just needs two short lists up front: which lights turn on and off during play, and what must remain readable no matter how dark the scene gets.
 
 ### Recovering the pixel grid ([unfake](https://pypi.org/project/unfake/), [proper-pixel-art](https://github.com/KennethJAllen/proper-pixel-art))
 
-- **What:** Finds the original grid in an AI's "big picture that looks like pixel art" and reads one representative color per cell to get true 1× pixel art back. We used our own post-processing built in the same order.
-- **Where it fits:** The last pass before AI pixel art goes into a game. Arbitrary downscaling mixes cells and smears the face; recovering the grid keeps even one-pixel eyes.
-- **License:** Check each tool's repository before use (our version lives in the game repo).
-- **Specs:** Plain Python, no GPU needed.
+- **What:** Detects the hidden pixel grid inside an AI's "big picture that merely looks like pixel art" and samples one representative color per cell to restore true 1× pixel art. We rolled our own post-processor following the exact same steps.
+- **Where it fits:** The final gate before AI pixel art enters a game. Naive downscaling smears cells and erases faces; recovering the native grid saves even single-pixel eyes.
+- **License:** Check each tool's repository before use (our own script lives inside the game repo).
+- **Specs:** Plain Python, no GPU required.
 - **Status:** Tested (2026-10-20)
-- **Verdict:** Always reduce colors after reading the cells. Flip the order and the eyes and pink cheeks vanish.
+- **Verdict:** Always quantize colors *after* reading the grid cells. Flip that order and eyes and rosy cheeks vanish on the spot.
 
 ### [pixelfx](https://github.com/patch-gg/pixelfx)
 
-- **What:** 244 pixel art effects drawn in code, no image files: fire, ice, lightning, holy, shadow, nature, status effects, pickups and more. Each effect carries a timing table for the body (wind-up → freeze on contact → recovery), and exports to a transparent PNG strip plus frame JSON.
-- **Where it fits:** When every named skill needs its own shape. "Call the grasping hands" gets hands rising from the ground; "Call the roots" gets roots wrapping the ankles. Colors change through an option.
+- **What:** 244 pixel-art effects drawn purely in code—no image files: fire, ice, lightning, holy, shadow, nature, status ailments, pickups and more. Each carries a timing table (wind-up → hit freeze → recovery) and exports as a transparent PNG strip plus frame JSON.
+- **Where it fits:** When every named spell deserves its own silhouette—"Grasping Hands" pulls hands out of the earth; "Entangling Roots" wraps vines around ankles. Colors swap via options.
 - **License:** MIT (commercial use and edits fine, keep the copyright notice). The bundled font is the one exception.
-- **Specs:** Node 18+, no other packages.
+- **Specs:** Node 18+, zero extra dependencies.
 - **Status:** In use (2026-11-03, 11 spell effects)
-- **Verdict:** Built to glow on dark backgrounds, so on a bright notebook page the light simply disappears. Kept at native size (a 24×38-pixel dummy) with our colors swapped in, it fit well; scaled up, the pixels got too chunky. Turning the light off and redrawing its job as solid bands made it crisp on the bright page too.
+- **Verdict:** Designed to glow against dark dungeons, so on a bright notebook page the glow vanishes. Keeping native scale (sized to a 24×38-pixel dummy) and swapping in our palette worked cleanly; scaling up made the dots blocky. Turning glow off and redrawing its job as solid opaque bands made every spell pop on white paper.
 
 ### [Sprite stacking](https://www.spritecook.ai/blog/sprite-stacking-pixel-art)
 
-- **What:** Slice an object into one-pixel-thick horizontal layers and draw them bottom to top. Rotate every layer by the same angle and lift each one a pixel higher than the last, and a pixel sprite turns in any of 360 directions with no 3D model. The write-up is on the SpriteCook blog (2026-11-14) and walks a race car from slicing to drawing in several engines.
-- **Where it fits:** Rigid things that turn a lot in top-down games: cars, boats, tanks, houses, trees. Not for characters with moving limbs or side-view games.
-- **License:** The technique is old and public, so no particular tool is needed. The slicing tools in the article are SpriteCook's (free generator, paid credits for AI art); MagicaVoxel layer export works for free.
-- **Specs:** Any browser with Canvas 2D. Cost is layers × objects per frame, so hundreds of turning objects get heavy.
-- **Status:** Tested (2026-11-20, a 14-layer house made in code, turning and camera tilt compared)
-- **Verdict:** Keep the order (lift, squash vertically, rotate) and it fits in under twenty lines of code. A squash near 0.75 looked right; at 0.5 the layers pulled apart and the roof split. Outline the finished stack once, not each layer, or lines cut through the body.
+- **What:** Slice an object into 1-pixel horizontal layers and stack them bottom to top. Rotate every slice by the same angle and offset each one a pixel higher, and a pixel sprite rotates smoothly through 360° with zero 3D models. The SpriteCook blog (2026-11-14) walks through a race car from slicing to rendering across engines.
+- **Where it fits:** Rigid objects that spin in top-down games—cars, boats, tanks, houses, trees. Skip it for characters with swinging limbs or side-view games.
+- **License:** It's an old, public technique with no tool lock-in. The article uses SpriteCook's slicer (free tool, paid credits for AI art), or you can export layers for free from MagicaVoxel.
+- **Specs:** Any browser with Canvas 2D. Cost scales as layers × objects per frame, so hundreds of rotating props will get heavy.
+- **Status:** Tested (2026-11-20, a 14-layer code-built house comparing rotation and camera tilt)
+- **Verdict:** Nail the three-step draw order (lift, squash vertically, rotate) and it fits in under twenty lines of code. A vertical squash around 0.75 felt right; down at 0.5 the layers pulled apart and split the roof. Outline the finished stack once at the end—outlining each slice turns the body into pinstripes.
