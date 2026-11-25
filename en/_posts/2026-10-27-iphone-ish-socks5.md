@@ -1,18 +1,18 @@
 ---
 layout: post
-title: "Poking at iPhone Tethering Limits: My iSH SOCKS5 and Shortcuts Setup"
+title: "Digging Into iPhone Tethering Limits: My iSH SOCKS5 and Shortcuts Setup"
 date: 2026-10-27 14:40:00 +0900
 category: dev-tips
 tags: [automation, security, iPhone, iSH, proxy]
 image: /assets/img/posts/iphone-ish-socks5/connection.webp
-summary: The whole process of running a SOCKS5 proxy server in iSH on an iPhone and connecting it to Windows v2rayN. A hands-on guide that also covers keeping it alive in the background and auto-starting it, so you never retype the commands.
+summary: "A complete walkthrough for running an authenticated SOCKS5 proxy inside iSH on an iPhone and connecting it to Windows v2rayN—including background keep-alive, clean shutdown, and auto-start so you never retype commands."
 ---
 
-What started as a mild curiosity about tethering limits on an iPhone MVNO (budget-carrier) plan somehow spiraled into running a SOCKS5 proxy server inside **a-Shell** and **iSH** on my phone. Since I'd already gone that far, I figured I'd see how much of the tedious command-typing could be automated away.
+What started as idle curiosity about how tethering limits work on an iPhone MVNO (budget-carrier) plan quickly escalated into running an authenticated SOCKS5 proxy inside **a-Shell** and **iSH** on my phone. Once I was that far down the rabbit hole, I figured I might as well see how much of the daily command-typing could be automated away.
 
-If you just copy-paste the scattered commands floating around the internet, you'll often end up lost: the one file that actually matters is missing, or the server is wide open with no authentication. So here's the complete walkthrough, no missing pieces: **① set up the server → ② connect the PC → ③ keep it alive in the background and automate it**.
+Most snippets floating around online leave out the parts you actually need: the server code itself is missing, there's no authentication, or a background process is left draining your battery after you quit. So here is the full, self-contained setup in order: **① server setup → ② PC connection → ③ background keep-alive and auto-start**.
 
-If you'd rather skip the backstory and install things on your iPhone right now, jump straight to **[1. Prepare Python and a working folder in iSH](#ish-install)**. Under each code block there's a **"Copy code"** button that copies everything, including the file-creation commands, in one go.
+Want to skip the backstory and get straight to installing on your iPhone? Jump straight to **[1. Prepare Python and a working folder in iSH](#ish-install)**. Every code block has a **"Copy code"** button underneath that grabs the full command, file-creation wrapper included.
 
 <script src="/assets/js/iphone-ish-code-copy.js" defer></script>
 <style>
@@ -21,49 +21,49 @@ If you'd rather skip the backstory and install things on your iPhone right now, 
 .ish-copybtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 </style>
 
-## Before you start: a working proxy and tethering data charges are two different things
+## Before you start: a working proxy and tethering data billing are separate questions
 
-What carriers call "unlimited data" and the "included tethering (hotspot) allowance" follow different rules depending on the carrier and the plan's terms. (Even [Apple's official guidance](https://support.apple.com/ko-kr/111785) says hotspot support depends on the carrier's policy.)
+What a carrier markets as "unlimited data" and what it counts against your "tethering (hotspot) allowance" vary wildly from plan to plan. (Even [Apple's official guidance](https://support.apple.com/ko-kr/111785) notes that Personal Hotspot behavior depends on carrier policy.)
 
-With a SOCKS5 proxy, your PC's internet requests go to an app inside your iPhone, which forwards them for you. Digging a side tunnel doesn't guarantee your carrier will count that traffic as regular phone data, though. "Does the proxy connect?" and "Does my tethering cap actually stay untouched?" are two different questions, so test with a small amount of data first before going all-in on it.
+Routing through a SOCKS5 proxy means your PC hands its internet requests to an app running on your iPhone, which forwards them onward. Still, digging that tunnel doesn't guarantee your carrier will bill the traffic as regular phone data. **"Does the proxy connect?"** and **"Does my tethering quota stay untouched?"** are two different checks—test with a tiny amount of traffic first before relying on it.
 
-And of course, the basic road between the PC and the iPhone (a hotspot connection, for example) has to be open first. If the hotspot itself is blocked, or the PC can't reach the iPhone's port, no amount of proxy setup will fix it—so start by checking your own plan's terms.
+You also need a basic path open between the PC and the iPhone (such as Personal Hotspot). If hotspot itself is blocked on your plan, or your PC can't reach ports on the phone at all, a proxy won't fix that—check your plan's terms first.
 
-<figure><img src="/assets/img/posts/iphone-ish-socks5/connection.webp" alt="Connection order from the PC app to v2rayN's local port, the iPhone SOCKS5 server and the internet, plus the separate things to check: iOS keep-alive and the carrier's data charges" loading="lazy"><figcaption>The whole connection flow. Opening the tunnel with a proxy is one thing; iOS background keep-alive and whether the carrier counts it against your tethering cap are two more things to verify separately.</figcaption></figure>
+<figure><img src="/assets/img/posts/iphone-ish-socks5/connection.webp" alt="Connection order from the PC app to v2rayN's local port, the iPhone SOCKS5 server and the internet, plus the separate things to check: iOS keep-alive and the carrier's data charges" loading="lazy"><figcaption>End-to-end flow. Getting traffic through the proxy is step one; iOS background survival and how your carrier meters the data each need their own check.</figcaption></figure>
 
-## Why I ended up on iSH instead of a-Shell
+## Why I gave up on a-Shell and switched to iSH
 
-I tried **a-Shell** first, an iOS terminal app with Python built in. According to its [official docs](https://github.com/holzschu/a-shell#shortcuts), it plays quite nicely with iOS Shortcuts.
+I started with **a-Shell**, an iOS terminal app that ships with Python built in. Its [official docs](https://github.com/holzschu/a-shell#shortcuts) make Shortcuts integration look invitingly clean.
 
-Back then I went with the well-known hack: "play a silent audio file forever + run `socks5.py` + loop the shortcut forever." Below is the shortcut screen I built at the time. Spoiler: **I don't recommend this approach.**
+At first I wired up the classic workaround: "loop a silent audio file + run `socks5.py` + repeat the shortcut forever." Below is the shortcut I built at the time—and the short verdict is **don't bother with this route.**
 
-<figure class="narrow"><img src="/assets/img/posts/iphone-ish-socks5/ashell-shortcut.webp" alt="The old a-Shell shortcut screen: switch on Personal Hotspot, go to the working folder, play the silent file and run socks5.py, then repeat" loading="lazy"><figcaption>The a-Shell shortcut from my early experiments. Even with silent playback and a loop, iOS ruthlessly put the background server to sleep.</figcaption></figure>
+<figure class="narrow"><img src="/assets/img/posts/iphone-ish-socks5/ashell-shortcut.webp" alt="The old a-Shell shortcut screen: switch on Personal Hotspot, go to the working folder, play the silent file and run socks5.py, then repeat" loading="lazy"><figcaption>My early a-Shell shortcut experiment. Even with silent audio and a loop, iOS put the background server right to sleep.</figcaption></figure>
 
-Putting a wait or a loop inside a shortcut doesn't make iOS give a terminal app unlimited run time. The silent-audio trick also gets spotted quickly on recent iOS, and the server tends to just keel over. If you look at the [a-Shell GitHub issue](https://github.com/holzschu/a-shell/issues/721), there are several reports of the same thing: running a SOCKS proxy with silent playback, then getting force-killed.
+Adding waits or loops inside a shortcut doesn't convince iOS to grant a terminal app indefinite background time. The silent-audio trick doesn't fool modern iOS for long either, and the server quietly dies. The [a-Shell GitHub issue tracker](https://github.com/holzschu/a-shell/issues/721) has plenty of similar reports of SOCKS proxies getting force-killed despite silent playback.
 
-So I changed direction and rebuilt the whole setup on **iSH**, which can hold on in the background more reliably through the location service (`/dev/location`). (One note: the `/root` path and the `apk` package commands are iSH-specific and won't work in a-Shell, so do all of this in the iSH app.)
+So I started over in **iSH**, which can stay alive in the background much more reliably via the location device (`/dev/location`). (Note that the `/root` path and `apk` commands below are iSH-specific and won't work in a-Shell—run all of these inside iSH.)
 
-## How the "two-line iSH command" you see everywhere actually works
+## What the "two-line iSH command" you see everywhere actually does
 
-If you've searched for tips on this, you've probably seen these two lines a lot.
+If you've searched around for iSH proxy tips, you've probably run across these two lines:
 
 ```sh
 cat /dev/location > /dev/null &
 cd /root/socks && python3 socks5.py
 ```
 
-- **Line 1 (`cat /dev/location ...`)**: It keeps reading the iPhone's GPS device, so iOS thinks "oh, this app is navigating right now!" and doesn't kill it in the background. (It's also the standard tip described on the [iSH official wiki](https://github.com/ish-app/ish/wiki/Running-in-background).) The stream of location coordinates gets tossed into `/dev/null`, while the trailing `&` keeps it running quietly in the background.
-- **Line 2 (`cd /root/socks ...`)**: It moves into the working folder and fires up the actual proxy server. Once the server is up, the terminal turns into a status display and the prompt stops. It's not frozen—it's working as intended. To stop it, press `Ctrl+C`.
+- **Line 1 (`cat /dev/location ...`)**: Continuously reads from the iPhone's GPS device so iOS assumes the app is actively navigating and holds off on killing it in the background. (This is the standard technique documented on the [iSH official wiki](https://github.com/ish-app/ish/wiki/Running-in-background).) The coordinate stream is discarded into `/dev/null`, and `&` sends it to the background.
+- **Line 2 (`cd /root/socks ...`)**: Enters the working folder and starts the proxy server. Once running, the terminal prompt appears to hang—that's normal; the server is simply waiting for connections. Press `Ctrl+C` when you want to stop it.
 
-But those tips usually leave out the most important parts: **what's actually inside the `socks5.py` file**, and **how to cleanly shut down the location reader you left running in the background**. So from here on I'll build the full set: a clean server with authentication, plus an automatic cleanup script.
+What most quick posts skip are the two details that matter most: **what actually goes inside `socks5.py`**, and **how to cleanly stop that background location reader when you're done**. Below we'll build the full kit: an authenticated server plus a wrapper script that cleans up after itself.
 
 <h2 id="ish-install">1. Prepare Python and a working folder in iSH</h2>
 
-If you opened this page on your iPhone, just tap the **Copy code** button on each block, paste it into the iSH terminal, and hit Enter. You only need to go through steps 1 to 4 in order the first time. Once it's set up, you can start everything with a single line.
+If you're reading this on your iPhone, tap **Copy code** under each block, paste it into iSH, and press Enter. Steps 1–4 are one-time setup; once they're done, starting the server takes a single line.
 
-The `socks5.py` we'll make is built on the proven open-source engine [pproxy](https://github.com/qwj/python-proxy), and it runs a TCP SOCKS5 server protected by a username and password. (UDP is not supported.)
+Our `socks5.py` wraps the well-tested open-source engine [pproxy](https://github.com/qwj/python-proxy) to serve a username/password-authenticated TCP SOCKS5 proxy. (UDP is not supported.)
 
-Open the iSH app, and when the terminal input appears, copy and paste the whole block below. It has to download packages, so you need an internet connection.
+Open iSH and, with an active internet connection so packages can download, paste the entire block below:
 
 ```sh
 (
@@ -81,11 +81,11 @@ Open the iSH app, and when the terminal input appears, copy and paste the whole 
 )
 ```
 
-After the installation scrolls by, if the last line prints **`Python / pproxy OK`**, step 1 is a success! If something errors out midway, the parentheses (`set -eu`) make it stop automatically, so check your internet connection and try again.
+Wait for the packages to finish installing. If the final line prints **`Python / pproxy OK`**, step 1 is done. Because of `set -eu` inside the subshell, any failure stops immediately—check your connection and rerun if needed.
 
 ## 2. Create the socks5.py server file
 
-Now it's time to put the actual server program, `socks5.py`, into that empty folder. Copy the block below and paste it into iSH. If it seems stuck on the last line, just press Enter once.
+Next, write the server script `socks5.py` into that folder. Paste the block below into iSH; if the cursor sits on the last line afterward, hit Enter once.
 
 ```sh
 cat > /root/socks/socks5.py <<'PY'
@@ -162,58 +162,58 @@ if __name__ == "__main__":
 PY
 ```
 
-Run a quick syntax check with the one-liner below to make sure the file was created properly. If you see **`socks5.py OK`**, the file is ready.
+Run a quick syntax check to verify nothing got mangled during paste. Seeing **`socks5.py OK`** means you're good to go.
 
 ```sh
 cd /root/socks && .venv/bin/python -m py_compile socks5.py && echo 'socks5.py OK'
 ```
 
-*(If copy-pasting is a hassle, you can also use [this same socks5.py as a direct download](/assets/downloads/iphone-socks5/socks5.py).)*
+*(If you'd rather skip pasting, you can grab [the exact same socks5.py as a direct download](/assets/downloads/iphone-socks5/socks5.py).)*
 
 ## 3. Set your own username and password
 
-You don't want just anyone hitching a free ride on your phone's proxy, so let's set a username and password. When you run the command below, it asks for them one after another.
+To keep anyone else from hitching a ride on your proxy, lock it down with a username and password. The command below prompts for them in order:
 
 ```sh
 cd /root/socks && .venv/bin/python socks5.py --configure
 ```
 
-One note: because of how pproxy parses its internal syntax, two underscores in a row (`__`) are blocked on purpose and will cause an error.
+One quirk to keep in mind: because of how pproxy parses its URI syntax, two underscores in a row (`__`) are deliberately disallowed.
 
-1. **`Username`**: Type whatever you like, using letters, digits, `_` and `-`.
-2. **`Password`**: Use the same kind of characters, but make it **at least 16 characters** long. (For safety, make up a brand-new password rather than one you use for your portal accounts. And it's normal that nothing shows on screen as you type!)
-3. **`Repeat password`**: Type the same password once more.
+1. **`Username`**: Any combination of ASCII letters, digits, `_`, and `-`.
+2. **`Password`**: Same character set, **at least 16 characters** long. (Use a brand-new password, not one reused from another account. Nothing appears on screen as you type—that's normal.)
+3. **`Repeat password`**: Enter the same password again.
 
-When you see **`Saved local credentials.json. Keep it private.`**, your credentials are safely tucked away. Later, you'll use this same username and password when connecting from the PC (v2rayN).
+When **`Saved local credentials.json. Keep it private.`** appears, your credentials are saved with `0600` permissions. You'll enter this same username and password in v2rayN on your PC shortly.
 
-## 4. Give the server a test run
+## 4. Test-run the server
 
-Before wiring up any automation, let's do a bare-bones test to make sure the server actually starts.
+Before adding any automation, verify that the bare server starts cleanly:
 
 ```sh
 cd /root/socks && .venv/bin/python -u socks5.py --host 0.0.0.0 --port 1080
 ```
 
-If the screen says **`SOCKS5 TCP listening on 0.0.0.0:1080; authentication required`**, the proxy server has successfully opened its doors inside the iPhone! (If iOS asks for "Local Network" permission, tap **Allow**.)
+Seeing **`SOCKS5 TCP listening on 0.0.0.0:1080; authentication required`** means the proxy is up and listening inside your iPhone. (If iOS prompts for "Local Network" access, tap **Allow**.)
 
-By the way, `--host 0.0.0.0` is the option that lets your hotspot-connected PC reach the iPhone server. When you're done testing and want to stop the server, tap the `Ctrl` button on the helper keyboard at the top of the iSH screen, then press the letter `C`.
+Here `--host 0.0.0.0` binds the server so your hotspot-connected PC can reach it. When you're ready to stop the test server, tap `Ctrl` on iSH's helper keyboard bar and then press `C`.
 
 ## Connecting from a Windows PC with v2rayN
 
-With the server running on the iPhone, now connect your PC to the iPhone's Personal Hotspot.
+Leave the server running on your iPhone and connect your Windows PC to the iPhone's Personal Hotspot.
 
-On Windows, open PowerShell, run `ipconfig`, and find the **"Default Gateway"** IP address of the hotspot connection. It usually looks like `172.20.10.1`—that's your iPhone on the hotspot network.
+Open PowerShell on Windows, run `ipconfig`, and note the **"Default Gateway"** IPv4 address for the hotspot adapter. It usually looks like `172.20.10.1`—that's your iPhone on the hotspot network.
 
-Use the command below to first knock on the iPhone's port 1080 from the PC and see if anyone answers.
+First, check whether your PC can reach port 1080 on the phone at all:
 
 ```powershell
 $phoneIp = Read-Host 'iPhone address'
 Test-NetConnection -ComputerName $phoneIp -Port 1080
 ```
 
-If the result shows `TcpTestSucceeded : True`, the connection is open! (If it says `False`, recheck the hotspot connection and iSH's local network permission.)
+`TcpTestSucceeded : True` means the port is reachable. (If it comes back `False`, double-check your hotspot connection and iSH's Local Network permission.)
 
-Next, test whether a real web page loads with the username and password you just set.
+Next, test an actual web request using your credentials:
 
 ```powershell
 $proxyUser = Read-Host 'SOCKS username you set'
@@ -222,9 +222,9 @@ curl.exe --connect-timeout 10 --max-time 30 `
   --proxy-user "$proxyUser" https://example.com/
 ```
 
-When the password prompt appears, enter the 16+ character password you set on the iPhone. If `Example Domain` HTML spills out on screen, you're in business—your PC's request just rode through the iPhone's iSH proxy out to the internet and back.
+Enter your 16+ character password when prompted. If the HTML for `Example Domain` streams across your terminal, it worked—that request just rode out through your iPhone's iSH proxy and back.
 
-Typing commands every time isn't realistic, so let's register this server in **[v2rayN](https://github.com/2dust/v2rayN)**, a proxy client for Windows.
+For everyday browsing, register the server in **[v2rayN](https://github.com/2dust/v2rayN)** on Windows:
 
 | Item | Value to enter |
 | --- | --- |
@@ -234,15 +234,15 @@ Typing commands every time isn't realistic, so let's register this server in **[
 | Username / password | The username and password you set in step 3 on the iPhone |
 | Set as active server | Right-click the entry you just added and choose it as the active server |
 
-For your first connection, skip the complicated TUN mode and start with the default **"Set system proxy"** to check that your web browser opens pages properly.
+For your first run, skip TUN mode and use **"Set system proxy"** to confirm your browser loads pages smoothly.
 
-> **💡 Don't forget!** When you're done and want to quit v2rayN, be sure to click **"Clear system proxy"** at the bottom first. If you close the program while the proxy setting is still on, Windows keeps looking for a proxy that no longer exists, making it look like your internet is dead.
+> **💡 Don't forget!** Before quitting v2rayN, always click **"Clear system proxy"** at the bottom first. If you close the app while the system proxy is still active, Windows keeps pointing traffic at a dead local port, making your internet look completely broken.
 
-## Bundling the location reader and the server into a "one-click script"
+## Bundling keep-alive and server launch into one script
 
-Now that the PC connection works, it's time to merge all those annoying steps into one. Back in iSH, stop the test server you left running with `Ctrl+C`.
+With PC access confirmed, let's fold the tedious parts into a single script. Go back to iSH and stop the test server with `Ctrl+C`.
 
-Copy and paste the block below, and it creates an all-in-one launch script (`start-socks.sh`) that handles **① starting the location reader for background keep-alive + ② a lock to prevent duplicate runs + ③ starting the proxy server + ④ cleaning up when it exits**.
+Paste the block below to create `start-socks.sh`, which handles **① starting the location keep-alive + ② a lock directory to prevent duplicate instances + ③ launching the proxy + ④ cleaning up on exit**:
 
 ```sh
 cat > /root/socks/start-socks.sh <<'SH'
@@ -281,28 +281,28 @@ SH
 chmod 700 /root/socks/start-socks.sh
 ```
 
-*(If you'd rather get it as a file, use [this same start-socks.sh download](/assets/downloads/iphone-socks5/start-socks.sh).)*
+*(Prefer a file download? Grab [the same start-socks.sh here](/assets/downloads/iphone-socks5/start-socks.sh).)*
 
-From now on, instead of complicated commands, just type **this one line** and both the location keep-alive and the server start together! (When iOS asks for location permission the first time, tap **"Allow While Using App" or "Always Allow"**.)
+From now on, **one command** brings up both the background keep-alive and the proxy server. (When iOS asks for location permission the first time, pick **"Allow While Using App" or "Always Allow"**.)
 
 ```sh
 sh /root/socks/start-socks.sh
 ```
 
-The nice part of this script is that when you later press `Ctrl+C` to stop the server, it also neatly shuts down the location reader (`cat /dev/location`) that had been quietly draining your battery in the background.
+The real win here is the cleanup trap: when you hit `Ctrl+C` to stop the server, the script also terminates the background `cat /dev/location` reader so it doesn't sit there quietly sipping battery.
 
-If the iSH app gets force-closed abnormally and the next launch shows `Already running, or stale .run-lock`, don't panic. Use `ps` to confirm no server is actually running, then delete just the lock folder with the commands below and start again.
+If iSH crashes or gets killed abnormally and the next run warns `Already running, or stale .run-lock`, run `ps` to confirm no server is still alive, clear the stale lock directory, and start again:
 
 ```sh
 rmdir /root/socks/.run-lock
 sh /root/socks/start-socks.sh
 ```
 
-Of course, even with the `/dev/location` trick, the connection can drop when the iPhone is badly short on memory or when iOS decides to clean up apps. So give it a quick test with the screen locked to see how long it holds up for your own routine.
+Even `/dev/location` isn't invincible—heavy memory pressure or an aggressive iOS cleanup can still drop the session. Test it with your screen locked for a bit to see how long it stays up under your own routine.
 
-## One step further: start the server automatically the moment iSH opens (.profile)
+## Going one step further: auto-start when iSH opens (`.profile`)
 
-If you're thinking "even typing that one line is too much! I want the server to just start when I open the app!", copy and run the block below. (Type it while any running server is stopped with `Ctrl+C`.)
+If even typing that one line feels like one line too many, wire it into `/root/.profile` so the server launches the moment iSH opens. (Make sure any running server is stopped with `Ctrl+C` first.)
 
 ```sh
 if ! grep -Fq '# BEGIN iSH SOCKS5 autostart' /root/.profile 2>/dev/null; then
@@ -322,40 +322,40 @@ PROFILE
 fi
 ```
 
-With this in place, every time you launch iSH and a login session opens, the proxy server starts automatically, without lifting a finger.
+From here on, every fresh interactive login shell in iSH starts the proxy automatically.
 
-If you need to do other terminal work and want to pause the auto-start for a while, stop the server with `Ctrl+C`, then create a "do not disturb sign" file with the command below.
+Need a normal terminal without auto-start getting in the way? Hit `Ctrl+C` to stop the server and drop a quick "do not disturb" marker file:
 
 ```sh
 touch /root/socks/disable-autostart
 ```
 
-When you want auto-start back, just delete the sign file and you're done.
+Remove the marker file whenever you want auto-start back:
 
 ```sh
 rm /root/socks/disable-autostart
 ```
 
-## A tip for pairing it with iOS Shortcuts
+## Pairing it with iOS Shortcuts
 
-For the finishing touch, the iPhone's built-in **Shortcuts** app makes things even easier.
+One last convenience layer: Apple's built-in **Shortcuts** app.
 
-Unfortunately, iSH doesn't support passing in an outside command like `ish://command-to-run` (the [official GitHub issue](https://github.com/ish-app/ish/issues/2063) was closed with no plans to support it). That means when a shortcut calls iSH with "Open App": if the app was completely closed, the `.profile` we just made starts the server automatically, but when you switch back to an already-open window, the auto-start may not run.
+iSH doesn't support passing commands via a URL scheme like `ish://command` (the [official GitHub issue](https://github.com/ish-app/ish/issues/2063) was closed as unplanned). That means an "Open App" shortcut triggers `.profile` auto-start when iSH launches cold, but won't re-run it if iSH was already open at a shell prompt.
 
-So when you build the shortcut, I recommend a **two-step combo** like this.
+The cleanest workaround is a **two-step shortcut**:
 
 1. **Copy text to clipboard**: `sh /root/socks/start-socks.sh`
 2. **Open app**: choose `iSH`
 
-Register it on your Home Screen icon or the iPhone Action Button. When you press it, if the server starts on its own, great. And even if it's off, just tap the terminal window and hit **"Paste"** to bring the server back to life in a second.
+Pin that shortcut to your Home Screen or map it to the iPhone Action Button. If iSH cold-starts, `.profile` brings the server up automatically; if it was already open and stopped, a single tap-and-paste gets you back online in a second.
 
-## Wrap-up and security tips
+## Final notes and security reminders
 
-- **Never on public Wi-Fi**: The SOCKS5 protocol itself doesn't encrypt the password; it goes over the wire in plain text ([RFC 1929](https://www.rfc-editor.org/rfc/rfc1929)). So never leave it on at a cafe's public Wi-Fi or the like. Use it only in a safe setup where your own PC connects one-on-one to your own iPhone hotspot.
-- **One step at a time**: If you pile everything on from the first setup, all the way to auto-start (`.profile`), it's hard to find where you got stuck. I recommend adding things one by one, like clearing stages in a game: **"manual server start → PC connection test → one-click script → auto-start."**
+- **Never run this on public Wi-Fi**: SOCKS5 username/password authentication is sent in plain text ([RFC 1929](https://www.rfc-editor.org/rfc/rfc1929)). Never leave it running on a cafe or hotel network—stick strictly to your own iPhone Personal Hotspot with your own PC connected directly.
+- **Layer one piece at a time**: Don't wire everything through `.profile` on the very first attempt, or debugging becomes guesswork. Verify each layer in order: **manual server start → PC connectivity test → wrapper script → auto-start**.
 
 ## Three-line summary
 
-1. Rather than a-Shell's silent-playback hack, keeping iSH alive in the background with `/dev/location` and running an authenticated SOCKS5 server with `pproxy` is far more stable.
-2. Bundle the location process and the exit cleanup into one shell script (`start-socks.sh`) and register it in `.profile`, and the server starts by itself as soon as you open iSH.
-3. First test that the PC (v2rayN) connection works, then be sure to check with a small amount of data how tethering data is actually charged on your own MVNO plan.
+1. Skipping a-Shell's fragile silent-audio workaround in favor of iSH's `/dev/location` keep-alive and an authenticated `pproxy` SOCKS5 server is far more dependable.
+2. Wrapping the location reader and exit cleanup inside `start-socks.sh` and hooking it into `.profile` lets the proxy start automatically whenever iSH launches.
+3. Verify the PC (`v2rayN`) connection first, then test with a small transfer to see how your MVNO plan actually meters the traffic.
