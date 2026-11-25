@@ -1,71 +1,73 @@
 ---
 layout: post
-title: "ComfyUI Picture Factory Test Log: What Survived Sixteen Runs"
+title: "ComfyUI Picture Factory Lab Notes: What Survived Sixteen Runs"
 date: 2026-10-28 11:00:00 +0900
 category: ai-lab
 series: comfyui-lab
 tags: [AI art, ComfyUI, pixel art, LoRA, test log]
 image: /assets/img/posts/comfyui-lab/talk-en.webp
-summary: I ran sixteen tests in two days on a ComfyUI picture factory set up on my own PC. Here's what worked, what didn't, and what's worth pulling out again for the next project.
+summary: "Two days, sixteen runs, and one buzzing RTX 4070 Ti on a local ComfyUI setup. I ended up drawing the game's art with another tool anyway, but here are the keepers and traps worth remembering for next time."
 ---
 
-I installed ComfyUI on my PC and let Claude drive it remotely so I could generate my own game characters. Two days and sixteen test runs later, I ended up making the game's art with a different tool. That doesn't make the tests a waste, though. I'm writing them up like lab notes so the next game doesn't repeat the same dead ends. Every run used a single RTX 4070 Ti (12GB).
+I installed ComfyUI on my PC—basically a local AI art factory—and handed Claude the remote controls so I could generate my own game characters. For two days my RTX 4070 Ti (12GB) ran hot through sixteen test runs. Full disclosure up front: I ended up making the current game's art with a different tool. Still, none of those runs were wasted. Here are the lab notes so my next project doesn't walk straight back into the same walls.
 
-<figure><img src="/assets/img/posts/comfyui-lab/talk-en.webp" alt="Five scenes (pixel, shrink, walk, pose, LoRA) laid out as what I said, Claude's answer, and what changed" loading="lazy"><figcaption>Sixteen runs squeezed into five scenes. Grey boxes are failures, green ones are keepers.</figcaption></figure>
+<figure><img src="/assets/img/posts/comfyui-lab/talk-en.webp" alt="Five scenes (pixel, shrink, walk, pose, LoRA) laid out as what I said, Claude's answer, and what changed" loading="lazy"><figcaption>Sixteen runs boiled down to five scenes. Grey boxes are dead ends; green ones are keepers.</figcaption></figure>
 
-## Run 1: the winning model couldn't be sold
+## Run 1: of course the winning model couldn't be sold
 
-The first order was simple: I wanted pixel-art characters. Claude fed the same prompt to four SDXL pixel models and lined up an herbalist, a goblin and a cave from each. Laid out side by side like a tasting flight, the choice was easy. One model had flat color areas and crisp outlines and beat the rest by a mile.
+The opening brief was simple: generate pixel-art characters. Claude fed the exact same prompt to four SDXL pixel models and lined up an herbalist, a goblin, and a cave from each. Laid out like a tasting flight, picking a winner took five seconds. One model nailed flat color blocks and crisp outlines by a mile.
 
-Then we read that winner's terms: you can't sell images from it without the creator's permission. From that day on, every test sheet ended with a license column. Pretty pictures still get me excited, but now the prettier the picture, the faster I check the fine print.
+Then we opened its license. You couldn't sell images from it without the creator's permission. From that moment on, every comparison table got a permanent license column at the far right. Pretty art still makes my eyes light up—only now, the prettier it looks, the faster I read the fine print.
 
-One extra lesson along the way: write "sprite sheet" in the prompt and the models happily line up ten or twenty people. So we switched to one character per image by default.
+One quick bonus tip: write "sprite sheet" in the prompt and models get overexcited, cramming ten or twenty tiny people onto one canvas. One character per image became the default rule right after.
 
 ## Shrinking to 18×22 erased the face
 
-To fit the game, the art had to shrink to fingernail size. The problem was that at 18×22 cells the face melted into a single skin-colored blob. The hood and clothes still read fine, but with no eyes it looked more like a ghost than a character.
+To fit the game, the sprite had to shrink to fingernail size. The catch was that scaling down to 18×22 cells melted the character's face into a flesh-colored smudge. The hood and tunic still read fine, but with both eyes gone, my herbalist looked less like an adventurer and more like a faceless ghost.
 
-Zooming into the originals, Claude spotted something surprising. What looks like a big picture from the pixel model is actually already pixel art drawn on a grid of roughly 8px cells. So instead of forcing it smaller, you find that grid and read one representative color per cell. The first attempt squeezed the colors down to 16 before reading the cells and lost the eyes and pink cheeks again; flipping the order kept even one-cell eyes alive.
+Zooming in on the raw output, Claude caught something clever: what looked like a large image was already pixel art drawn on a hidden grid of roughly 8px cells. Instead of crushing it with a normal resize, you detect that native grid and sample one representative color per cell.
 
-<figure><img src="/assets/img/posts/comfyui-lab/native-grid.webp" alt="The original herbalist, the grid-recovered version, and a half-size version side by side" loading="lazy"><figcaption>Far left is the AI original, next to it the recovered grid. The small ones on the right check whether the face survives at half size.</figcaption></figure>
+There was a sneaky order-of-operations trap here, too. On our first try, we quantized the palette down to 16 colors *before* reading the grid—and lost the eyes and pink cheeks all over again. **Flipping the order (recover the grid first, reduce colors second)** kept even single-cell eyes crisp and alive.
 
-## Is "just move the legs" really that big an ask?
+<figure><img src="/assets/img/posts/comfyui-lab/native-grid.webp" alt="The original herbalist, the grid-recovered version, and a half-size version side by side" loading="lazy"><figcaption>Far left: the AI original. Next to it: the recovered native grid. The tiny pair on the right checks whether the face survives at half size.</figcaption></figure>
 
-I assumed a walk cycle would be easy since only the legs change. We tried img2img, which redraws from the first frame, and raised the denoise strength (how far it's allowed to drift) to 0.5 and 0.7. As you can see, the cloak pattern shifted a little and the legs didn't budge.
+## Is "just move the legs" really that hard?
 
-<figure><img src="/assets/img/posts/comfyui-lab/img2img-walk.webp" alt="The same herbalist redrawn with img2img, legs in nearly the same pose every time" loading="lazy"><figcaption>Told to "walk" three times, she stood at attention three times.</figcaption></figure>
+A walk cycle only changes the legs, so I assumed it would be easy. We ran img2img—redrawing on top of frame one—and pushed the denoise strength (how much creative leeway the model gets) up to 0.5 and 0.7. As you can see below, the cloak pattern wiggled a bit while her legs stayed firmly planted at attention.
 
-Next we brought out ControlNet poses, which force a pose with a skeleton drawing. But the pose detector didn't even recognize a chibi with a head half the size of its body as a person. Even when we drew a chibi-proportioned skeleton by hand, the legs stayed put. That's where we called it: for a walk that moves a pixel or two, doing it by hand is faster than AI.
+<figure><img src="/assets/img/posts/comfyui-lab/img2img-walk.webp" alt="The same herbalist redrawn with img2img, legs in nearly the same pose every time" loading="lazy"><figcaption>Asked to "walk" three times; stood strictly at attention all three times.</figcaption></figure>
 
-## A new art style, and the edit model shone
+Next we brought in ControlNet pose, which tries to enforce posture using a stick-figure skeleton. Problem: the pose detector didn't even recognize a chibi character whose head is half her body as human. Even after we hand-drew a chibi-proportioned skeleton, the legs refused to budge. We called it right there. For a walk cycle that shifts a pixel or two, doing it by hand beats arguing with a neural net.
 
-Meanwhile the game's look changed to smooth pastel stickers (the saga is in [Picking the Game's Art Style]({% post_url 2026-10-27-ai-art-style %})). The brief changed too: now the same character needed to swing, pray, get hurt and fall down.
+## A new art style, and the edit model stole the show
 
-What saved the day was Qwen-Image-Edit, an image editing model. Instead of drawing from scratch, you give it one standing picture and say "change only the pose". In 20–25 seconds per image, **the pose changed while face, clothes, colors and style stayed almost the same**. It was the biggest win of the sixteen runs.
+Meanwhile, the game's visual direction pivoted to smooth pastel stickers (that whole detour lives in [Picking the Game's Art Style]({% post_url 2026-10-27-ai-art-style %})). Suddenly the problem changed: I needed the *same* character to swing, pray, wince in pain, and collapse on the floor.
 
-<figure><img src="/assets/img/posts/comfyui-lab/qwen-pose.webp" alt="One standing farm girl turned into swing, pray, hurt and fallen poses" loading="lazy"><figcaption>Only the leftmost image was given; the other four are edits. Please forgive the kerchief that refuses to fall off.</figcaption></figure>
+Enter **Qwen-Image-Edit**, an image-editing model. Instead of generating from scratch, you hand it one standing portrait and tell it to change only the pose. In 20–25 seconds per image, **the posture shifted while the face, clothes, palette, and art style stayed remarkably locked in.** Easily the biggest win out of all sixteen runs.
 
-## I baked my own style LoRA in 26 minutes, but
+<figure><img src="/assets/img/posts/comfyui-lab/qwen-pose.webp" alt="One standing farm girl turned into swing, pray, hurt and fallen poses" loading="lazy"><figcaption>Only the leftmost image was supplied; the other four are pure edits. Please forgive the kerchief that defies gravity even when she's down.</figcaption></figure>
 
-Last, I got greedy. What if we just taught the model the style of the example art I liked? A style LoRA trained on 13 examples was baked in 26 minutes; running it to 2,100 steps showed about 1,400 steps was best. For v2, we fed in 10 more images made with the edit model and tags like "two heads tall" and "three-quarter view".
+## Baking a custom style LoRA in 26 minutes—almost
 
-<figure><img src="/assets/img/posts/comfyui-lab/style-lora.webp" alt="Three example images compared with a girl, goblin and dwarf from style LoRA v1 and v2" loading="lazy"><figcaption>Top row is the examples, the two rows below are LoRA output. The colors match, but they keep getting taller.</figcaption></figure>
+Finally, I got ambitious. What if we taught the model my favorite style directly? I trained a style LoRA—a lightweight add-on patch that steers a base model toward a specific look—on 13 reference images. It finished baking in 26 minutes, and testing checkpoints up to 2,100 steps showed the sweet spot around 1,400 steps. For v2, we tossed in 10 more images from the edit model and carefully tagged "two heads tall" and "three-quarter view".
 
-It picked up the colors and details like patched cloth pretty well, but the characters kept growing to 2.5–3 heads tall and the lines came out darker than the examples. Thirteen images just weren't enough to hammer in the "giant head" rule.
+<figure><img src="/assets/img/posts/comfyui-lab/style-lora.webp" alt="Three example images compared with a girl, goblin and dwarf from style LoRA v1 and v2" loading="lazy"><figcaption>Top row: the reference examples. Bottom two rows: LoRA output. Great colors, stubbornly tall proportions.</figcaption></figure>
 
-## If I set up the factory again
+It nailed the colors and patched-fabric details, yet the characters kept stretching to 2.5–3 heads tall with noticeably heavier outlines than the references. Thirteen examples simply weren't enough to drill the "giant chibi head" rule into the weights.
 
-Around then I decided to move image generation to another tool and paused the ComfyUI tests. If I build the factory again for the next game, here's the order I'd follow.
+## The playbook for next time
 
-1. Put the licenses in a table before choosing a model.
-2. Don't shrink pixel art; find and recover its original grid.
-3. For many poses of one character, edit one image instead of drawing new ones.
-4. Bake a style LoRA only after collecting dozens of examples.
+Right around then I moved image production to another tool and shut down the ComfyUI lab. If I fire up the factory again for the next game, here is the checklist I'll follow from day one:
 
-Next time: I brought ComfyUI back out this week to see whether it can make a pixel sprite of one character walking and swinging.
+1. Put every candidate model's license in a table before admiring the samples.
+2. Never blind-resize pixel art; detect and recover its native grid first.
+3. For multiple poses of one character, edit a single base image rather than rolling from scratch.
+4. Don't bake a style LoRA until you have dozens of clean examples in hand.
+
+Next up: I turned ComfyUI back on this week to see whether it can finally pull off a pixel sprite of one character walking and swinging with the same face.
 
 ## Three-line summary
 
-1. Pixel models already draw on a grid, so recover that grid instead of shrinking.
-2. For many poses of one character, editing one image is far more consistent than drawing new ones.
-3. Always add a license column to your test results. The winning model may be one you can't sell.
+1. Pixel models already draw on a hidden grid—recover that grid first, then reduce colors, instead of crushing the image down.
+2. For consistent poses of one character, an image-editing model beats generating fresh frames by a wide margin.
+3. Always put a license column in your comparison sheet. The prettiest model in the lineup might be the one you can't sell.

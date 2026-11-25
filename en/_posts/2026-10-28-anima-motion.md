@@ -1,68 +1,68 @@
 ---
 layout: post
-title: "Same Face, Walking and Swinging: Pixel Motion Sprites with Anima"
+title: "Same Face, Real Strides: Making Pixel Motion Sprites with Anima"
 date: 2026-10-28 11:40:00 +0900
 category: ai-lab
 series: comfyui-lab
 tags: [AI art, ComfyUI, pixel art, test log]
 image: /assets/img/posts/anima-motion/talk-en.webp
-summary: I tested three routes to see whether AI can make pixel sprites of one character walking and swinging a pitchfork with the same face every frame. The reference adapter I brought in at the end flipped the result.
+summary: "Tired of AI sprites getting plastic surgery between every frame, I tested three routes for consistent pixel motion. A single-sheet trick, an edit model, and one link to a reference adapter finally cracked it."
 ---
 
-The most maddening moment in AI-made game sprites is when the character shows up with a new face every frame. The girl with a bob in frame 1 has bangs in frame 2, and by frame 3 her apron has changed color. This wasn't even for the current game—pure curiosity. I just wanted to know if it was possible, so I asked Claude.
+The fastest way to lose your mind making AI game sprites is watching your character get plastic surgery between frames. In frame 1 she has a bob; in frame 2 she suddenly has bangs; by frame 3 her apron is a different color. This test wasn't even for the current game—pure curiosity. I just wanted to see if consistent AI pixel motion actually works, so I pitched the question to Claude.
 
-<figure><img src="/assets/img/posts/anima-motion/talk-en.webp" alt="Five scenes (ask, sheet, edit, tip, adapter) laid out as what I said, Claude's answer, and what changed" loading="lazy"><figcaption>A test that started with one question and ended with one link.</figcaption></figure>
+<figure><img src="/assets/img/posts/anima-motion/talk-en.webp" alt="Five scenes (ask, sheet, edit, tip, adapter) laid out as what I said, Claude's answer, and what changed" loading="lazy"><figcaption>An experiment that kicked off with one curious question and flipped on a single link.</figcaption></figure>
 
-## "Wait, is Anima a checkpoint?"
+## "Wait—is Anima the checkpoint?"
 
-My question went like this: **"Can we combine the Anima model with pixel checkpoints or LoRAs in ComfyUI to get motion sprites of a consistent character?"**
+Here was my opening pitch: **"Can we combine the Anima model with pixel checkpoints or LoRAs in ComfyUI to get motion sprites of a consistent character?"**
 
-No luck mixing them directly, Claude said. Anima is great at anime styles, but its underlying skeleton is completely different from the SDXL pixel models I'd used before, so the parts don't swap. That threw me: "So we don't use a checkpoint? Is Anima the checkpoint...?" Exactly—Anima itself is the base model sitting in the checkpoint slot. Fortunately, Civitai already had a few Anima-specific pixel and sprite LoRAs, which gave Claude three routes to test.
+Claude shot down the mix-and-match plan immediately. Anima excels at anime styles, but its underlying architecture is completely different from the SDXL pixel models I had used earlier, so you can't swap parts between them. Confused, I asked: "So we don't use a checkpoint? Is Anima the checkpoint...?" Exactly. If a checkpoint is the base artist and a LoRA is a style textbook, Anima *was* the base artist. Fortunately, Civitai already had a handful of Anima-specific pixel and sprite LoRAs, giving Claude three routes to pit against each other.
 
-## Route 1: draw them all in one image and you get twins
+## Route 1: draw them all on one canvas and you get twins
 
-The first method stacked an RPG battle-sheet LoRA with a pixel style LoRA and had the model draw the same girl in 50-some cells of a single image. Drawing everything in one picture leaves the model no room to imagine each cell separately. The result was startlingly uniform: face, kerchief, apron patch, colors, even pixel size were twins across cells. At 55 seconds per sheet, about 1 second per frame, it was also the fastest.
+Route 1 stacked an RPG battle-sheet LoRA with a pixel style LoRA, asking the model to draw the same girl across 50-some cells of a single image. Because every cell is generated inside one shared canvas, the model has no chance to drift into a different person. The consistency was uncanny: face, kerchief, apron patch, palette, and pixel scale stayed dead-on twins from cell to cell. At 55 seconds per sheet—roughly 1 second per frame—it was blazingly fast, too.
 
-<figure><img src="/assets/img/posts/anima-motion/sheet.webp" alt="A single sheet with the same farm girl drawn in 50-some cells doing different motions" loading="lazy"><figcaption>Fifty girls on one sheet. All the same person.</figcaption></figure>
+<figure><img src="/assets/img/posts/anima-motion/sheet.webp" alt="A single sheet with the same farm girl drawn in 50-some cells doing different motions" loading="lazy"><figcaption>Fifty girls on one sheet, and every single one is the same person.</figcaption></figure>
 
-The problem was motion. Following RPG battle-screen conventions, "walk" was breathing in place and "attack" was a small arm thrust. It never picked up a weapon like a pitchfork at all.
+The catch was animation range. Trained on classic RPG battle screens, "walk" barely amounted to breathing in place, and "attack" was a polite little arm nudge. She wouldn't touch a weapon like a pitchfork at all.
 
-## Route 2: big poses, wandering direction
+## Route 2: bold poses, zero sense of direction
 
-The second method was the one that worked well in my last tests: make one base image and have an edit model (Qwen-Image-Edit) "change only the pose" for each frame. This time the motion was big. The legs alternated cleanly, and lifting the pitchfork and slamming it down read clearly at a glance.
+Route 2 went back to my favorite tool from earlier tests: generate one reference frame and let an edit model (Qwen-Image-Edit) change only the pose per frame. This time the motion popped. Legs crossed into real strides, and hoisting the pitchfork overhead before slamming it down read clearly at a glance.
 
-But now the girl turned whichever way she liked: facing right in one frame, straight at us in the next, then showing her back. The pitchfork's length changed the fit scale per image, so her height jumped around too. It felt like I had to pick either consistency or big motion.
+The trade-off? She spun around like a weathervane—facing right in one frame, staring straight at the camera in the next, then turning her back. Because the pitchfork stretched the bounding box differently each time, her height bounced up and down too. It felt like being forced to choose between consistency and actual movement.
 
-## One link flipped the result
+## One link flipped the whole test
 
-That's when I tossed in a link: "By the way, there seems to be this technique for keeping consistency in Anima, too." It was Anima Ref Adapter, which keeps a character's look from one reference image while the prompt changes the pose.
+That's when I dropped a link into the chat: "By the way, there seems to be this technique for keeping consistency in Anima, too." It was **Anima Ref Adapter**, a tool that locks a character's identity to one reference image while letting the text prompt drive the pose.
 
-Claude didn't install it right away; it asked first, since this meant putting someone else's code on my PC. Once I gave the go-ahead, Claude installed it, verified the code didn't phone home or run external commands, and fed in one cell from the Route 1 sheet as a reference.
+Claude didn't rush to install it; it paused to ask permission first, since we were putting third-party code onto my PC. Once I gave the green light, it installed the node, checked the source to verify there were no hidden network calls or external commands, and fed a single cell from Route 1's sheet in as the reference.
 
-<figure><img src="/assets/img/posts/anima-motion/refadapter-raw.webp" alt="Four walk frames redrawn from one sheet cell as reference, with the same face and outfit and big strides" loading="lazy"><figcaption>The girl from the sheet finally takes real strides.</figcaption></figure>
+<figure><img src="/assets/img/posts/anima-motion/refadapter-raw.webp" alt="Four walk frames redrawn from one sheet cell as reference, with the same face and outfit and big strides" loading="lazy"><figcaption>The girl from the battle sheet finally breaks into real strides.</figcaption></figure>
 
-The result combined the best of both worlds. All four frames have the same face, kerchief, apron, side view and size, while the legs clearly swap. Running the three routes side by side in the video makes the difference obvious.
+Out came the best of both worlds. All four frames kept the same face, kerchief, apron, profile, and height—while her legs actually swung back and forth. Watching the three routes side by side makes the jump unmistakable.
 
-<figure><video src="/assets/img/posts/anima-motion/walk.mp4" controls muted playsinline preload="none" poster="/assets/img/posts/anima-motion/walk.jpg"></video><figcaption>From left: one sheet, edit, reference adapter. Only the right one really walks.</figcaption></figure>
+<figure><video src="/assets/img/posts/anima-motion/walk.mp4" controls muted playsinline preload="none" poster="/assets/img/posts/anima-motion/walk.jpg"></video><figcaption>Left to right: single sheet, edit model, reference adapter. Only the right one actually walks.</figcaption></figure>
 
-There were still quirks. Even when told "face right" she mostly faced left, so the frames had to be flipped, and it drew a ground line under her feet nobody asked for. In the attack the pitchfork had to be handed to her fresh each time, so its shape changed a bit per frame, and with the Route 2 image as reference the apron patch turned into a flower print. At about 55 seconds per frame it was also the slowest.
+It wasn't magic without quirks. Even told to "face right," she stubbornly faced left most of the time (nothing a horizontal flip couldn't fix), and she insisted on sketching an uninvited ground line under her boots. In the attack cycle, handing her a fresh pitchfork each frame made the tool's shape drift slightly, and feeding Route 2's image as reference mysteriously turned her apron patch into a floral print. At roughly 55 seconds per frame, it was also the slowest option.
 
-<figure><video src="/assets/img/posts/anima-motion/attack.mp4" controls muted playsinline preload="none" poster="/assets/img/posts/anima-motion/attack.jpg"></video><figcaption>Attack comparison. The girl on the right hoists the pitchfork high over her head.</figcaption></figure>
+<figure><video src="/assets/img/posts/anima-motion/attack.mp4" controls muted playsinline preload="none" poster="/assets/img/posts/anima-motion/attack.jpg"></video><figcaption>Attack comparison. The girl on the right hoists the pitchfork clear over her head.</figcaption></figure>
 
-We hit one small snag along the way. The pixel cleanup step measured the grid size separately for each frame, so in some frames the girl shrank. Using the grid measured on the first frame for every frame fixed her height.
+We also caught a sneaky pipeline bug worth flagging: our pixel-cleanup step measured the native grid size independently on every frame, causing the girl to shrink randomly on certain frames. **Measuring the grid once on frame 1 and locking that size across the whole animation** kept her height rock-steady.
 
-## So how should you use it?
+## How to actually use this
 
-Here are the three routes side by side.
+Lined up side by side, the three routes split cleanly:
 
-1. One sheet: best consistency, small motion, fastest at 1 second per frame.
-2. Base image + edit: big motion but wobbling direction and size, about 31 seconds per frame.
-3. Base image + reference adapter: both consistency and big motion, about 55 seconds per frame.
+1. **Single sheet**: unbeatable consistency, tiny motion, fastest at ~1 second per frame.
+2. **Base image + edit model**: bold motion, wobbling direction and scale, ~31 seconds per frame.
+3. **Base image + reference adapter**: consistency *and* bold motion, ~55 seconds per frame.
 
-The best combo was **settling the character with a one-image sheet, then feeding one of its cells to the reference adapter for big motions**. Anima and the adapter carry non-commercial model licenses, though the images they generate can be used commercially. Some of the sprite LoRAs I used forbid selling images, though, so this can't go straight into a game I sell. I'm filing this away as a proven possibility and will pull it out again when a commercial route opens up.
+The winning combo was **locking in a character design on a single sheet first, then feeding one clean cell into the reference adapter to generate big action frames**. Both Anima and the adapter carry non-commercial model licenses while explicitly permitting commercial use of the generated images. Some of the sprite LoRAs I used forbid selling outputs, though, so this pipeline stays in the drawer for now—proven and ready the moment a commercially clean LoRA arrives.
 
 ## Three-line summary
 
-1. If you want one character drawn identically across many cells, have the AI draw them all in one image.
-2. If you also want big motions, feed one cell of that sheet back in as a reference and redraw.
-3. When installing someone else's tool on your PC, have the AI ask permission first and check what the code does afterward.
+1. Need the same character across dozens of frames? Generate them together on a single sheet first.
+2. Need bold poses too? Feed one clean cell from that sheet into a reference adapter as step two.
+3. Lock your pixel-grid measurement to frame 1 so sprites don't shrink mid-cycle—and always require permission plus a quick code check before installing third-party nodes.
