@@ -1,81 +1,81 @@
 ---
 layout: post
-title: "My First Week Building a Fantasy Web Game With AI, Knowing Zero Code"
+title: "My First Week Building a Fantasy Web Game With AI—Without Writing a Line of Code"
 date: 2026-10-27 13:00:00 +0900
 category: notebook-rpg
 tags: [retrospective, AI collaboration, decisions, measurement]
 series: rpg-weekly
 pin: true
 image: /assets/img/posts/first-week/cover.webp
-summary: "A non-coder's week-one survival log: running AI as my entire dev team, making executive calls, flailing around, and fact-checking my gut with real numbers."
+summary: "A non-coder's week-one log: directing AI as my entire dev team, tearing up the art style three times, and fact-checking my gut with real numbers."
 ---
 
-I broke ground on October 20, so today makes exactly one week.
+I started on October 20, which makes today exactly one week. Somehow a playable fantasy web game is already up and running—and I haven't written a single line of code myself.
 
-Confession up front: I don't write a single line of code myself. My job boils down to three things: sketching the big picture, judging whether what comes back looks good, and picking a lane at every fork in the road. The actual coding and doc upkeep fall to Claude, my full-time dev.
+My job boils down to three things: sketching the big picture, deciding whether what comes back actually feels right, and picking a lane at every fork in the road. The coding and documentation fall to Claude, who doubles as my entire engineering team.
 
-In other words, I'm the all-talk director and AI is the entire crew. This is a casual write-up of what the two of us decided—and what I learned from the flailing—over one week.
+I'm the director who only talks, and AI is the crew that builds. Here's what the two of us decided—and what a few wrong turns taught me—in week one.
 
-## What kind of game is this, anyway?
+## So what kind of game is this?
 
-In this game you're reincarnated at random as an ordinary resident of a fantasy world. Not a world-saving hero, but the farmer's daughter next door or the blacksmith's third son. Someone thoroughly average.
+You reincarnate at random as an ordinary resident of a fantasy world. No chosen ones, no saving the realm—you're the farmer's daughter next door or the blacksmith's third son. Thoroughly average.
 
-You live by rolling a 20-sided die at every crossroads of life, and a whole life can be over in a few minutes. When you die, a gravestone and a death notice get slapped onto the last page of the notebook, and a **"Great job!"** stamp comes down on top. (Died on the road and still "great job"? A bit savage, I know.)
+At each crossroads of life, you roll a 20-sided die, and an entire lifetime plays out in a few minutes. When you die, a gravestone and death notice get pasted onto the last page of your notebook, topped with a cheerful **"Great job!"** stamp. Getting a gold-star stamp for dying in a ditch feels slightly passive-aggressive, which is the point.
 
-<figure><img src="/assets/img/posts/first-week/cover.webp" alt="Notebook cover screen showing a name field, a character sticker, and a list of past notebooks" loading="lazy"><figcaption>The title screen. One notebook is one person's whole life, and every time you die, another past notebook joins the pile at the bottom.</figcaption></figure>
+<figure><img src="/assets/img/posts/first-week/cover.webp" alt="Notebook cover screen showing a name field, a character sticker, and a list of past notebooks" loading="lazy"><figcaption>The title screen. One notebook is one person's entire life; every death adds another finished notebook to the stack below.</figcaption></figure>
 
-When a life ends, the game traces everywhere that character wandered on a map.
+Once a life wraps up, the game retraces everywhere that character wandered on a map.
 
-<figure><video src="/assets/img/posts/first-week/journey.mp4" poster="/assets/img/posts/first-week/journey-poster.jpg" controls muted playsinline preload="none"></video><figcaption>A recap video that retraces your footsteps across the map from the birthplace village, following the big events.</figcaption></figure>
+<figure><video src="/assets/img/posts/first-week/journey.mp4" poster="/assets/img/posts/first-week/journey-poster.jpg" controls muted playsinline preload="none"></video><figcaption>A recap replay tracing your footsteps across the map from your birthplace, stopping at the big moments.</figcaption></figure>
 
-It looks like an adventure RPG a kid doodled in a notebook during class: ruled paper, spiral binding, wobbly pencil handwriting, even scrapbook stickers. But what happens inside is anything but sweet. **"Harmless and cute on the outside, ruthless and blunt in the results."** That's the core philosophy I nailed down on day one.
+Visually, it's meant to look like an adventure RPG a kid secretly doodled in a spiral notebook during class—ruled paper, wobbly pencil handwriting, scrapbook stickers and all. What happens inside is far less gentle. **"Harmless and cute on the outside, blunt and ruthless in the outcomes."** That's the rule I set on day one.
 
-<figure class="narrow"><img src="/assets/img/posts/first-week/play-phone.webp" alt="Game screen on a phone: character sticker scene on top, a route-map style travel map in the middle, a log of what happened below" loading="lazy"><figcaption>Living a life on a smartphone. The current scene is on top, a subway-map style travel map is in the middle, and the log of every wild thing that's happened so far is at the bottom.</figcaption></figure>
+<figure class="narrow"><img src="/assets/img/posts/first-week/play-phone.webp" alt="Game screen on a phone: character sticker scene on top, a route-map style travel map in the middle, a log of what happened below" loading="lazy"><figcaption>Living a life on a phone. The current scene sits at the top, a subway-style travel map runs through the middle, and every twist of fate piles up in the log below.</figcaption></figure>
 
-## Coding without touching the keyboard (feat. the guy who only makes decisions)
+## Developing with my voice instead of a keyboard
 
-The way we work is simple. I decide, and the AI does the legwork.
+The division of labor is simple: I make the calls, and AI does the legwork.
 
-When we hit a fork in the road, Claude brings me two or three alternatives plus its own recommended pick, neatly laid out as a "decision card." Then I just say "Hmm, let's go with B," like a boss. I signed off on dozens of items that way in a single week. My tips for getting an AI to file reports like this are collected separately in [how to make it let you choose](/en/2026/10/27/ai-decision-cards/).
+Whenever a design decision comes up, Claude puts together a short "decision card" laying out two or three options alongside its own recommendation. All I have to do is read it and say, "Let's go with B." I signed off on dozens of calls that way in a single week. I wrote down how I get an AI to present choices like this in [how to make it let you choose](/en/2026/10/27/ai-decision-cards/).
 
-Because I'm impatient (and greedy), I often open multiple windows and run big tasks in parallel, like polishing combat or adding login. It's definitely faster, but now and then the AIs would touch the same file at the same time and get into a brawl (a merge conflict). Luckily, I now have an automation command that tidies up the overlapping parts when code gets merged, and peace has been restored ([parallel work post](/en/2026/10/27/ai-parallel/)).
+Because I'm impatient, I often open multiple chat windows and run big tasks in parallel—polishing combat in one, hooking up login in another. It's fast, though now and then two sessions edit the same file and collide. Setting up an automated merge command that cleans up overlapping changes finally restored peace ([parallel work post](/en/2026/10/27/ai-parallel/)).
 
-One more thing: the moment you close a chat window, the AI loses all its memory, like a goldfish. So every time we make an important decision, I had it write down "why we chose that" in the project notepad itself, and the next-day habit of asking the same question all over again vanished like magic ([memory post](/en/2026/10/27/ai-memory/)).
+One catch: the second you close a chat window, the AI forgets everything you just talked through. Having it write down *why* we made each key decision inside a project notepad cured the next-day amnesia completely ([memory post](/en/2026/10/27/ai-memory/)).
 
-## I tore up the art style three times
+## Tearing up the art style three times
 
-The first character the AI brought me had muscles and armor detail, classic Western fantasy. Cool, but not the feel I wanted at all. I wanted a chibi-style character with a big head and round eyes, like a Japanese indie game.
+The first character the AI generated came back with sculpted armor and serious Western fantasy muscles. Impressive, just completely wrong for this game. I wanted a big-headed, wide-eyed chibi character with Japanese indie-game charm.
 
-After that I went from pixel art to smooth illustration, and finally realized the "pastel pixel sticker" I'd glanced at as a first example was the prettiest, winding up right back where I started.
+From there I bounced to pixel art, then to smooth illustration, before circling all the way back to the very first sample I'd glanced at—a "pastel pixel sticker" style—and realizing it was the winner all along.
 
-<figure class="narrow"><img src="/assets/img/posts/first-week/style-compare.webp" alt="Comparison chart of the same three characters drawn in several art styles, side by side" loading="lazy"><figcaption>The same characters lined up in different art styles. Only when they're laid out side by side did my own taste finally show up.</figcaption></figure>
+<figure class="narrow"><img src="/assets/img/posts/first-week/style-compare.webp" alt="Comparison chart of the same three characters drawn in several art styles, side by side" loading="lazy"><figcaption>The same three characters lined up in different art styles. Seeing them side by side was the only way my own taste clicked into focus.</figcaption></figure>
 
-What really sank in this time: tossing in a single reference image you like beats a hundred words of art direction. And until I'd compared several mockups side by side, even I didn't know exactly what I wanted ([order for picking an art style](/en/2026/10/27/ai-art-style/)).
+The takeaway was humbling: one reference image beats a hundred words of art direction. And until you see several mockups side by side, you probably don't know what you want either ([order for picking an art style](/en/2026/10/27/ai-art-style/)).
 
-## Dissecting it with numbers instead of "vibes"
+## Checking the numbers before trusting my gut
 
-Around October 24, playtesting started bringing out my inner nitpicker. Things like *"too many random events keep firing, so I'm not getting anywhere"* and *"getting the job I want is next to impossible."*
+By October 24, playtesting had given me a growing list of gripes: *"Too many random events keep interrupting progress,"* *"Landing the job I want feels nearly impossible."*
 
-In the old days I'd have gone straight to tweaking the probabilities, but this time I decided to measure first. I had the AI run an auto-play bot through more than a hundred lives, then crunch stats on where characters actually spend their time once they grow up.
+Normally I would've jumped straight into tweaking drop rates. This time I measured first. I asked the AI to run an auto-play bot through over a hundred lives and break down where adult characters actually spent their time.
 
-<figure><img src="/assets/img/posts/first-week/time-chart.webp" alt="Bar chart: one-year hire contracts 66%, taking on apprentices 12%, mountain training 11%, working their own job 1.4%" loading="lazy"><figcaption>What the grown-up characters spent their time on, laid bare. The culprit was somewhere unexpected.</figcaption></figure>
+<figure><img src="/assets/img/posts/first-week/time-chart.webp" alt="Bar chart: one-year hire contracts 66%, taking on apprentices 12%, mountain training 11%, working their own job 1.4%" loading="lazy"><figcaption>Where adult characters actually spent their lives. The real culprit was hiding in plain sight.</figcaption></figure>
 
-The result was pretty shocking. The characters were pouring a whopping **66% of their adult lives into "one-year gigs" (hire contracts)**, while **the time spent on their own actual job was just 1.4%**. When I dug into why, the gig pay beat what an entry-level job earned, so the AI kept doing nothing but gigs.
+The numbers caught me completely off guard. Characters were spending a staggering **66% of their adult lives on one-year hire contracts**, and only **1.4% actually working their own job**. Digging in, short-term contracts paid better than entry-level careers—so our rational little characters ignored their professions and became full-time gig workers.
 
-The job events weren't missing because there weren't enough of them. They never showed up because the characters were never doing the job in the first place. If I'd fixed it by gut feeling, I'd have pulled an all-nighter cranking out dozens more job events for nothing.
+Job events weren't rare because we hadn't written enough of them. They were rare because nobody was showing up for work. Had I trusted my gut, I would've spent a whole night writing dozens of extra job events that still wouldn't have triggered.
 
-"When something feels off, measure it before you touch anything." That's the most valuable habit I picked up this week.
+"When something feels broken, measure it before you touch a single knob." Easily the best habit I picked up in week one.
 
-## The login story that gave me a heart attack
+## The login scare
 
-This happened when I was hooking up Kakao and Google login. I absent-mindedly copied the five fresh-off-the-press secret keys and pasted them straight into the chat window, then realized what I'd done, scrapped every one of them, and had to reissue them all. That hair-raising blunder is preserved for posterity in the [secret keys post](/en/2026/10/27/ai-secret-keys/).
+While hooking up Kakao and Google login, I absent-mindedly pasted five brand-new secret keys straight into the chat window. Half a second later it hit me what I'd done, so I revoked and reissued every single one of them. I wrote the whole cautionary tale down in the [secret keys post](/en/2026/10/27/ai-secret-keys/) so I never repeat it.
 
-## What's next
+## Up next
 
-Right now I'm weaving "cause and effect" between events. Someone who just brushed past you in childhood shows up years later as your nemesis, or a choice you made carelessly when young comes back like a boomerang in old age. I'll post another fun survival report as the work progresses.
+Right now I'm weaving cause and effect between events—a face you pass in childhood returning years later as a rival, or a careless choice in your twenties boomeranging back in old age. I'll be back with another report once that starts clicking together.
 
 ## Three-line summary
 
-1. I point the direction and sign off. The dirty work of coding and checking belongs entirely to the AI.
-2. For things that are hard to put into words, like an art style, it's better for your sanity to have several mockups laid out side by side and pick one.
-3. When the game feels off, have the AI run stats before you rip things apart on a hunch. The real culprit is always hiding somewhere unexpected.
+1. Splitting roles—human for direction and calls, AI for code and verification—got a working web game off the ground in a week without writing code.
+2. For taste-driven decisions like art style, stop over-explaining and put multiple mockups side by side.
+3. Before fixing a game on a hunch, pull the stats first. The real bottleneck is rarely where you expect it.
