@@ -319,3 +319,12 @@ Image models have goldfish memory between frames—generate poses one at a time 
 - **Specs:** Any browser with Canvas 2D. Cost scales as layers × objects per frame, so hundreds of rotating props will get heavy.
 - **Status:** Tested (2026-11-20, a 14-layer code-built house comparing rotation and camera tilt)
 - **Verdict:** Nail the three-step draw order (lift, squash vertically, rotate) and it fits in under twenty lines of code. A vertical squash around 0.75 felt right; down at 0.5 the layers pulled apart and split the roof. Outline the finished stack once at the end—outlining each slice turns the body into pinstripes.
+
+### Faking pixel art with low-res 3D ([original post](https://gall.dcinside.com/mgallery/board/view/?id=game_dev&no=238263), Korean)
+
+- **What:** Draw zero pixel art: build the scene from Three.js boxes and cylinders, render it at a tiny resolution, and blow it up so it reads as a pixel game. A designer built a snowy drift game this way, and because it's 3D, headlights and police sirens light up the snow in real time while tire marks and snowfall come for free. Three.js's `RenderPixelatedPass` example is the starting point.
+- **Where it fits:** Top-down or angled driving, chase and exploration games where light and weather carry the mood—especially when hand-drawing a car in every direction is wearing you out. Not for Notebook RPG's side-view stickers.
+- **License:** Three.js is MIT.
+- **Specs:** Any WebGL browser. Rendering small actually makes it lighter on phones.
+- **Status:** Looked at (2026-11-26)
+- **Verdict:** The usual snag is pixels shimmering when the camera moves, so build in camera snapping to whole pixels from day one. A few rotating objects? Sprite stacking. Light, shadow and weather too? This. The same post's "hit a hydrant, it makes ice, and your own car slips too"—player and enemies sharing one rulebook—is worth stealing as well.
